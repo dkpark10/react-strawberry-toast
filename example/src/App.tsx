@@ -3,12 +3,17 @@ import { ToastContainer, toast } from '../../src';
 
 export default function App() {
   const click = () => {
-    toast(({ close }) => (
-      <div style={{ border: '1px solid red' }}>
-        <button onClick={close}>close</button>
-        toast component
-      </div>
-    ));
+    toast(
+      ({ close }) => (
+        <div style={{ border: '1px solid red' }}>
+          <button onClick={close}>close</button>
+          toast component
+        </div>
+      ),
+      {
+        infinity: true,
+      }
+    );
   };
 
   return (

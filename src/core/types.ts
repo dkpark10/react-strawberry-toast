@@ -12,6 +12,7 @@ export interface Options {
   position?: Position;
   timeOut?: number;
   ref?: RefObject<HTMLElement>;
+  infinity?: boolean;
 }
 
 type CloseFunc = (timer: ReturnType<typeof setTimeout>) => void;
@@ -20,7 +21,6 @@ export interface ToastMoreOptions {
   id: number;
   data: string | ReactNode | ((props: { close: () => void }) => ReactNode);
   close: CloseFunc;
-  timerId: ReturnType<typeof setTimeout>;
 }
 
 export type ToastState = Array<Options & ToastMoreOptions>;

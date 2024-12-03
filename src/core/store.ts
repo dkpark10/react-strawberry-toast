@@ -7,8 +7,6 @@ let state: ToastState = [];
 
 const listeners = new Set<Listener>();
 
-const getState = () => state;
-
 // must put a new memory value in the nextState.
 export const setState = (
   nextState: ToastState | ((state: ToastState) => ToastState)
@@ -25,5 +23,5 @@ const subscribe = (listener: Listener) => {
 };
 
 export const useToast = (): ToastState => {
-  return useSyncExternalStore(subscribe, () => getState());
+  return useSyncExternalStore(subscribe, () => state);
 };
