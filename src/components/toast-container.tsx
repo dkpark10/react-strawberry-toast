@@ -5,11 +5,12 @@ export function ToastContainer() {
 
   return (
     <div>
-      {toastList.map((toast) => (
-        <div key={toast.id} style={{ border: '1px solid red' }}>
-          {toast.data}
-        </div>
-      ))}
+      {toastList.map((toast) => {
+        const close = () => toast.close(toast.timerId);
+        const content =
+          typeof toast.data === 'function' ? toast.data({ close }) : toast.data;
+        return <div key={toast.id}>{content}</div>;
+      })}
     </div>
   );
 }

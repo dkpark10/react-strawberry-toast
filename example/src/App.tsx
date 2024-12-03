@@ -3,8 +3,13 @@ import { ToastContainer, toast } from '../../src';
 
 export default function App() {
   const click = () => {
-    toast('message');
-  }
+    toast(({ close }) => (
+      <div style={{ border: '1px solid red' }}>
+        <button onClick={close}>close</button>
+        toast component
+      </div>
+    ));
+  };
 
   return (
     <React.Fragment>

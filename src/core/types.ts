@@ -14,6 +14,15 @@ export interface Options {
   ref?: RefObject<HTMLElement>;
 }
 
-export type ToastState = Array<
-  Options & { id: number; data: string | ReactNode }
->;
+type CloseFunc = (timer: ReturnType<typeof setTimeout>) => void;
+
+export interface ToastMoreOptions {
+  id: number;
+  data: string | ReactNode | ((props: { close: () => void }) => ReactNode);
+  close: CloseFunc;
+  timerId: ReturnType<typeof setTimeout>;
+}
+
+export type ToastState = Array<Options & ToastMoreOptions>;
+
+export type Unpacked<T> = T extends (infer U)[] ? U : never;
