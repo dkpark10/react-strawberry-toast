@@ -12,7 +12,6 @@ export interface Options {
   position?: Position;
   timeOut?: number;
   ref?: RefObject<HTMLElement>;
-  infinity?: boolean;
 }
 
 type CloseFunc = (timer: ReturnType<typeof setTimeout>) => void;

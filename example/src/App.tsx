@@ -11,7 +11,7 @@ export default function App() {
         </div>
       ),
       {
-        infinity: true,
+        timeOut: Infinity,
       }
     );
   };

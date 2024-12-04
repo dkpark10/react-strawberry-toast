@@ -20,22 +20,17 @@ export const toast = (data: ToastMoreOptions['data'], options?: Options) => {
 
   const timeOut = options?.timeOut ?? import.meta.env.DEV ? 1_000 : 3_000;
 
-  const timer = options?.infinity
-    ? 0
-    : setTimeout(() => {
-        cleanUp(timer);
-      }, timeOut);
+  const timer = setTimeout(() => {
+    cleanUp(timer);
+  }, timeOut);
 
-  if (!options?.infinity) {
-    toastTimers.set(id, timer);
-  }
+  toastTimers.set(id, timer);
 
   const value: Unpacked<ToastState> = {
     ...options,
     id,
     data,
     close: cleanUp,
-    infinity: options?.infinity,
   };
 
   toastQueue.push(value);
