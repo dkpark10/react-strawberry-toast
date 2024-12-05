@@ -1,4 +1,4 @@
-import { useToast } from '../core/store';
+import { useStrawberryToast } from '../core/store';
 import { Position } from '../core/types';
 
 const OFFSET = 16;
@@ -33,7 +33,7 @@ const positionStyle: Record<Position, React.CSSProperties> = {
 };
 
 export function ToastContainer() {
-  const toastList = useToast();
+  const toastList = useStrawberryToast();
 
   return (
     <div
@@ -57,6 +57,7 @@ export function ToastContainer() {
           typeof toast.data === 'function' ? toast.data({ close }) : toast.data;
         return (
           <div
+            role="alert"
             key={toast.id}
             style={{
               pointerEvents: 'auto',

@@ -1,5 +1,8 @@
 import type { ToastState, Options, ToastMoreOptions, Unpacked } from './types';
 import { setState } from './store';
+import { generateId } from '../utils';
+
+const idGenerator = generateId();
 
 let toastQueue: ToastState = [];
 
@@ -18,10 +21,10 @@ const cleanUp = (toastId: number) => {
 export const toast = (data: ToastMoreOptions['data'], options: Options = {}) => {
   const { timeOut = 3_000 } = options;
 
-  const id = new Date().getTime();
+  const id = idGenerator();
 
   const timer = setTimeout(() => {
-    cleanUp(timer);
+    cleanUp(id);
   }, import.meta.env.DEV ? 1_000 : timeOut);
 
   toastTimers.set(id, timer);

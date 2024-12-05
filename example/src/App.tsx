@@ -11,7 +11,7 @@ export default function App() {
         </div>
       ),
       {
-        timeOut: Infinity,
+        timeOut: 1_000,
         position: 'top-right',
       }
     );
