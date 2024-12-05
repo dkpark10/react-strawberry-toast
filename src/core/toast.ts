@@ -15,14 +15,14 @@ const cleanUp = (toastId: number) => {
   toastTimers.delete(toastId);
 };
 
-export const toast = (data: ToastMoreOptions['data'], options?: Options) => {
-  const id = new Date().getTime();
+export const toast = (data: ToastMoreOptions['data'], options: Options = {}) => {
+  const { timeOut = 3_000 } = options;
 
-  const timeOut = options?.timeOut ?? import.meta.env.DEV ? 1_000 : 3_000;
+  const id = new Date().getTime();
 
   const timer = setTimeout(() => {
     cleanUp(timer);
-  }, timeOut);
+  }, import.meta.env.DEV ? 1_000 : timeOut);
 
   toastTimers.set(id, timer);
 

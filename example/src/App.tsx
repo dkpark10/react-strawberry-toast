@@ -12,14 +12,15 @@ export default function App() {
       ),
       {
         timeOut: Infinity,
+        position: 'top-right',
       }
     );
   };
 
   return (
     <React.Fragment>
-      <div>example</div>
       <ToastContainer />
+      <div>example</div>
       <button onClick={click}>click</button>
     </React.Fragment>
   );
