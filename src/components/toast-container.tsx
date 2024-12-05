@@ -58,6 +58,7 @@ export function ToastContainer() {
         return (
           <div
             role="alert"
+            data-testid={`toast-${toast.position}`}
             key={toast.id}
             onMouseEnter={() => {
               toast.pause(toast.id)
