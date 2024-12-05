@@ -18,14 +18,49 @@ const cleanUp = (toastId: number) => {
   toastTimers.delete(toastId);
 };
 
+const pause = (toastId: number) => {
+  const pausedAt = new Date().getTime();
+
+  toastQueue = toastQueue.map((toast) => {
+    if (toast.id === toastId) {
+      return {
+        ...toast,
+        pausedAt, 
+      };
+    } 
+    return toast;
+  });
+    
+  const timerId = toastTimers.get(toastId);
+  clearTimeout(timerId);
+
+  toastTimers.delete(toastId);
+  setState([...toastQueue]);
+} 
+
+const resume = (toastId: number) => {
+  const target = toastQueue.find(
+    (toast) => toast.id === toastId
+  ) as Unpacked<ToastState>;
+
+  const timeOut = target?.createdAt + target.timeOut! - (target.pausedAt || 0);
+
+  const timer = setTimeout(() => {
+    cleanUp(toastId);
+  }, timeOut);
+
+  toastTimers.set(toastId, timer);
+}
+
 export const toast = (data: ToastMoreOptions['data'], options: Options = {}) => {
   const { timeOut = 3_000 } = options;
 
   const id = idGenerator();
+  const createdAt = new Date().getTime();
 
   const timer = setTimeout(() => {
     cleanUp(id);
-  }, import.meta.env.DEV ? 1_000 : timeOut);
+  }, timeOut);
 
   toastTimers.set(id, timer);
 
@@ -33,7 +68,10 @@ export const toast = (data: ToastMoreOptions['data'], options: Options = {}) => 
     ...options,
     id,
     data,
+    createdAt,
     close: cleanUp,
+    pause,
+    resume,
   };
 
   toastQueue.push(value);

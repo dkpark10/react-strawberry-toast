@@ -14,12 +14,18 @@ export interface Options {
   ref?: RefObject<HTMLElement>;
 }
 
-type CloseFunc = (timer: ReturnType<typeof setTimeout>) => void;
+type CloseFunc = (toastId: number) => void;
+type PauseFunc = CloseFunc;
+type ResumeFunc = CloseFunc;
 
 export interface ToastMoreOptions {
   id: number;
   data: string | ReactNode | ((props: { close: () => void }) => ReactNode);
   close: CloseFunc;
+  pause: PauseFunc;
+  resume: ResumeFunc;
+  createdAt: number;
+  pausedAt?: number;
 }
 
 export type ToastState = Array<Options & ToastMoreOptions>;

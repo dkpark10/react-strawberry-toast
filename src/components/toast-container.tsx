@@ -59,6 +59,12 @@ export function ToastContainer() {
           <div
             role="alert"
             key={toast.id}
+            onMouseEnter={() => {
+              toast.pause(toast.id)
+            }}
+            onMouseLeave={() => {
+              toast.resume(toast.id)
+            }}
             style={{
               pointerEvents: 'auto',
               position: 'fixed',

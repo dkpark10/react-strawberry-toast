@@ -11,8 +11,8 @@ export default function App() {
         </div>
       ),
       {
-        timeOut: 1_000,
-        position: 'top-right',
+        timeOut: 10_000,
+        position: 'top-center',
       }
     );
   };
