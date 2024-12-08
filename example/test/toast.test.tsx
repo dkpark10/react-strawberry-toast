@@ -111,6 +111,7 @@ describe('toast', () => {
 
     expect(queryByText('strawberry toast')).toBeInTheDocument();
 
+    /** @fix Toast shall be shown if it is below 2_000 */
     act(() => {
       vi.advanceTimersByTime(2_000);
     });
