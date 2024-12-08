@@ -1,8 +1,7 @@
 import type { ToastState, Options, ToastMoreOptions, Unpacked } from './types';
 import { setState } from './store';
 import { generateId } from '../utils';
-
-const DEFAULT_TIMEOUT = 3_000;
+import { MAX_TIMEOUT, DEFAULT_TIMEOUT } from '../constants';
 
 const idGenerator = generateId();
 
@@ -66,14 +65,18 @@ export const toast = (
   const id = idGenerator();
   const createdAt = new Date().getTime();
 
-  const timer = setTimeout(() => {
-    cleanUp(id);
-  }, timeOut);
+  const timer = setTimeout(
+    () => {
+      cleanUp(id);
+    },
+    timeOut > MAX_TIMEOUT ? MAX_TIMEOUT : timeOut,
+  );
 
   toastTimers.set(id, timer);
 
   const value: Unpacked<ToastState> = {
     ...options,
+    timeOut: timeOut > MAX_TIMEOUT ? MAX_TIMEOUT : timeOut,
     id,
     data,
     createdAt,

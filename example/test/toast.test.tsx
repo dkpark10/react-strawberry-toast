@@ -2,6 +2,7 @@ import React from 'react';
 import { afterEach, beforeEach, vi, describe, expect, test } from 'vitest';
 import { act, render, fireEvent } from '@testing-library/react';
 import { ToastContainer, toast } from '../../src';
+import { MAX_TIMEOUT } from '../../src/constants';
 
 describe('toast', () => {
   beforeEach(() => {
@@ -116,5 +117,30 @@ describe('toast', () => {
     });
 
     expect(queryByText('strawberry toast')).not.toBeInTheDocument();
+  });
+
+  test('infinity', async () => {
+    function App() {
+      const click = () => {
+        toast(<div>strawberry toast</div>, { timeOut: Infinity });
+      };
+
+      return (
+        <React.Fragment>
+          <ToastContainer />
+          <button onClick={click}>click</button>
+        </React.Fragment>
+      );
+    }
+
+    const { getByRole, queryByText } = render(<App />);
+
+    fireEvent.click(getByRole('button', { name: 'click' }));
+
+    act(() => {
+      vi.advanceTimersByTime(MAX_TIMEOUT - 1);
+    });
+
+    expect(queryByText('strawberry toast')).toBeInTheDocument();
   });
 });

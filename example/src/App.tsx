@@ -20,6 +20,7 @@ export default function App() {
           </div>
         ),
         {
+          timeOut: Infinity,
           position: pos as Position,
         }
       );

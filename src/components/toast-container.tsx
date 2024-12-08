@@ -48,8 +48,8 @@ export function ToastContainer() {
       }}
     >
       {toastList.map((toast) => {
-        const pos = toast.position || 'top-center'
-        const style = positionStyle[(pos)];
+        const pos = toast.position || 'top-center';
+        const style = positionStyle[pos];
 
         const close = () => toast.close(toast.id);
 
@@ -57,14 +57,14 @@ export function ToastContainer() {
           typeof toast.data === 'function' ? toast.data({ close }) : toast.data;
         return (
           <div
-            role="alert"
+            role='alert'
             data-testid={`toast-${toast.position}`}
             key={toast.id}
             onMouseEnter={() => {
-              toast.pause(toast.id)
+              toast.pause(toast.id);
             }}
             onMouseLeave={() => {
-              toast.resume(toast.id)
+              toast.resume(toast.id);
             }}
             style={{
               pointerEvents: 'auto',
