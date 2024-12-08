@@ -1,11 +1,11 @@
-import type { ToastState, Options, ToastMoreOptions, Unpacked } from './types';
+import type { ToastState, Options, ToastMoreOptions } from './types';
 import { setState } from './store';
 import { generateId } from '../utils';
 import { MAX_TIMEOUT, DEFAULT_TIMEOUT } from '../constants';
 
 const idGenerator = generateId();
 
-let toastQueue: ToastState = [];
+let toastQueue: Array<ToastState> = [];
 
 const toastTimers = new Map<number, ReturnType<typeof setTimeout>>();
 
@@ -40,7 +40,7 @@ const pause = (toastId: number) => {
 };
 
 const resume = (toastId: number) => {
-  const target = toastQueue.find((toast) => toast.id === toastId) as Unpacked<ToastState>;
+  const target = toastQueue.find((toast) => toast.id === toastId) as ToastState;
 
   const timeOut = target?.createdAt + (target?.timeOut || DEFAULT_TIMEOUT) - (target.pausedAt || 0);
 
@@ -66,7 +66,7 @@ export const toast = (data: ToastMoreOptions['data'], options: Options = {}) => 
 
   toastTimers.set(id, timer);
 
-  const value: Unpacked<ToastState> = {
+  const value: ToastState = {
     ...options,
     timeOut: timeOut > MAX_TIMEOUT ? MAX_TIMEOUT : timeOut,
     id,

@@ -3,12 +3,14 @@ import { useSyncExternalStore } from 'react';
 
 type Listener = () => void;
 
-let state: ToastState = [];
+type ToastStateList = Array<ToastState>;
+
+let state: ToastStateList = [];
 
 const listeners = new Set<Listener>();
 
 /** @description must put a new memory value in the nextState. */
-export const setState = (nextState: ToastState | ((state: ToastState) => ToastState)) => {
+export const setState = (nextState: ToastStateList | ((state: ToastStateList) => ToastStateList)) => {
   state = typeof nextState === 'function' ? nextState(state) : nextState;
   listeners.forEach((listener) => listener());
 };
@@ -20,6 +22,6 @@ const subscribe = (listener: Listener) => {
   };
 };
 
-export const useStrawberryToast = (): ToastState => {
+export const useStrawberryToast = (): ToastStateList => {
   return useSyncExternalStore(subscribe, () => state);
 };

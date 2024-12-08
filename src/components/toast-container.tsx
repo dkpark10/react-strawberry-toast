@@ -1,5 +1,5 @@
 import { useStrawberryToast } from '../core/store';
-import { Position } from '../core/types';
+import type { Position, ToastState } from '../core/types';
 
 const OFFSET = 16;
 
@@ -35,6 +35,16 @@ const positionStyle: Record<Position, React.CSSProperties> = {
 export function ToastContainer() {
   const toastList = useStrawberryToast();
 
+  const toastListByPosition: Record<Position, Array<ToastState>> = toastList.reduce(
+    (acc, toast) => {
+      const key = toast.position || 'top-center';
+      acc[key] = acc[key] || [];
+      acc[key].push(toast);
+      return acc;
+    },
+    {} as Record<Position, Array<ToastState>>,
+  );
+
   return (
     <div
       style={{
@@ -47,24 +57,13 @@ export function ToastContainer() {
         pointerEvents: 'none',
       }}
     >
-      {toastList.map((toast) => {
-        const pos = toast.position || 'top-center';
-        const style = positionStyle[pos];
+      {Object.entries(toastListByPosition).map(([position, toastList]) => {
+        const style = positionStyle[position as Position];
 
-        const close = () => toast.close(toast.id);
-
-        const content = typeof toast.data === 'function' ? toast.data({ close }) : toast.data;
         return (
           <div
             role="alert"
-            data-testid={`toast-${toast.position}`}
-            key={toast.id}
-            onMouseEnter={() => {
-              toast.pause(toast.id);
-            }}
-            onMouseLeave={() => {
-              toast.resume(toast.id);
-            }}
+            key={position}
             style={{
               pointerEvents: 'auto',
               position: 'fixed',
@@ -72,7 +71,26 @@ export function ToastContainer() {
               ...style,
             }}
           >
-            {content}
+            {toastList.map((toast) => {
+              const close = () => toast.close(toast.id);
+
+              const content = typeof toast.data === 'function' ? toast.data({ close }) : toast.data;
+
+              return (
+                <div
+                  role="alert"
+                  key={toast.id}
+                  onMouseEnter={() => {
+                    toast.pause(toast.id);
+                  }}
+                  onMouseLeave={() => {
+                    toast.resume(toast.id);
+                  }}
+                >
+                  {content}
+                </div>
+              );
+            })}
           </div>
         );
       })}

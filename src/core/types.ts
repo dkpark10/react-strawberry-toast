@@ -28,6 +28,4 @@ export interface ToastMoreOptions {
   pausedAt?: number;
 }
 
-export type ToastState = Array<Options & ToastMoreOptions>;
-
-export type Unpacked<T> = T extends (infer U)[] ? U : never;
+export type ToastState = Options & ToastMoreOptions;
