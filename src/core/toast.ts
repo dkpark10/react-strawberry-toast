@@ -40,14 +40,9 @@ const pause = (toastId: number) => {
 };
 
 const resume = (toastId: number) => {
-  const target = toastQueue.find(
-    (toast) => toast.id === toastId
-  ) as Unpacked<ToastState>;
+  const target = toastQueue.find((toast) => toast.id === toastId) as Unpacked<ToastState>;
 
-  const timeOut =
-    target?.createdAt +
-    (target?.timeOut || DEFAULT_TIMEOUT) -
-    (target.pausedAt || 0);
+  const timeOut = target?.createdAt + (target?.timeOut || DEFAULT_TIMEOUT) - (target.pausedAt || 0);
 
   const timer = setTimeout(() => {
     cleanUp(toastId);
@@ -56,10 +51,7 @@ const resume = (toastId: number) => {
   toastTimers.set(toastId, timer);
 };
 
-export const toast = (
-  data: ToastMoreOptions['data'],
-  options: Options = {}
-) => {
+export const toast = (data: ToastMoreOptions['data'], options: Options = {}) => {
   const { timeOut = DEFAULT_TIMEOUT } = options;
 
   const id = idGenerator();

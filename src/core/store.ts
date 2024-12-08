@@ -7,10 +7,8 @@ let state: ToastState = [];
 
 const listeners = new Set<Listener>();
 
-// must put a new memory value in the nextState.
-export const setState = (
-  nextState: ToastState | ((state: ToastState) => ToastState)
-) => {
+/** @description must put a new memory value in the nextState. */
+export const setState = (nextState: ToastState | ((state: ToastState) => ToastState)) => {
   state = typeof nextState === 'function' ? nextState(state) : nextState;
   listeners.forEach((listener) => listener());
 };

@@ -53,11 +53,10 @@ export function ToastContainer() {
 
         const close = () => toast.close(toast.id);
 
-        const content =
-          typeof toast.data === 'function' ? toast.data({ close }) : toast.data;
+        const content = typeof toast.data === 'function' ? toast.data({ close }) : toast.data;
         return (
           <div
-            role='alert'
+            role="alert"
             data-testid={`toast-${toast.position}`}
             key={toast.id}
             onMouseEnter={() => {
