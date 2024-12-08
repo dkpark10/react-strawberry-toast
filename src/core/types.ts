@@ -1,4 +1,4 @@
-import type { ReactNode, RefObject } from 'react';
+import type { ReactNode } from 'react';
 
 export type Position =
   | 'bottom-left'
@@ -11,7 +11,7 @@ export type Position =
 export interface Options {
   position?: Position;
   timeOut?: number;
-  ref?: RefObject<HTMLElement>;
+  element?: HTMLElement;
 }
 
 type CloseFunc = (toastId: number) => void;
@@ -28,4 +28,6 @@ export interface ToastMoreOptions {
   pausedAt?: number;
 }
 
-export type ToastState = Options & ToastMoreOptions;
+type RequiredExcept<T, K extends keyof T> = Required<Omit<T, K>> & Pick<T, K>;
+
+export type ToastState = RequiredExcept<Options, 'element'> & ToastMoreOptions;

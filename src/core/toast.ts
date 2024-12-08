@@ -42,7 +42,7 @@ const pause = (toastId: number) => {
 const resume = (toastId: number) => {
   const target = toastQueue.find((toast) => toast.id === toastId) as ToastState;
 
-  const timeOut = target?.createdAt + (target?.timeOut || DEFAULT_TIMEOUT) - (target.pausedAt || 0);
+  const timeOut = target.createdAt + target.timeOut - (target.pausedAt || 0);
 
   const timer = setTimeout(() => {
     cleanUp(toastId);
@@ -52,7 +52,7 @@ const resume = (toastId: number) => {
 };
 
 export const toast = (data: ToastMoreOptions['data'], options: Options = {}) => {
-  const { timeOut = DEFAULT_TIMEOUT } = options;
+  const { timeOut = DEFAULT_TIMEOUT, position = 'top-center' } = options;
 
   const id = idGenerator();
   const createdAt = new Date().getTime();
@@ -69,6 +69,7 @@ export const toast = (data: ToastMoreOptions['data'], options: Options = {}) => 
   const value: ToastState = {
     ...options,
     timeOut: timeOut > MAX_TIMEOUT ? MAX_TIMEOUT : timeOut,
+    position,
     id,
     data,
     createdAt,

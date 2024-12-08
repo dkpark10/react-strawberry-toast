@@ -37,7 +37,7 @@ export function ToastContainer() {
 
   const toastListByPosition: Record<Position, Array<ToastState>> = toastList.reduce(
     (acc, toast) => {
-      const key = toast.position || 'top-center';
+      const key = toast.position;
       acc[key] = acc[key] || [];
       acc[key].push(toast);
       return acc;
