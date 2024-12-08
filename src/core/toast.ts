@@ -2,6 +2,8 @@ import type { ToastState, Options, ToastMoreOptions, Unpacked } from './types';
 import { setState } from './store';
 import { generateId } from '../utils';
 
+const DEFAULT_TIMEOUT = 3_000;
+
 const idGenerator = generateId();
 
 let toastQueue: ToastState = [];
@@ -25,35 +27,41 @@ const pause = (toastId: number) => {
     if (toast.id === toastId) {
       return {
         ...toast,
-        pausedAt, 
+        pausedAt,
       };
-    } 
+    }
     return toast;
   });
-    
+
   const timerId = toastTimers.get(toastId);
   clearTimeout(timerId);
 
   toastTimers.delete(toastId);
   setState([...toastQueue]);
-} 
+};
 
 const resume = (toastId: number) => {
   const target = toastQueue.find(
     (toast) => toast.id === toastId
   ) as Unpacked<ToastState>;
 
-  const timeOut = target?.createdAt + target.timeOut! - (target.pausedAt || 0);
+  const timeOut =
+    target?.createdAt +
+    (target?.timeOut || DEFAULT_TIMEOUT) -
+    (target.pausedAt || 0);
 
   const timer = setTimeout(() => {
     cleanUp(toastId);
   }, timeOut);
 
   toastTimers.set(toastId, timer);
-}
+};
 
-export const toast = (data: ToastMoreOptions['data'], options: Options = {}) => {
-  const { timeOut = 3_000 } = options;
+export const toast = (
+  data: ToastMoreOptions['data'],
+  options: Options = {}
+) => {
+  const { timeOut = DEFAULT_TIMEOUT } = options;
 
   const id = idGenerator();
   const createdAt = new Date().getTime();
