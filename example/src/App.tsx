@@ -4,7 +4,7 @@ import { Position } from '../../src/core/types';
 
 export default function App() {
   const click = () => {
-    ['top-center', 'top-right'].forEach((pos) => {
+    ['top-center'].forEach((pos) => {
       toast(
         ({ close }) => (
           <div style={{ border: '1px solid red' }}>
@@ -13,6 +13,7 @@ export default function App() {
           </div>
         ),
         {
+          timeOut: 1_000,
           position: pos as Position,
         },
       );
@@ -24,18 +25,6 @@ export default function App() {
       <ToastContainer />
       <div>example</div>
       <button onClick={click}>click</button>
-      <div
-        style={{
-          top: '50%',
-          left: '50%',
-          transform: 'translate(-50%, -50%)',
-          position: 'absolute',
-        }}
-      >
-        <button type="button" onClick={() => console.log(123)}>
-          button
-        </button>
-      </div>
     </React.Fragment>
   );
 }

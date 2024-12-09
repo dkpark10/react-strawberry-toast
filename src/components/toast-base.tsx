@@ -1,7 +1,7 @@
-import { styled } from '@linaria/react';
-import { PropsWithChildren } from 'react';
+import { type PropsWithChildren } from 'react';
+import { css } from '@linaria/core';
 
-const Toast = styled.div`
+const downAnimation = css`
   @keyframes down {
     from {
       transform: translateY(-100%);
@@ -12,19 +12,35 @@ const Toast = styled.div`
       opacity: 1;
     }
   }
-
   animation: down 0.2s ease-out;
+`;
+
+const upAnimation = css`
+  @keyframes up {
+    from {
+      transform: translateY(0);
+      opacity: 1;
+    }
+    to {
+      transform: translateY(-100%);
+      opacity: 0;
+    }
+  }
+  animation: up 0.2s ease-out;
 `;
 
 interface ToasterProps {
   onMouseEnter: () => void;
   onMouseLeave: () => void;
+  isVisible: boolean;
 }
 
-export function ToastBase({ children, ...rest }: ToasterProps & PropsWithChildren) {
+export function ToastBase({ children, isVisible, ...rest }: ToasterProps & PropsWithChildren) {
+  const animation = isVisible ? downAnimation : upAnimation;
+
   return (
-    <Toast role="alert" {...rest}>
+    <div className={animation} role="alert" {...rest}>
       {children}
-    </Toast>
+    </div>
   );
 }

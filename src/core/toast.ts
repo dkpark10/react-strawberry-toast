@@ -21,11 +21,6 @@ const cleanUp = (toastId: number) => {
     return toast;
   });
   setState([...toastQueue]);
-
-  const timerId = toastTimers.get(toastId);
-  clearTimeout(timerId);
-
-  toastTimers.delete(toastId);
   remove(toastId);
 };
 
@@ -33,7 +28,12 @@ const remove = (toastId: number) => {
   setTimeout(() => {
     toastQueue = toastQueue.filter((toast) => toast.id !== toastId);
     setState([...toastQueue]);
-  }, 500);
+  }, 200);
+
+  const timerId = toastTimers.get(toastId);
+  clearTimeout(timerId);
+
+  toastTimers.delete(toastId);
 }
 
 const pause = (toastId: number) => {
