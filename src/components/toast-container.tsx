@@ -1,4 +1,5 @@
 import { useStrawberryToast } from '../core/store';
+import { ToastBase } from './toast-base';
 import type { Position, ToastState } from '../core/types';
 
 const OFFSET = 16;
@@ -62,7 +63,6 @@ export function ToastContainer() {
 
         return (
           <div
-            role="alert"
             key={position}
             style={{
               pointerEvents: 'auto',
@@ -77,8 +77,7 @@ export function ToastContainer() {
               const content = typeof toast.data === 'function' ? toast.data({ close }) : toast.data;
 
               return (
-                <div
-                  role="alert"
+                <ToastBase
                   key={toast.id}
                   onMouseEnter={() => {
                     toast.pause(toast.id);
@@ -87,8 +86,8 @@ export function ToastContainer() {
                     toast.resume(toast.id);
                   }}
                 >
-                  {content}
-                </div>
+                  {content}{toast.id}
+                </ToastBase>
               );
             })}
           </div>
