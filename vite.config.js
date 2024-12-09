@@ -9,6 +9,10 @@ export default defineConfig(() => ({
       entry: path.resolve(__dirname, 'src/index.ts'),
       formats: ['es', 'cjs'],
     },
+    outDir: 'dist',
+    rollupOptions: {
+      external: ['react', 'react-dom'],
+    },
   },
   plugins: [
     wyw({
