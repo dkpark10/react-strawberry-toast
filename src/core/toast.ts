@@ -7,17 +7,34 @@ const idGenerator = generateId();
 
 let toastQueue: Array<ToastState> = [];
 
-const toastTimers = new Map<number, ReturnType<typeof setTimeout>>();
+/** @description key = toast id, value = timer id */
+const toastTimers = new Map<number, number>();
 
 const cleanUp = (toastId: number) => {
-  toastQueue = toastQueue.filter((q) => q.id !== toastId);
+  toastQueue = toastQueue.map((toast) => {
+    if (toast.id === toastId) {
+      return {
+        ...toast,
+        isVisible: false,
+      };
+    }
+    return toast;
+  });
   setState([...toastQueue]);
 
   const timerId = toastTimers.get(toastId);
   clearTimeout(timerId);
 
   toastTimers.delete(toastId);
+  remove(toastId);
 };
+
+const remove = (toastId: number) => {
+  setTimeout(() => {
+    toastQueue = toastQueue.filter((toast) => toast.id !== toastId);
+    setState([...toastQueue]);
+  }, 500);
+}
 
 const pause = (toastId: number) => {
   const pausedAt = new Date().getTime();
@@ -42,11 +59,11 @@ const pause = (toastId: number) => {
 const resume = (toastId: number) => {
   const target = toastQueue.find((toast) => toast.id === toastId) as ToastState;
 
-  const timeOut = target.createdAt + target.timeOut - (target.pausedAt || 0);
+  const leftTimeout = target.createdAt + target.timeOut - (target.pausedAt || 0);
 
   const timer = setTimeout(() => {
     cleanUp(toastId);
-  }, timeOut);
+  }, leftTimeout);
 
   toastTimers.set(toastId, timer);
 };
@@ -73,6 +90,7 @@ export const toast = (data: ToastMoreOptions['data'], options: Options = {}) => 
     id,
     data,
     createdAt,
+    isVisible: true,
     close: cleanUp,
     pause,
     resume,

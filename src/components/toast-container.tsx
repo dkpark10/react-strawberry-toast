@@ -76,6 +76,8 @@ export function ToastContainer() {
 
               const content = typeof toast.data === 'function' ? toast.data({ close }) : toast.data;
 
+              if (!toast.isVisible) return <></>;
+
               return (
                 <ToastBase
                   key={toast.id}

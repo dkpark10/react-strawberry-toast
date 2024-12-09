@@ -24,6 +24,7 @@ export interface ToastMoreOptions {
   close: CloseFunc;
   pause: PauseFunc;
   resume: ResumeFunc;
+  isVisible: boolean;
   createdAt: number;
   pausedAt?: number;
 }
