@@ -5,6 +5,7 @@ import { ToastContainer, toast } from '../../src';
 export default function App() {
   const click = () => {
     toast.success('toast component');
+    toast.error('toast component');
   };
 
   return (

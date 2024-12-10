@@ -2,7 +2,7 @@ import { useStrawberryToast } from '../core/store';
 import { ToastBase } from './toast-base';
 import { styled } from '@linaria/react';
 import type { Position, ToastState } from '../core/types';
-import { ToastComponents } from './toast-status';
+import { ToastStatusContainer, ToastStatusIcons } from './toast-status';
 
 const OFFSET = 16;
 
@@ -79,7 +79,7 @@ export function ToastContainer() {
 
               const content = typeof toast.data === 'function' ? toast.data({ close }) : toast.data;
 
-              const ToastComponent = ToastComponents[toast.toastStatus];
+              const Icon = ToastStatusIcons[toast.toastStatus];
 
               return (
                 <ToastBase
@@ -92,7 +92,7 @@ export function ToastContainer() {
                     toast.resume(toast.id);
                   }}
                 >
-                  <ToastComponent>{content}</ToastComponent>
+                  <ToastStatusContainer icon={<Icon />}>{content}</ToastStatusContainer>
                 </ToastBase>
               );
             })}
