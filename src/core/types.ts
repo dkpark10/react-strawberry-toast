@@ -25,9 +25,14 @@ type CloseFunc = (toastId: number) => void;
 type PauseFunc = CloseFunc;
 type ResumeFunc = CloseFunc;
 
+interface ToastDataCallback {
+  close: () => void;
+  icon: ReactNode;
+}
+
 export interface ToastMoreOptions {
   id: number;
-  data: string | ReactNode | ((props: { close: () => void }) => ReactNode);
+  data: string | ReactNode | ((props: ToastDataCallback) => ReactNode);
   close: CloseFunc;
   pause: PauseFunc;
   resume: ResumeFunc;

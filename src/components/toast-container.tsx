@@ -77,9 +77,10 @@ export function ToastContainer() {
             {toastList.map((toast) => {
               const close = () => toast.close(toast.id);
 
-              const content = typeof toast.data === 'function' ? toast.data({ close }) : toast.data;
-
               const Icon = ToastStatusIcons[toast.toastStatus];
+
+              const content =
+                typeof toast.data === 'function' ? toast.data({ close, icon: <Icon /> }) : toast.data;
 
               return (
                 <ToastBase
@@ -92,7 +93,11 @@ export function ToastContainer() {
                     toast.resume(toast.id);
                   }}
                 >
-                  <ToastStatusContainer icon={<Icon />}>{content}</ToastStatusContainer>
+                  {typeof toast.data === 'function' ? (
+                    content
+                  ) : (
+                    <ToastStatusContainer icon={<Icon />}>{content}</ToastStatusContainer>
+                  )}
                 </ToastBase>
               );
             })}
