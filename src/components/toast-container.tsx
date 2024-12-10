@@ -1,8 +1,19 @@
 import { useStrawberryToast } from '../core/store';
 import { ToastBase } from './toast-base';
+import { styled } from '@linaria/react';
 import type { Position, ToastState } from '../core/types';
 
 const OFFSET = 16;
+
+const ToastWrapper = styled.div`
+  position: fixed;
+  z-index: 9999;
+  top: 16px;
+  left: 16px;
+  right: 16px;
+  bottom: 16px;
+  pointer-events: none;
+`;
 
 const positionStyle: Record<Position, React.CSSProperties> = {
   'top-left': {
@@ -47,17 +58,7 @@ export function ToastContainer() {
   );
 
   return (
-    <div
-      style={{
-        position: 'fixed',
-        zIndex: 9999,
-        top: OFFSET,
-        left: OFFSET,
-        right: OFFSET,
-        bottom: OFFSET,
-        pointerEvents: 'none',
-      }}
-    >
+    <ToastWrapper>
       {Object.entries(toastListByPosition).map(([position, toastList]) => {
         const style = positionStyle[position as Position];
 
@@ -68,6 +69,8 @@ export function ToastContainer() {
               pointerEvents: 'auto',
               position: 'fixed',
               width: 160,
+              display: 'grid',
+              gap: 9,
               ...style,
             }}
           >
@@ -94,6 +97,6 @@ export function ToastContainer() {
           </div>
         );
       })}
-    </div>
+    </ToastWrapper>
   );
 }

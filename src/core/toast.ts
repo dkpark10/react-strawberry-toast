@@ -1,7 +1,7 @@
 import type { ToastState, Options, ToastMoreOptions } from './types';
 import { setState } from './store';
 import { generateId } from '../utils';
-import { MAX_TIMEOUT, DEFAULT_TIMEOUT } from '../constants';
+import { REMOVE_TIMEOUT, MAX_TIMEOUT, DEFAULT_TIMEOUT } from '../constants';
 
 const idGenerator = generateId();
 
@@ -28,7 +28,7 @@ const remove = (toastId: number) => {
   setTimeout(() => {
     toastQueue = toastQueue.filter((toast) => toast.id !== toastId);
     setState([...toastQueue]);
-  }, 200);
+  }, REMOVE_TIMEOUT);
 
   const timerId = toastTimers.get(toastId);
   clearTimeout(timerId);

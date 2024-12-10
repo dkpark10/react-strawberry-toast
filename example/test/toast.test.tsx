@@ -2,7 +2,7 @@ import React from 'react';
 import { afterEach, beforeEach, vi, describe, expect, test } from 'vitest';
 import { act, render, fireEvent } from '@testing-library/react';
 import { ToastContainer, toast } from '../../src';
-import { MAX_TIMEOUT } from '../../src/constants';
+import { MAX_TIMEOUT, DEFAULT_TIMEOUT, REMOVE_TIMEOUT } from '../../src/constants';
 
 describe('toast', () => {
   beforeEach(() => {
@@ -40,7 +40,7 @@ describe('toast', () => {
     expect(queryByText('strawberry toast')).toBeInTheDocument();
 
     act(() => {
-      vi.advanceTimersByTime(2_000);
+      vi.advanceTimersByTime(2_000 + REMOVE_TIMEOUT);
     });
 
     expect(queryByText('strawberry toast')).not.toBeInTheDocument();
@@ -72,6 +72,10 @@ describe('toast', () => {
     expect(queryByText('strawberry toast')).toBeInTheDocument();
 
     fireEvent.click(getByRole('button', { name: 'close' }));
+
+    act(() => {
+      vi.advanceTimersByTime(DEFAULT_TIMEOUT + REMOVE_TIMEOUT);
+    });
 
     expect(queryByText('strawberry toast')).not.toBeInTheDocument();
   });
@@ -113,7 +117,7 @@ describe('toast', () => {
     expect(queryByText('strawberry toast')).toBeInTheDocument();
 
     act(() => {
-      vi.advanceTimersByTime(2_000);
+      vi.advanceTimersByTime(2_000 + REMOVE_TIMEOUT);
     });
 
     expect(queryByText('strawberry toast')).not.toBeInTheDocument();

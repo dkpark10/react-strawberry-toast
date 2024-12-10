@@ -2,7 +2,7 @@ import { type PropsWithChildren } from 'react';
 import { css } from '@linaria/core';
 
 const downAnimation = css`
-  @keyframes down {
+  @keyframes fade-in {
     from {
       transform: translateY(-100%);
       opacity: 0;
@@ -12,11 +12,11 @@ const downAnimation = css`
       opacity: 1;
     }
   }
-  animation: down 0.2s ease-out;
+  animation: fade-in 0.3s ease-out;
 `;
 
 const upAnimation = css`
-  @keyframes up {
+  @keyframes fade-out {
     from {
       transform: translateY(0);
       opacity: 1;
@@ -26,7 +26,7 @@ const upAnimation = css`
       opacity: 0;
     }
   }
-  animation: up 0.2s ease-out;
+  animation: fade-out 0.3s ease-out;
 `;
 
 interface ToasterProps {
