@@ -1,4 +1,4 @@
-import type { ToastState, Options, ToastMoreOptions } from './types';
+import type { ToastState, Options, ToastMoreOptions, ToastStatus } from './types';
 import { setState } from './store';
 import { generateId } from '../utils';
 import { REMOVE_TIMEOUT, MAX_TIMEOUT, DEFAULT_TIMEOUT } from '../constants';
@@ -10,7 +10,7 @@ let toastQueue: Array<ToastState> = [];
 /** @description key = toast id, value = timer id */
 const toastTimers = new Map<number, number>();
 
-const cleanUp = (toastId: number) => {
+const cleanUp = (toastId: number): void => {
   toastQueue = toastQueue.map((toast) => {
     if (toast.id === toastId) {
       return {
@@ -24,7 +24,7 @@ const cleanUp = (toastId: number) => {
   remove(toastId);
 };
 
-const remove = (toastId: number) => {
+const remove = (toastId: number): void => {
   setTimeout(() => {
     toastQueue = toastQueue.filter((toast) => toast.id !== toastId);
     setState([...toastQueue]);
@@ -34,9 +34,9 @@ const remove = (toastId: number) => {
   clearTimeout(timerId);
 
   toastTimers.delete(toastId);
-}
+};
 
-const pause = (toastId: number) => {
+const pause = (toastId: number): void => {
   const pausedAt = new Date().getTime();
 
   toastQueue = toastQueue.map((toast) => {
@@ -56,7 +56,7 @@ const pause = (toastId: number) => {
   setState([...toastQueue]);
 };
 
-const resume = (toastId: number) => {
+const resume = (toastId: number): void => {
   const target = toastQueue.find((toast) => toast.id === toastId) as ToastState;
 
   const leftTimeout = target.createdAt + target.timeOut - (target.pausedAt || 0);
@@ -68,35 +68,51 @@ const resume = (toastId: number) => {
   toastTimers.set(toastId, timer);
 };
 
-export const toast = (data: ToastMoreOptions['data'], options: Options = {}) => {
-  const { timeOut = DEFAULT_TIMEOUT, position = 'top-center' } = options;
+const createToast =
+  (toastStatus: ToastStatus): ((data: ToastMoreOptions['data'], options?: Options) => void) =>
+  (data: ToastMoreOptions['data'], options: Options = {}) => {
+    const { timeOut = DEFAULT_TIMEOUT, position = 'top-center' } = options;
 
-  const id = idGenerator();
-  const createdAt = new Date().getTime();
+    const id = idGenerator();
+    const createdAt = new Date().getTime();
 
-  const timer = setTimeout(
-    () => {
-      cleanUp(id);
-    },
-    timeOut > MAX_TIMEOUT ? MAX_TIMEOUT : timeOut,
-  );
+    const timer = setTimeout(
+      () => {
+        cleanUp(id);
+      },
+      timeOut > MAX_TIMEOUT ? MAX_TIMEOUT : timeOut,
+    );
 
-  toastTimers.set(id, timer);
+    toastTimers.set(id, timer);
 
-  const value: ToastState = {
-    ...options,
-    timeOut: timeOut > MAX_TIMEOUT ? MAX_TIMEOUT : timeOut,
-    position,
-    id,
-    data,
-    createdAt,
-    isVisible: true,
-    close: cleanUp,
-    pause,
-    resume,
+    const value: ToastState = {
+      ...options,
+      timeOut: timeOut > MAX_TIMEOUT ? MAX_TIMEOUT : timeOut,
+      position,
+      id,
+      data,
+      createdAt,
+      toastStatus,
+      isVisible: true,
+      close: cleanUp,
+      pause,
+      resume,
+    };
+
+    toastQueue.push(value);
+
+    setState([...toastQueue]);
   };
 
-  toastQueue.push(value);
+export const toast = (data: ToastMoreOptions['data'], options: Options = {}) =>
+  createToast('default')(data, options);
 
-  setState([...toastQueue]);
+toast.success = createToast('success');
+toast.error = createToast('error');
+toast.warn = createToast('warn');
+toast.loading = createToast('loading');
+
+/** @todo */
+toast.promise = (promise: Promise<any>) => {
+  promise.then().catch();
 };

@@ -10,12 +10,12 @@ let state: ToastStateList = [];
 const listeners = new Set<Listener>();
 
 /** @description must put a new memory value in the nextState. */
-export const setState = (nextState: ToastStateList | ((state: ToastStateList) => ToastStateList)) => {
+export const setState = (nextState: ToastStateList | ((state: ToastStateList) => ToastStateList)): void => {
   state = typeof nextState === 'function' ? nextState(state) : nextState;
   listeners.forEach((listener) => listener());
 };
 
-const subscribe = (listener: Listener) => {
+const subscribe = (listener: Listener): Listener => {
   listeners.add(listener);
   return () => {
     listeners.delete(listener);

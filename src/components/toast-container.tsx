@@ -2,6 +2,7 @@ import { useStrawberryToast } from '../core/store';
 import { ToastBase } from './toast-base';
 import { styled } from '@linaria/react';
 import type { Position, ToastState } from '../core/types';
+import { ToastComponents } from './toast-status';
 
 const OFFSET = 16;
 
@@ -68,7 +69,6 @@ export function ToastContainer() {
             style={{
               pointerEvents: 'auto',
               position: 'fixed',
-              width: 160,
               display: 'grid',
               gap: 9,
               ...style,
@@ -78,6 +78,8 @@ export function ToastContainer() {
               const close = () => toast.close(toast.id);
 
               const content = typeof toast.data === 'function' ? toast.data({ close }) : toast.data;
+
+              const ToastComponent = ToastComponents[toast.toastStatus];
 
               return (
                 <ToastBase
@@ -90,7 +92,7 @@ export function ToastContainer() {
                     toast.resume(toast.id);
                   }}
                 >
-                  {content}
+                  <ToastComponent>{content}</ToastComponent>
                 </ToastBase>
               );
             })}

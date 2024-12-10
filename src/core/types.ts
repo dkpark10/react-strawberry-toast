@@ -8,6 +8,13 @@ export type Position =
   | 'top-center'
   | 'top-right';
 
+export type ToastStatus =
+  | 'default'
+  | 'success'
+  | 'error'
+  | 'loading'
+  | 'warn'
+
 export interface Options {
   position?: Position;
   timeOut?: number;
@@ -26,6 +33,7 @@ export interface ToastMoreOptions {
   resume: ResumeFunc;
   isVisible: boolean;
   createdAt: number;
+  toastStatus: ToastStatus;
   pausedAt?: number;
 }
 

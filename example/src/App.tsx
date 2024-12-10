@@ -1,23 +1,10 @@
 import React from 'react';
 import { ToastContainer, toast } from '../../src';
-import { Position } from '../../src/core/types';
+// import { Position } from '../../src/core/types';
 
 export default function App() {
   const click = () => {
-    ['top-center'].forEach((pos) => {
-      toast(
-        ({ close }) => (
-          <div style={{ border: '1px solid red' }}>
-            <button onClick={close}>close</button>
-            toast component
-          </div>
-        ),
-        {
-          timeOut: 1_000,
-          position: pos as Position,
-        },
-      );
-    });
+    toast.success('toast component');
   };
 
   return (
