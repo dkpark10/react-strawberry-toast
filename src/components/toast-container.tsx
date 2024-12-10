@@ -1,8 +1,9 @@
 import { useStrawberryToast } from '../core/store';
 import { ToastBase } from './toast-base';
 import { styled } from '@linaria/react';
-import type { Position, ToastState } from '../core/types';
 import { ToastStatusContainer, ToastStatusIcons } from './toast-status';
+import { Condition, If, Else } from './condition';
+import type { Position, ToastState } from '../core/types';
 
 const OFFSET = 16;
 
@@ -93,11 +94,12 @@ export function ToastContainer() {
                     toast.resume(toast.id);
                   }}
                 >
-                  {typeof toast.data === 'function' ? (
-                    content
-                  ) : (
-                    <ToastStatusContainer icon={<Icon />}>{content}</ToastStatusContainer>
-                  )}
+                  <Condition condition={typeof toast.data === 'function'}>
+                    <If>{content}</If>
+                    <Else>
+                      <ToastStatusContainer icon={<Icon />}>{content}</ToastStatusContainer>
+                    </Else>
+                  </Condition>
                 </ToastBase>
               );
             })}
