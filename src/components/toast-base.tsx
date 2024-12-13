@@ -14,12 +14,14 @@ export function ToastComponent({ children, toast, ...rest }: ToasterProps & Prop
     if (!strawBerryToast.isActive(toast.toastId)) {
       strawBerryToast.disappear(toast.toastId, toast.timeOut);
     }
+  }, [toast.toastId]);
 
-    if (toast.updated) {
+  useEffect(() => {
+    if (toast.updated !== undefined) {
       const newTimeOut = toast.timeOut >= MAX_TIMEOUT ? 2_000 : toast.timeOut;
       strawBerryToast.disappear(toast.toastId, newTimeOut);
     }
-  }, [toast.updated, toast.toastId]);
+  }, [toast.updated]);
 
   return (
     <div role="alert" {...rest}>

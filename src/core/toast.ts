@@ -128,7 +128,6 @@ toast.replace = (toastId: number, data: ToastMoreOptions['data'], options: Parti
 
 toast.isActive = (toastId: number): boolean => toastTimers.has(toastId);
 
-/** @todo */
 toast.promise = (
   promise: Promise<any>,
   promiseOption: {

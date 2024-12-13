@@ -212,6 +212,5 @@ describe('toast', () => {
     expect(queryByText(/loading/i)).not.toBeInTheDocument();
 
     expect(queryByText(/error/i)).toBeInTheDocument();
-
   });
 });
