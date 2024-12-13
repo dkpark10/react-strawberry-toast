@@ -19,17 +19,13 @@ export default function App() {
       success: 'success',
       error: 'error',
     });
-    toast.promise(fakeFetchReject(), {
-      loading: 'loading',
-      success: 'success',
-      error: 'error',
-    });
-    // toast.success('strawberry', {
-    //   timeOut: Infinity,
+    // toast.promise(fakeFetchReject(), {
+    //   loading: 'loading',
+    //   success: 'success',
+    //   error: 'error',
     // });
-    // toast.error('strawberry', {
-    //   timeOut: Infinity,
-    // });
+    toast.success('strawberry 123123 check');
+    toast.error('strawberry');
   };
 
   return (

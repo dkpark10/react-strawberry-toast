@@ -1,8 +1,8 @@
 import { useStrawberryToast } from '../core/store';
 import { toast as strawBerryToast } from '../core/toast';
-import { ToastBase } from './toast-base';
+import { Toast } from './toast-base';
 import { styled } from '@linaria/react';
-import { ToastStatusContainer, ToastStatusIcons } from './toast-status';
+import { DefaultToast, ToastStatusIcons } from './toast-default';
 import { Condition, If, Else } from './condition';
 import type { Position, ToastState } from '../core/types';
 
@@ -87,7 +87,7 @@ export function ToastContainer() {
                 typeof toast.data === 'function' ? toast.data({ close, icon: <Icon /> }) : toast.data;
 
               return (
-                <ToastBase
+                <Toast
                   key={toast.toastId}
                   toast={toast}
                   onMouseEnter={() => {
@@ -98,12 +98,15 @@ export function ToastContainer() {
                   }}
                 >
                   <Condition condition={typeof toast.data === 'function'}>
+                    {/** custom not styling */}
                     <If>{content}</If>
                     <Else>
-                      <ToastStatusContainer icon={<Icon />}>{content}</ToastStatusContainer>
+                      <DefaultToast isVisible={toast.isVisible} icon={<Icon />}>
+                        {content}
+                      </DefaultToast>
                     </Else>
                   </Condition>
-                </ToastBase>
+                </Toast>
               );
             })}
           </div>

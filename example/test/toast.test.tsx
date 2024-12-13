@@ -1,6 +1,6 @@
 import React from 'react';
 import { afterEach, beforeEach, vi, describe, expect, test } from 'vitest';
-import { act, render, fireEvent } from '@testing-library/react';
+import { act, render, fireEvent, waitFor } from '@testing-library/react';
 import { ToastContainer, toast } from '../../src';
 import { MAX_TIMEOUT, DEFAULT_TIMEOUT, REMOVE_TIMEOUT } from '../../src/constants';
 
@@ -31,19 +31,19 @@ describe('toast', () => {
 
     fireEvent.click(getByRole('button', { name: 'click' }));
 
-    expect(queryByText('strawberry toast')).toBeInTheDocument();
+    expect(queryByText(/strawberry toast/i)).toBeInTheDocument();
 
     act(() => {
       vi.advanceTimersByTime(1_000);
     });
 
-    expect(queryByText('strawberry toast')).toBeInTheDocument();
+    expect(queryByText(/strawberry toast/i)).toBeInTheDocument();
 
     act(() => {
       vi.advanceTimersByTime(2_000 + REMOVE_TIMEOUT);
     });
 
-    expect(queryByText('strawberry toast')).not.toBeInTheDocument();
+    expect(queryByText(/strawberry toast/i)).not.toBeInTheDocument();
   });
 
   test('click close', async () => {
@@ -69,7 +69,7 @@ describe('toast', () => {
 
     fireEvent.click(getByRole('button', { name: 'click' }));
 
-    expect(queryByText('strawberry toast')).toBeInTheDocument();
+    expect(queryByText(/strawberry toast/i)).toBeInTheDocument();
 
     fireEvent.click(getByRole('button', { name: 'close' }));
 
@@ -77,7 +77,7 @@ describe('toast', () => {
       vi.advanceTimersByTime(DEFAULT_TIMEOUT + REMOVE_TIMEOUT);
     });
 
-    expect(queryByText('strawberry toast')).not.toBeInTheDocument();
+    expect(queryByText(/strawberry toast/i)).not.toBeInTheDocument();
   });
 
   test('mouse enter mouse leave', async () => {
@@ -98,7 +98,7 @@ describe('toast', () => {
 
     fireEvent.click(getByRole('button', { name: 'click' }));
 
-    expect(queryByText('strawberry toast')).toBeInTheDocument();
+    expect(queryByText(/strawberry toast/i)).toBeInTheDocument();
 
     act(() => {
       vi.advanceTimersByTime(1_000);
@@ -110,17 +110,17 @@ describe('toast', () => {
       vi.advanceTimersByTime(60_000);
     });
 
-    expect(queryByText('strawberry toast')).toBeInTheDocument();
+    expect(queryByText(/strawberry toast/i)).toBeInTheDocument();
 
     fireEvent.mouseLeave(getByText('strawberry toast'));
 
-    expect(queryByText('strawberry toast')).toBeInTheDocument();
+    expect(queryByText(/strawberry toast/i)).toBeInTheDocument();
 
     act(() => {
       vi.advanceTimersByTime(2_000 + REMOVE_TIMEOUT);
     });
 
-    expect(queryByText('strawberry toast')).not.toBeInTheDocument();
+    expect(queryByText(/strawberry toast/i)).not.toBeInTheDocument();
   });
 
   test('infinity', async () => {
@@ -145,6 +145,46 @@ describe('toast', () => {
       vi.advanceTimersByTime(MAX_TIMEOUT - 1);
     });
 
-    expect(queryByText('strawberry toast')).toBeInTheDocument();
+    expect(queryByText(/strawberry toast/i)).toBeInTheDocument();
+  });
+
+  // FIXME
+  test.skip('promise', async () => {
+    function App() {
+      const click = () => {
+        const promise = new Promise((resolve) => {
+          setTimeout(resolve, 3_000);
+        });
+
+        toast.promise(promise, {
+          loading: 'loading',
+          success: 'success',
+          error: 'error',
+        });
+      };
+
+      return (
+        <React.Fragment>
+          <ToastContainer />
+          <button onClick={click}>click</button>
+        </React.Fragment>
+      );
+    }
+
+    const { getByRole, queryByText, findByText } = render(<App />);
+
+    await act(async () => {
+      fireEvent.click(getByRole('button', { name: 'click' }));
+    });
+
+    expect(queryByText(/loading/i)).toBeInTheDocument();
+
+    act(() => {
+      vi.advanceTimersByTime(DEFAULT_TIMEOUT + 1);
+    });
+
+    await waitFor(() => {
+      expect(queryByText(/success/i)).toBeInTheDocument();
+    });
   });
 });

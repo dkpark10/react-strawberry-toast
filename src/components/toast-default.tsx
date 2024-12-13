@@ -1,3 +1,4 @@
+import { css } from '@linaria/core';
 import { styled } from '@linaria/react';
 import type { PropsWithChildren, ReactNode } from 'react';
 import type { ToastStatus } from '@/core/types';
@@ -15,6 +16,34 @@ const ToastStatusWrapper = styled.div`
   & .inner-content {
     margin: 0px 5px;
   }
+`;
+
+const downAnimation = css`
+  @keyframes fade-in {
+    from {
+      transform: translateY(-100%);
+      opacity: 0;
+    }
+    to {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+  animation: fade-in 0.3s ease-out;
+`;
+
+const upAnimation = css`
+  @keyframes fade-out {
+    from {
+      transform: translateY(0);
+      opacity: 1;
+    }
+    to {
+      transform: translateY(-100%);
+      opacity: 0;
+    }
+  }
+  animation: fade-out 0.3s ease-out;
 `;
 
 const LoadingContainer = styled.div`
@@ -37,13 +66,16 @@ const LoadingContainer = styled.div`
   animation: l3 1s infinite linear;
 `;
 
-interface ToastStatusContainerProps {
+interface DefaultToastProps {
+  isVisible: boolean;
   icon?: ReactNode;
 }
 
-export function ToastStatusContainer({ icon, children }: ToastStatusContainerProps & PropsWithChildren) {
+export function DefaultToast({ icon, isVisible, children }: DefaultToastProps & PropsWithChildren) {
+  const animation = isVisible ? downAnimation : upAnimation;
+
   return (
-    <ToastStatusWrapper>
+    <ToastStatusWrapper className={animation}>
       {icon}
       <div className="inner-content">{children}</div>
     </ToastStatusWrapper>
