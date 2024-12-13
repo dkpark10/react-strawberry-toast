@@ -2,30 +2,25 @@ import React from 'react';
 import { ToastContainer, toast } from '../../src';
 // import { Position } from '../../src/core/types';
 
-const fakeFetchResolve = () =>
-  new Promise((resolve) => {
-    setTimeout(resolve, 3_000);
-  });
-
-const fakeFetchReject = () =>
-  new Promise((_, reject) => {
-    setTimeout(reject, 3_000);
-  });
-
 export default function App() {
   const click = () => {
-    toast.promise(fakeFetchResolve(), {
-      loading: 'loading',
-      success: 'success',
-      error: 'error',
-    });
+    toast.promise(
+      new Promise((resolve) => {
+        setTimeout(resolve, 3_000);
+      }),
+      {
+        loading: 'loading',
+        success: 'success',
+        error: 'error',
+      },
+    );
     // toast.promise(fakeFetchReject(), {
     //   loading: 'loading',
     //   success: 'success',
     //   error: 'error',
     // });
-    toast.success('strawberry 123123 check');
-    toast.error('strawberry');
+    // toast.success('strawberry 123123 check');
+    // toast.error('strawberry');
   };
 
   return (

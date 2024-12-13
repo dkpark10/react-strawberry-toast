@@ -1,6 +1,6 @@
 import React from 'react';
 import { afterEach, beforeEach, vi, describe, expect, test } from 'vitest';
-import { act, render, fireEvent, waitFor } from '@testing-library/react';
+import { screen, act, render, fireEvent, waitFor } from '@testing-library/react';
 import { ToastContainer, toast } from '../../src';
 import { MAX_TIMEOUT, DEFAULT_TIMEOUT, REMOVE_TIMEOUT } from '../../src/constants';
 
@@ -148,12 +148,23 @@ describe('toast', () => {
     expect(queryByText(/strawberry toast/i)).toBeInTheDocument();
   });
 
-  // FIXME
-  test.skip('promise', async () => {
+  test('promise', async () => {
     function App() {
-      const click = () => {
+      const resolveClick = () => {
         const promise = new Promise((resolve) => {
           setTimeout(resolve, 3_000);
+        });
+
+        toast.promise(promise, {
+          loading: 'loading',
+          success: 'success',
+          error: 'error',
+        });
+      };
+
+      const rejectClick = () => {
+        const promise = new Promise((_, reject) => {
+          setTimeout(reject, 3_000);
         });
 
         toast.promise(promise, {
@@ -166,25 +177,41 @@ describe('toast', () => {
       return (
         <React.Fragment>
           <ToastContainer />
-          <button onClick={click}>click</button>
+          <button onClick={resolveClick}>resolve</button>
+          <button onClick={rejectClick}>reject</button>
         </React.Fragment>
       );
     }
 
-    const { getByRole, queryByText, findByText } = render(<App />);
+    const { getByRole, queryByText } = render(<App />);
 
-    await act(async () => {
-      fireEvent.click(getByRole('button', { name: 'click' }));
+    act(() => {
+      fireEvent.click(getByRole('button', { name: 'resolve' }));
     });
 
     expect(queryByText(/loading/i)).toBeInTheDocument();
 
-    act(() => {
+    await act(() => {
       vi.advanceTimersByTime(DEFAULT_TIMEOUT + 1);
     });
+    
+    expect(queryByText(/loading/i)).not.toBeInTheDocument();
 
-    await waitFor(() => {
-      expect(queryByText(/success/i)).toBeInTheDocument();
+    expect(queryByText(/success/i)).toBeInTheDocument();
+
+    act(() => {
+      fireEvent.click(getByRole('button', { name: 'reject' }));
     });
+
+    expect(queryByText(/loading/i)).toBeInTheDocument();
+
+    await act(() => {
+      vi.advanceTimersByTime(DEFAULT_TIMEOUT + 1);
+    });
+    
+    expect(queryByText(/loading/i)).not.toBeInTheDocument();
+
+    expect(queryByText(/error/i)).toBeInTheDocument();
+
   });
 });
