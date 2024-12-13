@@ -10,62 +10,20 @@ let toastQueue: Array<ToastState> = [];
 /** @description key = toast id, value = timer id */
 const toastTimers = new Map<number, number>();
 
-const cleanUp = (toastId: number): void => {
-  toastQueue = toastQueue.map((toast) => {
-    if (toast.id === toastId) {
-      return {
-        ...toast,
-        isVisible: false,
-      };
-    }
-    return toast;
-  });
-  setState([...toastQueue]);
-  remove(toastId);
-};
+const deleteTimer = (toastId: number) => {
+  const timerId = toastTimers.get(toastId);
+  clearTimeout(timerId);
+
+  toastTimers.delete(toastId);
+}
 
 const remove = (toastId: number): void => {
   setTimeout(() => {
-    toastQueue = toastQueue.filter((toast) => toast.id !== toastId);
+    toastQueue = toastQueue.filter((toast) => toast.toastId !== toastId);
     setState([...toastQueue]);
   }, REMOVE_TIMEOUT);
 
-  const timerId = toastTimers.get(toastId);
-  clearTimeout(timerId);
-
-  toastTimers.delete(toastId);
-};
-
-const pause = (toastId: number): void => {
-  const pausedAt = new Date().getTime();
-
-  toastQueue = toastQueue.map((toast) => {
-    if (toast.id === toastId) {
-      return {
-        ...toast,
-        pausedAt,
-      };
-    }
-    return toast;
-  });
-
-  const timerId = toastTimers.get(toastId);
-  clearTimeout(timerId);
-
-  toastTimers.delete(toastId);
-  setState([...toastQueue]);
-};
-
-const resume = (toastId: number): void => {
-  const target = toastQueue.find((toast) => toast.id === toastId) as ToastState;
-
-  const leftTimeout = target.createdAt + target.timeOut - (target.pausedAt || 0);
-
-  const timer = setTimeout(() => {
-    cleanUp(toastId);
-  }, leftTimeout);
-
-  toastTimers.set(toastId, timer);
+  deleteTimer(toastId);
 };
 
 const createToast =
@@ -73,30 +31,18 @@ const createToast =
   (data: ToastMoreOptions['data'], options: Options = {}) => {
     const { timeOut = DEFAULT_TIMEOUT, position = 'top-center' } = options;
 
-    const id = idGenerator();
+    const toastId = idGenerator();
     const createdAt = new Date().getTime();
-
-    const timer = setTimeout(
-      () => {
-        cleanUp(id);
-      },
-      timeOut > MAX_TIMEOUT ? MAX_TIMEOUT : timeOut,
-    );
-
-    toastTimers.set(id, timer);
 
     const value: ToastState = {
       ...options,
       timeOut: timeOut > MAX_TIMEOUT ? MAX_TIMEOUT : timeOut,
       position,
-      id,
+      toastId,
       data,
       createdAt,
       toastStatus,
       isVisible: true,
-      close: cleanUp,
-      pause,
-      resume,
     };
 
     toastQueue.push(value);
@@ -112,7 +58,65 @@ toast.error = createToast('error');
 toast.warn = createToast('warn');
 toast.loading = createToast('loading');
 
-/** @todo */
-toast.promise = (promise: Promise<any>) => {
-  promise.then().catch();
+toast.disappear = (toastId: number, timeOut: number) => {
+  const timer = setTimeout(
+    () => {
+      toastQueue = toastQueue.map((toast) => {
+        if (toast.toastId === toastId) {
+          return {
+            ...toast,
+            isVisible: false,
+          };
+        }
+        return toast;
+      });
+      setState([...toastQueue]);
+      remove(toastId);
+    },
+    timeOut > MAX_TIMEOUT ? MAX_TIMEOUT : timeOut,
+  );
+
+  toastTimers.set(toastId, timer);
 };
+
+toast.resume = (toastId: number): void => {
+  const target = toastQueue.find((toast) => toast.toastId === toastId) as ToastState;
+
+  const leftTimeout = target.createdAt + target.timeOut - (target.pausedAt || 0);
+  
+  toast.disappear(toastId, leftTimeout);
+};
+
+toast.pause = (toastId: number): void => {
+  const pausedAt = new Date().getTime();
+
+  toastQueue = toastQueue.map((toast) => {
+    if (toast.toastId === toastId) {
+      return {
+        ...toast,
+        pausedAt,
+      };
+    }
+    return toast;
+  });
+
+  deleteTimer(toastId);
+  setState([...toastQueue]);
+};
+
+/** @todo */
+// toast.promise = (
+//   promise: Promise<any>,
+//   promiseOption: {
+//     loading: string | ReactNode;
+//     success: string | ReactNode;
+//     error: string | ReactNode;
+//   },
+//   options: Options = {},
+// ) => {
+//   const toastId = idGenerator();
+
+//   const { position = 'top-center' } = options;
+
+//   promise.then(() => {}).catch(() => {});
+// };

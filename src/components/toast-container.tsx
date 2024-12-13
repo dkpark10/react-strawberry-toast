@@ -1,4 +1,5 @@
 import { useStrawberryToast } from '../core/store';
+import { toast as strawBerryToast } from '../core/toast';
 import { ToastBase } from './toast-base';
 import { styled } from '@linaria/react';
 import { ToastStatusContainer, ToastStatusIcons } from './toast-status';
@@ -76,7 +77,7 @@ export function ToastContainer() {
             }}
           >
             {toastList.map((toast) => {
-              const close = () => toast.close(toast.id);
+              const close = () => strawBerryToast.disappear(toast.toastId, toast.timeOut);
 
               const Icon = ToastStatusIcons[toast.toastStatus];
 
@@ -85,13 +86,13 @@ export function ToastContainer() {
 
               return (
                 <ToastBase
-                  key={toast.id}
-                  isVisible={toast.isVisible}
+                  key={toast.toastId}
+                  toast={toast}
                   onMouseEnter={() => {
-                    toast.pause(toast.id);
+                    strawBerryToast.pause(toast.toastId);
                   }}
                   onMouseLeave={() => {
-                    toast.resume(toast.id);
+                    strawBerryToast.resume(toast.toastId);
                   }}
                 >
                   <Condition condition={typeof toast.data === 'function'}>
