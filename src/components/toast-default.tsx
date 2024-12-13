@@ -1,7 +1,7 @@
 import { css } from '@linaria/core';
 import { styled } from '@linaria/react';
-import type { PropsWithChildren, ReactNode } from 'react';
-import type { ToastStatus } from '@/core/types';
+import React, { type PropsWithChildren, type ReactNode } from 'react';
+import type { ToastStatus } from '../core/types';
 
 const ToastStatusWrapper = styled.div`
   box-sizing: border-box;

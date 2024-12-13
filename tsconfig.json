@@ -10,10 +10,11 @@
     "moduleResolution": "node",
     "allowImportingTsExtensions": true,
     "rootDir": "./",
+    "declaration": true,
     "noImplicitReturns": true,
     "moduleDetection": "force",
     "noEmit": true,
-    "jsx": "react-jsx",
+    "jsx": "react",
     "strict": true,
     "noUnusedLocals": true,
     "strictNullChecks": true,
@@ -21,10 +22,6 @@
     "esModuleInterop": true,
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
-    "paths": {
-      "@/*": [
-        "./src/*"
-      ],
-    }
-  }
+  },
+  "include": ["./src/**/*"]
 }

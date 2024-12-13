@@ -1,7 +1,7 @@
-import { useEffect, type PropsWithChildren } from 'react';
+import React, { useEffect, type PropsWithChildren } from 'react';
 import { toast as strawBerryToast } from '../core/toast';
 import { MAX_TIMEOUT } from '../constants';
-import type { ToastState } from '@/core/types';
+import type { ToastState } from '../core/types';
 
 interface ToasterProps {
   onMouseEnter: () => void;

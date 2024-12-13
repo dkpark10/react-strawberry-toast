@@ -1,3 +1,4 @@
+import React from 'react';
 import { useStrawberryToast } from '../core/store';
 import { toast as strawBerryToast } from '../core/toast';
 import { ToastComponent } from './toast-base';

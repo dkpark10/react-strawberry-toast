@@ -1,6 +1,8 @@
 {
   "name": "react-strawberry-toast",
+  "description": "simple headless free position react toast library",
   "version": "0.1.0",
+  "author": "dkpark10",
   "main": "./src/index.ts",
   "scripts": {
     "build": "vite build",
