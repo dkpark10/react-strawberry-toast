@@ -1,8 +1,8 @@
 import React from 'react';
 import { afterEach, beforeEach, vi, describe, expect, test } from 'vitest';
-import { screen, act, render, fireEvent, waitFor } from '@testing-library/react';
-import { ToastContainer, toast } from '../../src';
-import { MAX_TIMEOUT, DEFAULT_TIMEOUT, REMOVE_TIMEOUT } from '../../src/constants';
+import { act, render, fireEvent } from '@testing-library/react';
+import { ToastContainer, toast } from '../src';
+import { MAX_TIMEOUT, DEFAULT_TIMEOUT, REMOVE_TIMEOUT } from '../src/constants';
 
 describe('toast', () => {
   beforeEach(() => {

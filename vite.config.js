@@ -1,6 +1,5 @@
 import { defineConfig } from 'vite';
-import wyw from '@wyw-in-js/vite';
-import path from 'path'
+import path from 'path';
 
 export default defineConfig(() => ({
   build: {
@@ -14,12 +13,9 @@ export default defineConfig(() => ({
       external: ['react', 'react-dom'],
     },
   },
-  plugins: [
-    wyw({
-      include: ['./src/*.{ts,tsx}'],
-      babelOptions: {
-        presets: ['@babel/preset-typescript', '@babel/preset-react'],
-      },
-    }),
-  ],
+  test: {
+    globals: true,
+    environment: 'jsdom',
+    setupFiles: './setupTest.js',
+  },
 }));
