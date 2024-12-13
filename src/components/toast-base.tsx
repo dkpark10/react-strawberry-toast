@@ -9,7 +9,7 @@ interface ToasterProps {
   toast: ToastState;
 }
 
-export function Toast({ children, toast, ...rest }: ToasterProps & PropsWithChildren) {
+export function ToastComponent({ children, toast, ...rest }: ToasterProps & PropsWithChildren) {
   useEffect(() => {
     if (!strawBerryToast.isActive(toast.toastId)) {
       strawBerryToast.disappear(toast.toastId, toast.timeOut);

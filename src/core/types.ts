@@ -1,12 +1,19 @@
 import type { ReactNode } from 'react';
 
+export type Top = 'top';
+export type Left = 'left';
+export type Right = 'right';
+export type Bottom = 'bottom';
+
+export type Direction = Top | Left | Right | Bottom;
+
 export type Position =
-  | 'bottom-left'
-  | 'bottom-center'
-  | 'bottom-right'
-  | 'top-left'
-  | 'top-center'
-  | 'top-right';
+  | `${Bottom}-${Left}`
+  | `${Bottom}-center`
+  | `${Bottom}-${Right}`
+  | `${Top}-${Left}`
+  | `${Top}-center`
+  | `${Top}-${Right}`
 
 export type ToastStatus =
   | 'default'
@@ -18,7 +25,10 @@ export type ToastStatus =
 export interface Options {
   position?: Position;
   timeOut?: number;
-  element?: HTMLElement;
+  element?: {
+    target: HTMLElement;
+    position?: Direction;
+  };
 }
 
 interface ToastDataCallback {

@@ -1,10 +1,11 @@
 import { useStrawberryToast } from '../core/store';
 import { toast as strawBerryToast } from '../core/toast';
-import { Toast } from './toast-base';
+import { ToastComponent } from './toast-base';
 import { styled } from '@linaria/react';
 import { DefaultToast, ToastStatusIcons } from './toast-default';
 import { Condition, If, Else } from './condition';
 import type { Position, ToastState } from '../core/types';
+import { createPortal } from 'react-dom';
 
 const OFFSET = 16;
 
@@ -83,22 +84,52 @@ export function ToastContainer() {
 
               const Icon = ToastStatusIcons[toast.toastStatus];
 
+              const onMouseEnter = () => {
+                strawBerryToast.pause(toast.toastId);
+              };
+
+              const onMouseLeave = () => {
+                strawBerryToast.resume(toast.toastId);
+              };
+
               const content =
                 typeof toast.data === 'function' ? toast.data({ close, icon: <Icon /> }) : toast.data;
 
+              if (toast.element?.target) {
+                const toastPosOnTarget = toast.element.position || 'left';
+
+                return (
+                  <ToastComponent
+                    key={toast.toastId}
+                    toast={toast}
+                    onMouseEnter={onMouseEnter}
+                    onMouseLeave={onMouseLeave}
+                  >
+                    <Condition condition={typeof toast.data === 'function'}>
+                      {/** custom component not styling */}
+                      <If>{createPortal(content, toast.element.target)}</If>
+                      <Else>
+                        {createPortal(
+                          <DefaultToast isVisible={toast.isVisible} icon={<Icon />}>
+                            {content}
+                          </DefaultToast>,
+                          toast.element.target,
+                        )}
+                      </Else>
+                    </Condition>
+                  </ToastComponent>
+                );
+              }
+
               return (
-                <Toast
+                <ToastComponent
                   key={toast.toastId}
                   toast={toast}
-                  onMouseEnter={() => {
-                    strawBerryToast.pause(toast.toastId);
-                  }}
-                  onMouseLeave={() => {
-                    strawBerryToast.resume(toast.toastId);
-                  }}
+                  onMouseEnter={onMouseEnter}
+                  onMouseLeave={onMouseLeave}
                 >
                   <Condition condition={typeof toast.data === 'function'}>
-                    {/** custom not styling */}
+                    {/** custom component not styling */}
                     <If>{content}</If>
                     <Else>
                       <DefaultToast isVisible={toast.isVisible} icon={<Icon />}>
@@ -106,7 +137,7 @@ export function ToastContainer() {
                       </DefaultToast>
                     </Else>
                   </Condition>
-                </Toast>
+                </ToastComponent>
               );
             })}
           </div>
