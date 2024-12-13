@@ -9,7 +9,7 @@
     "skipLibCheck": true,
     "moduleResolution": "node",
     "allowImportingTsExtensions": true,
-    "rootDir": "./",
+    "rootDir": "./src",
     "declaration": true,
     "noImplicitReturns": true,
     "moduleDetection": "force",
@@ -23,5 +23,11 @@
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
   },
-  "include": ["./src/**/*"]
+  "include": [
+    "./src/**/*"
+  ],
+  "exclude": [
+    "node_modules",
+    "./test"
+  ]
 }

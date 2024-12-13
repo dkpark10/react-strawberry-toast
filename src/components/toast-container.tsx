@@ -97,7 +97,7 @@ export function ToastContainer() {
                 typeof toast.data === 'function' ? toast.data({ close, icon: <Icon /> }) : toast.data;
 
               if (toast.element?.target) {
-                const toastPosOnTarget = toast.element.position || 'left';
+                // const toastPosOnTarget = toast.element.position || 'left';
 
                 return (
                   <ToastComponent
