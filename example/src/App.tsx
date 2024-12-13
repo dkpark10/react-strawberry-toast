@@ -8,7 +8,7 @@ export default function App() {
   const click = () => {
     toast.success('strawberry 123123 check', {
       element: {
-        target: targetRef.current!
+        target: targetRef.current!,
       },
     });
     toast.success('strawberry 123123 check');

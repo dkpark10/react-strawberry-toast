@@ -15,7 +15,7 @@ export function Condition({ condition, children }: ConditionProps & PropsWithChi
       return child.type.name === 'If';
     }
     return child.type.name === 'Else';
-  })
+  });
 }
 
 export function If({ children }: PropsWithChildren) {

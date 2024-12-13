@@ -52,15 +52,12 @@ const positionStyle: Record<Position, React.CSSProperties> = {
 export function ToastContainer() {
   const toastList = useStrawberryToast();
 
-  const toastListByPosition: Record<Position, Array<ToastState>> = toastList.reduce(
-    (acc, toast) => {
-      const key = toast.position;
-      acc[key] = acc[key] || [];
-      acc[key].push(toast);
-      return acc;
-    },
-    {} as Record<Position, Array<ToastState>>,
-  );
+  const toastListByPosition: Record<Position, Array<ToastState>> = toastList.reduce((acc, toast) => {
+    const key = toast.position;
+    acc[key] = acc[key] || [];
+    acc[key].push(toast);
+    return acc;
+  }, {} as Record<Position, Array<ToastState>>);
 
   return (
     <ToastWrapper>
@@ -114,7 +111,7 @@ export function ToastContainer() {
                           <DefaultToast isVisible={toast.isVisible} icon={<Icon />}>
                             {content}
                           </DefaultToast>,
-                          toast.element.target,
+                          toast.element.target
                         )}
                       </Else>
                     </Condition>
