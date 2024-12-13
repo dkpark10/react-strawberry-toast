@@ -1,7 +1,8 @@
-import type { ToastState, Options, ToastMoreOptions, ToastStatus } from './types';
 import { setState } from './store';
 import { generateId } from '../utils';
 import { REMOVE_TIMEOUT, MAX_TIMEOUT, DEFAULT_TIMEOUT } from '../constants';
+import type { ReactNode } from 'react';
+import type { ToastState, Options, ToastMoreOptions, ToastStatus } from './types';
 
 const idGenerator = generateId();
 
@@ -15,9 +16,9 @@ const deleteTimer = (toastId: number) => {
   clearTimeout(timerId);
 
   toastTimers.delete(toastId);
-}
+};
 
-const remove = (toastId: number): void => {
+const toastRemove = (toastId: number): void => {
   setTimeout(() => {
     toastQueue = toastQueue.filter((toast) => toast.toastId !== toastId);
     setState([...toastQueue]);
@@ -27,8 +28,8 @@ const remove = (toastId: number): void => {
 };
 
 const createToast =
-  (toastStatus: ToastStatus): ((data: ToastMoreOptions['data'], options?: Options) => void) =>
-  (data: ToastMoreOptions['data'], options: Options = {}) => {
+  (toastStatus: ToastStatus) =>
+  (data: ToastMoreOptions['data'], options: Options = {}): number => {
     const { timeOut = DEFAULT_TIMEOUT, position = 'top-center' } = options;
 
     const toastId = idGenerator();
@@ -48,6 +49,8 @@ const createToast =
     toastQueue.push(value);
 
     setState([...toastQueue]);
+
+    return toastId;
   };
 
 export const toast = (data: ToastMoreOptions['data'], options: Options = {}) =>
@@ -61,7 +64,7 @@ toast.loading = createToast('loading');
 toast.disappear = (toastId: number, timeOut: number): void => {
   const timer = setTimeout(
     () => {
-      toastQueue = toastQueue.map((toast) => {
+      toastQueue = toastQueue.map((toast): ToastState => {
         if (toast.toastId === toastId) {
           return {
             ...toast,
@@ -71,7 +74,7 @@ toast.disappear = (toastId: number, timeOut: number): void => {
         return toast;
       });
       setState([...toastQueue]);
-      remove(toastId);
+      toastRemove(toastId);
     },
     timeOut > MAX_TIMEOUT ? MAX_TIMEOUT : timeOut,
   );
@@ -82,17 +85,18 @@ toast.disappear = (toastId: number, timeOut: number): void => {
 toast.resume = (toastId: number): void => {
   if (toastTimers.has(toastId)) return;
 
-  const target = toastQueue.find((toast) => toast.toastId === toastId) as ToastState;
+  const target = toastQueue.find((toast) => toast.toastId === toastId);
+
+  if (!target) return;
 
   const leftTimeout = target.createdAt + target.timeOut - (target.pausedAt || 0);
-  
   toast.disappear(toastId, leftTimeout);
 };
 
 toast.pause = (toastId: number): void => {
   const pausedAt = new Date().getTime();
 
-  toastQueue = toastQueue.map((toast) => {
+  toastQueue = toastQueue.map((toast): ToastState => {
     if (toast.toastId === toastId) {
       return {
         ...toast,
@@ -106,21 +110,52 @@ toast.pause = (toastId: number): void => {
   setState([...toastQueue]);
 };
 
+toast.replace = (toastId: number, data: ToastMoreOptions['data'], options: Partial<ToastState>) => {
+  toastQueue = toastQueue.map((toast): ToastState => {
+    if (toast.toastId === toastId) {
+      return {
+        ...toast,
+        ...options,
+        updated: true,
+        data,
+      };
+    }
+    return toast;
+  });
+
+  setState([...toastQueue]);
+};
+
 toast.isActive = (toastId: number): boolean => toastTimers.has(toastId);
 
 /** @todo */
-// toast.promise = (
-//   promise: Promise<any>,
-//   promiseOption: {
-//     loading: string | ReactNode;
-//     success: string | ReactNode;
-//     error: string | ReactNode;
-//   },
-//   options: Options = {},
-// ) => {
-//   const toastId = idGenerator();
+toast.promise = (
+  promise: Promise<any>,
+  promiseOption: {
+    loading: string | ReactNode;
+    success: string | ReactNode;
+    error: string | ReactNode;
+  },
+  options: Options = {},
+) => {
+  const { loading, success, error } = promiseOption;
 
-//   const { position = 'top-center' } = options;
+  const toastId = toast.loading(loading, {
+    ...options,
+    timeOut: MAX_TIMEOUT,
+  });
 
-//   promise.then(() => {}).catch(() => {});
-// };
+  promise
+    .then(() => {
+      toast.replace(toastId, success, {
+        ...options,
+        toastStatus: 'success',
+      });
+    })
+    .catch(() => {
+      toast.replace(toastId, error, {
+        ...options,
+        toastStatus: 'error',
+      });
+    });
+};

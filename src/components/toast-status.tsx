@@ -3,17 +3,38 @@ import type { PropsWithChildren, ReactNode } from 'react';
 import type { ToastStatus } from '@/core/types';
 
 const ToastStatusWrapper = styled.div`
+  box-sizing: border-box;
   background-color: white;
   padding: 12px 12px;
   display: flex;
   align-items: center;
   border-radius: 8px;
   box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.1);
-  justify-content: space-around;
+  height: 44px;
 
   & .inner-content {
     margin: 0px 5px;
   }
+`;
+
+const LoadingContainer = styled.div`
+  @keyframes l3 {
+    to {
+      transform: rotate(1turn);
+    }
+  }
+
+  width: 11px;
+  padding: 3px;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: #6b6875;
+  --_m: conic-gradient(#0000 10%, #000), linear-gradient(#000 0 0) content-box;
+  -webkit-mask: var(--_m);
+  mask: var(--_m);
+  -webkit-mask-composite: source-out;
+  mask-composite: subtract;
+  animation: l3 1s infinite linear;
 `;
 
 interface ToastStatusContainerProps {
@@ -55,9 +76,9 @@ function Success() {
 function Error() {
   return (
     <svg
-      stroke="currentColor"
+      stroke="none"
       fill="#eb2639"
-      strokeWidth="0"
+      strokeWidth="2"
       viewBox="0 0 24 24"
       height="20"
       width="20"
@@ -68,10 +89,14 @@ function Error() {
   );
 }
 
+function Loading() {
+  return <LoadingContainer />;
+}
+
 export const ToastStatusIcons: Record<ToastStatus, () => ReactNode> = {
   default: () => <></>,
   success: Success,
   error: Error,
-  loading: Success,
+  loading: Loading,
   warn: Success,
 };

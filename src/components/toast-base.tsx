@@ -1,6 +1,7 @@
 import { useEffect, type PropsWithChildren } from 'react';
 import { css } from '@linaria/core';
 import { toast as strawBerryToast } from '../core/toast';
+import { MAX_TIMEOUT } from '../constants';
 import type { ToastState } from '@/core/types';
 
 const downAnimation = css`
@@ -44,7 +45,12 @@ export function ToastBase({ children, toast, ...rest }: ToasterProps & PropsWith
     if (!strawBerryToast.isActive(toast.toastId)) {
       strawBerryToast.disappear(toast.toastId, toast.timeOut);
     }
-  }, [toast.toastId]);
+
+    if (toast.updated) {
+      const newTimeOut = toast.timeOut >= MAX_TIMEOUT ? 2_000 : toast.timeOut;
+      strawBerryToast.disappear(toast.toastId, newTimeOut);
+    }
+  }, [toast.updated, toast.toastId]);
 
   return (
     <div className={animation} role="alert" {...rest}>
