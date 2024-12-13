@@ -107,7 +107,7 @@ describe('toast', () => {
     fireEvent.mouseEnter(getByText('strawberry toast'));
 
     act(() => {
-      vi.advanceTimersByTime(2_000);
+      vi.advanceTimersByTime(60_000);
     });
 
     expect(queryByText('strawberry toast')).toBeInTheDocument();

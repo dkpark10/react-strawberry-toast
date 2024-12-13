@@ -1,7 +1,7 @@
+import { useEffect, type PropsWithChildren } from 'react';
 import { css } from '@linaria/core';
 import { toast as strawBerryToast } from '../core/toast';
 import type { ToastState } from '@/core/types';
-import { useEffect, type PropsWithChildren } from 'react';
 
 const downAnimation = css`
   @keyframes fade-in {
@@ -41,8 +41,10 @@ export function ToastBase({ children, toast, ...rest }: ToasterProps & PropsWith
   const animation = toast.isVisible ? downAnimation : upAnimation;
 
   useEffect(() => {
-    strawBerryToast.disappear(toast.toastId, toast.timeOut);
-  }, []);
+    if (!strawBerryToast.isActive(toast.toastId)) {
+      strawBerryToast.disappear(toast.toastId, toast.timeOut);
+    }
+  }, [toast.toastId]);
 
   return (
     <div className={animation} role="alert" {...rest}>

@@ -4,10 +4,11 @@ import { ToastContainer, toast } from '../../src';
 
 export default function App() {
   const click = () => {
-    toast.success(({ icon }) => <div>{icon}toast</div>);
-    toast.error(({ icon }) => <div>{icon}toast</div>);
-    toast.success('toast component');
-    toast.error('toast component');
+    toast('straw berry');
+    // toast.success(({ icon }) => <div>{icon}toast</div>);
+    // toast.error(({ icon }) => <div>{icon}toast</div>);
+    // toast.success('toast component');
+    // toast.error('toast component');
   };
 
   return (

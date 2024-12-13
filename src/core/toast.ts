@@ -58,7 +58,7 @@ toast.error = createToast('error');
 toast.warn = createToast('warn');
 toast.loading = createToast('loading');
 
-toast.disappear = (toastId: number, timeOut: number) => {
+toast.disappear = (toastId: number, timeOut: number): void => {
   const timer = setTimeout(
     () => {
       toastQueue = toastQueue.map((toast) => {
@@ -105,6 +105,8 @@ toast.pause = (toastId: number): void => {
   deleteTimer(toastId);
   setState([...toastQueue]);
 };
+
+toast.isActive = (toastId: number): boolean => toastTimers.has(toastId);
 
 /** @todo */
 // toast.promise = (
