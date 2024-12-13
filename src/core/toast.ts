@@ -80,6 +80,8 @@ toast.disappear = (toastId: number, timeOut: number) => {
 };
 
 toast.resume = (toastId: number): void => {
+  if (toastTimers.has(toastId)) return;
+
   const target = toastQueue.find((toast) => toast.toastId === toastId) as ToastState;
 
   const leftTimeout = target.createdAt + target.timeOut - (target.pausedAt || 0);

@@ -34,10 +34,10 @@ function Success() {
     <svg
       stroke="none"
       fill="none"
-      stroke-width="2"
+      strokeWidth="2"
       viewBox="0 0 24 24"
-      stroke-linecap="round"
-      stroke-linejoin="round"
+      strokeLinecap="round"
+      strokeLinejoin="round"
       height="20"
       width="20"
       xmlns="http://www.w3.org/2000/svg"
@@ -45,7 +45,7 @@ function Success() {
       <path stroke="none" d="M0 0h24v24H0z"></path>
       <path
         d="M17 3.34a10 10 0 1 1 -14.995 8.984l-.005 -.324l.005 -.324a10 10 0 0 1 14.995 -8.336zm-1.293 5.953a1 1 0 0 0 -1.32 -.083l-.094 .083l-3.293 3.292l-1.293 -1.292l-.094 -.083a1 1 0 0 0 -1.403 1.403l.083 .094l2 2l.094 .083a1 1 0 0 0 1.226 0l.094 -.083l4 -4l.083 -.094a1 1 0 0 0 -.083 -1.32z"
-        stroke-width="0"
+        strokeWidth="0"
         fill="#1ab173"
       />
     </svg>
@@ -57,7 +57,7 @@ function Error() {
     <svg
       stroke="currentColor"
       fill="#eb2639"
-      stroke-width="0"
+      strokeWidth="0"
       viewBox="0 0 24 24"
       height="20"
       width="20"
