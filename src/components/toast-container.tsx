@@ -1,7 +1,7 @@
 import React from 'react';
 import { useStrawberryToast } from '../core/store';
 import { toast as strawBerryToast } from '../core/toast';
-import { ToastComponent } from './toast-base';
+import { Toast } from './toast';
 import { styled } from '@linaria/react';
 import { DefaultToast, ToastStatusIcons } from './toast-default';
 import { Condition, If, Else } from './condition';
@@ -97,7 +97,7 @@ export function ToastContainer() {
                 // const toastPosOnTarget = toast.element.position || 'left';
 
                 return (
-                  <ToastComponent
+                  <Toast
                     key={toast.toastId}
                     toast={toast}
                     onMouseEnter={onMouseEnter}
@@ -115,12 +115,12 @@ export function ToastContainer() {
                         )}
                       </Else>
                     </Condition>
-                  </ToastComponent>
+                  </Toast>
                 );
               }
 
               return (
-                <ToastComponent
+                <Toast
                   key={toast.toastId}
                   toast={toast}
                   onMouseEnter={onMouseEnter}
@@ -135,7 +135,7 @@ export function ToastContainer() {
                       </DefaultToast>
                     </Else>
                   </Condition>
-                </ToastComponent>
+                </Toast>
               );
             })}
           </div>

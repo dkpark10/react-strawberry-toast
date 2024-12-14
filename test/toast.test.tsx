@@ -3,6 +3,14 @@ import { afterEach, beforeEach, vi, describe, expect, test } from 'vitest';
 import { act, render, fireEvent } from '@testing-library/react';
 import { ToastContainer, toast } from '../src';
 import { MAX_TIMEOUT, DEFAULT_TIMEOUT, REMOVE_TIMEOUT } from '../src/constants';
+import '@testing-library/jest-dom';
+
+declare global {
+  namespace Vi {
+    interface Assertion extends jest.Matchers<void> {}
+    interface AsymmetricMatchers extends jest.Matchers<void> {}
+  }
+}
 
 describe('toast', () => {
   beforeEach(() => {
