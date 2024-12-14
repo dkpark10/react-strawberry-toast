@@ -91,7 +91,9 @@ export function ToastContainer() {
               };
 
               const content =
-                typeof toast.data === 'function' ? toast.data({ close, icon: <Icon /> }) : toast.data;
+                typeof toast.data === 'function'
+                  ? toast.data({ close, icon: <Icon />, isVisible: toast.isVisible })
+                  : toast.data;
 
               if (toast.element?.target) {
                 // const toastPosOnTarget = toast.element.position || 'left';

@@ -7,12 +7,8 @@ export default function App() {
 
   const click = () => {
     toast.success('strawberry 123123 check', {
-      element: {
-        target: targetRef.current!,
-      },
+      timeOut: 1_000,
     });
-    toast.success('strawberry 123123 check');
-    toast.error('strawberry 123123 check');
   };
 
   return (
