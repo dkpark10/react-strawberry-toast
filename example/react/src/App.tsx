@@ -1,5 +1,5 @@
 import React, { useRef } from 'react';
-import { ToastContainer, toast } from '../../src';
+import { ToastContainer, toast } from '../../../src';
 // import { Position } from '../../src/core/types';
 
 export default function App() {
