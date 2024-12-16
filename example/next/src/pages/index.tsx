@@ -1,6 +1,6 @@
 import Head from 'next/head';
 import React from 'react';
-import { ToastContainer } from 'react-strawberry-toast';
+import { ToastContainer } from '../../../../src';
 
 export default function Home() {
   return (
