@@ -23,5 +23,9 @@ const subscribe = (listener: Listener): Listener => {
 };
 
 export const useStrawberryToast = (): ToastStateList => {
-  return useSyncExternalStore(subscribe, () => state);
+  return useSyncExternalStore(
+    subscribe,
+    () => state,
+    () => state
+  );
 };
