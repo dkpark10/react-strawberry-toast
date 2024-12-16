@@ -2,23 +2,12 @@ import React from 'react';
 import { useStrawberryToast } from '../core/store';
 import { toast as strawBerryToast } from '../core/toast';
 import { Toast } from './toast';
-import { styled } from '@linaria/react';
 import { DefaultToast, ToastStatusIcons } from './toast-default';
 import { Condition, If, Else } from './condition';
 import type { Position, ToastState } from '../core/types';
 import { createPortal } from 'react-dom';
 
 const OFFSET = 16;
-
-const ToastWrapper = styled.div`
-  position: fixed;
-  z-index: 9999;
-  top: 16px;
-  left: 16px;
-  right: 16px;
-  bottom: 16px;
-  pointer-events: none;
-`;
 
 const positionStyle: Record<Position, React.CSSProperties> = {
   'top-left': {
@@ -60,8 +49,18 @@ export function ToastContainer() {
   }, {} as Record<Position, Array<ToastState>>);
 
   return (
-    <ToastWrapper>
-      {Object.entries(toastListByPosition).map(([position, toastList]) => {
+    <div
+      style={{
+        position: 'fixed',
+        zIndex: 9999,
+        top: OFFSET,
+        left: OFFSET,
+        right: OFFSET,
+        bottom: OFFSET,
+        pointerEvents: 'none',
+      }}
+    >
+      {Object.entries(toastListByPosition).map(([position]) => {
         const style = positionStyle[position as Position];
 
         return (
@@ -143,6 +142,6 @@ export function ToastContainer() {
           </div>
         );
       })}
-    </ToastWrapper>
+    </div>
   );
 }

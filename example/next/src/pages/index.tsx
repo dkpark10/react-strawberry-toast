@@ -1,5 +1,6 @@
 import Head from 'next/head';
 import React from 'react';
+import { ToastContainer } from 'react-strawberry-toast';
 
 export default function Home() {
   return (
@@ -13,6 +14,7 @@ export default function Home() {
       <div>
         123
       </div>
+      <ToastContainer />
     </>
   );
 }

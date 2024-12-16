@@ -12,7 +12,8 @@
     "@next/font": "13.1.6",
     "next": "^14",
     "react": "^18.2.0",
-    "react-dom": "18.2.0"
+    "react-dom": "18.2.0",
+    "react-strawberry-toast": "workspace:*"
   },
   "devDependencies": {
     "@types/node": "^20",
