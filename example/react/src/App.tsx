@@ -6,7 +6,9 @@ export default function App() {
   const targetRef = useRef<HTMLDivElement>(null);
 
     const click = () => {
-      toast.warn('warn');
+      toast.success('success', { timeOut: 1_000 });
+      toast.error('error', { timeOut: 1_000 });
+      toast.warn('warn', { timeOut: 1_000 });
     };
 
   return (

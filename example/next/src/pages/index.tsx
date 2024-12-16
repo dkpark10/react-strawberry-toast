@@ -1,8 +1,14 @@
 import Head from 'next/head';
 import React from 'react';
-import { ToastContainer } from '../../../../src';
+import { ToastContainer, toast } from '../../../../src';
 
 export default function Home() {
+  const click = () => {
+    toast.success('success', { timeOut: 2_000 });
+    toast.error('error', { timeOut: 2_000 });
+    toast.warn('warn', { timeOut: 2_000 });
+  };
+
   return (
     <>
       <Head>
@@ -11,8 +17,8 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <div>
-        123
+      <div onClick={click}>
+        click
       </div>
       <ToastContainer />
     </>

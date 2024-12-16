@@ -1,70 +1,7 @@
-import { css } from '@linaria/core';
-import { styled } from '@linaria/react';
 import React, { type PropsWithChildren, type ReactNode } from 'react';
+import '../styles/index.scss';
+import { STYLE_NAMESPACE } from '../constants'
 import type { ToastStatus } from '../core/types';
-
-const ToastStatusWrapper = styled.div`
-  box-sizing: border-box;
-  background-color: white;
-  padding: 12px 12px;
-  display: flex;
-  align-items: center;
-  border-radius: 8px;
-  box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.1);
-  height: 44px;
-
-  & .inner-content {
-    margin: 0px 5px;
-  }
-`;
-
-const downAnimation = css`
-  @keyframes fade-in {
-    from {
-      transform: translateY(-100%);
-      opacity: 0;
-    }
-    to {
-      transform: translateY(0);
-      opacity: 1;
-    }
-  }
-  animation: fade-in 0.3s ease-out;
-`;
-
-const upAnimation = css`
-  @keyframes fade-out {
-    from {
-      transform: translateY(0);
-      opacity: 1;
-    }
-    to {
-      transform: translateY(-100%);
-      opacity: 0;
-    }
-  }
-  animation: fade-out 0.3s ease-out;
-`;
-
-const LoadingContainer = styled.div`
-  @keyframes l3 {
-    to {
-      transform: rotate(1turn);
-    }
-  }
-
-  width: 11px;
-  padding: 3px;
-  aspect-ratio: 1;
-  border-radius: 50%;
-  background: #6b6875;
-  --_m: conic-gradient(#0000 10%, #000), linear-gradient(#000 0 0) content-box;
-  -webkit-mask: var(--_m);
-  mask: var(--_m);
-  -webkit-mask-composite: source-out;
-  mask-composite: subtract;
-  animation: l3 1s infinite linear;
-`;
 
 interface DefaultToastProps {
   isVisible: boolean;
@@ -72,13 +9,30 @@ interface DefaultToastProps {
 }
 
 export function DefaultToast({ icon, isVisible, children }: DefaultToastProps & PropsWithChildren) {
-  const animation = isVisible ? downAnimation : upAnimation;
-
   return (
-    <ToastStatusWrapper className={animation}>
+    <div
+      className={isVisible ? `${STYLE_NAMESPACE}__fade-in` : `${STYLE_NAMESPACE}__fade-out`}
+
+      style={{
+        boxSizing: 'border-box',
+        backgroundColor: 'white',
+        padding: '12px 12px',
+        display: 'flex',
+        alignItems: 'center',
+        borderRadius: 8,
+        boxShadow: '2px 4px 10px rgba(0, 0, 0, 0.1)',
+        height: 44,
+      }}
+    >
       {icon}
-      <div className="inner-content">{children}</div>
-    </ToastStatusWrapper>
+      <div
+        style={{
+          margin: '0px 5px',
+        }}
+      >
+        {children}
+      </div>
+    </div>
   );
 }
 
@@ -138,7 +92,7 @@ function Warn() {
 }
 
 function Loading() {
-  return <LoadingContainer />;
+  return <div className={`${STYLE_NAMESPACE}__loading`} />;
 }
 
 export const ToastStatusIcons: Record<ToastStatus, () => ReactNode> = {
