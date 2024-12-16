@@ -6,17 +6,7 @@ export default function App() {
   const targetRef = useRef<HTMLDivElement>(null);
 
     const click = () => {
-      toast(
-        ({ close }) => (
-          <div>
-            <span>strawberry toast</span>
-            <button onClick={close}>close</button>
-          </div>
-        ),
-        {
-          timeOut: Infinity,
-        }
-      );
+      toast.warn('warn');
     };
 
   return (
