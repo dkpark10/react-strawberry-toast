@@ -29,7 +29,7 @@
     "dist"
   ],
   "scripts": {
-    "dev": "tsup --watch",
+    "dev": "pnpm run --filter=react-strawberry-toast-react-example dev",
     "build": "tsup ./src/index.ts --format cjs,esm --dts --minify",
     "test": "vitest",
     "test:watch": "vitest --watch",

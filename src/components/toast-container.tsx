@@ -76,7 +76,7 @@ export function ToastContainer() {
           >
             {toastList.map((toast) => {
               const close = () => {
-                strawBerryToast.disappear(toast.toastId, toast.timeOut);
+                strawBerryToast.disappear(toast.toastId, 0);
               };
 
               const Icon = ToastStatusIcons[toast.toastStatus];

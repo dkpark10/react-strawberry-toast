@@ -57,12 +57,17 @@ describe('toast', () => {
   test('click close', async () => {
     function App() {
       const click = () => {
-        toast(({ close }) => (
-          <div>
-            <span>strawberry toast</span>
-            <button onClick={close}>close</button>
-          </div>
-        ));
+        toast(
+          ({ close }) => (
+            <div>
+              <span>strawberry toast</span>
+              <button onClick={close}>close</button>
+            </div>
+          ),
+          {
+            timeOut: Infinity,
+          }
+        );
       };
 
       return (
@@ -82,7 +87,7 @@ describe('toast', () => {
     fireEvent.click(getByRole('button', { name: 'close' }));
 
     act(() => {
-      vi.advanceTimersByTime(DEFAULT_TIMEOUT + REMOVE_TIMEOUT);
+      vi.advanceTimersByTime(REMOVE_TIMEOUT);
     });
 
     expect(queryByText(/strawberry toast/i)).not.toBeInTheDocument();

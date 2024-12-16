@@ -73,6 +73,7 @@ toast.disappear = (toastId: number, timeOut: number): void => {
         }
         return toast;
       });
+
       setState([...toastQueue]);
       toastRemove(toastId);
     },
