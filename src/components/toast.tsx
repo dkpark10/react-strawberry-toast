@@ -24,7 +24,7 @@ export function Toast({ children, toast, ...rest }: ToasterProps & PropsWithChil
   }, [toast.updated]);
 
   return (
-    <div role="alert" {...rest}>
+    <div role='alert' {...rest}>
       {children}
     </div>
   );

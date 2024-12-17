@@ -65,7 +65,7 @@ export function ToastContainer({ reverse = false }: ToastContainerProps) {
         pointerEvents: 'none',
       }}
     >
-      {Object.entries(toastListByPosition).map(([position]) => {
+      {Object.entries(toastListByPosition).map(([position, toasts]) => {
         const style = positionStyle[position as Position];
 
         const flexDirection = getDirection({
@@ -85,7 +85,7 @@ export function ToastContainer({ reverse = false }: ToastContainerProps) {
               ...style,
             }}
           >
-            {toastList.map((toast) => {
+            {toasts.map((toast) => {
               const close = () => strawBerryToast.disappear(toast.toastId, 0);
 
               const immediatelyClose = () => {

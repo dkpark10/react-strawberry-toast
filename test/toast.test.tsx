@@ -167,7 +167,17 @@ describe('toast', () => {
   test('infinity', async () => {
     function App() {
       const click = () => {
-        toast(<div>strawberry toast</div>, { timeOut: Infinity });
+        toast(
+          ({ immediatelyClose }) => (
+            <div>
+              <span>strawberry toast</span>
+              <button onClick={immediatelyClose}>close</button>
+            </div>
+          ),
+          {
+            timeOut: Infinity,
+          }
+        );
       };
 
       return (
@@ -187,6 +197,14 @@ describe('toast', () => {
     });
 
     expect(queryByText(/strawberry toast/i)).toBeInTheDocument();
+
+    fireEvent.click(getByRole('button', { name: 'close' }));
+
+    act(() => {
+      vi.advanceTimersByTime(0);
+    });
+
+    expect(queryByText(/strawberry toast/i)).not.toBeInTheDocument();
   });
 
   test('promise', async () => {
@@ -235,7 +253,7 @@ describe('toast', () => {
     await act(() => {
       vi.advanceTimersByTime(DEFAULT_TIMEOUT + 1);
     });
-    
+
     expect(queryByText(/loading/i)).not.toBeInTheDocument();
 
     expect(queryByText(/success/i)).toBeInTheDocument();
@@ -249,9 +267,39 @@ describe('toast', () => {
     await act(() => {
       vi.advanceTimersByTime(DEFAULT_TIMEOUT + 1);
     });
-    
+
     expect(queryByText(/loading/i)).not.toBeInTheDocument();
 
     expect(queryByText(/error/i)).toBeInTheDocument();
+  });
+
+  test('toast count', async () => {
+    function App() {
+      const click = () => {
+        toast(<div>strawberry toast1</div>);
+        toast(<div>strawberry toast2</div>, {
+          position: 'bottom-left'
+        });
+        toast(<div>strawberry toast3</div>, {
+          position: 'bottom-center'
+        });
+        toast(<div>strawberry toast4</div>, {
+          position: 'bottom-right'
+        });
+      };
+
+      return (
+        <React.Fragment>
+          <ToastContainer />
+          <button onClick={click}>click</button>
+        </React.Fragment>
+      );
+    }
+
+    const { getByRole, queryAllByText } = render(<App />);
+
+    fireEvent.click(getByRole('button', { name: 'click' }));
+
+    expect(queryAllByText(/strawberry toast/i)).toHaveLength(4);
   });
 });

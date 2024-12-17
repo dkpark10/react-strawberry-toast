@@ -6,10 +6,15 @@ export default function App() {
   const targetRef = useRef<HTMLDivElement>(null);
 
   const click = () => {
-    toast.success('123123', { timeOut: 1_000 });
-    toast.success('123123', {
+    toast(<div>strawberry toast1</div>);
+    toast(<div>strawberry toast2</div>, {
+      position: 'bottom-left',
+    });
+    toast(<div>strawberry toast3</div>, {
       position: 'bottom-center',
-      timeOut: 1_000,
+    });
+    toast(<div>strawberry toast4</div>, {
+      position: 'bottom-right',
     });
   };
 
