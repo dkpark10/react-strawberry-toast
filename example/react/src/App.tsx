@@ -6,22 +6,16 @@ export default function App() {
   const targetRef = useRef<HTMLDivElement>(null);
 
   const click = () => {
-    toast(
-      ({ immediatelyClose }) => (
-        <div>
-          <span>strawberry toast</span>
-          <button onClick={immediatelyClose}>close</button>
-        </div>
-      ),
-      {
-        timeOut: Infinity,
-      }
-    );
+    toast.success('123123', { timeOut: 1_000 });
+    toast.success('123123', {
+      position: 'bottom-center',
+      timeOut: 1_000,
+    });
   };
 
   return (
     <React.Fragment>
-      <ToastContainer />
+      <ToastContainer reverse />
       <div>example</div>
       <button onClick={click}>click</button>
       <div

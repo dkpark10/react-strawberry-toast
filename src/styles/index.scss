@@ -30,12 +30,44 @@ $react-strawberry-toast-namespace: 'react-strawberry-toast';
   }
 }
 
+@keyframes fade-in-reverse {
+  from {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes fade-out-reverse {
+  from {
+    transform: translateY(0);
+    opacity: 1;
+  }
+
+  to {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+}
+
 .#{$react-strawberry-toast-namespace}__fade-in {
   animation: fade-in 0.3s ease-out;
 }
 
 .#{$react-strawberry-toast-namespace}__fade-out {
   animation: fade-out 0.3s ease-out;
+}
+
+.#{$react-strawberry-toast-namespace}__fade-in-reverse {
+  animation: fade-in-reverse 0.3s ease-out;
+}
+
+.#{$react-strawberry-toast-namespace}__fade-out-reverse {
+  animation: fade-out-reverse 0.3s ease-out;
 }
 
 .#{$react-strawberry-toast-namespace}__loading {

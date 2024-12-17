@@ -1,18 +1,20 @@
 import React, { type PropsWithChildren, type ReactNode } from 'react';
+import { getAnimation } from '../utils/get-animation';
 import '../styles/index.scss';
 import { STYLE_NAMESPACE } from '../constants'
-import type { ToastStatus } from '../core/types';
+import type { Position, ToastStatus } from '../core/types';
 
 interface DefaultToastProps {
   isVisible: boolean;
+  position: Position;
   icon?: ReactNode;
 }
 
-export function DefaultToast({ icon, isVisible, children }: DefaultToastProps & PropsWithChildren) {
+export function DefaultToast({ icon, position, isVisible, children }: DefaultToastProps & PropsWithChildren) {
+  const animationClassName = getAnimation({ isVisible, position });
   return (
     <div
-      className={isVisible ? `${STYLE_NAMESPACE}__fade-in` : `${STYLE_NAMESPACE}__fade-out`}
-
+      className={animationClassName}
       style={{
         boxSizing: 'border-box',
         backgroundColor: 'white',

@@ -2,6 +2,7 @@ import React from 'react';
 import { useStrawberryToast } from '../core/store';
 import { toast as strawBerryToast } from '../core/toast';
 import { Toast } from './toast';
+import { getDirection } from '../utils/get-direction';
 import { DefaultToast, ToastStatusIcons } from './toast-default';
 import { Condition, If, Else } from './condition';
 import type { Position, ToastState } from '../core/types';
@@ -38,7 +39,11 @@ const positionStyle: Record<Position, React.CSSProperties> = {
   },
 };
 
-export function ToastContainer() {
+interface ToastContainerProps {
+  reverse?: boolean;
+}
+
+export function ToastContainer({ reverse = false }: ToastContainerProps) {
   const toastList = useStrawberryToast();
 
   const toastListByPosition: Record<Position, Array<ToastState>> = toastList.reduce((acc, toast) => {
@@ -63,21 +68,25 @@ export function ToastContainer() {
       {Object.entries(toastListByPosition).map(([position]) => {
         const style = positionStyle[position as Position];
 
+        const flexDirection = getDirection({
+          position: position as Position,
+          reverse,
+        });
+
         return (
           <div
             key={position}
             style={{
               pointerEvents: 'auto',
               position: 'fixed',
-              display: 'grid',
+              display: 'flex',
+              flexDirection,
               gap: 9,
               ...style,
             }}
           >
             {toastList.map((toast) => {
-              const close = () => {
-                strawBerryToast.disappear(toast.toastId, 0);
-              };
+              const close = () => strawBerryToast.disappear(toast.toastId, 0);
 
               const immediatelyClose = () => {
                 strawBerryToast.disappear(toast.toastId, 0);
@@ -114,7 +123,7 @@ export function ToastContainer() {
                       <If>{createPortal(content, toast.element.target)}</If>
                       <Else>
                         {createPortal(
-                          <DefaultToast isVisible={toast.isVisible} icon={<Icon />}>
+                          <DefaultToast position={position as Position} isVisible={toast.isVisible} icon={<Icon />}>
                             {content}
                           </DefaultToast>,
                           toast.element.target
@@ -136,7 +145,7 @@ export function ToastContainer() {
                     {/** custom component not styling */}
                     <If>{content}</If>
                     <Else>
-                      <DefaultToast isVisible={toast.isVisible} icon={<Icon />}>
+                      <DefaultToast position={position as Position} isVisible={toast.isVisible} icon={<Icon />}>
                         {content}
                       </DefaultToast>
                     </Else>

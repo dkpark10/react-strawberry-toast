@@ -1,5 +1,5 @@
 import { setState } from './store';
-import { generateId } from '../utils';
+import { generateId } from '../utils/generate-id';
 import { REMOVE_TIMEOUT, MAX_TIMEOUT, DEFAULT_TIMEOUT } from '../constants';
 import type { ReactNode } from 'react';
 import type { ToastState, Options, ToastMoreOptions, ToastStatus } from './types';
