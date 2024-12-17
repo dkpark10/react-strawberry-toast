@@ -33,6 +33,7 @@ export interface Options {
 
 interface ToastDataCallback {
   close: () => void;
+  immediatelyClose: () => void;
   isVisible: boolean;
   icon: ReactNode;
 }

@@ -5,11 +5,19 @@ import { ToastContainer, toast } from '../../../src';
 export default function App() {
   const targetRef = useRef<HTMLDivElement>(null);
 
-    const click = () => {
-      toast.success('success', { timeOut: 1_000 });
-      toast.error('error', { timeOut: 1_000 });
-      toast.warn('warn', { timeOut: 1_000 });
-    };
+  const click = () => {
+    toast(
+      ({ immediatelyClose }) => (
+        <div>
+          <span>strawberry toast</span>
+          <button onClick={immediatelyClose}>close</button>
+        </div>
+      ),
+      {
+        timeOut: Infinity,
+      }
+    );
+  };
 
   return (
     <React.Fragment>

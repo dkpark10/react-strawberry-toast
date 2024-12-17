@@ -18,15 +18,6 @@ const deleteTimer = (toastId: number) => {
   toastTimers.delete(toastId);
 };
 
-const toastRemove = (toastId: number): void => {
-  setTimeout(() => {
-    toastQueue = toastQueue.filter((toast) => toast.toastId !== toastId);
-    setState([...toastQueue]);
-  }, REMOVE_TIMEOUT);
-
-  deleteTimer(toastId);
-};
-
 const createToast =
   (toastStatus: ToastStatus) =>
   (data: ToastMoreOptions['data'], options: Options = {}): number => {
@@ -75,7 +66,7 @@ toast.disappear = (toastId: number, timeOut: number): void => {
       });
 
       setState([...toastQueue]);
-      toastRemove(toastId);
+      toast.remove(toastId);
     },
     timeOut > MAX_TIMEOUT ? MAX_TIMEOUT : timeOut,
   );
@@ -125,6 +116,15 @@ toast.replace = (toastId: number, data: ToastMoreOptions['data'], options: Parti
   });
 
   setState([...toastQueue]);
+};
+
+toast.remove = (toastId: ToastState['toastId'], timeOut = REMOVE_TIMEOUT) => {
+  setTimeout(() => {
+    toastQueue = toastQueue.filter((toast) => toast.toastId !== toastId);
+    setState([...toastQueue]);
+  }, timeOut);
+
+  deleteTimer(toastId);
 };
 
 toast.isActive = (toastId: number): boolean => toastTimers.has(toastId);

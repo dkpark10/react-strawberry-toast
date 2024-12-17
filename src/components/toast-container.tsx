@@ -79,6 +79,11 @@ export function ToastContainer() {
                 strawBerryToast.disappear(toast.toastId, 0);
               };
 
+              const immediatelyClose = () => {
+                strawBerryToast.disappear(toast.toastId, 0);
+                strawBerryToast.remove(toast.toastId, 0);
+              };
+
               const Icon = ToastStatusIcons[toast.toastStatus];
 
               const onMouseEnter = () => {
@@ -91,7 +96,7 @@ export function ToastContainer() {
 
               const content =
                 typeof toast.data === 'function'
-                  ? toast.data({ close, icon: <Icon />, isVisible: toast.isVisible })
+                  ? toast.data({ close, immediatelyClose, icon: <Icon />, isVisible: toast.isVisible })
                   : toast.data;
 
               if (toast.element?.target) {

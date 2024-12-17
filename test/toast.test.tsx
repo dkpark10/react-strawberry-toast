@@ -70,10 +70,25 @@ describe('toast', () => {
         );
       };
 
+      const click2 = () => {
+        toast(
+          ({ immediatelyClose }) => (
+            <div>
+              <span>strawberry toast2</span>
+              <button onClick={immediatelyClose}>close2</button>
+            </div>
+          ),
+          {
+            timeOut: Infinity,
+          }
+        );
+      };
+
       return (
         <React.Fragment>
           <ToastContainer />
           <button onClick={click}>click</button>
+          <button onClick={click2}>click2</button>
         </React.Fragment>
       );
     }
@@ -91,6 +106,19 @@ describe('toast', () => {
     });
 
     expect(queryByText(/strawberry toast/i)).not.toBeInTheDocument();
+
+    /** @description immediatelyClose */
+    fireEvent.click(getByRole('button', { name: 'click2' }));
+
+    expect(queryByText(/strawberry toast2/i)).toBeInTheDocument();
+
+    fireEvent.click(getByRole('button', { name: 'close2' }));
+
+    act(() => {
+      vi.advanceTimersByTime(0);
+    });
+
+    expect(queryByText(/strawberry toast2/i)).not.toBeInTheDocument();
   });
 
   test('mouse enter mouse leave', async () => {
