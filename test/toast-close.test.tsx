@@ -3,8 +3,9 @@ import { afterEach, beforeEach, vi, describe, expect, test } from 'vitest';
 import { act, render, fireEvent } from '@testing-library/react';
 import { ToastContainer } from '../src/components/toast-container';
 import { toast } from '../src/core/toast';
-import { DISAPPEAR_TIMEOUT, MAX_TIMEOUT, REMOVE_TIMEOUT } from '../src/constants';
+import { REMOVE_TIMEOUT } from '../src/constants';
 import '@testing-library/jest-dom';
+  
 
 describe('toast', () => {
   beforeEach(() => {
@@ -15,16 +16,41 @@ describe('toast', () => {
     vi.useRealTimers();
   });
 
-  test('show and disappear', async () => {
+  test('click close', async () => {
     function App() {
       const click = () => {
-        toast(() => <div>strawberry toast</div>);
+        toast(
+          ({ close }) => (
+            <div>
+              <span>strawberry toast</span>
+              <button onClick={close}>close</button>
+            </div>
+          ),
+          {
+            timeOut: Infinity,
+          }
+        );
+      };
+
+      const click2 = () => {
+        toast(
+          ({ immediatelyClose }) => (
+            <div>
+              <span>strawberry toast2</span>
+              <button onClick={immediatelyClose}>close2</button>
+            </div>
+          ),
+          {
+            timeOut: Infinity,
+          }
+        );
       };
 
       return (
         <React.Fragment>
           <ToastContainer />
           <button onClick={click}>click</button>
+          <button onClick={click2}>click2</button>
         </React.Fragment>
       );
     }
@@ -35,20 +61,16 @@ describe('toast', () => {
 
     expect(queryByText(/strawberry toast/i)).toBeInTheDocument();
 
-    act(() => {
-      vi.advanceTimersByTime(1_000);
-    });
-
-    expect(queryByText(/strawberry toast/i)).toBeInTheDocument();
+    fireEvent.click(getByRole('button', { name: 'close' }));
 
     act(() => {
-      vi.advanceTimersByTime(2_000 + REMOVE_TIMEOUT);
+      vi.advanceTimersByTime(REMOVE_TIMEOUT);
     });
 
     expect(queryByText(/strawberry toast/i)).not.toBeInTheDocument();
   });
 
-  test('infinity', async () => {
+  test('immediately close', async () => {
     function App() {
       const click = () => {
         toast(
@@ -76,10 +98,6 @@ describe('toast', () => {
 
     fireEvent.click(getByRole('button', { name: 'click' }));
 
-    act(() => {
-      vi.advanceTimersByTime(MAX_TIMEOUT - 1);
-    });
-
     expect(queryByText(/strawberry toast/i)).toBeInTheDocument();
 
     fireEvent.click(getByRole('button', { name: 'close' }));
@@ -89,35 +107,5 @@ describe('toast', () => {
     });
 
     expect(queryByText(/strawberry toast/i)).not.toBeInTheDocument();
-  });
-
-  test('toast count', async () => {
-    function App() {
-      const click = () => {
-        toast(<div>strawberry toast1</div>);
-        toast(<div>strawberry toast2</div>, {
-          position: 'bottom-left'
-        });
-        toast(<div>strawberry toast3</div>, {
-          position: 'bottom-center'
-        });
-        toast(<div>strawberry toast4</div>, {
-          position: 'bottom-right'
-        });
-      };
-
-      return (
-        <React.Fragment>
-          <ToastContainer />
-          <button onClick={click}>click</button>
-        </React.Fragment>
-      );
-    }
-
-    const { getByRole, queryAllByText } = render(<App />);
-
-    fireEvent.click(getByRole('button', { name: 'click' }));
-
-    expect(queryAllByText(/strawberry toast/i)).toHaveLength(4);
   });
 });

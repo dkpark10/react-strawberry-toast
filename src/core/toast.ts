@@ -1,6 +1,6 @@
 import { setState } from './store';
 import { generateId } from '../utils/generate-id';
-import { REMOVE_TIMEOUT, MAX_TIMEOUT, DEFAULT_TIMEOUT } from '../constants';
+import { REMOVE_TIMEOUT, MAX_TIMEOUT, DISAPPEAR_TIMEOUT } from '../constants';
 import type { ReactNode } from 'react';
 import type { ToastState, Options, ToastMoreOptions, ToastStatus } from './types';
 
@@ -21,7 +21,7 @@ const deleteTimer = (toastId: number) => {
 const createToast =
   (toastStatus: ToastStatus = 'success') =>
   (data: ToastMoreOptions['data'], options: Options = {}): number => {
-    const { timeOut = DEFAULT_TIMEOUT, position = 'top-center' } = options;
+    const { timeOut = DISAPPEAR_TIMEOUT, removeTimeOut = REMOVE_TIMEOUT, position = 'top-center' } = options;
 
     const toastId = idGenerator();
     const createdAt = new Date().getTime();
@@ -34,6 +34,7 @@ const createToast =
       data,
       createdAt,
       toastStatus,
+      removeTimeOut,
       isVisible: true,
     };
 
@@ -62,11 +63,13 @@ toast.disappear = (toastId: number, timeOut: number): void => {
             isVisible: false,
           };
         }
-        return toast;
+      return toast;
       });
 
       setState([...toastQueue]);
-      toast.remove(toastId);
+
+      const removeTimeOut = toastQueue.find((toast) => toast.toastId === toastId)?.removeTimeOut;
+      toast.remove(toastId, removeTimeOut);
     },
     timeOut > MAX_TIMEOUT ? MAX_TIMEOUT : timeOut,
   );

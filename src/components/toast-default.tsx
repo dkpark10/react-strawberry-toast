@@ -98,7 +98,6 @@ function Loading() {
 }
 
 export const ToastStatusIcons: Record<ToastStatus, () => ReactNode> = {
-  default: () => <></>,
   success: Success,
   error: Error,
   loading: Loading,

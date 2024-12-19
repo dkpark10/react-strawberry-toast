@@ -24,6 +24,7 @@ export type ToastStatus =
 export interface Options {
   position?: Position;
   timeOut?: number;
+  removeTimeOut?: number;
   element?: HTMLElement;
 }
 
