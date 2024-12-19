@@ -26,6 +26,6 @@ export const useStrawberryToast = (): ToastStateList => {
   return useSyncExternalStore(
     subscribe,
     () => state,
-    () => state
+    () => state,
   );
 };

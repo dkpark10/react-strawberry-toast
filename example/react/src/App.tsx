@@ -5,8 +5,6 @@ export default function App() {
   const targetRef = useRef<HTMLDivElement>(null);
 
   const click = () => {
-    toast(<div>strawberry toast1</div>);
-
     toast(<div>strawberry toast1</div>, {
       element: targetRef.current!,
     });

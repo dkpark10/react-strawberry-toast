@@ -3,7 +3,6 @@ import { useStrawberryToast } from '../core/store';
 import { toast as strawBerryToast } from '../core/toast';
 import { Toast } from './toast';
 import { getDirection } from '../utils/get-direction';
-import { getAbsolutePosition } from '../utils/get-absolute-position';
 import { DefaultToast, ToastStatusIcons } from './toast-default';
 import { ToastAbsoluteContainer } from './toast-absolute-container'
 import { Condition, If, Else } from './condition';
@@ -111,8 +110,6 @@ export function ToastContainer({ reverse = false }: ToastContainerProps) {
                   : toast.data;
 
               if (toast.element) {
-                const { y, x } = getAbsolutePosition(toast.element);
-
                 return (
                   <Toast
                     key={toast.toastId}
@@ -124,7 +121,7 @@ export function ToastContainer({ reverse = false }: ToastContainerProps) {
                       {/** custom component not styling */}
                       <If>
                         {createPortal(
-                          <ToastAbsoluteContainer y={y} x={x}>
+                          <ToastAbsoluteContainer element={toast.element}>
                             {content}
                           </ToastAbsoluteContainer>,
                           document.body
@@ -132,7 +129,7 @@ export function ToastContainer({ reverse = false }: ToastContainerProps) {
                       </If>
                       <Else>
                         {createPortal(
-                          <ToastAbsoluteContainer y={y} x={x}>
+                          <ToastAbsoluteContainer element={toast.element}>
                             <DefaultToast
                               position={position as Position}
                               isVisible={toast.isVisible}
