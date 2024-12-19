@@ -19,7 +19,7 @@ const deleteTimer = (toastId: number) => {
 };
 
 const createToast =
-  (toastStatus: ToastStatus) =>
+  (toastStatus: ToastStatus = 'success') =>
   (data: ToastMoreOptions['data'], options: Options = {}): number => {
     const { timeOut = DEFAULT_TIMEOUT, position = 'top-center' } = options;
 
@@ -45,7 +45,7 @@ const createToast =
   };
 
 export const toast = (data: ToastMoreOptions['data'], options: Options = {}) =>
-  createToast('default')(data, options);
+  createToast()(data, options);
 
 toast.success = createToast('success');
 toast.error = createToast('error');

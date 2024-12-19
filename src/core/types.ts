@@ -16,7 +16,6 @@ export type Position =
   | `${Top}-${Right}`
 
 export type ToastStatus =
-  | 'default'
   | 'success'
   | 'error'
   | 'loading'
@@ -25,10 +24,7 @@ export type ToastStatus =
 export interface Options {
   position?: Position;
   timeOut?: number;
-  element?: {
-    target: HTMLElement;
-    position?: Direction;
-  };
+  element?: HTMLElement;
 }
 
 interface ToastDataCallback {
@@ -51,3 +47,8 @@ export interface ToastMoreOptions {
 type RequiredExcept<T, K extends keyof T> = Required<Omit<T, K>> & Pick<T, K>;
 
 export type ToastState = RequiredExcept<Options, 'element'> & ToastMoreOptions;
+
+export type Coord = {
+  y: number;
+  x: number;
+}

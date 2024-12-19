@@ -3,7 +3,9 @@ import { useStrawberryToast } from '../core/store';
 import { toast as strawBerryToast } from '../core/toast';
 import { Toast } from './toast';
 import { getDirection } from '../utils/get-direction';
+import { getAbsolutePosition } from '../utils/get-absolute-position';
 import { DefaultToast, ToastStatusIcons } from './toast-default';
+import { ToastAbsoluteContainer } from './toast-absolute-container'
 import { Condition, If, Else } from './condition';
 import type { Position, ToastState } from '../core/types';
 import { createPortal } from 'react-dom';
@@ -108,8 +110,8 @@ export function ToastContainer({ reverse = false }: ToastContainerProps) {
                   ? toast.data({ close, immediatelyClose, icon: <Icon />, isVisible: toast.isVisible })
                   : toast.data;
 
-              if (toast.element?.target) {
-                // const toastPosOnTarget = toast.element.position || 'left';
+              if (toast.element) {
+                const { y, x } = getAbsolutePosition(toast.element);
 
                 return (
                   <Toast
@@ -120,13 +122,26 @@ export function ToastContainer({ reverse = false }: ToastContainerProps) {
                   >
                     <Condition condition={typeof toast.data === 'function'}>
                       {/** custom component not styling */}
-                      <If>{createPortal(content, toast.element.target)}</If>
+                      <If>
+                        {createPortal(
+                          <ToastAbsoluteContainer y={y} x={x}>
+                            {content}
+                          </ToastAbsoluteContainer>,
+                          document.body
+                        )}
+                      </If>
                       <Else>
                         {createPortal(
-                          <DefaultToast position={position as Position} isVisible={toast.isVisible} icon={<Icon />}>
-                            {content}
-                          </DefaultToast>,
-                          toast.element.target
+                          <ToastAbsoluteContainer y={y} x={x}>
+                            <DefaultToast
+                              position={position as Position}
+                              isVisible={toast.isVisible}
+                              icon={<Icon />}
+                            >
+                              {content}
+                            </DefaultToast>
+                          </ToastAbsoluteContainer>,
+                          document.body
                         )}
                       </Else>
                     </Condition>
@@ -145,7 +160,11 @@ export function ToastContainer({ reverse = false }: ToastContainerProps) {
                     {/** custom component not styling */}
                     <If>{content}</If>
                     <Else>
-                      <DefaultToast position={position as Position} isVisible={toast.isVisible} icon={<Icon />}>
+                      <DefaultToast
+                        position={position as Position}
+                        isVisible={toast.isVisible}
+                        icon={<Icon />}
+                      >
                         {content}
                       </DefaultToast>
                     </Else>
