@@ -42,9 +42,10 @@ const positionStyle: Record<Position, React.CSSProperties> = {
 
 interface ToastContainerProps {
   reverse?: boolean;
+  gap?: number;
 }
 
-export function ToastContainer({ reverse = false }: ToastContainerProps) {
+export function ToastContainer({ gap = 9, reverse = false }: ToastContainerProps) {
   const toastList = useStrawberryToast();
 
   const toastListByPosition: Record<Position, Array<ToastState>> = toastList.reduce((acc, toast) => {
@@ -82,7 +83,7 @@ export function ToastContainer({ reverse = false }: ToastContainerProps) {
               position: 'fixed',
               display: 'flex',
               flexDirection,
-              gap: 9,
+              gap,
               ...style,
             }}
           >
