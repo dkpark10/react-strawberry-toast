@@ -1,7 +1,8 @@
 import React from 'react';
 import { afterEach, beforeEach, vi, describe, expect, test } from 'vitest';
 import { act, render, fireEvent } from '@testing-library/react';
-import { ToastContainer, toast } from '../src';
+import { ToastContainer } from '../src/components/toast-container';
+import { toast } from '../src/core/toast';
 import { MAX_TIMEOUT, DEFAULT_TIMEOUT, REMOVE_TIMEOUT } from '../src/constants';
 import '@testing-library/jest-dom';
 
@@ -24,7 +25,7 @@ describe('toast', () => {
   test('show and disappear', async () => {
     function App() {
       const click = () => {
-        toast(<div>strawberry toast</div>);
+        toast(() => <div>strawberry toast</div>);
       };
 
       return (
