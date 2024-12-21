@@ -8,12 +8,14 @@ export default function App() {
     // toast(<div>strawberry toast1</div>, {
     //   element: targetRef.current!,
     // });
-    toast(<div>strawberry toast1</div>);
+    toast(<div>strawberry toast1</div>, { 
+      timeOut: Infinity,
+    });
   };
 
   return (
     <React.Fragment>
-      <ToastContainer />
+      <ToastContainer reverse />
       <div>example</div>
       <button onClick={click}>click</button>
       <div

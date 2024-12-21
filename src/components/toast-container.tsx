@@ -122,22 +122,14 @@ export function ToastContainer({ gap = 9, reverse = false }: ToastContainerProps
                       {/** custom component not styling */}
                       <If>
                         {createPortal(
-                          <ToastAbsoluteContainer element={toast.element}>
-                            {content}
-                          </ToastAbsoluteContainer>,
+                          <ToastAbsoluteContainer element={toast.element}>{content}</ToastAbsoluteContainer>,
                           document.body
                         )}
                       </If>
                       <Else>
                         {createPortal(
                           <ToastAbsoluteContainer element={toast.element}>
-                            <DefaultToast
-                              position={position as Position}
-                              isVisible={toast.isVisible}
-                              icon={<Icon />}
-                            >
-                              {content}
-                            </DefaultToast>
+                            <DefaultToast icon={<Icon />}>{content}</DefaultToast>
                           </ToastAbsoluteContainer>,
                           document.body
                         )}
@@ -158,13 +150,7 @@ export function ToastContainer({ gap = 9, reverse = false }: ToastContainerProps
                     {/** custom component not styling */}
                     <If>{content}</If>
                     <Else>
-                      <DefaultToast
-                        position={position as Position}
-                        isVisible={toast.isVisible}
-                        icon={<Icon />}
-                      >
-                        {content}
-                      </DefaultToast>
+                      <DefaultToast icon={<Icon />}>{content}</DefaultToast>
                     </Else>
                   </Condition>
                 </Toast>
