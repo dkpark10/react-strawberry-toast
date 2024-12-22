@@ -15,7 +15,7 @@ describe('mouse enter mouse leave', () => {
     vi.useRealTimers();
   });
 
-  test.skip('basic', async () => {
+  test('basic', async () => {
     function App() {
       const click = () => {
         toast(<div>strawberry toast</div>);

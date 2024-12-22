@@ -53,7 +53,7 @@ export function ToastAbsolute({ toast }: ToastAbsoluteContainerProps) {
   return (
     <div
       role="alert"
-      className={animationClassName}
+      className={typeof toast.data === 'function' ? '' : animationClassName}
       onMouseEnter={() => strawBerryToast.pause(toast.toastId)}
       onMouseLeave={() => strawBerryToast.resume(toast.toastId)}
       style={{

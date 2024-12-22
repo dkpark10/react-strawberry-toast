@@ -18,7 +18,7 @@ describe('toast', () => {
   test('show and disappear', async () => {
     function App() {
       const click = () => {
-        toast(() => <div>strawberry toast</div>);
+        toast('strawberry toast');
       };
 
       return (
@@ -119,5 +119,31 @@ describe('toast', () => {
     fireEvent.click(getByRole('button', { name: 'click' }));
 
     expect(queryAllByText(/strawberry toast/i)).toHaveLength(4);
+
+    act(() => {
+      vi.advanceTimersByTime(DISAPPEAR_TIMEOUT + REMOVE_TIMEOUT);
+    });
+  });
+
+  test('if data is function, there should have no style and animation.', async () => {
+    function App() {
+      const click = () => {
+        toast(() => <div>strawberry toast</div>);
+      };
+
+      return (
+        <React.Fragment>
+          <ToastContainer />
+          <button onClick={click}>click</button>
+        </React.Fragment>
+      );
+    }
+
+    const { getByRole, queryByText } = render(<App />);
+
+    fireEvent.click(getByRole('button', { name: 'click' }));
+
+    // @ts-ignore
+    expect(queryByText(/strawberry toast/i)?.style._values).empty;
   });
 });
