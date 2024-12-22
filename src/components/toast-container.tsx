@@ -4,7 +4,7 @@ import { toast as strawBerryToast } from '../core/toast';
 import { Toast } from './toast';
 import { getDirection } from '../utils/get-direction';
 import { DefaultToast, ToastStatusIcons } from './toast-default';
-import { ToastAbsoluteContainer } from './toast-absolute-container'
+import { ToastAbsolute } from './toast-absolute-container'
 import { Condition, If, Else } from './condition';
 import type { Position, ToastState } from '../core/types';
 import { createPortal } from 'react-dom';
@@ -112,30 +112,23 @@ export function ToastContainer({ gap = 9, reverse = false }: ToastContainerProps
 
               if (toast.element) {
                 return (
-                  <Toast
-                    key={toast.toastId}
-                    toast={toast}
-                    onMouseEnter={onMouseEnter}
-                    onMouseLeave={onMouseLeave}
-                  >
-                    <Condition condition={typeof toast.data === 'function'}>
-                      {/** custom component not styling */}
-                      <If>
-                        {createPortal(
-                          <ToastAbsoluteContainer element={toast.element}>{content}</ToastAbsoluteContainer>,
-                          document.body
-                        )}
-                      </If>
-                      <Else>
-                        {createPortal(
-                          <ToastAbsoluteContainer element={toast.element}>
-                            <DefaultToast icon={<Icon />}>{content}</DefaultToast>
-                          </ToastAbsoluteContainer>,
-                          document.body
-                        )}
-                      </Else>
-                    </Condition>
-                  </Toast>
+                  <Condition condition={typeof toast.data === 'function'} key={toast.toastId}>
+                    {/** custom component not styling */}
+                    <If>
+                      {createPortal(
+                        <ToastAbsolute toast={toast}>{content}</ToastAbsolute>,
+                        document.body
+                      )}
+                    </If>
+                    <Else>
+                      {createPortal(
+                        <ToastAbsolute toast={toast}>
+                          <DefaultToast icon={<Icon />}>{content}</DefaultToast>
+                        </ToastAbsolute>,
+                        document.body
+                      )}
+                    </Else>
+                  </Condition>
                 );
               }
 

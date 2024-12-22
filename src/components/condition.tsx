@@ -7,7 +7,7 @@ interface ConditionProps {
 export function Condition({ condition, children }: ConditionProps & PropsWithChildren) {
   const childrenArray = Children.toArray(children);
   if (childrenArray.length > 2) {
-    throw new Error('children length over 2');
+    throw new Error('The number of children exceeds two.');
   }
 
   return (childrenArray as any[]).find((child) => {
