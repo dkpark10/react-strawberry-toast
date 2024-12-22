@@ -6,9 +6,11 @@ import { Coord, ToastState } from '../core/types';
 
 interface ToastAbsoluteContainerProps {
   toast: ToastState;
+  onMouseEnter: () => void;
+  onMouseLeave: () => void;
 }
 
-export function ToastAbsolute({ children, toast }: PropsWithChildren & ToastAbsoluteContainerProps) {
+export function ToastAbsolute({ children, toast, ...rest }: PropsWithChildren & ToastAbsoluteContainerProps) {
   if (!toast.element) {
     throw new Error('Element does not exist.');
   }
@@ -42,6 +44,7 @@ export function ToastAbsolute({ children, toast }: PropsWithChildren & ToastAbso
         top: `${coord.y}px`,
         left: `${coord.x}px`,
       }}
+      {...rest}
     >
       {children}
     </div>

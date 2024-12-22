@@ -116,13 +116,15 @@ export function ToastContainer({ gap = 9, reverse = false }: ToastContainerProps
                     {/** custom component not styling */}
                     <If>
                       {createPortal(
-                        <ToastAbsolute toast={toast}>{content}</ToastAbsolute>,
+                        <ToastAbsolute toast={toast} onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave}>
+                          {content}
+                        </ToastAbsolute>,
                         document.body
                       )}
                     </If>
                     <Else>
                       {createPortal(
-                        <ToastAbsolute toast={toast}>
+                        <ToastAbsolute toast={toast} onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave}>
                           <DefaultToast icon={<Icon />}>{content}</DefaultToast>
                         </ToastAbsolute>,
                         document.body

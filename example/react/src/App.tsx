@@ -10,6 +10,8 @@ export default function App() {
       timeOut: Infinity,
       element: targetRef.current!,
     });
+
+    toast(<div>strawberry toast1</div>);
   };
 
   return (
