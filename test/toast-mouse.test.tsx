@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React from 'react';
 import { afterEach, beforeEach, vi, describe, expect, test } from 'vitest';
 import { act, render, fireEvent } from '@testing-library/react';
 import { ToastContainer } from '../src/components/toast-container';
