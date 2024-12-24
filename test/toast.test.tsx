@@ -96,13 +96,13 @@ describe('toast', () => {
       const click = () => {
         toast(<div>strawberry toast1</div>);
         toast(<div>strawberry toast2</div>, {
-          position: 'bottom-left'
+          position: 'bottom-left',
         });
         toast(<div>strawberry toast3</div>, {
-          position: 'bottom-center'
+          position: 'bottom-center',
         });
         toast(<div>strawberry toast4</div>, {
-          position: 'bottom-right'
+          position: 'bottom-right',
         });
       };
 
@@ -145,5 +145,50 @@ describe('toast', () => {
 
     // @ts-ignore
     expect(queryByText(/strawberry toast/i)?.style._values).empty;
+
+    act(() => {
+      vi.advanceTimersByTime(DISAPPEAR_TIMEOUT + REMOVE_TIMEOUT);
+    });
+  });
+
+  test('multiple container id.', async () => {
+    function App() {
+      const click = () => {
+        toast(<div>strawberry toast</div>);
+        toast(<div>strawberry toast</div>, {
+          containerId: '1',
+        });
+        toast(<div>strawberry toast</div>, {
+          containerId: '2',
+        });
+        toast(<div>strawberry toast</div>, {
+          containerId: '3',
+        });
+      };
+
+      return (
+        <React.Fragment>
+          <ToastContainer />
+          <ToastContainer containerId="1" />
+          <ToastContainer containerId="2" />
+          <ToastContainer containerId="3" />
+          <button onClick={click}>click</button>
+        </React.Fragment>
+      );
+    }
+
+    const { getByRole, queryAllByText, getAllByTestId } = render(<App />);
+
+    fireEvent.click(getByRole('button', { name: 'click' }));
+
+    expect(queryAllByText(/strawberry toast/i)).toHaveLength(4);
+
+    expect(getAllByTestId('container-1')).toHaveLength(1);
+    expect(getAllByTestId('container-2')).toHaveLength(1);
+    expect(getAllByTestId('container-3')).toHaveLength(1);
+
+    act(() => {
+      vi.advanceTimersByTime(DISAPPEAR_TIMEOUT + REMOVE_TIMEOUT);
+    });
   });
 });

@@ -44,6 +44,7 @@ export function Toast({ toast }: ToasterProps) {
   return (
     <div
       role="alert"
+      data-testid={`container-${toast.containerId}`}
       className={typeof toast.data === 'function' ? '' : animationClassName}
       onMouseEnter={() => strawBerryToast.pause(toast.toastId)}
       onMouseLeave={() => strawBerryToast.resume(toast.toastId)}
