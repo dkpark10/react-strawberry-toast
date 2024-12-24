@@ -1,10 +1,11 @@
 import React, { useEffect } from 'react';
-import { DefaultToast, ToastStatusIcons } from './toast-default';
 import { Condition, If, Else } from './condition';
 import { getAnimation } from '../utils/get-animation';
 import { toast as strawBerryToast } from '../core/toast';
 import { MAX_TIMEOUT } from '../constants';
+import { DefaultToast, ToastStatusIcons } from './toast-default';
 import type { ToastState } from '../core/types';
+import '../styles/index.scss';
 
 interface ToasterProps {
   toast: ToastState;
@@ -28,12 +29,14 @@ export function Toast({ toast }: ToasterProps) {
         })
       : toast.data;
 
+  /** @description disappear after mount */
   useEffect(() => {
     if (!strawBerryToast.isActive(toast.toastId)) {
       strawBerryToast.disappear(toast.toastId, toast.timeOut);
     }
   }, [toast.toastId]);
 
+  /** @description promise toast */
   useEffect(() => {
     if (toast.updated !== undefined) {
       const newTimeOut = toast.timeOut >= MAX_TIMEOUT ? 2_000 : toast.timeOut;
@@ -53,7 +56,7 @@ export function Toast({ toast }: ToasterProps) {
         {/** custom component not styling */}
         <If>{content}</If>
         <Else>
-          <DefaultToast icon={<Icon />}>{content}</DefaultToast>
+          <DefaultToast status={toast.toastStatus}>{content}</DefaultToast>
         </Else>
       </Condition>
     </div>
