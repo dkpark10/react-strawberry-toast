@@ -21,7 +21,12 @@ const deleteTimer = (toastId: number) => {
 const createToast =
   (toastStatus: ToastStatus = 'success') =>
   (data: ToastMoreOptions['data'], options: Options = {}): number => {
-    const { timeOut = DISAPPEAR_TIMEOUT, removeTimeOut = REMOVE_TIMEOUT, position = 'top-center' } = options;
+    const {
+      timeOut = DISAPPEAR_TIMEOUT,
+      removeTimeOut = REMOVE_TIMEOUT,
+      position = 'top-center',
+      pauseOnHover = true,
+    } = options;
 
     const toastId = idGenerator();
     const createdAt = new Date().getTime();
@@ -34,6 +39,7 @@ const createToast =
       data,
       createdAt,
       toastStatus,
+      pauseOnHover,
       removeTimeOut,
       isVisible: true,
     };

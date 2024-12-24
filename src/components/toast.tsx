@@ -29,6 +29,18 @@ export function Toast({ toast }: ToasterProps) {
         })
       : toast.data;
 
+  const onMouseEnter = () => {
+    if (toast.pauseOnHover) {
+      strawBerryToast.pause(toast.toastId);
+    }
+  };
+
+  const onMouseLeave = () => {
+    if (toast.pauseOnHover) {
+      strawBerryToast.resume(toast.toastId);
+    }
+  };
+
   /** @description disappear after mount */
   useEffect(() => {
     if (!strawBerryToast.isActive(toast.toastId)) {
@@ -49,8 +61,8 @@ export function Toast({ toast }: ToasterProps) {
       role="alert"
       data-testid={`container-${toast.containerId}`}
       className={typeof toast.data === 'function' ? '' : animationClassName}
-      onMouseEnter={() => strawBerryToast.pause(toast.toastId)}
-      onMouseLeave={() => strawBerryToast.resume(toast.toastId)}
+      onMouseEnter={onMouseEnter}
+      onMouseLeave={onMouseLeave}
     >
       <Condition condition={typeof toast.data === 'function'}>
         {/** custom component not styling */}

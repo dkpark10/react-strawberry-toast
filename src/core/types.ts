@@ -27,6 +27,7 @@ export interface Options {
   removeTimeOut?: number;
   element?: HTMLElement;
   containerId?: string;
+  pauseOnHover?: boolean;
 }
 
 interface ToastDataCallback {
