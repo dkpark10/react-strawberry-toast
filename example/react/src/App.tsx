@@ -1,12 +1,29 @@
-import React, { useRef } from 'react';
+import React from 'react';
 import { ToastContainer, toast } from '../../../src';
 
 export default function App() {
-  const targetRef = useRef<HTMLDivElement>(null);
-
   const click = () => {
-    toast(() => <div>strawberry toast1</div>, {
+    toast(<div>strawberry</div>, {
       timeOut: Infinity,
+    });
+
+    // toast(
+    //   ({ close }) => (
+    //     <div>
+    //       <button onClick={close}>click</button>
+    //       <span>strawberry</span>
+    //     </div>
+    //   ),
+    //   {
+    //     timeOut: Infinity,
+    //     position: 'bottom-center',
+    //     containerId: '1',
+    //   }
+    // );
+
+    toast('asdsaddas', {
+      timeOut: Infinity,
+      containerId: '1',
     });
   };
 
@@ -15,8 +32,8 @@ export default function App() {
       <ToastContainer />
       <div>example</div>
       <button onClick={click}>click</button>
+
       <div
-        ref={targetRef}
         style={{
           width: 100,
           height: 50,
@@ -27,7 +44,7 @@ export default function App() {
           transform: 'translate(-50%, -50%)',
         }}
       >
-        target
+        <ToastContainer containerId="1" />
       </div>
     </React.Fragment>
   );

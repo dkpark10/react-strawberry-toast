@@ -26,6 +26,7 @@ export interface Options {
   timeOut?: number;
   removeTimeOut?: number;
   element?: HTMLElement;
+  containerId?: string;
 }
 
 interface ToastDataCallback {
@@ -47,7 +48,7 @@ export interface ToastMoreOptions {
 
 type RequiredExcept<T, K extends keyof T> = Required<Omit<T, K>> & Pick<T, K>;
 
-export type ToastState = RequiredExcept<Options, 'element'> & ToastMoreOptions;
+export type ToastState = RequiredExcept<Options, 'element' | 'containerId'> & ToastMoreOptions;
 
 export type Coord = {
   y: number;
