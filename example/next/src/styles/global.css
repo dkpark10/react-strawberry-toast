@@ -2,8 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
+:root, ::before, ::after {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  background-color: #fffcfd;
+  color: #020715;
 }

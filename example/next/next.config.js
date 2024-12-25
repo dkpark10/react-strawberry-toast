@@ -2,6 +2,8 @@
 const nextConfig = {
   output: 'export',
 
+  reactStrictMode: true,
+
   transpilePackages: ['react-strawberry-toast'],
 
   webpack: (config) => {
