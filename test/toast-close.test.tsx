@@ -5,7 +5,6 @@ import { ToastContainer } from '../src/components/toast-container';
 import { toast } from '../src/core/toast';
 import { REMOVE_TIMEOUT } from '../src/constants';
 import '@testing-library/jest-dom';
-  
 
 describe('toast', () => {
   beforeEach(() => {
@@ -32,25 +31,10 @@ describe('toast', () => {
         );
       };
 
-      const click2 = () => {
-        toast(
-          ({ immediatelyClose }) => (
-            <div>
-              <span>strawberry toast2</span>
-              <button onClick={immediatelyClose}>close2</button>
-            </div>
-          ),
-          {
-            timeOut: Infinity,
-          }
-        );
-      };
-
       return (
         <React.Fragment>
           <ToastContainer />
           <button onClick={click}>click</button>
-          <button onClick={click2}>click2</button>
         </React.Fragment>
       );
     }
@@ -70,7 +54,7 @@ describe('toast', () => {
     expect(queryByText(/strawberry toast/i)).not.toBeInTheDocument();
   });
 
-  test('immediately close', async () => {
+  test('click immediately close', async () => {
     function App() {
       const click = () => {
         toast(

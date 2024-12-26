@@ -59,7 +59,7 @@ export function ToastContainer({ containerId = '', gap = 9, reverse = false }: T
       <If>
         <div
           style={{
-            position: 'fixed',
+            position: 'absolute',
             zIndex: 9999,
             pointerEvents: 'none',
           }}

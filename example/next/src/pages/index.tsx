@@ -1,18 +1,17 @@
 import Head from 'next/head';
-import React, { useState } from 'react';
+import React from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import Code from '@/components/code';
 import Github from '@/components/github';
-import { ToastContainer, toast, type Position } from '../../../../src';
+import { ToastContainer, toast } from '../../../../src';
 import { PrismLight as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { CodeTheme } from '@/constants/code-theme';
 
 const packagesName = ['npm', 'yarn', 'pnpm'] as const;
 
 export default function Home() {
-  const [pos, setPos] = useState<Position>('top-center');
-
   return (
     <>
       <Head>
@@ -91,23 +90,102 @@ function App() {
         </SyntaxHighlighter>
       </div>
 
-      <h3 className="font-bold text-lg text-center pb-4">playground</h3>
-      <div id="playground-area" className="flex justify-center">
-        <div>
-          {['success', 'error', 'warn', 'promise', 'custom'].map(
-            (status) => (
-              <button
-                key={status}
-                className="text-center rounded-md bg-white w-36 h-11 shadow-md"
-              >
-                {status}
-              </button>
-            )
-          )}
+      <h3 className="font-bold text-lg text-center pb-5">playground</h3>
+
+      <div className="flex justify-center pb-8">
+        <div id="container-area" className="grid gap-4 grid-cols-3">
+          {Array.from({ length: 6 }, (_, i) => i + 1).map((id) => (
+            <div
+              className="font-semibold w-32 h-8 bg-straw-berry flex items-center justify-center shadow-lg"
+              key={id}
+            >
+              <ToastContainer containerId={String(id)} />
+              <span className="text-white">{id}</span>
+            </div>
+          ))}
         </div>
       </div>
 
+      <div className="border-2 border-red-400 gap-[166px] flex justify-center">
+        <div id="toast-example-btn-area">
+          <div className="py-2">
+            <button
+              type="button"
+              className="rounded w-40 h-11 shadow-md text-sm font-semibold py-2 px-2 flex items-center"
+              onClick={() => {
+                toast.success('success strawberry toast');
+              }}
+            >
+              <Image className="mr-3" src={'/success.svg'} alt="success svg" width={18} height={18} />
+              success
+            </button>
+          </div>
+          <div className="py-2">
+            <button
+              className="rounded w-40 h-11 shadow-md text-sm font-semibold py-2 px-2 flex items-center"
+              onClick={() => {
+                toast.error('error strawberry toast');
+              }}
+            >
+              <Image className="mr-3" src={'/error.svg'} alt="error svg" width={18} height={18} />
+              error
+            </button>
+          </div>
+          <div className="py-2">
+            <button
+              className="rounded w-40 h-11 shadow-md text-sm font-semibold py-2 px-2 flex items-center"
+              onClick={() => {
+                toast.warn('warn strawberry toast');
+              }}
+            >
+              <Image className="mr-3" src={'/warn.svg'} alt="warn svg" width={18} height={18} />
+              warn
+            </button>
+          </div>
+          <div className="py-2">
+            <button
+              className="rounded w-40 h-11 shadow-md text-sm font-semibold py-2 px-2 flex items-center"
+              onClick={() => {
+                const promise = new Promise((resolve, reject) => {
+                  const func = Math.floor(Math.random() * 100) & 2 ? resolve : reject;
+                  setTimeout(func, 3_000);
+                });
+
+                toast.promise(promise, {
+                  loading: 'loading',
+                  success: 'success',
+                  error: 'error',
+                });
+              }}
+            >
+              <Image className="mr-3" src={'/promise.svg'} alt="promise svg" width={18} height={18} />
+              promise
+            </button>
+          </div>
+          <div className="py-2">
+            <button
+              className="rounded w-40 h-11 shadow-md text-sm font-semibold py-2 px-2 flex items-center"
+              onClick={() => {
+                toast.success('success strawberry toast');
+              }}
+            >
+              <Image
+                className="mr-3"
+                src={'/custom.svg'}
+                alt="custom toast code svg"
+                width={18}
+                height={18}
+              />
+              custom
+            </button>
+          </div>
+        </div>
+
+        <div id="option-area" />
+      </div>
+
       <ToastContainer />
+      <footer className="py-10" />
     </>
   );
 }

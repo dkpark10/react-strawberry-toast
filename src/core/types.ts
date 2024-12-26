@@ -1,25 +1,14 @@
 import type { ReactNode } from 'react';
 
-export type Top = 'top';
-export type Left = 'left';
-export type Right = 'right';
-export type Bottom = 'bottom';
-
-export type Direction = Top | Left | Right | Bottom;
-
 export type Position =
-  | `${Bottom}-${Left}`
-  | `${Bottom}-center`
-  | `${Bottom}-${Right}`
-  | `${Top}-${Left}`
-  | `${Top}-center`
-  | `${Top}-${Right}`
+  | 'bottom-left'
+  | 'bottom-center'
+  | 'bottom-right'
+  | 'top-left'
+  | 'top-center'
+  | 'top-right';
 
-export type ToastStatus =
-  | 'success'
-  | 'error'
-  | 'loading'
-  | 'warn';
+export type ToastStatus = 'success' | 'error' | 'loading' | 'warn';
 
 export interface Options {
   position?: Position;
@@ -36,7 +25,9 @@ interface ToastDataCallback {
   icon: ReactNode;
 }
 
-export interface ToastMoreOptions {
+type RequiredExcept<T, K extends keyof T> = Required<Omit<T, K>> & Pick<T, K>;
+
+export type ToastState = RequiredExcept<Options, 'containerId'> & {
   toastId: number;
   data: string | ReactNode | ((props: ToastDataCallback) => ReactNode);
   isVisible: boolean;
@@ -44,13 +35,9 @@ export interface ToastMoreOptions {
   toastStatus: ToastStatus;
   pausedAt?: number;
   updated?: boolean;
-}
-
-type RequiredExcept<T, K extends keyof T> = Required<Omit<T, K>> & Pick<T, K>;
-
-export type ToastState = RequiredExcept<Options, 'containerId'> & ToastMoreOptions;
+};
 
 export type Coord = {
   y: number;
   x: number;
-}
+};

@@ -3,10 +3,6 @@ import { ToastContainer, toast } from '../../../src';
 
 export default function App() {
   const click = () => {
-    toast(<div>strawberry</div>, {
-      timeOut: Infinity,
-    });
-
     // toast(
     //   ({ close }) => (
     //     <div>
@@ -21,10 +17,7 @@ export default function App() {
     //   }
     // );
 
-    toast('asdsaddas', {
-      timeOut: Infinity,
-      containerId: '1',
-    });
+    toast('asdsaddas');
   };
 
   return (
