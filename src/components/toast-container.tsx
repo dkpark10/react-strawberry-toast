@@ -37,18 +37,24 @@ const positionStyle: Record<Position, React.CSSProperties> = {
 };
 
 interface ToastContainerProps {
+  position?: Position;
   containerId?: string;
   reverse?: boolean;
   gap?: number;
 }
 
-export function ToastContainer({ containerId = '', gap = 9, reverse = false }: ToastContainerProps) {
+export function ToastContainer({
+  position: globalPosition = 'top-center',
+  containerId = '',
+  gap = 9,
+  reverse = false,
+}: ToastContainerProps) {
   const toastList = useStrawberryToast();
 
   const toastsByPosition: Record<Position, Array<ToastState>> = toastList
     .filter((toast) => toast.containerId === undefined)
     .reduce((acc, toast) => {
-      const key = toast.position;
+      const key = toast.position || globalPosition;
       acc[key] = acc[key] || [];
       acc[key].push(toast);
       return acc;
@@ -103,6 +109,7 @@ export function ToastContainer({ containerId = '', gap = 9, reverse = false }: T
             return (
               <div
                 key={position}
+                data-testid={position}
                 style={{
                   pointerEvents: 'auto',
                   position: 'fixed',

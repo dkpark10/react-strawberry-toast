@@ -191,4 +191,34 @@ describe('toast', () => {
       vi.advanceTimersByTime(DISAPPEAR_TIMEOUT + REMOVE_TIMEOUT);
     });
   });
+
+  test('global position.', async () => {
+    function App() {
+      const click = () => {
+        toast(<div>strawberry toast bottom left</div>);
+      };
+
+      const click2 = () => {
+        toast(<div>strawberry toast</div>, {
+          position: 'top-right',
+        });
+      };
+
+      return (
+        <React.Fragment>
+          <ToastContainer position="bottom-left" />
+          <button onClick={click}>click</button>
+          <button onClick={click2}>click2</button>
+        </React.Fragment>
+      );
+    }
+
+    const { getByRole, queryByTestId } = render(<App />);
+
+    fireEvent.click(getByRole('button', { name: 'click' }));
+    fireEvent.click(getByRole('button', { name: 'click2' }));
+
+    expect(queryByTestId('bottom-left')).toBeInTheDocument();
+    expect(queryByTestId('top-right')).toBeInTheDocument();
+  });
 });

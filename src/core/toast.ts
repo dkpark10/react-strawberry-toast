@@ -24,7 +24,6 @@ const createToast =
     const {
       timeOut = DISAPPEAR_TIMEOUT,
       removeTimeOut = REMOVE_TIMEOUT,
-      position = 'top-center',
       pauseOnHover = true,
     } = options;
 
@@ -34,7 +33,6 @@ const createToast =
     const value: ToastState = {
       ...options,
       timeOut: timeOut > MAX_TIMEOUT ? MAX_TIMEOUT : timeOut,
-      position,
       toastId,
       data,
       createdAt,

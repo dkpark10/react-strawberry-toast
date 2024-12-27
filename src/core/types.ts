@@ -27,7 +27,7 @@ interface ToastDataCallback {
 
 type RequiredExcept<T, K extends keyof T> = Required<Omit<T, K>> & Pick<T, K>;
 
-export type ToastState = RequiredExcept<Options, 'containerId'> & {
+export type ToastState = RequiredExcept<Options, 'containerId' | 'position'> & {
   toastId: number;
   data: string | ReactNode | ((props: ToastDataCallback) => ReactNode);
   isVisible: boolean;
