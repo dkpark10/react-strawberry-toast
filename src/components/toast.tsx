@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { Condition, If, Else } from './condition';
 import { getAnimation } from '../utils/get-animation';
 import { toast as strawBerryToast } from '../core/toast';
-import { MAX_TIMEOUT } from '../constants';
+import { DISAPPEAR_TIMEOUT, MAX_TIMEOUT } from '../constants';
 import { DefaultToast, ToastStatusIcons } from './toast-default';
 import type { ToastState } from '../core/types';
 import '../styles/index.scss';
@@ -51,7 +51,7 @@ export function Toast({ toast }: ToasterProps) {
   /** @description promise toast */
   useEffect(() => {
     if (toast.updated !== undefined) {
-      const newTimeOut = toast.timeOut >= MAX_TIMEOUT ? 2_000 : toast.timeOut;
+      const newTimeOut = toast.timeOut >= MAX_TIMEOUT ? DISAPPEAR_TIMEOUT : toast.timeOut;
       strawBerryToast.disappear(toast.toastId, newTimeOut);
     }
   }, [toast.updated]);
