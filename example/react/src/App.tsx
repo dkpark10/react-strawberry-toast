@@ -4,7 +4,10 @@ import { ToastContainer, toast } from '../../../src';
 export default function App() {
   const click = () => {
     toast('success', {
-      containerId: '1',
+      timeOut: Infinity,
+    });
+    toast('success 1231231231231', {
+      timeOut: Infinity,
     });
   };
 

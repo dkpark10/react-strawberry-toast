@@ -55,6 +55,7 @@ export function ToastContainer({
     .filter((toast) => toast.containerId === undefined)
     .reduce((acc, toast) => {
       const key = toast.position || globalPosition;
+      toast.position = key;
       acc[key] = acc[key] || [];
       acc[key].push(toast);
       return acc;

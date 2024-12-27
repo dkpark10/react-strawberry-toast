@@ -12,7 +12,7 @@ interface ToasterProps {
 }
 
 export function Toast({ toast }: ToasterProps) {
-  const animationClassName = getAnimation({ isVisible: toast.isVisible, position: toast.position });
+  const animationClassName = getAnimation({ isVisible: toast.isVisible, position: toast.position! });
 
   const Icon = ToastTypeIcons[toast.toastType];
 
@@ -63,6 +63,10 @@ export function Toast({ toast }: ToasterProps) {
       className={typeof toast.data === 'function' ? '' : animationClassName}
       onMouseEnter={onMouseEnter}
       onMouseLeave={onMouseLeave}
+      style={{
+        display: 'flex',
+        justifyContent: 'center',
+      }}
     >
       <Condition condition={typeof toast.data === 'function'}>
         {/** custom component not styling */}
