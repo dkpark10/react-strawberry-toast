@@ -3,7 +3,7 @@ import { Condition, If, Else } from './condition';
 import { getAnimation } from '../utils/get-animation';
 import { toast as strawBerryToast } from '../core/toast';
 import { DISAPPEAR_TIMEOUT, MAX_TIMEOUT } from '../constants';
-import { DefaultToast, ToastStatusIcons } from './toast-default';
+import { DefaultToast, ToastTypeIcons } from './toast-default';
 import type { ToastState } from '../core/types';
 import '../styles/index.scss';
 
@@ -14,7 +14,7 @@ interface ToasterProps {
 export function Toast({ toast }: ToasterProps) {
   const animationClassName = getAnimation({ isVisible: toast.isVisible, position: toast.position });
 
-  const Icon = ToastStatusIcons[toast.toastStatus];
+  const Icon = ToastTypeIcons[toast.toastType];
 
   const content =
     typeof toast.data === 'function'
@@ -68,7 +68,7 @@ export function Toast({ toast }: ToasterProps) {
         {/** custom component not styling */}
         <If>{content}</If>
         <Else>
-          <DefaultToast status={toast.toastStatus}>{content}</DefaultToast>
+          <DefaultToast status={toast.toastType}>{content}</DefaultToast>
         </Else>
       </Condition>
     </div>

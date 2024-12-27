@@ -8,7 +8,7 @@ export type Position =
   | 'top-center'
   | 'top-right';
 
-export type ToastStatus = 'success' | 'error' | 'loading' | 'warn';
+export type ToastType = 'success' | 'error' | 'loading' | 'warn';
 
 export interface Options {
   position?: Position;
@@ -32,7 +32,7 @@ export type ToastState = RequiredExcept<Options, 'containerId'> & {
   data: string | ReactNode | ((props: ToastDataCallback) => ReactNode);
   isVisible: boolean;
   createdAt: number;
-  toastStatus: ToastStatus;
+  toastType: ToastType;
   pausedAt?: number;
   updated?: boolean;
 };

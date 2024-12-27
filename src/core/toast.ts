@@ -2,7 +2,7 @@ import { setState } from './store';
 import { generateId } from '../utils/generate-id';
 import { REMOVE_TIMEOUT, MAX_TIMEOUT, DISAPPEAR_TIMEOUT } from '../constants';
 import type { ReactNode } from 'react';
-import type { ToastState, Options, ToastStatus } from './types';
+import type { ToastState, Options, ToastType } from './types';
 
 const idGenerator = generateId();
 
@@ -19,7 +19,7 @@ const deleteTimer = (toastId: ToastState['toastId']) => {
 };
 
 const createToast =
-  (toastStatus: ToastStatus = 'success') =>
+  (toastType: ToastType = 'success') =>
   (data: ToastState['data'], options: Options = {}): ToastState['toastId'] => {
     const {
       timeOut = DISAPPEAR_TIMEOUT,
@@ -38,7 +38,7 @@ const createToast =
       toastId,
       data,
       createdAt,
-      toastStatus,
+      toastType,
       pauseOnHover,
       removeTimeOut,
       isVisible: true,
@@ -158,13 +158,13 @@ toast.promise = (
     .then(() => {
       toast.replace(toastId, success, {
         ...options,
-        toastStatus: 'success',
+        toastType: 'success',
       });
     })
     .catch(() => {
       toast.replace(toastId, error, {
         ...options,
-        toastStatus: 'error',
+        toastType: 'error',
       });
     });
 };

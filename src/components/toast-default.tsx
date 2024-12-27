@@ -3,7 +3,7 @@ import { STYLE_NAMESPACE } from '../constants';
 // import SuccessSvg from '../../public/assets/success.svg?react';
 // import ErrorSvg from '../../public/assets/error.svg?react';
 // import WarnSvg from '../../public/assets/warn.svg?react';
-import type { ToastStatus } from '../core/types';
+import type { ToastType } from '../core/types';
 
 /** @todo svg component after deploy */
 function Success() {
@@ -61,7 +61,7 @@ function Warn() {
   );
 }
 
-export const ToastStatusIcons: Record<ToastStatus, any> = {
+export const ToastTypeIcons: Record<ToastType, any> = {
   success: Success,
   error: Error,
   loading: () => <div className={`${STYLE_NAMESPACE}__loading`} />,
@@ -69,11 +69,11 @@ export const ToastStatusIcons: Record<ToastStatus, any> = {
 };
 
 interface DefaultToastProps {
-  status: ToastStatus;
+  status: ToastType;
 }
 
 export function DefaultToast({ status, children }: DefaultToastProps & PropsWithChildren) {
-  const Icon = ToastStatusIcons[status];
+  const Icon = ToastTypeIcons[status];
 
   return (
     <div

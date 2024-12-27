@@ -3,21 +3,9 @@ import { ToastContainer, toast } from '../../../src';
 
 export default function App() {
   const click = () => {
-    // toast(
-    //   ({ close }) => (
-    //     <div>
-    //       <button onClick={close}>click</button>
-    //       <span>strawberry</span>
-    //     </div>
-    //   ),
-    //   {
-    //     timeOut: Infinity,
-    //     position: 'bottom-center',
-    //     containerId: '1',
-    //   }
-    // );
-
-    toast('asdsaddas');
+    toast('success', {
+      containerId: '1',
+    });
   };
 
   return (
