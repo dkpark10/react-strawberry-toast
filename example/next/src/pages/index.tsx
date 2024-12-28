@@ -101,7 +101,39 @@ export default function Home() {
     {
       type: 'custom',
       click: () => {
-        toast(({ close, isVisible }) => <div>custom toast</div>);
+        setToastCode(`
+toast(
+  ({ close, isVisible }) => (
+    <div
+      className={
+        ${"${isVisible ? 'animate-[fade-in_0.3s_ease-in-out]' : 'animate-[fade-out_0.3s_ease-in-out]'"}
+        "bg-white p-4 flex justify-between gap-2"
+      }
+    >
+      <span>custom toast</span>
+      <button type="button" className="bg-straw-berry text-white w-6 h-6 rounded-sm" onClick={close}>
+        X
+      </button>
+    </div>
+  )
+);
+        `);
+
+        toast(
+          ({ close, isVisible }) => (
+            <div
+              className={`${
+                isVisible ? 'animate-[fade-in_0.3s_ease-in-out]' : 'animate-[fade-out_0.3s_ease-in-out]'
+              } bg-white p-4 flex justify-between gap-2`}
+            >
+              <span>custom toast</span>
+              <button type="button" className="bg-straw-berry text-white w-6 h-6 rounded-sm" onClick={close}>
+                X
+              </button>
+            </div>
+          ),
+          pos
+        );
       },
     },
   ];
@@ -268,7 +300,14 @@ export default function Home() {
       </div>
 
       <ToastContainer />
-      <footer className="py-10" />
+
+      <footer className="pt-36 text-center">
+        <div className="h-60 flex justify-center items-center bg-primary-black text-[#c3c6c1]">
+          Copyright © 2025 dkpark10
+        </div>
+      </footer>
     </>
   );
 }
+
+// c3c6c1
