@@ -3,6 +3,7 @@ import { useStrawberryToast } from '../core/store';
 import { Toast } from './toast';
 import { getDirection } from '../utils/get-direction';
 import type { Position, ToastState } from '../core/types';
+import { Condition, If, Else } from './condition';
 
 const OFFSET = 16;
 
@@ -61,8 +62,8 @@ export function ToastContainer({
     }, {} as Record<Position, Array<ToastState>>);
 
   return (
-    <>
-      {!!containerId ? (
+    <Condition condition={!!containerId}>
+      <If>
         <div
           style={{
             position: 'absolute',
@@ -85,7 +86,8 @@ export function ToastContainer({
               ))}
           </div>
         </div>
-      ) : (
+      </If>
+      <Else>
         <div
           style={{
             position: 'fixed',
@@ -125,7 +127,7 @@ export function ToastContainer({
             );
           })}
         </div>
-      )}
-    </>
+      </Else>
+    </Condition>
   );
 }

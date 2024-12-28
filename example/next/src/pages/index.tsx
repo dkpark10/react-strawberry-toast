@@ -9,6 +9,7 @@ import Github from '@/components/github';
 import { ToastContainer, toast, type Position, ToastState } from 'react-strawberry-toast';
 import { PrismLight as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { CodeTheme } from '@/constants/code-theme';
+import 'react-strawberry-toast/dist/style.css';
 
 const packagesName = ['npm', 'yarn', 'pnpm'] as const;
 

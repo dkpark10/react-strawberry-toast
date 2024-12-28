@@ -12,9 +12,9 @@ export function Condition({ condition, children }: ConditionProps & PropsWithChi
 
   return (childrenArray as any[]).find((child) => {
     if (condition) {
-      return child.type.name === 'If';
+      return child.key === '.0';
     }
-    return child.type.name === 'Else';
+    return child.key === '.1';
   });
 }
 

@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import { Condition, If, Else } from './condition';
 import { getAnimation } from '../utils/get-animation';
 import { toast as strawBerryToast } from '../core/toast';
 import { DISAPPEAR_TIMEOUT, MAX_TIMEOUT } from '../constants';
@@ -67,11 +68,14 @@ export function Toast({ toast }: ToasterProps) {
         justifyContent: 'center',
       }}
     >
-      {typeof toast.data === 'function' ? (
-        content
-      ) : (
-        <DefaultToast status={toast.toastType}>{content}</DefaultToast>
-      )}
+      <Condition condition={typeof toast.data === 'function'}>
+        <If>
+          {content}
+        </If>
+        <Else>
+          <DefaultToast status={toast.toastType}>{content}</DefaultToast>
+        </Else>
+      </Condition>
     </div>
   );
 }
