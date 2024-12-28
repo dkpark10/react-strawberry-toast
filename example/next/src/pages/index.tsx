@@ -109,7 +109,7 @@ export default function Home() {
   const optionButtonClassName = (bool: boolean) =>
     `${clsx(
       bool && 'bg-straw-berry text-white'
-    )} active:bg-straw-berry active:text-white rounded w-36 h-10 shadow-md text-sm font-semibold
+    )} active:bg-straw-berry active:text-white rounded w-36 h-10 shadow-md text-sm font-medium
    py-2 px-2 flex items-center justify-center hover:bg-straw-berry hover:text-white`;
 
   return (
@@ -196,12 +196,11 @@ export default function Home() {
       <div className="flex justify-center pb-8">
         <div id="container-area" className="grid gap-x-24 gap-y-4 grid-cols-3">
           {containerIds.map((id) => (
-            <div
-              className="font-semibold w-52 h-8 bg-straw-berry flex items-center justify-center shadow-lg"
-              key={id}
-            >
+            <div key={id}>
               <ToastContainer containerId={id} />
-              <span className="text-white">{id}</span>
+              <span className="text-white font-semibold flex items-center justify-center w-52 h-8 bg-straw-berry shadow-lg">
+                {id}
+              </span>
             </div>
           ))}
         </div>
@@ -235,6 +234,7 @@ export default function Home() {
             {['top-left', 'top-center', 'top-right', 'bottom-left', 'bottom-center', 'bottom-right'].map(
               (p) => (
                 <button
+                  key={p}
                   type="button"
                   className={optionButtonClassName(option === p)}
                   onClick={() => setOption(p as Position)}
@@ -249,6 +249,7 @@ export default function Home() {
           <div className="grid gap-4 grid-cols-3">
             {containerIds.map((p) => (
               <button
+                key={p}
                 type="button"
                 className={optionButtonClassName(option === p)}
                 onClick={() => setOption(p as Position)}
