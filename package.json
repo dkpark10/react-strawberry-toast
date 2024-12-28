@@ -22,7 +22,8 @@
         "types": "./dist/index.d.ts",
         "default": "./dist/index.mjs"
       }
-    }
+    },
+    "./dist/style.css": "./dist/style.css"
   },
   "files": [
     "src",
@@ -30,6 +31,7 @@
   ],
   "scripts": {
     "dev": "pnpm run --filter=react-strawberry-toast-react-example dev",
+    "dev:next": "pnpm run --filter=react-strawberry-toast-docs dev",
     "build": "vite build",
     "test": "vitest",
     "test:watch": "vitest --watch",

@@ -6,7 +6,7 @@ import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import clsx from 'clsx';
 import Code from '@/components/code';
 import Github from '@/components/github';
-import { ToastContainer, toast, type Position, ToastState } from '../../../../src';
+import { ToastContainer, toast, type Position, ToastState } from 'react-strawberry-toast';
 import { PrismLight as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { CodeTheme } from '@/constants/code-theme';
 
@@ -105,10 +105,10 @@ export default function Home() {
 toast(
   ({ close, isVisible }) => (
     <div
-      className={
+      className={${'`'}
         ${"${isVisible ? 'animate-[fade-in_0.3s_ease-in-out]' : 'animate-[fade-out_0.3s_ease-in-out]'"}
-        "bg-white p-4 flex justify-between gap-2"
-      }
+        "bg-white p-4 flex justify-between gap-2 rounded-sm shadow-xl"
+      ${'`'}}
     >
       <span>custom toast</span>
       <button type="button" className="bg-straw-berry text-white w-6 h-6 rounded-sm" onClick={close}>
@@ -124,7 +124,7 @@ toast(
             <div
               className={`${
                 isVisible ? 'animate-[fade-in_0.3s_ease-in-out]' : 'animate-[fade-out_0.3s_ease-in-out]'
-              } bg-white p-4 flex justify-between gap-2`}
+              } bg-white p-4 flex justify-between gap-2 rounded-sm shadow-xl`}
             >
               <span>custom toast</span>
               <button type="button" className="bg-straw-berry text-white w-6 h-6 rounded-sm" onClick={close}>
@@ -309,5 +309,3 @@ toast(
     </>
   );
 }
-
-// c3c6c1

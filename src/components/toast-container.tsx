@@ -1,6 +1,5 @@
 import React from 'react';
 import { useStrawberryToast } from '../core/store';
-import { Condition, If, Else } from './condition';
 import { Toast } from './toast';
 import { getDirection } from '../utils/get-direction';
 import type { Position, ToastState } from '../core/types';
@@ -62,8 +61,8 @@ export function ToastContainer({
     }, {} as Record<Position, Array<ToastState>>);
 
   return (
-    <Condition condition={!!containerId}>
-      <If>
+    <>
+      {!!containerId ? (
         <div
           style={{
             position: 'absolute',
@@ -86,8 +85,7 @@ export function ToastContainer({
               ))}
           </div>
         </div>
-      </If>
-      <Else>
+      ) : (
         <div
           style={{
             position: 'fixed',
@@ -127,7 +125,7 @@ export function ToastContainer({
             );
           })}
         </div>
-      </Else>
-    </Condition>
+      )}
+    </>
   );
 }

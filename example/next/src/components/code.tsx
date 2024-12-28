@@ -1,4 +1,4 @@
-import { toast } from '../../../../src';
+import { toast } from 'react-strawberry-toast';
 import type { PropsWithChildren } from 'react';
 
 export default function Code({ children }: PropsWithChildren) {
