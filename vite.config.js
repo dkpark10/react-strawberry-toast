@@ -2,6 +2,7 @@ import path from 'path';
 import { defineConfig } from 'vite';
 import dts from 'vite-plugin-dts';
 import svgr from 'vite-plugin-svgr';
+import preserveDirectives from 'rollup-preserve-directives'
 
 export default defineConfig(() => ({
   plugins: [
@@ -9,6 +10,7 @@ export default defineConfig(() => ({
       rollupTypes: true,
     }),
     svgr(),
+    preserveDirectives(),
   ],
   build: {
     minify: true,

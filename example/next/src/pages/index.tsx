@@ -6,7 +6,7 @@ import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import clsx from 'clsx';
 import Code from '@/components/code';
 import Github from '@/components/github';
-import { ToastContainer, toast, type Position, ToastState } from 'react-strawberry-toast';
+import { ToastContainer, toast, type Position, type ToastState } from 'react-strawberry-toast';
 import { PrismLight as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { CodeTheme } from '@/constants/code-theme';
 import 'react-strawberry-toast/dist/style.css';
