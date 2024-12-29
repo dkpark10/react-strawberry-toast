@@ -6,7 +6,7 @@ import { STYLE_NAMESPACE } from '../constants';
 import type { ToastType } from '../core/types';
 
 /** @todo svg component after deploy */
-function Success() {
+function SuccessSvg() {
   return (
     <svg
       stroke="none"
@@ -29,7 +29,7 @@ function Success() {
   );
 }
 
-function Error() {
+function ErrorSvg() {
   return (
     <svg
       stroke="none"
@@ -45,7 +45,7 @@ function Error() {
   );
 }
 
-function Warn() {
+function WarnSvg() {
   return (
     <svg
       stroke="none"
@@ -62,10 +62,10 @@ function Warn() {
 }
 
 export const ToastTypeIcons: Record<ToastType, any> = {
-  success: Success,
-  error: Error,
+  success: SuccessSvg,
+  error: ErrorSvg,
   loading: () => <div className={`${STYLE_NAMESPACE}__loading`} />,
-  warn: Warn,
+  warn: WarnSvg,
 };
 
 interface DefaultToastProps {

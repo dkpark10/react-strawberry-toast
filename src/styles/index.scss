@@ -6,7 +6,7 @@ $react-strawberry-toast-namespace: 'react-strawberry-toast';
   }
 }
 
-@keyframes fade-in {
+@keyframes react-strawberry-toast_fade-in {
   from {
     transform: translateY(-100%);
     opacity: 0;
@@ -18,7 +18,7 @@ $react-strawberry-toast-namespace: 'react-strawberry-toast';
   }
 }
 
-@keyframes fade-out {
+@keyframes react-strawberry-toast_fade-out {
   from {
     transform: translateY(0);
     opacity: 1;
@@ -30,7 +30,7 @@ $react-strawberry-toast-namespace: 'react-strawberry-toast';
   }
 }
 
-@keyframes fade-in-reverse {
+@keyframes react-strawberry-toast_fade-in-reverse {
   from {
     transform: translateY(100%);
     opacity: 0;
@@ -42,7 +42,7 @@ $react-strawberry-toast-namespace: 'react-strawberry-toast';
   }
 }
 
-@keyframes fade-out-reverse {
+@keyframes react-strawberry-toast_fade-out-reverse {
   from {
     transform: translateY(0);
     opacity: 1;
@@ -55,19 +55,19 @@ $react-strawberry-toast-namespace: 'react-strawberry-toast';
 }
 
 .#{$react-strawberry-toast-namespace}__fade-in {
-  animation: fade-in 0.3s ease-out;
+  animation: react-strawberry-toast_fade-in 0.3s ease-out;
 }
 
 .#{$react-strawberry-toast-namespace}__fade-out {
-  animation: fade-out 0.3s ease-out;
+  animation: react-strawberry-toast_fade-out 0.3s ease-out;
 }
 
 .#{$react-strawberry-toast-namespace}__fade-in-reverse {
-  animation: fade-in-reverse 0.3s ease-out;
+  animation: react-strawberry-toast_fade-in-reverse 0.3s ease-out;
 }
 
 .#{$react-strawberry-toast-namespace}__fade-out-reverse {
-  animation: fade-out-reverse 0.3s ease-out;
+  animation: react-strawberry-toast_fade-out-reverse 0.3s ease-out;
 }
 
 .#{$react-strawberry-toast-namespace}__loading {

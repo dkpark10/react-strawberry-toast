@@ -6,7 +6,8 @@ import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import clsx from 'clsx';
 import Code from '@/components/code';
 import Github from '@/components/github';
-import { ToastContainer, toast, type Position, type ToastState } from 'react-strawberry-toast';
+// import { ToastContainer, toast, type Position, type ToastState } from 'react-strawberry-toast';
+import { ToastContainer, toast, type Position, type ToastState } from '../../../../src';
 import { PrismLight as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { CodeTheme } from '@/constants/code-theme';
 import 'react-strawberry-toast/dist/style.css';
@@ -25,7 +26,8 @@ export default function Home() {
                    toast.success('success');                 
 
 
-                `);
+                `
+  );
 
   const pos =
     /top/i.test(option) || /bottom/i.test(option)
@@ -43,7 +45,7 @@ export default function Home() {
 
 
                 `);
-        toast.success('success', pos);
+        toast.success('success', pos,);
       },
     },
     {
@@ -107,8 +109,8 @@ toast(
   ({ close, isVisible }) => (
     <div
       className={${'`'}
-        ${"${isVisible ? 'animate-[fade-in_0.3s_ease-in-out]' : 'animate-[fade-out_0.3s_ease-in-out]'"}
-        "bg-white p-4 flex justify-between gap-2 rounded-sm shadow-xl"
+        ${"${isVisible ? 'react-strawberry-toast__fade-in' : 'react-strawberry-toast__fade-out'}"}
+        bg-white p-4 flex justify-between gap-2 rounded-sm shadow-xl
       ${'`'}}
     >
       <span>custom toast</span>
@@ -124,7 +126,9 @@ toast(
           ({ close, isVisible }) => (
             <div
               className={`${
-                isVisible ? 'animate-[fade-in_0.3s_ease-in-out]' : 'animate-[fade-out_0.3s_ease-in-out]'
+                isVisible
+                  ? 'react-strawberry-toast__fade-in'
+                  : 'react-strawberry-toast__fade-out'
               } bg-white p-4 flex justify-between gap-2 rounded-sm shadow-xl`}
             >
               <span>custom toast</span>
@@ -133,7 +137,7 @@ toast(
               </button>
             </div>
           ),
-          pos
+          pos,
         );
       },
     },
@@ -304,7 +308,7 @@ toast(
 
       <footer className="pt-36 text-center">
         <div className="h-60 flex justify-center items-center bg-primary-black text-[#c3c6c1]">
-          Copyright © 2025 dkpark10
+          @Created by dkpark10
         </div>
       </footer>
     </>
