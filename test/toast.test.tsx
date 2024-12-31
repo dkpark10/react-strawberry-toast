@@ -15,7 +15,7 @@ describe('toast', () => {
     vi.useRealTimers();
   });
 
-  test('show and disappear', async () => {
+  test('should display toast when the button is clicked and hide it after 3 seconds', async () => {
     function App() {
       const click = () => {
         toast('strawberry toast');
@@ -48,7 +48,7 @@ describe('toast', () => {
     expect(queryByText(/strawberry toast/i)).not.toBeInTheDocument();
   });
 
-  test('infinity', async () => {
+  test('should remain visible even after an infinite amount of time has passed for the toast', async () => {
     function App() {
       const click = () => {
         toast(
@@ -91,7 +91,7 @@ describe('toast', () => {
     expect(queryByText(/strawberry toast/i)).not.toBeInTheDocument();
   });
 
-  test('toast count', async () => {
+  test('should have exactly 4 toasts', async () => {
     function App() {
       const click = () => {
         toast(<div>strawberry toast1</div>);
@@ -125,7 +125,7 @@ describe('toast', () => {
     });
   });
 
-  test('if data is function, there should have no style and animation.', async () => {
+  test('should have no style and no animation if data is function.', async () => {
     function App() {
       const click = () => {
         toast(() => <div>strawberry toast</div>);
@@ -151,7 +151,7 @@ describe('toast', () => {
     });
   });
 
-  test('multiple container id.', async () => {
+  test('should display toasts in each toast container.', async () => {
     function App() {
       const click = () => {
         toast(<div>strawberry toast</div>);
@@ -192,7 +192,7 @@ describe('toast', () => {
     });
   });
 
-  test('global position.', async () => {
+  test('should display toasts at the global position when global-position is set.', async () => {
     function App() {
       const click = () => {
         toast(<div>strawberry toast bottom left</div>);
@@ -220,5 +220,34 @@ describe('toast', () => {
 
     expect(queryByTestId('bottom-left')).toBeInTheDocument();
     expect(queryByTestId('top-right')).toBeInTheDocument();
+
+    act(() => {
+      vi.advanceTimersByTime(DISAPPEAR_TIMEOUT + REMOVE_TIMEOUT);
+    });
+  });
+
+  test('should display the toast after 3200ms even if removeTimeout is greater than or equal to 1000ms', async () => {
+    function App() {
+      const click = () => {
+        toast('strawberry toast', { removeTimeOut: 1_000 });
+      };
+
+      return (
+        <React.Fragment>
+          <ToastContainer />
+          <button onClick={click}>click</button>
+        </React.Fragment>
+      );
+    }
+
+    const { getByRole, queryByText } = render(<App />);
+
+    fireEvent.click(getByRole('button', { name: 'click' }));
+
+    act(() => {
+      vi.advanceTimersByTime(DISAPPEAR_TIMEOUT + REMOVE_TIMEOUT);
+    });
+
+    expect(queryByText(/strawberry toast/i)).toBeInTheDocument();
   });
 });

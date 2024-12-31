@@ -6,7 +6,7 @@ import { toast } from '../src/core/toast';
 import { REMOVE_TIMEOUT } from '../src/constants';
 import '@testing-library/jest-dom';
 
-describe('toast', () => {
+describe('toast close', () => {
   beforeEach(() => {
     vi.useFakeTimers();
   });
@@ -15,7 +15,7 @@ describe('toast', () => {
     vi.useRealTimers();
   });
 
-  test('click close', async () => {
+  test('should not display the toast when the close button is clicked', async () => {
     function App() {
       const click = () => {
         toast(
@@ -54,7 +54,7 @@ describe('toast', () => {
     expect(queryByText(/strawberry toast/i)).not.toBeInTheDocument();
   });
 
-  test('click immediately close', async () => {
+  test('should not immediately display the toast when the immediatelyClose button is clicked', async () => {
     function App() {
       const click = () => {
         toast(

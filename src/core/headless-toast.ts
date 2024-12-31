@@ -1,7 +1,7 @@
 import { generateId } from '../utils/generate-id';
 import { ToastStore } from '../core/store';
 import { REMOVE_TIMEOUT, MAX_TIMEOUT, DISAPPEAR_TIMEOUT } from '../constants';
-import type { HeadlessOption, HeadlessToastState } from './types';
+import type { BaseOptions, HeadlessToastState } from './types';
 
 export const toastStore = new ToastStore<HeadlessToastState>();
 
@@ -21,7 +21,7 @@ const deleteTimer = (toastId: HeadlessToastState['toastId']) => {
 
 const createToast =
   () =>
-  (data: HeadlessToastState['data'], options: HeadlessOption = {}): HeadlessToastState['toastId'] => {
+  (data: HeadlessToastState['data'], options: BaseOptions = {}): HeadlessToastState['toastId'] => {
     const { timeOut = DISAPPEAR_TIMEOUT, removeTimeOut = REMOVE_TIMEOUT } = options;
 
     const toastId = idGenerator();
@@ -44,7 +44,7 @@ const createToast =
     return toastId;
   };
 
-export const toast = (data: HeadlessToastState['data'], options: HeadlessOption = {}) =>
+export const toast = (data: HeadlessToastState['data'], options: BaseOptions = {}) =>
   createToast()(data, options);
 
 toast.disappear = (toastId: HeadlessToastState['toastId'], timeOut: number): void => {
@@ -78,7 +78,7 @@ toast.resume = (toastId: HeadlessToastState['toastId']): void => {
 
   if (!target) return;
 
-  const leftTimeout = target.createdAt + target.timeOut - (target.pausedAt || 0);
+  const leftTimeout = target.createdAt + (target.timeOut || DISAPPEAR_TIMEOUT) - (target.pausedAt || 0);
   toast.disappear(toastId, leftTimeout);
 };
 

@@ -6,7 +6,7 @@ import { toast } from '../src/core/toast';
 import { DISAPPEAR_TIMEOUT } from '../src/constants';
 import '@testing-library/jest-dom';
 
-describe('toast', () => {
+describe('toast promise', () => {
   beforeEach(() => {
     vi.useFakeTimers();
   });

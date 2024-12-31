@@ -1,20 +1,12 @@
 import React from 'react';
 import { useStrawberryToast } from '../../../src/hooks/use-strawberry-toast';
+import { toast } from '../../../src/core/headless-toast';
 
 export default function App() {
-  const {
-    toasts,
-    handlers: { toast },
-  } = useStrawberryToast();
+  const toasts = useStrawberryToast();
 
   const click = () => {
-    console.log('123');
-    toast('success', {
-      timeOut: Infinity,
-    });
-    toast('success 1231231231231', {
-      timeOut: Infinity,
-    });
+    toast('success');
   };
 
   return (
