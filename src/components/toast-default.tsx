@@ -3,7 +3,7 @@ import { STYLE_NAMESPACE } from '../constants';
 // import SuccessSvg from '../../public/assets/success.svg?react';
 // import ErrorSvg from '../../public/assets/error.svg?react';
 // import WarnSvg from '../../public/assets/warn.svg?react';
-import type { ToastType } from '../core/types';
+import type { ToastType } from '../types';
 
 /** @todo svg component after deploy */
 function SuccessSvg() {

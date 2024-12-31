@@ -4,7 +4,7 @@ import { getAnimation } from '../utils/get-animation';
 import { toast as strawBerryToast } from '../core/toast';
 import { DISAPPEAR_TIMEOUT, MAX_TIMEOUT } from '../constants';
 import { DefaultToast, ToastTypeIcons } from './toast-default';
-import type { ToastState } from '../core/types';
+import type { ToastState } from '../types';
 import '../styles/index.scss';
 
 interface ToasterProps {

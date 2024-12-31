@@ -1,4 +1,4 @@
-import type { ToastState } from './types';
+import type { ToastState } from '../types';
 import { useSyncExternalStore } from 'react';
 
 type Listener = () => void;

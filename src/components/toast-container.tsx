@@ -5,7 +5,7 @@ import { useStrawberryToast } from '../core/store';
 import { Toast } from './toast';
 import { toastStore } from '../core/toast';
 import { getDirection } from '../utils/get-direction';
-import type { Position, ToastState } from '../core/types';
+import type { Position, ToastState } from '../types';
 import { Condition, If, Else } from './condition';
 
 const OFFSET = 16;

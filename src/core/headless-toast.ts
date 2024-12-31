@@ -1,7 +1,7 @@
 import { generateId } from '../utils/generate-id';
 import { ToastStore } from '../core/store';
 import { REMOVE_TIMEOUT, MAX_TIMEOUT, DISAPPEAR_TIMEOUT } from '../constants';
-import type { BaseOptions, HeadlessToastState } from './types';
+import type { BaseOptions, HeadlessToastState } from '../types';
 
 export const toastStore = new ToastStore<HeadlessToastState>();
 

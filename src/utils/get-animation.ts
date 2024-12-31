@@ -1,5 +1,5 @@
 import { STYLE_NAMESPACE } from '../constants';
-import { Position } from '../core/types';
+import { Position } from '../types';
 
 export const getAnimation = ({ isVisible, position }: { isVisible: boolean; position: Position }) => {
   if (isVisible) {
