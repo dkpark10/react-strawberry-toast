@@ -4,7 +4,7 @@ import { REMOVE_TIMEOUT, MAX_TIMEOUT, DISAPPEAR_TIMEOUT } from '../constants';
 import type { ReactNode } from 'react';
 import type { ToastState, Options, ToastType } from './types';
 
-export const toastStore = new ToastStore();
+export const toastStore = new ToastStore<ToastState>();
 
 const idGenerator = generateId();
 

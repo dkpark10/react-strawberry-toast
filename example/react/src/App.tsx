@@ -1,8 +1,14 @@
 import React from 'react';
-import { ToastContainer, toast } from '../../../src';
+import { useStrawberryToast } from '../../../src/hooks/use-strawberry-toast';
 
 export default function App() {
+  const {
+    toasts,
+    handlers: { toast },
+  } = useStrawberryToast();
+
   const click = () => {
+    console.log('123');
     toast('success', {
       timeOut: Infinity,
     });
@@ -13,23 +19,11 @@ export default function App() {
 
   return (
     <React.Fragment>
-      <ToastContainer />
       <div>example</div>
       <button onClick={click}>click</button>
-
-      <div
-        style={{
-          width: 100,
-          height: 50,
-          border: '1px solid red',
-          position: 'absolute',
-          top: '50%',
-          left: '50%',
-          transform: 'translate(-50%, -50%)',
-        }}
-      >
-        <ToastContainer containerId="1" />
-      </div>
+      {toasts.map((toast) => (
+        <div key={toast.toastId}>{toast.data}</div>
+      ))}
     </React.Fragment>
   );
 }

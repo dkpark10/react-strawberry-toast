@@ -3,9 +3,7 @@ import { useSyncExternalStore } from 'react';
 
 type Listener = () => void;
 
-type ToastStateList = Array<ToastState>;
-
-export class ToastStore<T extends ToastState = ToastState> {
+export class ToastStore<T> {
   state: Array<T> = [];
 
   listeners = new Set<Listener>();
@@ -25,12 +23,12 @@ export class ToastStore<T extends ToastState = ToastState> {
     this.listeners.forEach((listener) => listener());
   }
 
-  getSnapShot() {
+  getSnapShot(): Array<T> {
     return this.state;
   }
 }
 
-export const useStrawberryToast = (store: ToastStore): ToastStateList => {
+export const useStrawberryToast = <T = ToastState>(store: ToastStore<T>): Array<T> => {
   return useSyncExternalStore(
     store.subscribe.bind(store),
     store.getSnapShot.bind(store),

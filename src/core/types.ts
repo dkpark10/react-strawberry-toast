@@ -37,7 +37,9 @@ export type ToastState = RequiredExcept<Options, 'containerId' | 'position'> & {
   updated?: boolean;
 };
 
-export type HeadlessToastState = Omit<ToastState, 'toastType' | 'pauseOnHover'>;
+export type HeadlessToastState = Omit<ToastState, 'toastType' | 'pauseOnHover' | 'data'> & {
+  data: string | ReactNode;
+};
 
 export type HeadlessOption = Pick<Options, 'timeOut' | 'removeTimeOut'>;
 
