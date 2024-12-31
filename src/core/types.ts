@@ -37,6 +37,10 @@ export type ToastState = RequiredExcept<Options, 'containerId' | 'position'> & {
   updated?: boolean;
 };
 
+export type HeadlessToastState = Omit<ToastState, 'toastType' | 'pauseOnHover'>;
+
+export type HeadlessOption = Pick<Options, 'timeOut' | 'removeTimeOut'>;
+
 export type Coord = {
   y: number;
   x: number;

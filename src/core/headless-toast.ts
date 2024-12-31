@@ -1,14 +1,12 @@
+import { setState } from './store';
 import { generateId } from '../utils/generate-id';
-import { ToastStore } from '../core/store';
 import { REMOVE_TIMEOUT, MAX_TIMEOUT, DISAPPEAR_TIMEOUT } from '../constants';
+import type { ToastState, Options, HeadlessOption, HeadlessToastState } from './types';
 import type { ReactNode } from 'react';
-import type { ToastState, Options, ToastType } from './types';
-
-export const toastStore = new ToastStore();
 
 const idGenerator = generateId();
 
-let toastQueue: Array<ToastState> = [];
+let toastQueue: Array<HeadlessToastState> = [];
 
 /** @description key = toast id, value = timer id */
 const toastTimers = new Map<ToastState['toastId'], number>();
@@ -20,39 +18,30 @@ const deleteTimer = (toastId: ToastState['toastId']) => {
   toastTimers.delete(toastId);
 };
 
-const createToast =
-  (toastType: ToastType = 'success') =>
-  (data: ToastState['data'], options: Options = {}): ToastState['toastId'] => {
-    const { timeOut = DISAPPEAR_TIMEOUT, removeTimeOut = REMOVE_TIMEOUT, pauseOnHover = true } = options;
+const createToast = (data: ReactNode | string, options: HeadlessOption = {}): ToastState['toastId'] => {
+    const { timeOut = DISAPPEAR_TIMEOUT, removeTimeOut = REMOVE_TIMEOUT } = options;
 
     const toastId = idGenerator();
     const createdAt = new Date().getTime();
 
-    const value: ToastState = {
+    const value: HeadlessToastState = {
       ...options,
       timeOut: timeOut > MAX_TIMEOUT ? MAX_TIMEOUT : timeOut,
       toastId,
       data,
       createdAt,
-      toastType,
-      pauseOnHover,
       removeTimeOut,
       isVisible: true,
     };
 
     toastQueue.push(value);
 
-    toastStore.setState([...toastQueue]);
+    setState([...toastQueue]);
 
     return toastId;
   };
 
 export const toast = (data: ToastState['data'], options: Options = {}) => createToast()(data, options);
-
-toast.success = createToast('success');
-toast.error = createToast('error');
-toast.warn = createToast('warn');
-toast.loading = createToast('loading');
 
 toast.disappear = (toastId: ToastState['toastId'], timeOut: number): void => {
   const timer = setTimeout(
@@ -67,7 +56,7 @@ toast.disappear = (toastId: ToastState['toastId'], timeOut: number): void => {
         return toast;
       });
 
-      toastStore.setState([...toastQueue]);
+      setState([...toastQueue]);
 
       const removeTimeOut = toastQueue.find((toast) => toast.toastId === toastId)?.removeTimeOut;
       toast.remove(toastId, removeTimeOut);
@@ -103,7 +92,7 @@ toast.pause = (toastId: ToastState['toastId']): void => {
   });
 
   deleteTimer(toastId);
-  toastStore.setState([...toastQueue]);
+  setState([...toastQueue]);
 };
 
 toast.replace = (toastId: ToastState['toastId'], data: ToastState['data'], options: Partial<ToastState>) => {
@@ -119,47 +108,16 @@ toast.replace = (toastId: ToastState['toastId'], data: ToastState['data'], optio
     return toast;
   });
 
-  toastStore.setState([...toastQueue]);
+  setState([...toastQueue]);
 };
 
 toast.remove = (toastId: ToastState['toastId'], timeOut = REMOVE_TIMEOUT) => {
   setTimeout(() => {
     toastQueue = toastQueue.filter((toast) => toast.toastId !== toastId);
-    toastStore.setState([...toastQueue]);
+    setState([...toastQueue]);
   }, timeOut);
 
   deleteTimer(toastId);
 };
 
 toast.isActive = (toastId: ToastState['toastId']): boolean => toastTimers.has(toastId);
-
-toast.promise = (
-  promise: Promise<any>,
-  promiseOption: {
-    loading: string | ReactNode;
-    success: string | ReactNode;
-    error: string | ReactNode;
-  },
-  options: Options = {}
-) => {
-  const { loading, success, error } = promiseOption;
-
-  const toastId = toast.loading(loading, {
-    ...options,
-    timeOut: MAX_TIMEOUT,
-  });
-
-  promise
-    .then(() => {
-      toast.replace(toastId, success, {
-        ...options,
-        toastType: 'success',
-      });
-    })
-    .catch(() => {
-      toast.replace(toastId, error, {
-        ...options,
-        toastType: 'error',
-      });
-    });
-};

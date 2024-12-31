@@ -3,6 +3,7 @@
 import React from 'react';
 import { useStrawberryToast } from '../core/store';
 import { Toast } from './toast';
+import { toastStore } from '../core/toast';
 import { getDirection } from '../utils/get-direction';
 import type { Position, ToastState } from '../core/types';
 import { Condition, If, Else } from './condition';
@@ -51,7 +52,7 @@ export function ToastContainer({
   gap = 9,
   reverse = false,
 }: ToastContainerProps) {
-  const toastList = useStrawberryToast();
+  const toastList = useStrawberryToast(toastStore);
 
   const toastsByPosition: Record<Position, Array<ToastState>> = toastList
     .filter((toast) => toast.containerId === undefined)

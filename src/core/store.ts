@@ -5,27 +5,35 @@ type Listener = () => void;
 
 type ToastStateList = Array<ToastState>;
 
-let state: ToastStateList = [];
+export class ToastStore<T extends ToastState = ToastState> {
+  state: Array<T> = [];
 
-const listeners = new Set<Listener>();
+  listeners = new Set<Listener>();
 
-/** @description must put a new memory value in the nextState. */
-export const setState = (nextState: ToastStateList | ((state: ToastStateList) => ToastStateList)): void => {
-  state = typeof nextState === 'function' ? nextState(state) : nextState;
-  listeners.forEach((listener) => listener());
-};
+  constructor() {}
 
-const subscribe = (listener: Listener): Listener => {
-  listeners.add(listener);
-  return () => {
-    listeners.delete(listener);
-  };
-};
+  subscribe(listener: Listener): Listener {
+    this.listeners.add(listener);
+    return () => {
+      this.listeners.delete(listener);
+    }
+  }
 
-export const useStrawberryToast = (): ToastStateList => {
+  /** @description must put a new memory value in the nextState. */
+  setState(nextState: Array<T> | ((state: Array<T>) => Array<T>)): void {
+    this.state = typeof nextState === 'function' ? nextState(this.state) : nextState;
+    this.listeners.forEach((listener) => listener());
+  }
+
+  getSnapShot() {
+    return this.state;
+  }
+}
+
+export const useStrawberryToast = (store: ToastStore): ToastStateList => {
   return useSyncExternalStore(
-    subscribe,
-    () => state,
-    () => state,
+    store.subscribe.bind(store),
+    store.getSnapShot.bind(store),
+    store.getSnapShot.bind(store),
   );
 };
