@@ -15,7 +15,8 @@ describe('toast promise', () => {
     vi.useRealTimers();
   });
 
-  test('promise', async () => {
+  test(`should display a loading indicator when the first toast is displayed,
+   and display success toast after 3 seconds `, async () => {
     function App() {
       const resolveClick = () => {
         const promise = new Promise((resolve) => {

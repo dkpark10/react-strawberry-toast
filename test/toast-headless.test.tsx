@@ -7,7 +7,7 @@ import { HeadlessToastState } from '../src/core/types';
 import { DISAPPEAR_TIMEOUT, REMOVE_TIMEOUT } from '../src/constants';
 import '@testing-library/jest-dom';
 
-describe('mouse enter mouse leave', () => {
+describe('mouse event test', () => {
   beforeEach(() => {
     vi.useFakeTimers();
   });
@@ -80,7 +80,7 @@ describe('mouse enter mouse leave', () => {
     expect(queryByText(/strawberry toast/i)).not.toBeInTheDocument();
   });
 
-  test('mouse event', async () => {
+  test('should pause the toast when the mouseenter event occurs, and resume the toast timer when the mouseleave event occurs', async () => {
     const { getByRole, queryByText, getByText } = render(<App />);
 
     fireEvent.click(getByRole('button', { name: 'click' }));

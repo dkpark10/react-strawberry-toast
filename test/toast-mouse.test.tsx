@@ -15,7 +15,7 @@ describe('mouse enter mouse leave', () => {
     vi.useRealTimers();
   });
 
-  test('basic', async () => {
+  test('should pause the toast when the mouseenter event occurs, and resume the toast timer when the mouseleave event occurs', async () => {
     function App() {
       const click = () => {
         toast(<div>strawberry toast</div>);
@@ -58,7 +58,8 @@ describe('mouse enter mouse leave', () => {
     expect(queryByText(/strawberry toast/i)).not.toBeInTheDocument();
   });
 
-  test('multiple container.', async () => {
+  test(`should pause the toast when the mouseenter event occurs, and resume the toast timer 
+    when the mouseleave event occurs in multiple container`, async () => {
     function App() {
       const click = () => {
         toast(<div>strawberry toast</div>);
@@ -103,7 +104,7 @@ describe('mouse enter mouse leave', () => {
     expect(queryByText('strawberry toast1')).toBeInTheDocument();
   });
 
-  test('off pause on hover.', async () => {
+  test('should not display toast when the mouseenter event occurs if pauseOnHover option is set', async () => {
     function App() {
       const click = () => {
         toast(<div>strawberry toast</div>, {
