@@ -1,8 +1,14 @@
+const createMDX = require('@next/mdx');
+
+const withMdx = createMDX();
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   output: 'export',
 
   reactStrictMode: true,
+
+  pageExtensions: ['js', 'jsx', 'md', 'mdx', 'ts', 'tsx'],
 
   transpilePackages: ['react-strawberry-toast'],
 
@@ -11,4 +17,4 @@ const nextConfig = {
   },
 };
 
-module.exports = nextConfig;
+module.exports = withMdx(nextConfig);

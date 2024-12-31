@@ -6,8 +6,8 @@ import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import clsx from 'clsx';
 import Code from '@/components/code';
 import Github from '@/components/github';
-// import { ToastContainer, toast, type Position, type ToastState } from 'react-strawberry-toast';
-import { ToastContainer, toast, type Position, type ToastState } from '../../../../src';
+import { ToastContainer, toast, type Position, type ToastState } from 'react-strawberry-toast';
+// import { ToastContainer, toast, type Position, type ToastState } from '../../../../src';
 import { PrismLight as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { CodeTheme } from '@/constants/code-theme';
 import 'react-strawberry-toast/dist/style.css';
@@ -305,12 +305,6 @@ toast(
       </div>
 
       <ToastContainer />
-
-      <footer className="pt-36 text-center">
-        <div className="h-60 flex justify-center items-center bg-primary-black text-[#c3c6c1]">
-          @Created by dkpark10
-        </div>
-      </footer>
     </>
   );
 }

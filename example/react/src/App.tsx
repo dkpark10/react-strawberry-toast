@@ -1,10 +1,8 @@
 import React from 'react';
-import { useStrawberryToast } from '../../../src/hooks/use-strawberry-toast';
-import { toast } from '../../../src/core/headless-toast';
+import { toast } from '../../../src/core/toast';
+import { ToastContainer } from '../../../src/components/toast-container';
 
 export default function App() {
-  const toasts = useStrawberryToast();
-
   const click = () => {
     toast('success');
   };
@@ -13,9 +11,7 @@ export default function App() {
     <React.Fragment>
       <div>example</div>
       <button onClick={click}>click</button>
-      {toasts.map((toast) => (
-        <div key={toast.toastId}>{toast.data}</div>
-      ))}
+      <ToastContainer />
     </React.Fragment>
   );
 }
