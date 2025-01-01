@@ -1,4 +1,5 @@
 import path from 'path';
+import { copyFileSync } from 'fs';
 import { defineConfig, loadEnv } from 'vite';
 import dts from 'vite-plugin-dts';
 import svgr from 'vite-plugin-svgr';
@@ -12,6 +13,12 @@ export default defineConfig(({ mode }) => {
       plugins: [
         dts({
           rollupTypes: true,
+          beforeWriteFile: (typeFilePath) => {
+            if (typeFilePath === path.resolve(__dirname, 'dist/index.d.ts')) {
+              const targetPath = path.resolve(__dirname, 'dist/headless.d.ts');
+              copyFileSync(typeFilePath, targetPath);
+            }
+          },
         }),
       ],
       build: {

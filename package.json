@@ -23,13 +23,13 @@
         "default": "./dist/index.mjs"
       }
     },
-    "./headless": {
+    "./dist/headless": {
       "require": {
-        "types": "./dist/index.d.ts",
+        "types": "./dist/headless.d.ts",
         "default": "./dist/headless.js"
       },
       "import": {
-        "types": "./dist/index.d.ts",
+        "types": "./dist/headless.d.ts",
         "default": "./dist/headless.mjs"
       }
     },
