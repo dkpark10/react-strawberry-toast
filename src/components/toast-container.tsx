@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import { useStrawberryToast } from '../core/store';
+import { useStrawberryToast } from '../hooks/use-strawberry-toast';
 import { Toast } from './toast';
 import { toastStore } from '../core/toast';
 import { getDirection } from '../utils/get-direction';
