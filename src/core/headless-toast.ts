@@ -1,30 +1,18 @@
 import { generateId } from '../utils/generate-id';
 import { ToastStore } from '../core/store';
 import { REMOVE_TIMEOUT, MAX_TIMEOUT, DISAPPEAR_TIMEOUT } from '../constants';
-import type { BaseOptions, ToastState } from '../types';
+import type { BaseOptions, ToastState, Options, NonHeadlessToastState } from '../types';
 
 export const toastStore = new ToastStore<ToastState>();
 
 const idGenerator = generateId();
-
-let toastQueue: Array<ToastState> = [];
-
-/** @description key = toast id, value = timer id */
-const toastTimers = new Map<ToastState['toastId'], number>();
-
-const deleteTimer = (toastId: ToastState['toastId']) => {
-  const timerId = toastTimers.get(toastId);
-  clearTimeout(timerId);
-
-  toastTimers.delete(toastId);
-};
 
 const createToast =
   () =>
   (data: ToastState['data'], options: BaseOptions = {}): ToastState['toastId'] => {
     const { timeOut = DISAPPEAR_TIMEOUT, removeTimeOut = REMOVE_TIMEOUT } = options;
 
-    const toastId = idGenerator();
+    const toastId = 'h' + idGenerator();
     const createdAt = new Date().getTime();
 
     const value: ToastState = {
@@ -37,91 +25,112 @@ const createToast =
       isVisible: true,
     };
 
-    toastQueue.push(value);
+    toastStore.state.push(value);
 
-    toastStore.setState([...toastQueue]);
+    toastStore.setState([...toastStore.state]);
 
     return toastId;
   };
 
-export const toast = (data: ToastState['data'], options: BaseOptions = {}) =>
-  createToast()(data, options);
+export const toastHandlers = (toastStore: ToastStore) => {
+  const deleteTimer = (toastId: ToastState['toastId']) => {
+    const timerId = toastStore.toastTimers.get(toastId);
+    clearTimeout(timerId);
 
-toast.disappear = (toastId: ToastState['toastId'], timeOut: number): void => {
-  const timer = setTimeout(
-    () => {
-      toastQueue = toastQueue.map((toast): ToastState => {
-        if (toast.toastId === toastId) {
-          return {
-            ...toast,
-            isVisible: false,
-          };
-        }
-        return toast;
-      });
+    toastStore.toastTimers.delete(toastId);
+  };
 
-      toastStore.setState([...toastQueue]);
+  const isActive = (toastId: ToastState['toastId']): boolean => toastStore.toastTimers.has(toastId);
 
-      const removeTimeOut = toastQueue.find((toast) => toast.toastId === toastId)?.removeTimeOut;
-      toast.remove(toastId, removeTimeOut);
-    },
-    timeOut > MAX_TIMEOUT ? MAX_TIMEOUT : timeOut
-  );
+  const remove = (toastId: ToastState['toastId'], timeOut = REMOVE_TIMEOUT) => {
+    setTimeout(() => {
+      toastStore.state = toastStore.state.filter((toast) => toast.toastId !== toastId);
+      toastStore.setState([...toastStore.state]);
+    }, timeOut);
 
-  toastTimers.set(toastId, timer);
+    deleteTimer(toastId);
+  };
+
+  const replace = (
+    toastId: ToastState['toastId'],
+    data: ToastState['data'],
+    options: Options & { toastType: NonHeadlessToastState['toastType'] }
+  ) => {
+    toastStore.state = toastStore.state.map((toast): ToastState => {
+      if (toast.toastId === toastId) {
+        return {
+          ...toast,
+          ...options,
+          updated: true,
+          data,
+        };
+      }
+      return toast;
+    });
+
+    toastStore.setState([...toastStore.state]);
+  };
+
+  const pause = (toastId: ToastState['toastId']): void => {
+    const pausedAt = new Date().getTime();
+
+    toastStore.state = toastStore.state.map((toast): ToastState => {
+      if (toast.toastId === toastId) {
+        return {
+          ...toast,
+          pausedAt,
+        };
+      }
+      return toast;
+    });
+
+    deleteTimer(toastId);
+    toastStore.setState([...toastStore.state]);
+  };
+
+  const disappear = (toastId: ToastState['toastId'], timeOut: number): void => {
+    const timer = setTimeout(
+      () => {
+        toastStore.state = toastStore.state.map((toast): ToastState => {
+          if (toast.toastId === toastId) {
+            return {
+              ...toast,
+              isVisible: false,
+            };
+          }
+          return toast;
+        });
+
+        toastStore.setState([...toastStore.state]);
+
+        const removeTimeOut = toastStore.state.find((toast) => toast.toastId === toastId)?.removeTimeOut;
+        remove(toastId, removeTimeOut);
+      },
+      timeOut > MAX_TIMEOUT ? MAX_TIMEOUT : timeOut
+    );
+
+    toastStore.toastTimers.set(toastId, timer);
+  };
+
+  const resume = (toastId: ToastState['toastId']): void => {
+    if (toastStore.toastTimers.has(toastId)) return;
+
+    const target = toastStore.state.find((toast) => toast.toastId === toastId);
+    if (!target) return;
+
+    const leftTimeout = target.createdAt + (target.timeOut || DISAPPEAR_TIMEOUT) - (target.pausedAt || 0);
+    disappear(toastId, leftTimeout);
+  };
+
+  return { isActive, disappear, resume, pause, replace, remove };
 };
 
-toast.resume = (toastId: ToastState['toastId']): void => {
-  if (toastTimers.has(toastId)) return;
+export const toast = (data: ToastState['data'], options: BaseOptions = {}) => createToast()(data, options);
 
-  const target = toastQueue.find((toast) => toast.toastId === toastId);
-
-  if (!target) return;
-
-  const leftTimeout = target.createdAt + (target.timeOut || DISAPPEAR_TIMEOUT) - (target.pausedAt || 0);
-  toast.disappear(toastId, leftTimeout);
-};
-
-toast.pause = (toastId: ToastState['toastId']): void => {
-  const pausedAt = new Date().getTime();
-
-  toastQueue = toastQueue.map((toast): ToastState => {
-    if (toast.toastId === toastId) {
-      return {
-        ...toast,
-        pausedAt,
-      };
-    }
-    return toast;
-  });
-
-  deleteTimer(toastId);
-  toastStore.setState([...toastQueue]);
-};
-
-toast.replace = (toastId: ToastState['toastId'], data: ToastState['data'], options: Partial<ToastState>) => {
-  toastQueue = toastQueue.map((toast): ToastState => {
-    if (toast.toastId === toastId) {
-      return {
-        ...toast,
-        ...options,
-        updated: true,
-        data,
-      };
-    }
-    return toast;
-  });
-
-  toastStore.setState([...toastQueue]);
-};
-
-toast.remove = (toastId: ToastState['toastId'], timeOut = REMOVE_TIMEOUT) => {
-  setTimeout(() => {
-    toastQueue = toastQueue.filter((toast) => toast.toastId !== toastId);
-    toastStore.setState([...toastQueue]);
-  }, timeOut);
-
-  deleteTimer(toastId);
-};
-
-toast.isActive = (toastId: ToastState['toastId']): boolean => toastTimers.has(toastId);
+const handlers = toastHandlers(toastStore);
+toast.isActive = handlers.isActive;
+toast.disappear = handlers.disappear;
+toast.resume = handlers.resume;
+toast.pause = handlers.pause;
+toast.replace = handlers.replace;
+toast.remove = handlers.remove;

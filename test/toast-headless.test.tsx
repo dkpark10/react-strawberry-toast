@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { afterEach, beforeEach, vi, describe, expect, test } from 'vitest';
 import { act, render, fireEvent } from '@testing-library/react';
 import { useStrawberryToast } from '../src/hooks/use-strawberry-toast';
-import { toast as headLessToast, toastStore } from '../src/core/headless-toast';
+import { toast as headLessToast } from '../src/core/headless-toast';
 import { ToastState } from '../src/types';
 import { DISAPPEAR_TIMEOUT, REMOVE_TIMEOUT } from '../src/constants';
 import '@testing-library/jest-dom';

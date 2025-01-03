@@ -15,7 +15,7 @@ export interface BaseOptions {
   removeTimeOut?: number;
 }
 interface ToastBaseState {
-  toastId: number;
+  toastId: string;
   data: string | ReactNode;
   isVisible: boolean;
   createdAt: number;
