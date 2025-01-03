@@ -1,66 +1,69 @@
 import React, { useEffect } from 'react';
 import { Condition, If, Else } from './condition';
 import { getAnimation } from '../utils/get-animation';
-import { toast as strawBerryToast } from '../core/toast';
+import { toast } from '../core/toast';
 import { DISAPPEAR_TIMEOUT, MAX_TIMEOUT } from '../constants';
 import { DefaultToast, ToastTypeIcons } from './toast-default';
-import type { ToastState } from '../types';
+import type { NonHeadlessToastState as ToastState } from '../types';
 import '../styles/index.scss';
 
 interface ToasterProps {
-  toast: ToastState;
+  toastProps: ToastState;
 }
 
-export function Toast({ toast }: ToasterProps) {
-  const animationClassName = getAnimation({ isVisible: toast.isVisible, position: toast.position! });
+export function Toast({ toastProps }: ToasterProps) {
+  const animationClassName = getAnimation({
+    isVisible: toastProps.isVisible,
+    position: toastProps.position!,
+  });
 
-  const Icon = ToastTypeIcons[toast.toastType];
+  const Icon = ToastTypeIcons[toastProps.toastType];
 
   const content =
-    typeof toast.data === 'function'
-      ? toast.data({
-          close: () => strawBerryToast.disappear(toast.toastId, 0),
+    typeof toastProps.data === 'function'
+      ? toastProps.data({
+          close: () => toast.disappear(toastProps.toastId, 0),
           immediatelyClose: () => {
-            strawBerryToast.disappear(toast.toastId, 0);
-            strawBerryToast.remove(toast.toastId, 0);
+            toast.disappear(toastProps.toastId, 0);
+            toast.remove(toastProps.toastId, 0);
           },
           icon: <Icon />,
-          isVisible: toast.isVisible,
+          isVisible: toastProps.isVisible,
         })
-      : toast.data;
+      : toastProps.data;
 
   const onMouseEnter = () => {
-    if (toast.pauseOnHover) {
-      strawBerryToast.pause(toast.toastId);
+    if (toastProps.pauseOnHover) {
+      toast.pause(toastProps.toastId);
     }
   };
 
   const onMouseLeave = () => {
-    if (toast.pauseOnHover) {
-      strawBerryToast.resume(toast.toastId);
+    if (toastProps.pauseOnHover) {
+      toast.resume(toastProps.toastId);
     }
   };
 
   /** @description disappear after mount */
   useEffect(() => {
-    if (!strawBerryToast.isActive(toast.toastId)) {
-      strawBerryToast.disappear(toast.toastId, toast.timeOut);
+    if (!toast.isActive(toastProps.toastId)) {
+      toast.disappear(toastProps.toastId, toastProps.timeOut);
     }
-  }, [toast.toastId]);
+  }, [toastProps.toastId]);
 
   /** @description promise toast */
   useEffect(() => {
-    if (toast.updated !== undefined) {
-      const newTimeOut = toast.timeOut >= MAX_TIMEOUT ? DISAPPEAR_TIMEOUT : toast.timeOut;
-      strawBerryToast.disappear(toast.toastId, newTimeOut);
+    if (toastProps.updated !== undefined) {
+      const newTimeOut = toastProps.timeOut >= MAX_TIMEOUT ? DISAPPEAR_TIMEOUT : toastProps.timeOut;
+      toast.disappear(toastProps.toastId, newTimeOut);
     }
-  }, [toast.updated]);
+  }, [toastProps.updated]);
 
   return (
     <div
       role="alert"
-      data-testid={`container-${toast.containerId}`}
-      className={typeof toast.data === 'function' ? '' : animationClassName}
+      data-testid={`container-${toastProps.containerId}`}
+      className={typeof toastProps.data === 'function' ? '' : animationClassName}
       onMouseEnter={onMouseEnter}
       onMouseLeave={onMouseLeave}
       style={{
@@ -68,12 +71,12 @@ export function Toast({ toast }: ToasterProps) {
         justifyContent: 'center',
       }}
     >
-      <Condition condition={typeof toast.data === 'function'}>
+      <Condition condition={typeof toastProps.data === 'function'}>
         <If>
           {content}
         </If>
         <Else>
-          <DefaultToast status={toast.toastType}>{content}</DefaultToast>
+          <DefaultToast status={toastProps.toastType}>{content}</DefaultToast>
         </Else>
       </Condition>
     </div>

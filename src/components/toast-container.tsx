@@ -5,7 +5,7 @@ import { useStrawberryToast } from '../hooks/use-strawberry-toast';
 import { Toast } from './toast';
 import { toastStore } from '../core/toast';
 import { getDirection } from '../utils/get-direction';
-import type { Position, ToastState } from '../types';
+import type { Position, NonHeadlessToastState as ToastState } from '../types';
 import { Condition, If, Else } from './condition';
 
 const OFFSET = 16;
@@ -57,7 +57,7 @@ export function ToastContainer({
   const toastsByPosition: Record<Position, Array<ToastState>> = toastList
     .filter((toast) => toast.containerId === undefined)
     .reduce((acc, toast) => {
-      const key = toast.position || globalPosition;
+      const key = toast.position || globalPosition; 
       toast.position = key;
       acc[key] = acc[key] || [];
       acc[key].push(toast);
@@ -85,7 +85,7 @@ export function ToastContainer({
             {toastList
               .filter((toast) => toast.containerId === containerId)
               .map((toast) => (
-                <Toast key={toast.toastId} toast={toast} />
+                <Toast key={toast.toastId} toastProps={toast} />
               ))}
           </div>
         </div>
@@ -124,7 +124,7 @@ export function ToastContainer({
                 }}
               >
                 {toasts.map((toast) => (
-                  <Toast key={toast.toastId} toast={toast} />
+                  <Toast key={toast.toastId} toastProps={toast} />
                 ))}
               </div>
             );

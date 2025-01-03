@@ -35,20 +35,17 @@ interface ToastDataCallback {
   icon: ReactNode;
 }
 
-export type HeadlessToastState = ToastBaseState & BaseOptions;
+export type ToastState = ToastBaseState & BaseOptions;
 
 type DataCallback = (props: ToastDataCallback) => ReactNode | string;
 
 type RequiredExcept<T, K extends keyof T> = Required<Omit<T, K>> & Pick<T, K>;
 
-type ToastStateWithCallback = Omit<ToastBaseState, 'data'> & { data: DataCallback | ReactNode | string };
+type ToastStateWithCallback = Omit<ToastBaseState, 'data'> & {
+  data: DataCallback | ReactNode | string;
+};
 
-export type ToastState = RequiredExcept<Options, 'containerId' | 'position'> &
+export type NonHeadlessToastState = RequiredExcept<Options, 'containerId' | 'position'> &
   ToastStateWithCallback & {
     toastType: ToastType;
   };
-
-export type Coord = {
-  y: number;
-  x: number;
-};
