@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import { useStrawberryToast } from '../hooks/use-strawberry-toast';
+import { useSyncExternalStore } from 'react';
 import { Toast } from './toast';
 import { toastStore } from '../core/toast';
 import { getDirection } from '../utils/get-direction';
@@ -52,7 +52,11 @@ export function ToastContainer({
   gap = 9,
   reverse = false,
 }: ToastContainerProps) {
-  const toastList = useStrawberryToast(toastStore);
+  const toastList = useSyncExternalStore(
+    toastStore.subscribe.bind(toastStore),
+    toastStore.getSnapShot.bind(toastStore),
+    toastStore.getSnapShot.bind(toastStore)
+  );
 
   const toastsByPosition: Record<Position, Array<ToastState>> = toastList
     .filter((toast) => toast.containerId === undefined)

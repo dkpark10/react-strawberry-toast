@@ -3,7 +3,7 @@ import { afterEach, beforeEach, vi, describe, expect, test } from 'vitest';
 import { act, render, fireEvent } from '@testing-library/react';
 import { useStrawberryToast } from '../src/hooks/use-strawberry-toast';
 import { toast as headLessToast, toastStore } from '../src/core/headless-toast';
-import { HeadlessToastState } from '../src/types';
+import { ToastState } from '../src/types';
 import { DISAPPEAR_TIMEOUT, REMOVE_TIMEOUT } from '../src/constants';
 import '@testing-library/jest-dom';
 
@@ -16,7 +16,7 @@ describe('mouse event test', () => {
     vi.useRealTimers();
   });
 
-  function Toast({ toast }: { toast: HeadlessToastState }) {
+  function Toast({ toast }: { toast: ToastState }) {
     const onMouseEnter = () => {
       headLessToast.pause(toast.toastId);
     };
@@ -44,7 +44,7 @@ describe('mouse event test', () => {
   }
 
   function App() {
-    const toasts = useStrawberryToast(toastStore);
+    const toasts = useStrawberryToast();
 
     const click = () => {
       headLessToast('strawberry toast');

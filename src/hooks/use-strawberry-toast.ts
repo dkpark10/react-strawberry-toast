@@ -1,11 +1,11 @@
 import { useSyncExternalStore } from 'react';
-import { ToastStore } from '../core/store';
+import { toastStore } from '../core/headless-toast';
 import type { ToastState } from '../types';
 
-export const useStrawberryToast = <T = ToastState>(store: ToastStore<T>): Array<T> => {
+export const useStrawberryToast = (): Array<ToastState> => {
   return useSyncExternalStore(
-    store.subscribe.bind(store),
-    store.getSnapShot.bind(store),
-    store.getSnapShot.bind(store)
+    toastStore.subscribe.bind(toastStore),
+    toastStore.getSnapShot.bind(toastStore),
+    toastStore.getSnapShot.bind(toastStore)
   );
 };
