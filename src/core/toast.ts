@@ -10,7 +10,7 @@ export const toastStore = new ToastStore<ToastState>();
 const idGenerator = generateId();
 
 const createToast =
-  (toastType: ToastType = 'success') =>
+  (toastType: ToastType = 'default') =>
   (data: ToastState['data'], options: Options = {}): ToastState['toastId'] => {
     const { timeOut = DISAPPEAR_TIMEOUT, removeTimeOut = REMOVE_TIMEOUT, pauseOnHover = true } = options;
 

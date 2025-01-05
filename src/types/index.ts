@@ -8,7 +8,7 @@ export type Position =
   | 'top-center'
   | 'top-right';
 
-export type ToastType = 'success' | 'error' | 'loading' | 'warn';
+export type ToastType = 'default' | 'success' | 'error' | 'loading' | 'warn';
 
 export interface BaseOptions {
   timeOut?: number;

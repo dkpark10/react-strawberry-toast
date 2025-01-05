@@ -62,6 +62,7 @@ function WarnSvg() {
 }
 
 export const ToastTypeIcons: Record<ToastType, any> = {
+  default: () => <></>,
   success: SuccessSvg,
   error: ErrorSvg,
   loading: () => <div className={`${STYLE_NAMESPACE}__loading`} />,

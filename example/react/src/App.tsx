@@ -4,9 +4,7 @@ import { ToastContainer } from '../../../src/components/toast-container';
 
 export default function App() {
   const click = () => {
-    toast('success', {
-      pauseOnHover: true,
-    });
+    toast('success');
   };
 
   return (
