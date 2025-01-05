@@ -1,4 +1,4 @@
-import React, { type PropsWithChildren } from 'react';
+import React, { type PropsWithChildren, type ReactNode } from 'react';
 import { STYLE_NAMESPACE } from '../constants';
 // import SuccessSvg from '../../public/assets/success.svg?react';
 // import ErrorSvg from '../../public/assets/error.svg?react';
@@ -70,12 +70,10 @@ export const ToastTypeIcons: Record<ToastType, any> = {
 };
 
 interface DefaultToastProps {
-  status: ToastType;
+  icon: ReactNode;
 }
 
-export function DefaultToast({ status, children }: DefaultToastProps & PropsWithChildren) {
-  const Icon = ToastTypeIcons[status];
-
+export function DefaultToast({ icon, children }: DefaultToastProps & PropsWithChildren) {
   return (
     <div
       style={{
@@ -90,7 +88,7 @@ export function DefaultToast({ status, children }: DefaultToastProps & PropsWith
         height: 44,
       }}
     >
-      <Icon />
+      {icon}
       {children}
     </div>
   );

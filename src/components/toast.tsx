@@ -72,11 +72,9 @@ export function Toast({ toastProps }: ToasterProps) {
       }}
     >
       <Condition condition={typeof toastProps.data === 'function'}>
-        <If>
-          {content}
-        </If>
+        <If>{content}</If>
         <Else>
-          <DefaultToast status={toastProps.toastType}>{content}</DefaultToast>
+          <DefaultToast icon={<Icon />}>{content}</DefaultToast>
         </Else>
       </Condition>
     </div>
