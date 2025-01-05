@@ -14,7 +14,9 @@ import {
 } from 'react-strawberry-toast';
 // import { ToastContainer, toast, type Position, type ToastState } from '../../../../src';
 import { PrismLight as SyntaxHighlighter } from 'react-syntax-highlighter';
+import { codeSyntax} from '@/constants/code-syntax';
 import { CodeTheme } from '@/constants/code-theme';
+
 import 'react-strawberry-toast/dist/index.css';
 
 const packagesName = ['npm', 'yarn', 'pnpm'] as const;
@@ -24,15 +26,7 @@ const containerIds = Array.from({ length: 6 }, (_, i) => String(i + 1));
 export default function Home() {
   const [option, setOption] = useState<Position | '1' | '2' | '3' | '4' | '5' | '6'>('top-center');
 
-  const [toastCode, setToastCode] = useState(
-    `
-
-
-                   toast.success('success');                 
-
-
-                `
-  );
+  const [toastCode, setToastCode] = useState(codeSyntax.success);
 
   const pos =
     /top/i.test(option) || /bottom/i.test(option)
@@ -43,52 +37,28 @@ export default function Home() {
     {
       type: 'success',
       click: () => {
-        setToastCode(`
-
-
-                   toast.success('success');                 
-
-
-                `);
+        setToastCode(codeSyntax.success);
         toast.success('success', pos,);
       },
     },
     {
       type: 'error',
       click: () => {
-        setToastCode(`
-
-
-                    toast.error('error');                    
-
-
-                `);
+        setToastCode(codeSyntax.error);
         toast.error('error', pos);
       },
     },
     {
       type: 'warn',
       click: () => {
-        setToastCode(`
-
-
-                    toast.warn('warn');                      
-
-
-                `);
+        setToastCode(codeSyntax.warn);
         toast.warn('warn', pos);
       },
     },
     {
       type: 'promise',
       click: () => {
-        setToastCode(`
-                  toast.promise(promise, {
-                    loading: 'loading',                      
-                    success: 'success',
-                    error: 'error',
-                  });                     
-                `);
+        setToastCode(codeSyntax.promise);
 
         const promise = new Promise((resolve, reject) => {
           const func = Math.floor(Math.random() * 100) & 2 ? resolve : reject;
@@ -109,23 +79,7 @@ export default function Home() {
     {
       type: 'custom',
       click: () => {
-        setToastCode(`
-toast(
-  ({ close, isVisible }) => (
-    <div
-      className={${'`'}
-        ${"${isVisible ? 'react-strawberry-toast__fade-in' : 'react-strawberry-toast__fade-out'}"}
-        bg-white p-4 flex justify-between gap-2 rounded-sm shadow-xl
-      ${'`'}}
-    >
-      <span>custom toast</span>
-      <button type="button" className="bg-straw-berry text-white w-6 h-6 rounded-sm" onClick={close}>
-        X
-      </button>
-    </div>
-  )
-);
-        `);
+        setToastCode(codeSyntax.custom);
 
         toast(
           ({ close, isVisible }) => (
@@ -195,7 +149,11 @@ toast(
         <Tabs>
           <TabList className="flex justify-center space-x-6 py-3">
             {packagesName.map((packageName) => (
-              <Tab key={packageName} className="text-lg cursor-pointer font-bold">
+              <Tab
+                key={packageName}
+                className="text-lg cursor-pointer font-bold"
+                selectedClassName="text-lg text-straw-berry cursor-pointer font-bold "
+              >
                 {packageName}
               </Tab>
             ))}
@@ -215,21 +173,7 @@ toast(
 
       <div id="code-area" className="flex justify-center py-8 text-sm">
         <SyntaxHighlighter language="jsx" style={CodeTheme}>
-          {`   import { ToastContainer, toast } from 'react-strawberry-toast';    
-   import 'react-strawberry-toast/dist/style.css';
-
-    function App() {
-      const click = () => {
-        toast('hello strawberry toast');
-      };
-    
-      return (
-        <>
-          <ToastContainer />
-          <button type='button' onClick={click}>click</button>
-        </>
-      );
-    }`}
+          {codeSyntax['started']}
         </SyntaxHighlighter>
       </div>
 

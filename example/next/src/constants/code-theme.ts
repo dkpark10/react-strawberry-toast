@@ -66,7 +66,7 @@ export const CodeTheme: { [key: string]: React.CSSProperties } = {
   number: { color: '#bd93f9' },
   selector: { color: strawBerry },
   'attr-name': { color: codeTextColor },
-  string: { color: codeTextColor },
+  string: { color: '#f1fa8c' },
   char: { color: strawBerry },
   builtin: { color: strawBerry },
   inserted: { color: strawBerry },

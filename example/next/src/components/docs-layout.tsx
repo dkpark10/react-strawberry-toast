@@ -30,7 +30,7 @@ export default function DocsLayout({ children }: PropsWithChildren) {
       <aside className="py-2 px-5">
         <div className="flex">
           <nav className="w-48">
-            <ul className="font-semibold text-primary-black">
+            <ul className="font-semibold text-primary-black text-lg">
               <li>
                 <Link href="/">Get Started</Link>
               </li>

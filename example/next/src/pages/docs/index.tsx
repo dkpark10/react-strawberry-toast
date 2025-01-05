@@ -3,8 +3,8 @@ import DocsLayout from '@/components/docs-layout';
 import Code from '@/components/code';
 import { PrismLight as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { CodeTheme } from '@/constants/code-theme';
+import { codeSyntax } from '@/constants/code-syntax';
 import { ToastContainer } from 'react-strawberry-toast';
-
 export default function DocsIndexPage() {
   return (
     <React.Fragment>
@@ -20,21 +20,7 @@ export default function DocsIndexPage() {
       
       <h2 className="pt-10 text-2xl font-bold">code</h2>
       <SyntaxHighlighter language="jsx" style={CodeTheme}>
-          {`   import { ToastContainer, toast } from 'react-strawberry-toast';    
-   import 'react-strawberry-toast/dist/style.css';
-
-    function App() {
-      const click = () => {
-        toast('hello strawberry toast');
-      };
-    
-      return (
-        <>
-          <ToastContainer />
-          <button type='button' onClick={click}>click</button>
-        </>
-      );
-    }`}
+          {codeSyntax['started']}
         </SyntaxHighlighter>
 
       <ToastContainer />
@@ -45,3 +31,5 @@ export default function DocsIndexPage() {
 DocsIndexPage.getLayout = function getLayout(page: ReactElement) {
   return <DocsLayout>{page}</DocsLayout>;
 };
+
+// gruvbox-dark

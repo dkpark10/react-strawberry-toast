@@ -7,7 +7,7 @@ export default function Code({ children }: PropsWithChildren) {
     window.navigator.clipboard
       .writeText(text)
       .then(() => {
-        toast('Copied');
+        toast.success('Copied');
       })
       .catch((error) => {
         console.error(error);
