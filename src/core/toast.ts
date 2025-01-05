@@ -1,7 +1,7 @@
 import { generateId } from '../utils/generate-id';
 import { ToastStore } from '../core/store';
 import { REMOVE_TIMEOUT, MAX_TIMEOUT, DISAPPEAR_TIMEOUT } from '../constants';
-import { toastHandlers } from './headless-toast';
+import { toastHandlers } from './toast-handler';
 import type { ReactNode } from 'react';
 import type { NonHeadlessToastState as ToastState, Options, ToastType } from '../types';
 
