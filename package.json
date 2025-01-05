@@ -42,10 +42,7 @@
   "scripts": {
     "dev": "pnpm run --filter=react-strawberry-toast-react-example dev",
     "dev:next": "pnpm run --filter=react-strawberry-toast-docs dev",
-    "build": "pnpm run build:toast && pnpm run build:headless",
-    "build:toast": "vite build",
-    "build:headless": "VITE_HEADLESS=true vite build",
-    "build:tsup": "tsup",
+    "build": "tsup",
     "test": "vitest",
     "test:watch": "vitest --watch",
     "test:ui": "vitest --ui",

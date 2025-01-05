@@ -61,7 +61,7 @@ describe('mouse event test', () => {
   }
 
   test('should display toast when the button is clicked and hide it after 3 seconds', async () => {
-    const { getByRole, queryByText, getByText } = render(<App />);
+    const { getByRole, queryByText } = render(<App />);
 
     fireEvent.click(getByRole('button', { name: 'click' }));
 

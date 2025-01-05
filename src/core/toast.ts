@@ -30,7 +30,6 @@ const createToast =
     };
 
     toastStore.state.push(value);
-
     toastStore.setState([...toastStore.state]);
 
     return toastId;
