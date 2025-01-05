@@ -2,7 +2,9 @@ import { ToastStore } from './store';
 import { REMOVE_TIMEOUT, MAX_TIMEOUT, DISAPPEAR_TIMEOUT } from '../constants';
 import type { ToastState, Options, NonHeadlessToastState } from '../types';
 
-export const toastHandlers = (toastStore: ToastStore) => {
+export const toastHandlers = <T = ToastState>(
+  toastStore: ToastStore<T extends ToastState ? ToastState : NonHeadlessToastState>
+) => {
   const deleteTimer = (toastId: ToastState['toastId']) => {
     const timerId = toastStore.toastTimers.get(toastId);
     clearTimeout(timerId);
@@ -26,7 +28,7 @@ export const toastHandlers = (toastStore: ToastStore) => {
     data: ToastState['data'],
     options: Options & { toastType: NonHeadlessToastState['toastType'] }
   ) => {
-    toastStore.state = toastStore.state.map((toast): ToastState => {
+    toastStore.state = toastStore.state.map((toast) => {
       if (toast.toastId === toastId) {
         return {
           ...toast,
@@ -44,7 +46,7 @@ export const toastHandlers = (toastStore: ToastStore) => {
   const pause = (toastId: ToastState['toastId']): void => {
     const pausedAt = new Date().getTime();
 
-    toastStore.state = toastStore.state.map((toast): ToastState => {
+    toastStore.state = toastStore.state.map((toast) => {
       if (toast.toastId === toastId) {
         return {
           ...toast,
@@ -61,7 +63,7 @@ export const toastHandlers = (toastStore: ToastStore) => {
   const disappear = (toastId: ToastState['toastId'], timeOut: number): void => {
     const timer = setTimeout(
       () => {
-        toastStore.state = toastStore.state.map((toast): ToastState => {
+        toastStore.state = toastStore.state.map((toast) => {
           if (toast.toastId === toastId) {
             return {
               ...toast,
