@@ -85,10 +85,10 @@ export function DefaultToast({ icon, children }: DefaultToastProps & PropsWithCh
         gap: 5,
         borderRadius: 8,
         boxShadow: '2px 4px 10px rgba(0, 0, 0, 0.1)',
-        height: 44,
+        maxWidth: 350,
       }}
     >
-      {icon}
+      <span style={{ minWidth: 20, maxWidth: 20 }}>{icon}</span>
       {children}
     </div>
   );
