@@ -7,6 +7,7 @@ export default function App() {
     toast.custom(<div>123123</div>);
     toast(<div>123123</div>);
     toast('123123');
+    toast(123123);
     toast.success('asdsaddsa');
     toast((props) => (
       <div>

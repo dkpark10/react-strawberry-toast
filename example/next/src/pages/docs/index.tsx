@@ -31,5 +31,3 @@ export default function DocsIndexPage() {
 DocsIndexPage.getLayout = function getLayout(page: ReactElement) {
   return <DocsLayout>{page}</DocsLayout>;
 };
-
-// gruvbox-dark

@@ -38,6 +38,7 @@ function App() {
            success: 'success',
            error: 'error',
          });                     
+         
 `,
   custom: 
 `toast(
@@ -45,7 +46,7 @@ function App() {
     <div
       className={${'`'}
         ${"${isVisible ? 'react-strawberry-toast__fade-in' : 'react-strawberry-toast__fade-out'}"}
-        bg-white p-4 flex justify-between gap-2 rounded-sm shadow-xl
+        bg-white p-4 flex justify-between gap-2 rounded-sm
       ${'`'}}
     >
       <span>custom toast</span>

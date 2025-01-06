@@ -1,7 +1,15 @@
 import Head from 'next/head';
 import Link from 'next/link';
 import Github from '@/components/github';
-import { PropsWithChildren } from 'react';
+import type { PropsWithChildren } from 'react';
+
+function DocsLinkItem({ href, children }: { href: string } & PropsWithChildren) {
+  return (
+    <li className="py-1 text-base font-medium">
+      <Link href={href}>{children}</Link>
+    </li>
+  );
+}
 
 export default function DocsLayout({ children }: PropsWithChildren) {
   return (
@@ -32,13 +40,25 @@ export default function DocsLayout({ children }: PropsWithChildren) {
           <nav className="w-48">
             <ul className="font-semibold text-primary-black text-lg">
               <li>
-                <Link href="/">Get Started</Link>
+                <h3>
+                  <Link href="/docs">Get Started</Link>
+                </h3>
               </li>
               <li>
-                <Link href="/docs/guides">Guides</Link>
+                <h3 className="pt-3">Guides</h3>
+                <ul className="ml-2">
+                  <DocsLinkItem href="/docs/show-toast">Show Toast</DocsLinkItem>
+                  <DocsLinkItem href="/docs/custom">Custom Toast</DocsLinkItem>
+                  <DocsLinkItem href="/docs/multi-container">Multi Container</DocsLinkItem>
+                  <DocsLinkItem href="/docs/headless-hook">Headless Hook</DocsLinkItem>
+                </ul>
               </li>
               <li>
-                <Link href="/docs/api">API</Link>
+                <h3 className="pt-3">API</h3>
+                <ul className="ml-2">
+                  <DocsLinkItem href="/docs/toast-container">toastContainer</DocsLinkItem>
+                  <DocsLinkItem href="/docs/toast">toast</DocsLinkItem>
+                </ul>
               </li>
             </ul>
           </nav>
