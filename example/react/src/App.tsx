@@ -4,8 +4,10 @@ import { ToastContainer } from '../../../src/components/toast-container';
 
 export default function App() {
   const click = () => {
+    toast.custom(<div>123123</div>);
     toast(<div>123123</div>);
     toast('123123');
+    toast.success('asdsaddsa');
     toast((props) => (
       <div>
         {props.icons.success}

@@ -61,8 +61,7 @@ function WarnSvg() {
   );
 }
 
-export const ToastTypeIcons: Record<ToastType, () => ReactNode> = {
-  default: () => <></>,
+export const ToastTypeIcons: Record<Exclude<ToastType, 'custom' | 'default'>, () => ReactNode> = {
   success: SuccessSvg,
   error: ErrorSvg,
   loading: () => <div className={`${STYLE_NAMESPACE}__loading`} />,
@@ -70,10 +69,12 @@ export const ToastTypeIcons: Record<ToastType, () => ReactNode> = {
 };
 
 interface DefaultToastProps {
-  icon: ReactNode;
+  status: ToastType;
 }
 
-export function DefaultToast({ icon, children }: DefaultToastProps & PropsWithChildren) {
+export function DefaultToast({ status, children }: DefaultToastProps & PropsWithChildren) {
+  const Icon = status === 'custom' || status === 'default' ? null : ToastTypeIcons[status];
+
   return (
     <div
       style={{
@@ -85,10 +86,14 @@ export function DefaultToast({ icon, children }: DefaultToastProps & PropsWithCh
         gap: 5,
         borderRadius: 8,
         boxShadow: '2px 4px 10px rgba(0, 0, 0, 0.1)',
-        maxWidth: 350,
       }}
     >
-      <span style={{ minWidth: 20, maxWidth: 20 }}>{icon}</span>
+      {Icon && (
+        <span style={{ minWidth: 20, maxWidth: 20 }}>
+          <Icon />
+        </span>
+      )}
+
       {children}
     </div>
   );

@@ -4,7 +4,7 @@ import { getAnimation } from '../utils/get-animation';
 import { toast } from '../core/toast';
 import { DISAPPEAR_TIMEOUT, MAX_TIMEOUT } from '../constants';
 import { DefaultToast, ToastTypeIcons } from './toast-default';
-import type { NonHeadlessToastState as ToastState } from '../types';
+import type { NonHeadlessToastState as ToastState, ToastType } from '../types';
 import '../styles/index.scss';
 
 interface ToasterProps {
@@ -16,8 +16,6 @@ export function Toast({ toastProps }: ToasterProps) {
     isVisible: toastProps.isVisible,
     position: toastProps.position!,
   });
-
-  const Icon = ToastTypeIcons[toastProps.toastType];
 
   const content =
     typeof toastProps.data === 'function'
@@ -68,9 +66,7 @@ export function Toast({ toastProps }: ToasterProps) {
     <div
       role="alert"
       data-testid={`container-${toastProps.containerId}`}
-      className={
-        typeof toastProps.data === 'function' || toastProps.toastType === 'default' ? '' : animationClassName
-      }
+      className={toastProps.toastType === 'custom' ? '' : animationClassName}
       onMouseEnter={onMouseEnter}
       onMouseLeave={onMouseLeave}
       style={{
@@ -78,11 +74,11 @@ export function Toast({ toastProps }: ToasterProps) {
         justifyContent: 'center',
       }}
     >
-      <Condition condition={typeof toastProps.data === 'function' || toastProps.toastType === 'default'}>
-        <If>{content}</If>
-        <Else>
-          <DefaultToast icon={<Icon />}>{content}</DefaultToast>
-        </Else>
+      <Condition condition={toastProps.toastType !== 'custom'}>
+        <If>
+          <DefaultToast status={toastProps.toastType}>{content}</DefaultToast>
+        </If>
+        <Else>{content}</Else>
       </Condition>
     </div>
   );

@@ -9,7 +9,7 @@ export type Position =
   | 'top-center'
   | 'top-right';
 
-export type ToastType = 'default' | 'success' | 'error' | 'loading' | 'warn';
+export type ToastType = 'default' | 'custom' | 'success' | 'error' | 'loading' | 'warn';
 
 export interface BaseOptions {
   timeOut?: number;
@@ -34,7 +34,7 @@ interface ToastDataCallback {
   close: () => void;
   immediatelyClose: () => void;
   isVisible: boolean;
-  icons: Record<Exclude<ToastType, 'default'>, ReactNode>;
+  icons: Record<Exclude<ToastType, 'default' | 'custom'>, ReactNode>;
 }
 
 export type ToastState = ToastBaseState & BaseOptions;

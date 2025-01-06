@@ -53,6 +53,7 @@ toast.success = createToast('success');
 toast.error = createToast('error');
 toast.warn = createToast('warn');
 toast.loading = createToast('loading');
+toast.custom = createToast<ToastState['data'] | ToastDataWithCallback>('custom');
 
 toast.promise = (
   promise: Promise<any>,
