@@ -4,7 +4,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import clsx from 'clsx';
-import Code from '@/components/code';
+import ShellCode from '@/components/shell-code';
 import Github from '@/components/github';
 import {
   ToastContainer,
@@ -13,7 +13,7 @@ import {
   type NonHeadlessToastState as ToastState,
 } from 'react-strawberry-toast';
 // import { ToastContainer, toast, type Position, type ToastState } from '../../../../src';
-import { PrismLight as SyntaxHighlighter } from 'react-syntax-highlighter';
+import { PrismLight } from 'react-syntax-highlighter';
 import { codeSyntax} from '@/constants/code-syntax';
 import { CodeTheme } from '@/constants/code-theme';
 
@@ -160,21 +160,21 @@ export default function Home() {
           </TabList>
 
           <TabPanel>
-            <Code>npm i react-strawberry-toast</Code>
+            <ShellCode>npm i react-strawberry-toast</ShellCode>
           </TabPanel>
           <TabPanel>
-            <Code>yarn add react-strawberry-toast</Code>
+            <ShellCode>yarn add react-strawberry-toast</ShellCode>
           </TabPanel>
           <TabPanel>
-            <Code>pnpm i react-strawberry-toast</Code>
+            <ShellCode>pnpm i react-strawberry-toast</ShellCode>
           </TabPanel>
         </Tabs>
       </div>
 
       <div id="code-area" className="flex justify-center py-8 text-sm">
-        <SyntaxHighlighter language="jsx" style={CodeTheme}>
+        <PrismLight language="jsx" style={CodeTheme}>
           {codeSyntax['started']}
-        </SyntaxHighlighter>
+        </PrismLight>
       </div>
 
       <h3 className="font-bold text-2xl text-center py-5">container</h3>
@@ -205,8 +205,8 @@ export default function Home() {
                   className="mr-3"
                   src={`/${example.type}.svg`}
                   alt={`${example.type} svg icon`}
-                  width={18}
-                  height={18}
+                  width={22}
+                  height={22}
                 />
                 {example.type}
               </button>
@@ -248,9 +248,9 @@ export default function Home() {
       </div>
 
       <div id="code-area" className="flex justify-center py-8 text-sm">
-        <SyntaxHighlighter language="jsx" style={CodeTheme}>
+        <PrismLight language="jsx" style={CodeTheme}>
           {toastCode}
-        </SyntaxHighlighter>
+        </PrismLight>
       </div>
 
       <ToastContainer />

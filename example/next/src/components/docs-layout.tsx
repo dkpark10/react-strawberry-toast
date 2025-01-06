@@ -5,7 +5,7 @@ import type { PropsWithChildren } from 'react';
 
 function DocsLinkItem({ href, children }: { href: string } & PropsWithChildren) {
   return (
-    <li className="py-1 text-base font-medium">
+    <li className="py-1 text-base font-medium hover:text-straw-berry hover:opacity-55">
       <Link href={href}>{children}</Link>
     </li>
   );
@@ -36,8 +36,8 @@ export default function DocsLayout({ children }: PropsWithChildren) {
       <div className="h-[2px] bg-[#ececec]" />
 
       <aside className="py-2 px-5">
-        <div className="flex">
-          <nav className="w-48">
+        <div id="layout-container" className="flex">
+          <nav className="w-56">
             <ul className="font-semibold text-primary-black text-lg">
               <li>
                 <h3>
@@ -48,7 +48,6 @@ export default function DocsLayout({ children }: PropsWithChildren) {
                 <h3 className="pt-3">Guides</h3>
                 <ul className="ml-2">
                   <DocsLinkItem href="/docs/show-toast">Show Toast</DocsLinkItem>
-                  <DocsLinkItem href="/docs/custom">Custom Toast</DocsLinkItem>
                   <DocsLinkItem href="/docs/multi-container">Multi Container</DocsLinkItem>
                   <DocsLinkItem href="/docs/headless-hook">Headless Hook</DocsLinkItem>
                 </ul>
@@ -63,7 +62,7 @@ export default function DocsLayout({ children }: PropsWithChildren) {
             </ul>
           </nav>
 
-          <main>{children}</main>
+          <main id="main" className="w-7/12">{children}</main>
         </div>
       </aside>
     </>

@@ -41,7 +41,6 @@ export const CodeTheme: { [key: string]: React.CSSProperties } = {
     msHyphens: 'none',
     hyphens: 'none',
     padding: '1em',
-    margin: '.5em 0',
     overflow: 'auto',
     borderRadius: '0.375em',
   },

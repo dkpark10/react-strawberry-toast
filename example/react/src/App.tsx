@@ -15,6 +15,12 @@ export default function App() {
         asdads
       </div>
     ));
+    toast.custom((props) => (
+      <div>
+        {props.icons.success}
+        asdads
+      </div>
+    ));
   };
 
   return (

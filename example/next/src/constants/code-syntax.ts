@@ -50,7 +50,7 @@ function App() {
       ${'`'}}
     >
       <span>custom toast</span>
-      <button type="button" className="bg-straw-berry text-white w-6 h-6 rounded-sm" onClick={close}>
+      <button type="button" onClick={close} className="bg-straw-berry text-white w-6 h-6 rounded-sm">
         X
       </button>
     </div>

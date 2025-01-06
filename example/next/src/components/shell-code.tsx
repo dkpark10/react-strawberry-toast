@@ -1,7 +1,7 @@
 import { toast } from 'react-strawberry-toast';
 import type { PropsWithChildren } from 'react';
 
-export default function Code({ children }: PropsWithChildren) {
+export default function ShellCode({ children }: PropsWithChildren) {
   const click = (e: React.MouseEvent<HTMLElement> | React.KeyboardEvent<HTMLElement>): void => {
     const text = e.currentTarget.textContent ?? '';
     window.navigator.clipboard
