@@ -1,4 +1,5 @@
 import type { ReactNode } from 'react';
+import type { RequiredExcept } from './utils';
 
 export type Position =
   | 'bottom-left'
@@ -27,25 +28,20 @@ export interface Options extends BaseOptions {
   position?: Position;
   containerId?: string;
   pauseOnHover?: boolean;
+  toastType?: ToastType;
 }
 interface ToastDataCallback {
   close: () => void;
   immediatelyClose: () => void;
   isVisible: boolean;
-  icon: ReactNode;
+  icons: Record<Exclude<ToastType, 'default'>, ReactNode>;
 }
 
 export type ToastState = ToastBaseState & BaseOptions;
 
-type DataCallback = (props: ToastDataCallback) => ReactNode | string;
-
-type RequiredExcept<T, K extends keyof T> = Required<Omit<T, K>> & Pick<T, K>;
-
-type ToastStateWithCallback = Omit<ToastBaseState, 'data'> & {
-  data: DataCallback | ReactNode | string;
-};
+export type ToastDataWithCallback = (props: ToastDataCallback) => ReactNode | string;
 
 export type NonHeadlessToastState = RequiredExcept<Options, 'containerId' | 'position'> &
-  ToastStateWithCallback & {
-    toastType: ToastType;
+  Omit<ToastState, 'data'> & {
+    data: ToastDataWithCallback | ReactNode | string;
   };

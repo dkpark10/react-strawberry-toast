@@ -27,7 +27,12 @@ export function Toast({ toastProps }: ToasterProps) {
             toast.disappear(toastProps.toastId, 0);
             toast.remove(toastProps.toastId, 0);
           },
-          icon: <Icon />,
+          icons: {
+            success: <ToastTypeIcons.success />,
+            error: <ToastTypeIcons.error />,
+            warn: <ToastTypeIcons.warn />,
+            loading: <ToastTypeIcons.loading />,
+          },
           isVisible: toastProps.isVisible,
         })
       : toastProps.data;
@@ -63,7 +68,9 @@ export function Toast({ toastProps }: ToasterProps) {
     <div
       role="alert"
       data-testid={`container-${toastProps.containerId}`}
-      className={typeof toastProps.data === 'function' ? '' : animationClassName}
+      className={
+        typeof toastProps.data === 'function' || toastProps.toastType === 'default' ? '' : animationClassName
+      }
       onMouseEnter={onMouseEnter}
       onMouseLeave={onMouseLeave}
       style={{
@@ -71,7 +78,7 @@ export function Toast({ toastProps }: ToasterProps) {
         justifyContent: 'center',
       }}
     >
-      <Condition condition={typeof toastProps.data === 'function'}>
+      <Condition condition={typeof toastProps.data === 'function' || toastProps.toastType === 'default'}>
         <If>{content}</If>
         <Else>
           <DefaultToast icon={<Icon />}>{content}</DefaultToast>

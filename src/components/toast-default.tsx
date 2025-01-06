@@ -61,7 +61,7 @@ function WarnSvg() {
   );
 }
 
-export const ToastTypeIcons: Record<ToastType, any> = {
+export const ToastTypeIcons: Record<ToastType, () => ReactNode> = {
   default: () => <></>,
   success: SuccessSvg,
   error: ErrorSvg,

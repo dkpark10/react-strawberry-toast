@@ -3,21 +3,24 @@ import { ToastStore } from '../core/store';
 import { REMOVE_TIMEOUT, MAX_TIMEOUT, DISAPPEAR_TIMEOUT } from '../constants';
 import { toastHandlers } from './toast-handler';
 import type { ReactNode } from 'react';
-import { type NonHeadlessToastState as ToastState, type Options, type ToastType } from '../types';
+import type { NonHeadlessToastState, ToastState, Options, ToastType, ToastDataWithCallback } from '../types';
 
-export const toastStore = new ToastStore<ToastState>();
+export const toastStore = new ToastStore<NonHeadlessToastState>();
 
 const idGenerator = generateId();
 
 const createToast =
-  (toastType: ToastType = 'default') =>
-  (data: ToastState['data'], options: Options = {}): ToastState['toastId'] => {
+  <T = ToastState['data']>(toastType: ToastType = 'default') =>
+  (
+    data: T extends ToastState['data'] ? ToastState['data'] : ToastDataWithCallback,
+    options: Options = {}
+  ): ToastState['toastId'] => {
     const { timeOut = DISAPPEAR_TIMEOUT, removeTimeOut = REMOVE_TIMEOUT, pauseOnHover = true } = options;
 
     const toastId = idGenerator();
     const createdAt = new Date().getTime();
 
-    const value: ToastState = {
+    const value: NonHeadlessToastState = {
       ...options,
       timeOut: timeOut > MAX_TIMEOUT ? MAX_TIMEOUT : timeOut,
       toastId,
@@ -35,9 +38,10 @@ const createToast =
     return toastId;
   };
 
-export const toast = (data: ToastState['data'], options: Options = {}) => createToast()(data, options);
+export const toast = (data: ToastState['data'] | ToastDataWithCallback, options: Options = {}) =>
+  createToast<ToastState['data'] | ToastDataWithCallback>()(data, options);
 
-const handlers = toastHandlers<ToastState>(toastStore);
+const handlers = toastHandlers<NonHeadlessToastState>(toastStore);
 toast.isActive = handlers.isActive;
 toast.disappear = handlers.disappear;
 toast.resume = handlers.resume;
