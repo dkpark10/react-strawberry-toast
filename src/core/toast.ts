@@ -58,9 +58,9 @@ toast.custom = createToast<ToastState['data'] | ToastDataWithCallback>('custom')
 toast.promise = (
   promise: Promise<any>,
   promiseOption: {
-    loading: string | ReactNode;
-    success: string | ReactNode;
-    error: string | ReactNode;
+    loading: ReactNode;
+    success: ReactNode;
+    error: ReactNode;
   },
   options: Options = {}
 ) => {

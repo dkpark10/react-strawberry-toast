@@ -17,7 +17,7 @@ export interface BaseOptions {
 }
 interface ToastBaseState {
   toastId: string;
-  data: string | ReactNode;
+  data: ReactNode;
   isVisible: boolean;
   createdAt: number;
   pausedAt?: number;
@@ -39,9 +39,9 @@ interface ToastDataCallback {
 
 export type ToastState = ToastBaseState & BaseOptions;
 
-export type ToastDataWithCallback = (props: ToastDataCallback) => ReactNode | string;
+export type ToastDataWithCallback = (props: ToastDataCallback) => ReactNode;
 
 export type NonHeadlessToastState = RequiredExcept<Options, 'containerId' | 'position'> &
   Omit<ToastState, 'data'> & {
-    data: ToastDataWithCallback | ReactNode | string;
+    data: ToastDataWithCallback | ReactNode;
   };
