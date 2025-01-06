@@ -9,9 +9,10 @@ import '../styles/index.scss';
 
 interface ToasterProps {
   toastProps: ToastState;
+  style: React.CSSProperties;
 }
 
-export function Toast({ toastProps }: ToasterProps) {
+export function Toast({ toastProps, ...rest }: ToasterProps) {
   const animationClassName = getAnimation({
     isVisible: toastProps.isVisible,
     position: toastProps.position!,
@@ -69,10 +70,7 @@ export function Toast({ toastProps }: ToasterProps) {
       className={toastProps.toastType === 'custom' ? '' : animationClassName}
       onMouseEnter={onMouseEnter}
       onMouseLeave={onMouseLeave}
-      style={{
-        display: 'flex',
-        justifyContent: 'center',
-      }}
+      {...rest}
     >
       <Condition condition={toastProps.toastType !== 'custom'}>
         <If>

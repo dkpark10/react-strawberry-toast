@@ -41,4 +41,3 @@ toast.resume = handlers.resume;
 toast.pause = handlers.pause;
 toast.replace = handlers.replace;
 toast.remove = handlers.remove;
-

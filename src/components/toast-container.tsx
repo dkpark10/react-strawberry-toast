@@ -61,7 +61,7 @@ export function ToastContainer({
   const toastsByPosition: Record<Position, Array<ToastState>> = toastList
     .filter((toast) => toast.containerId === undefined)
     .reduce((acc, toast) => {
-      const key = toast.position || globalPosition; 
+      const key = toast.position || globalPosition;
       toast.position = key;
       acc[key] = acc[key] || [];
       acc[key].push(toast);
@@ -89,7 +89,13 @@ export function ToastContainer({
             {toastList
               .filter((toast) => toast.containerId === containerId)
               .map((toast) => (
-                <Toast key={toast.toastId} toastProps={toast} />
+                <Toast
+                  key={toast.toastId}
+                  toastProps={toast}
+                  style={{
+                    display: 'flex',
+                  }}
+                />
               ))}
           </div>
         </div>
@@ -128,7 +134,14 @@ export function ToastContainer({
                 }}
               >
                 {toasts.map((toast) => (
-                  <Toast key={toast.toastId} toastProps={toast} />
+                  <Toast
+                    key={toast.toastId}
+                    toastProps={toast}
+                    style={{
+                      display: 'flex',
+                      justifyContent: 'center',
+                    }}
+                  />
                 ))}
               </div>
             );
