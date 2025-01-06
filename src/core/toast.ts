@@ -15,9 +15,14 @@ const createToast =
     data: T extends ToastState['data'] ? ToastState['data'] : ToastDataWithCallback,
     options: Options = {}
   ): ToastState['toastId'] => {
-    const { timeOut = DISAPPEAR_TIMEOUT, removeTimeOut = REMOVE_TIMEOUT, pauseOnHover = true } = options;
+    const {
+      timeOut = DISAPPEAR_TIMEOUT,
+      removeTimeOut = REMOVE_TIMEOUT,
+      pauseOnHover = true,
+      toastId: optionToastId,
+    } = options;
 
-    const toastId = idGenerator();
+    const toastId = optionToastId || idGenerator();
     const createdAt = new Date().getTime();
 
     const value: NonHeadlessToastState = {

@@ -11,9 +11,9 @@ const idGenerator = generateId();
 const createToast =
   () =>
   (data: ToastState['data'], options: BaseOptions = {}): ToastState['toastId'] => {
-    const { timeOut = DISAPPEAR_TIMEOUT, removeTimeOut = REMOVE_TIMEOUT } = options;
+    const { timeOut = DISAPPEAR_TIMEOUT, removeTimeOut = REMOVE_TIMEOUT, toastId: optionToastId } = options;
 
-    const toastId = idGenerator();
+    const toastId = optionToastId || idGenerator();
     const createdAt = new Date().getTime();
 
     const value: ToastState = {

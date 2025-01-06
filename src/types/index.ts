@@ -12,6 +12,7 @@ export type Position =
 export type ToastType = 'default' | 'custom' | 'success' | 'error' | 'loading' | 'warn';
 
 export interface BaseOptions {
+  toastId?: string;
   timeOut?: number;
   removeTimeOut?: number;
 }
