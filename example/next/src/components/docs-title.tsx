@@ -5,11 +5,11 @@ function MainTitle({ children }: PropsWithChildren) {
 }
 
 function SubTitle({ children }: PropsWithChildren) {
-  return <h2 className="text-2xl font-semibold pb-2">{children}</h2>;
+  return <h2 className="text-2xl font-semibold pb-1">{children}</h2>;
 }
 
 function SsubTitle({ children }: PropsWithChildren) {
-  return <h3 className="text-lg font-semibold pb-2">{children}</h3>;
+  return <h3 className="text-lg font-semibold pb-1">{children}</h3>;
 }
 
 function SpaceSm() {

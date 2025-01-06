@@ -178,11 +178,11 @@ export default function Home() {
       <h3 className="font-bold text-2xl text-center py-5">container</h3>
 
       <div className="flex justify-center pb-8">
-        <div id="container-area" className="grid gap-x-24 gap-y-4 grid-cols-3">
+        <div id="container-area" className="grid gap-x-16 gap-y-4 grid-cols-3">
           {containerIds.map((id) => (
             <div key={id}>
               <ToastContainer containerId={id} />
-              <span className="text-white font-semibold flex items-center justify-center w-52 h-8 bg-straw-berry shadow-lg">
+              <span className="font-semibold flex items-center justify-center w-52 h-8 shadow-md">
                 {id}
               </span>
             </div>

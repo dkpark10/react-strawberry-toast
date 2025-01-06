@@ -14,20 +14,20 @@ export default function DocsIndexPage() {
       <Docs.SsubTitle>npm</Docs.SsubTitle>
       <Docs.SpaceSm />
       <ShellCode>npm i react-strawberry-toast</ShellCode>
-      <Docs.SpaceSm />
+      <Docs.SpaceLg />
 
       <Docs.SsubTitle>yarn</Docs.SsubTitle>
       <Docs.SpaceSm />
       <ShellCode>yarn add react-strawberry-toast</ShellCode>
-      <Docs.SpaceSm />
+      <Docs.SpaceLg />
 
       <Docs.SsubTitle>pnpm</Docs.SsubTitle>
       <Docs.SpaceSm />
       <ShellCode>pnpm i react-strawberry-toast</ShellCode>
-      <Docs.SpaceSm />
+      <Docs.SpaceLg />
 
       <Docs.SpaceMd />
-      <Docs.SubTitle>code</Docs.SubTitle>
+      <Docs.SubTitle>usage</Docs.SubTitle>
       <SyntaxHighlighter language="jsx" style={CodeTheme}>
         {codeSyntax['started']}
       </SyntaxHighlighter>

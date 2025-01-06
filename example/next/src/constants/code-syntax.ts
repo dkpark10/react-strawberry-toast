@@ -1,5 +1,6 @@
 export const codeSyntax = {
-  started: `import { ToastContainer, toast } from 'react-strawberry-toast';
+  started: 
+`import { ToastContainer, toast } from 'react-strawberry-toast';
 import 'react-strawberry-toast/dist/style.css';
   
 function App() {
@@ -55,6 +56,61 @@ function App() {
       </button>
     </div>
   )
-);`
-    
+);`,
+
+    multiContainer: 
+`import { ToastContainer, toast } from 'react-strawberry-toast';
+      
+function App() {
+  const [msg, setMsg] = useState('');
+
+  const onClick = () => {
+    if (!msg) return;
+    toast.custom(
+      ({ isVisible }) => (
+        <div
+          role="alert"
+          className={${'`'}bg-red-500 rounded-md px-2 text-white ${'${clsx('}
+            isVisible ? 'animate-right-grow' : 'animate-left-shrink'
+          )}${'`'}}
+        >
+          {msg}
+        </div>
+      ), 
+      {
+        containerId: '1',
+      }
+    );
+    setMsg('');
+  };
+          
+  return (
+    <>
+      <div id="profile" className="border border-primary-gray p-2 w-10/12">
+        <div className="flex items-center gap-2">
+          <Image src="/profile.svg" width={34} height={34} alt="profile icon" />
+          <div>developer</div>
+        </div>
+
+        <div className="py-1" />
+        <ToastContainer containerId="1" />
+        <div className="py-2" />
+        <div className="py-2" />
+
+        <div className="flex items-center gap-2">
+          <input
+            type="text"
+            value={msg}
+            onChange={(e) => setMsg(e.target.value)}
+            className="w-full border border-primary-gray px-1"
+            placeholder="type a message"
+          />
+          <button type="button" onClick={onClick}>
+            <Image src="/send.svg" width={24} height={24} alt="send icon" />
+          </button>
+        </div>
+      </div>
+    </>
+  );
+}`
 };

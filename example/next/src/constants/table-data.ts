@@ -8,8 +8,8 @@ type TableData<N extends number> = {
 export const customToastPropsTableData: TableData<3> = {
   header: ['option', 'description', 'type'],
   body: [
-    ['close', 'Toast closing function', 'Function'],
-    ['immediatelyClose', 'immediatelyClose function', 'Function'],
+    ['close', 'closing function', 'Function'],
+    ['immediatelyClose', 'immediatelyClosing function', 'Function'],
     ['icons', 'Toast A collection of icons in all states', 'ReactNode'],
     ['isVisible', 'Toast exposure status value', 'Boolean'],
   ]

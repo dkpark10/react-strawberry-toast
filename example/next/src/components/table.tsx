@@ -1,3 +1,5 @@
+import clsx from 'clsx';
+
 interface TableProps {
   headers: Array<string>;
   body: Array<Array<string>>;
@@ -21,7 +23,7 @@ export function Table({ headers, body }: TableProps) {
             <tr key={idx} className="border-b border-primary-gray">
               {row.map((item) => {
                 return (
-                  <td key={item} className="py-2 font-normal">
+                  <td key={item} className={`py-2 pl-2 font-normal ${clsx(idx % 2 && 'bg-[#ececec]')}`}>
                     {item}
                   </td>
                 );

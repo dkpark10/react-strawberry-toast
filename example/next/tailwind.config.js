@@ -10,6 +10,19 @@ module.exports = {
   ],
   theme: {
     extend: {
+      keyframes: {
+        'right-grow': {
+          '0%': { transform: 'scaleX(0.1)', opacity: '0', transformOrigin: 'left' },
+          '100%': { transform: 'scaleX(1)', opacity: '1', transformOrigin: 'left' },
+        },
+        'left-shrink': {
+          '0%': { transform: 'scaleX(1)', opacity: '1', transformOrigin: 'right' },
+          '100%': { transform: 'scaleX(0.1)', opacity: '0', transformOrigin: 'right' },
+        },
+      },
+
+      animation: { 'right-grow': 'right-grow 0.4s ease-in-out', 'left-shrink': 'left-shrink 0.4s ease-in-out' },
+
       colors: {
         'primary-black': primaryBlack,
         'primary-white': primaryWhite,

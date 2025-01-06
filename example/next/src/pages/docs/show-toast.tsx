@@ -23,44 +23,48 @@ export default function DocShowToast() {
       <PrismLight language="jsx" style={CodeTheme}>
         {`toast('default')`}
       </PrismLight>
+      <Docs.SpaceMd />
 
       <Docs.SsubTitle>success</Docs.SsubTitle>
       <PrismLight language="jsx" style={CodeTheme}>
         {`toast.success('success')`}
       </PrismLight>
+      <Docs.SpaceMd />
 
       <Docs.SsubTitle>error</Docs.SsubTitle>
       <PrismLight language="jsx" style={CodeTheme}>
         {`toast.error('error')`}
       </PrismLight>
+      <Docs.SpaceMd />
 
       <Docs.SsubTitle>warn</Docs.SsubTitle>
       <PrismLight language="jsx" style={CodeTheme}>
         {`toast.warn('warn')`}
       </PrismLight>
+      <Docs.SpaceMd />
 
       <Docs.SsubTitle>loading</Docs.SsubTitle>
       <PrismLight language="jsx" style={CodeTheme}>
         {`toast.loading('loading')`}
       </PrismLight>
+      <Docs.SpaceMd />
 
       <Docs.SpaceLg />
       <Docs.SubTitle>Custom Toast</Docs.SubTitle>
-      <Docs.SpaceLg />
+      <Docs.SpaceMd />
 
       <Docs.SsubTitle>Props</Docs.SsubTitle>
-      <Docs.SpaceSm />
 
       <Table headers={customToastPropsTableData.header} body={customToastPropsTableData.body} />
 
       <Docs.SpaceLg />
 
       <p>
-        Basic toast can be customized in the form of a function. Basic style and animation are applied. <br />
+        Basic toast can be customized in the form of a function. Basic style and animation are applied.
         If you don't want this, use <SyntaxHighlight>toast.custom</SyntaxHighlight>
       </p>
 
-      <Docs.SpaceSm />
+      <Docs.SpaceMd />
 
       <PrismLight language="jsx" style={CodeTheme}>
         {codeSyntax.custom}
@@ -71,8 +75,8 @@ export default function DocShowToast() {
       <Docs.SsubTitle>close function</Docs.SsubTitle>
       <p>
         Toast disappears <SyntaxHighlight>3000ms</SyntaxHighlight> after mounting and is completely removed
-        from the toast list after <SyntaxHighlight>200ms</SyntaxHighlight>.<br />
-        This was intentionally removed after 200 ms for animation application when unmounted. <br />
+        from the toast list after <SyntaxHighlight>200ms</SyntaxHighlight>.
+        This was intentionally removed after 200 ms for animation application when unmounted. 
         If you want to remove it immediately, use <SyntaxHighlight>immediatelyClose</SyntaxHighlight> props
         function.
       </p>
@@ -82,7 +86,7 @@ export default function DocShowToast() {
         {`toast(({ immediatelyClose }) => <div onClick={immediatelyClose}>...</div>)`}
       </PrismLight>
 
-      <Docs.SpaceSm />
+      <Docs.SpaceMd />
       <Docs.SsubTitle>icons</Docs.SsubTitle>
       <p>You can receive and render icons used in success, error, warn, loading as props.</p>
 
