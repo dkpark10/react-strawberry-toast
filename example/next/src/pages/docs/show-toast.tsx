@@ -5,6 +5,8 @@ import { CodeTheme } from '@/constants/code-theme';
 import { codeSyntax } from '@/constants/code-syntax';
 import SyntaxHighlight from '@/components/syntax-hilight';
 import { Docs } from '@/components/docs-title';
+import { Table } from '@/components/table';
+import { customToastPropsTableData } from '@/constants/table-data';
 
 export default function DocShowToast() {
   return (
@@ -42,18 +44,28 @@ export default function DocShowToast() {
         {`toast.loading('loading')`}
       </PrismLight>
 
+      <Docs.SpaceLg />
       <Docs.SubTitle>Custom Toast</Docs.SubTitle>
+      <Docs.SpaceLg />
 
       <Docs.SsubTitle>Props</Docs.SsubTitle>
+      <Docs.SpaceSm />
+
+      <Table headers={customToastPropsTableData.header} body={customToastPropsTableData.body} />
+
+      <Docs.SpaceLg />
 
       <p>
         Basic toast can be customized in the form of a function. Basic style and animation are applied. <br />
         If you don't want this, use <SyntaxHighlight>toast.custom</SyntaxHighlight>
       </p>
+
+      <Docs.SpaceSm />
+
       <PrismLight language="jsx" style={CodeTheme}>
         {codeSyntax.custom}
       </PrismLight>
-      
+
       <Docs.SpaceMd />
 
       <Docs.SsubTitle>close function</Docs.SsubTitle>
@@ -65,6 +77,7 @@ export default function DocShowToast() {
         function.
       </p>
 
+      <Docs.SpaceSm />
       <PrismLight language="jsx" style={CodeTheme}>
         {`toast(({ immediatelyClose }) => <div onClick={immediatelyClose}>...</div>)`}
       </PrismLight>
@@ -73,6 +86,7 @@ export default function DocShowToast() {
       <Docs.SsubTitle>icons</Docs.SsubTitle>
       <p>You can receive and render icons used in success, error, warn, loading as props.</p>
 
+      <Docs.SpaceSm />
       <PrismLight language="jsx" style={CodeTheme}>
         {`toast(({ icons }) => <div>{icons.success}</div>)`}
       </PrismLight>

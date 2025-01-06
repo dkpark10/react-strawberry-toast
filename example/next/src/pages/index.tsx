@@ -17,8 +17,6 @@ import { PrismLight } from 'react-syntax-highlighter';
 import { codeSyntax} from '@/constants/code-syntax';
 import { CodeTheme } from '@/constants/code-theme';
 
-import 'react-strawberry-toast/dist/index.css';
-
 const packagesName = ['npm', 'yarn', 'pnpm'] as const;
 
 const containerIds = Array.from({ length: 6 }, (_, i) => String(i + 1));

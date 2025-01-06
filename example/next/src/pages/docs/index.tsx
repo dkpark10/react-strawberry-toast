@@ -6,6 +6,7 @@ import { CodeTheme } from '@/constants/code-theme';
 import { codeSyntax } from '@/constants/code-syntax';
 import { ToastContainer } from 'react-strawberry-toast';
 import { Docs } from '@/components/docs-title';
+
 export default function DocsIndexPage() {
   return (
     <React.Fragment>
@@ -25,7 +26,7 @@ export default function DocsIndexPage() {
       <ShellCode>pnpm i react-strawberry-toast</ShellCode>
       <Docs.SpaceSm />
 
-      <Docs.SpaceSm />
+      <Docs.SpaceMd />
       <Docs.SubTitle>code</Docs.SubTitle>
       <SyntaxHighlighter language="jsx" style={CodeTheme}>
         {codeSyntax['started']}
