@@ -37,7 +37,9 @@ describe('mouse event test', () => {
 
     return (
       <div role="alert" onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave}>
-        <button type="button" onClick={click}>close</button>
+        <button type="button" onClick={click}>
+          close
+        </button>
         {toast.data}
       </div>
     );
@@ -50,9 +52,16 @@ describe('mouse event test', () => {
       headLessToast('strawberry toast');
     };
 
+    const clickWithToastId = () => {
+      headLessToast('strawberry toast', {
+        toastId: 'a',
+      });
+    };
+
     return (
       <React.Fragment>
         <button onClick={click}>click</button>
+        <button onClick={clickWithToastId}>clickWithToastId</button>
         {toasts.map((toast) => (
           <Toast key={toast.toastId} toast={toast} />
         ))}
@@ -116,5 +125,19 @@ describe('mouse event test', () => {
     });
 
     expect(queryByText(/strawberry toast/i)).not.toBeInTheDocument();
+  });
+
+  test('should not display duplicated toast id', async () => {
+    const { getByRole, queryByText } = render(<App />);
+
+    fireEvent.click(getByRole('button', { name: 'clickWithToastId' }));
+
+    expect(queryByText(/strawberry toast/i)).toBeInTheDocument();
+
+    expect(() =>
+      headLessToast('strawberry toast', {
+        toastId: 'a',
+      })
+    ).toThrowError('A duplicate custom ID is not available.');
   });
 });

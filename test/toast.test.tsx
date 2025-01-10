@@ -249,5 +249,38 @@ describe('toast', () => {
     });
 
     expect(queryByText(/strawberry toast/i)).toBeInTheDocument();
+
+    act(() => {
+      vi.advanceTimersByTime(8_000);
+    });
+  });
+
+  test('should not display duplicated toast id', async () => {
+    function App() {
+      const click = () => {
+        toast('strawberry toast', {
+          toastId: 'a',
+        });
+      };
+
+      return (
+        <React.Fragment>
+          <ToastContainer />
+          <button onClick={click}>click</button>
+        </React.Fragment>
+      );
+    }
+
+    const { getByRole, queryByText } = render(<App />);
+
+    fireEvent.click(getByRole('button', { name: 'click' }));
+
+    expect(queryByText(/strawberry toast/i)).toBeInTheDocument();
+
+    expect(() =>
+      toast('strawberry toast', {
+        toastId: 'a',
+      })
+    ).toThrowError('A duplicate custom ID is not available.');
   });
 });

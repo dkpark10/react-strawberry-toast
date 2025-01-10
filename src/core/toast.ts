@@ -23,6 +23,11 @@ const createToast =
     } = options;
 
     const toastId = optionToastId || idGenerator();
+
+    if (toast.isActive(toastId)) {
+      throw new Error('A duplicate custom ID is not available.');
+    }
+
     const createdAt = new Date().getTime();
 
     const value: NonHeadlessToastState = {
