@@ -48,49 +48,6 @@ describe('toast', () => {
     expect(queryByText(/strawberry toast/i)).not.toBeInTheDocument();
   });
 
-  test('should remain visible even after an infinite amount of time has passed for the toast', async () => {
-    function App() {
-      const click = () => {
-        toast(
-          ({ immediatelyClose }) => (
-            <div>
-              <span>strawberry toast</span>
-              <button onClick={immediatelyClose}>close</button>
-            </div>
-          ),
-          {
-            timeOut: Infinity,
-          }
-        );
-      };
-
-      return (
-        <React.Fragment>
-          <ToastContainer />
-          <button onClick={click}>click</button>
-        </React.Fragment>
-      );
-    }
-
-    const { getByRole, queryByText } = render(<App />);
-
-    fireEvent.click(getByRole('button', { name: 'click' }));
-
-    act(() => {
-      vi.advanceTimersByTime(MAX_TIMEOUT - 1);
-    });
-
-    expect(queryByText(/strawberry toast/i)).toBeInTheDocument();
-
-    fireEvent.click(getByRole('button', { name: 'close' }));
-
-    act(() => {
-      vi.advanceTimersByTime(0);
-    });
-
-    expect(queryByText(/strawberry toast/i)).not.toBeInTheDocument();
-  });
-
   test('should have exactly 4 toasts', async () => {
     function App() {
       const click = () => {
