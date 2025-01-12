@@ -112,5 +112,62 @@ function App() {
       </div>
     </>
   );
-}`
+}`,
+  headless: 
+`
+import { useToasts } from 'react-strawberry-toast/dist/headless';
+
+function Toast({ toast }: { toast: ToastState }) {
+  const onMouseEnter = () => {
+    headLessToast.pause(toast.toastId);
+  };
+
+  const onMouseLeave = () => {
+    headLessToast.resume(toast.toastId);
+  };
+
+  const click = () => {
+    headLessToast.disappear(toast.toastId, 0);
+  };
+
+  useEffect(() => {
+    if (!headLessToast.isActive(toast.toastId)) {
+      headLessToast.disappear(toast.toastId, DISAPPEAR_TIMEOUT);
+    }
+  }, [toast.toastId]);
+
+  return (
+    <div role="alert" onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave}>
+      <button type="button" onClick={click}>
+        close
+      </button>
+      {toast.data}
+    </div>
+  );
+}
+
+function App() {
+  const toasts = useToasts();
+
+  const click = () => {
+    headLessToast('strawberry toast');
+  };
+
+  const clickWithToastId = () => {
+    headLessToast('strawberry toast', {
+      toastId: 'a',
+    });
+  };
+
+  return (
+    <React.Fragment>
+      <button onClick={click}>click</button>
+      <button onClick={clickWithToastId}>clickWithToastId</button>
+      {toasts.map((toast) => (
+        <Toast key={toast.toastId} toast={toast} />
+      ))}
+    </React.Fragment>
+  );
+}
+`,
 };

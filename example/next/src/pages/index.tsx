@@ -12,7 +12,6 @@ import {
   type Position,
   type NonHeadlessToastState as ToastState,
 } from 'react-strawberry-toast';
-// import { ToastContainer, toast, type Position, type ToastState } from '../../../../src';
 import { PrismLight } from 'react-syntax-highlighter';
 import { codeSyntax} from '@/constants/code-syntax';
 import { CodeTheme } from '@/constants/code-theme';
