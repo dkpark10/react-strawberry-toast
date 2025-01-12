@@ -35,7 +35,7 @@ export default function Home() {
       type: 'success',
       click: () => {
         setToastCode(codeSyntax.success);
-        toast.success('success', pos,);
+        toast.success('success', pos);
       },
     },
     {

@@ -78,7 +78,7 @@ export const CodeTheme: { [key: string]: React.CSSProperties } = {
   'attr-value': { color: '#f1fa8c' },
   function: { color: '#ff79c6' },
   'class-name': { color: '#f1fa8c' },
-  keyword: { color: primeGray },
+  keyword: { color: '#8696f0' },
   regex: { color: '#ffb86c' },
   important: { color: '#ffb86c', fontWeight: 'bold' },
   bold: { fontWeight: 'bold' },

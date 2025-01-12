@@ -1,7 +1,7 @@
 import React, { type ReactElement } from 'react';
 import DocsLayout from '@/components/docs-layout';
 import ShellCode from '@/components/shell-code';
-import { PrismLight as SyntaxHighlighter } from 'react-syntax-highlighter';
+import { PrismLight } from 'react-syntax-highlighter';
 import { CodeTheme } from '@/constants/code-theme';
 import { codeSyntax } from '@/constants/code-syntax';
 import { ToastContainer } from 'react-strawberry-toast';
@@ -28,9 +28,9 @@ export default function DocsIndexPage() {
 
       <Docs.SpaceMd />
       <Docs.SubTitle>usage</Docs.SubTitle>
-      <SyntaxHighlighter language="jsx" style={CodeTheme}>
+      <PrismLight language="jsx" style={CodeTheme}>
         {codeSyntax['started']}
-      </SyntaxHighlighter>
+      </PrismLight>
 
       <ToastContainer />
     </React.Fragment>

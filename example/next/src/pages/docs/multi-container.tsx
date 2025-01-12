@@ -35,7 +35,7 @@ export default function DocsMultiContainer() {
     <React.Fragment>
       <Docs.MainTitle>Multi Container</Docs.MainTitle>
       <p>
-        You will use multi-containers when you charge an ID for a container. When using multi-containers, they
+        You can use multi-containers when you set an ID for a container. When using multi-containers, they
         are shown in the container location, not in the existing top-left, top-center, top-right, bottom-left,
         bottom-center, bottom-right location.
       </p>
