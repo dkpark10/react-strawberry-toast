@@ -1,9 +1,9 @@
 import { primaryBlack, strawBerry } from '@/constants/style-variable';
-import { primeGray } from '@/constants/style-variable';
+import { primaryGray } from '@/constants/style-variable';
 
 export const CodeTheme: { [key: string]: React.CSSProperties } = {
   'code[class*="language-"]': {
-    color: primeGray,
+    color: primaryGray,
     background: 'none',
     textShadow: '0 1px rgba(0, 0, 0, 0.3)',
     fontFamily: "Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace",
@@ -63,7 +63,7 @@ export const CodeTheme: { [key: string]: React.CSSProperties } = {
   boolean: { color: '#bd93f9' },
   number: { color: '#bd93f9' },
   selector: { color: strawBerry },
-  'attr-name': { color: primeGray },
+  'attr-name': { color: primaryGray },
   string: { color: '#f1fa8c' },
   char: { color: strawBerry },
   builtin: { color: strawBerry },

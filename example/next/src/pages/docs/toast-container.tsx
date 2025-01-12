@@ -17,5 +17,9 @@ export default function DocApiToastContainer() {
 }
 
 DocApiToastContainer.getLayout = function getLayout(page: ReactElement) {
-  return <DocsLayout>{page}</DocsLayout>;
+  return (
+    <DocsLayout>
+      <div className="pb-64">{page}</div>
+    </DocsLayout>
+  );
 };

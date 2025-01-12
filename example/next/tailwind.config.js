@@ -1,4 +1,4 @@
-import { primaryBlack, primaryBlack, primaryWhite, strawBerry } from './src/constants/style-variable';
+import { primaryBlack, primaryGray, primaryWhite, strawBerry } from './src/constants/style-variable';
 
 /** @type {import('tailwindcss').Config} */
 module.exports = {
@@ -21,11 +21,15 @@ module.exports = {
         },
       },
 
-      animation: { 'right-grow': 'right-grow 0.4s ease-in-out', 'left-shrink': 'left-shrink 0.4s ease-in-out' },
+      animation: {
+        'right-grow': 'right-grow 0.4s ease-in-out',
+        'left-shrink': 'left-shrink 0.4s ease-in-out',
+      },
 
       colors: {
         'primary-black': primaryBlack,
         'primary-white': primaryWhite,
+        'primary-gray': primaryGray,
         'straw-berry': strawBerry,
       },
     },
