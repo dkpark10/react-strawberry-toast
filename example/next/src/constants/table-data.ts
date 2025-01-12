@@ -34,12 +34,30 @@ export const toastContainerApi: TableData<4> = {
   body: [
     [
       'position',
-      "Toast's Position",
-      'top-left, top-center, top-right, bottom-left, bottom-center, bottom-right',
+      "Global toast's Position",
+      `'top-left' | 'top-center' | 'top-right' | 'bottom-left' | 'bottom-center' | 'bottom-right'`,
       'false',
     ],
     ['containerId', "ToastContainer's unique id", 'String', 'false'],
     ['reverse', 'Direction when toast appear', 'Boolean', 'false'],
     ['gap', 'Gap Between toasts', 'Boolean', 'false'],
+  ],
+};
+
+export const toastApi: TableData<4> = {
+  header: ['option', 'description', 'type', 'required'],
+  body: [
+    ['toastId', "Toast's unique Id", 'String', 'false'],
+    [
+      'position',
+      'Position per toast',
+      `'top-left' | 'top-center' | 'top-right' | 'bottom-left' | 'bottom-center' | 'bottom-right'`,
+      'false',
+    ],
+    ['containerId', "ID shown in the Toast Container Unique ID", 'String', 'false'],
+    ['pauseOnHover', "The Option that sets the timer to stop or not when a hover event occurs", 'String', 'false'],
+    ['toastType', "Toast Type", `'default' | 'custom' | 'success' | 'error' | 'loading' | 'warn'`, 'false'],
+    ['timeOut', 'Time for toast to disappear', 'Number', 'false'],
+    ['removeTimeOut', 'Time for toast to remove In List', 'Number', 'false'],
   ],
 };
