@@ -33,7 +33,6 @@ export default function DocsHeadlessHook() {
       </p>
 
       <Docs.SpaceMd />
-      <Docs.SsubTitle>state</Docs.SsubTitle>
 
       <Table headers={useToastsReturnValue.header} body={useToastsReturnValue.body} />
     </React.Fragment>

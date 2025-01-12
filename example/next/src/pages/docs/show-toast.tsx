@@ -49,6 +49,18 @@ export default function DocShowToast() {
       </PrismLight>
       <Docs.SpaceMd />
 
+      <Docs.SsubTitle>promise</Docs.SsubTitle>
+      <PrismLight language="jsx" style={CodeTheme}>
+        {`toast.promise(promise, {
+  loading: 'loading',           
+  success: 'success',
+  error: 'error',
+});                     
+`
+        }
+      </PrismLight>
+      <Docs.SpaceMd />
+
       <Docs.SpaceLg />
       <Docs.SubTitle>Custom Toast</Docs.SubTitle>
       <Docs.SpaceMd />

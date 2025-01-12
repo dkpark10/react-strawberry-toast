@@ -9,7 +9,7 @@ export function Table({ headers, body }: TableProps) {
   return (
     <table className="w-full max-w-[1100px]">
       <thead>
-        <tr className="border-b border-primary-gray">
+        <tr className="border-t border-primary-gray">
           {headers.map((header) => (
             <th className="py-2 font-normal" key={header}>
               {header}
@@ -20,7 +20,7 @@ export function Table({ headers, body }: TableProps) {
       <tbody>
         {body.map((row, idx) => {
           return (
-            <tr key={idx} className="border-b border-primary-gray">
+            <tr key={idx} className="border-y border-primary-gray">
               {row.map((item) => {
                 return (
                   <td key={item} className={`py-2 pl-2 font-normal ${clsx(idx % 2 && 'bg-[#ececec]')}`}>

@@ -44,7 +44,7 @@ export default function DocsMultiContainer() {
       <Docs.SubTitle>usage</Docs.SubTitle>
       <Docs.SpaceMd />
 
-      <div id="profile" className="border border-primary-gray p-2 w-10/12">
+      <div id="profile" className="border border-gray-300 p-2 w-10/12">
         <div className="flex items-center gap-2">
           <Image src="/profile.svg" width={34} height={34} alt="profile icon" />
           <div>developer</div>
@@ -60,7 +60,7 @@ export default function DocsMultiContainer() {
             type="text"
             value={msg}
             onChange={(e) => setMsg(e.target.value)}
-            className="w-full border border-primary-gray px-1"
+            className="w-full border border-gray-300 px-1"
             placeholder="type a message"
           />
           <button type="button" onClick={onClick}>

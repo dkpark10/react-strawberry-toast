@@ -28,3 +28,18 @@ export const useToastsReturnValue: TableData<3> = {
     ['updated', 'Time to update data on toast already created', 'Number'],
   ],
 };
+
+export const toastContainerApi: TableData<4> = {
+  header: ['option', 'description', 'type', 'required'],
+  body: [
+    [
+      'position',
+      "Toast's Position",
+      'top-left, top-center, top-right, bottom-left, bottom-center, bottom-right',
+      'false',
+    ],
+    ['containerId', "ToastContainer's unique id", 'String', 'false'],
+    ['reverse', 'Direction when toast appear', 'Boolean', 'false'],
+    ['gap', 'Gap Between toasts', 'Boolean', 'false'],
+  ],
+};
