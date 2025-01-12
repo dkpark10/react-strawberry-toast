@@ -12,6 +12,10 @@ const nextConfig = {
 
   transpilePackages: ['react-strawberry-toast'],
 
+  images: {
+    domains: ['localhost'],
+  },
+
   webpack: (config) => {
     return config;
   },
