@@ -51,6 +51,7 @@ export function Toast({ toastProps, ...rest }: ToasterProps) {
   /** @description disappear after mount */
   useEffect(() => {
     if (!toast.isActive(toastProps.toastId)) {
+      toast.setActive(toastProps.toastId);
       toast.disappear(toastProps.toastId, toastProps.timeOut);
     }
   }, [toastProps.toastId]);

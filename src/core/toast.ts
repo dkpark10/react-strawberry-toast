@@ -52,6 +52,7 @@ export const toast = (data: ToastState['data'] | ToastDataWithCallback, options:
   createToast<ToastState['data'] | ToastDataWithCallback>()(data, options);
 
 const handlers = toastHandlers<NonHeadlessToastState>(toastStore);
+toast.setActive = handlers.setActive;
 toast.isActive = handlers.isActive;
 toast.disappear = handlers.disappear;
 toast.resume = handlers.resume;

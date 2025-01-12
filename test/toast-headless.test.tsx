@@ -2,9 +2,9 @@ import React, { useEffect } from 'react';
 import { afterEach, beforeEach, vi, describe, expect, test } from 'vitest';
 import { act, render, fireEvent } from '@testing-library/react';
 import { useToasts } from '../src/hooks/use-toasts';
-import { toast as headLessToast } from '../src/core/headless-toast';
+import { toast } from '../src/core/headless-toast';
 import { ToastState } from '../src/types';
-import { DISAPPEAR_TIMEOUT, REMOVE_TIMEOUT } from '../src/constants';
+import { DISAPPEAR_TIMEOUT, MAX_TIMEOUT, REMOVE_TIMEOUT } from '../src/constants';
 import '@testing-library/jest-dom';
 
 describe('mouse event test', () => {
@@ -16,31 +16,32 @@ describe('mouse event test', () => {
     vi.useRealTimers();
   });
 
-  function Toast({ toast }: { toast: ToastState }) {
+  function Toast({ toastProps }: { toastProps: ToastState }) {
     const onMouseEnter = () => {
-      headLessToast.pause(toast.toastId);
+      toast.pause(toastProps.toastId);
     };
 
     const onMouseLeave = () => {
-      headLessToast.resume(toast.toastId);
+      toast.resume(toastProps.toastId);
     };
 
     const click = () => {
-      headLessToast.disappear(toast.toastId, 0);
+      toast.disappear(toastProps.toastId, 0);
     };
 
     useEffect(() => {
-      if (!headLessToast.isActive(toast.toastId)) {
-        headLessToast.disappear(toast.toastId, DISAPPEAR_TIMEOUT);
+      if (!toast.isActive(toastProps.toastId)) {
+        toast.setActive(toastProps.toastId);
+        toast.disappear(toastProps.toastId, toastProps.timeOut || DISAPPEAR_TIMEOUT);
       }
-    }, [toast.toastId]);
+    }, [toastProps.toastId]);
 
     return (
       <div role="alert" onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave}>
         <button type="button" onClick={click}>
           close
         </button>
-        {toast.data}
+        {toastProps.data}
       </div>
     );
   }
@@ -49,11 +50,15 @@ describe('mouse event test', () => {
     const toasts = useToasts();
 
     const click = () => {
-      headLessToast('strawberry toast');
+      toast('strawberry toast');
+    };
+
+    const infinityClick = () => {
+      toast('infinite strawberry toast', { timeOut: Infinity });
     };
 
     const clickWithToastId = () => {
-      headLessToast('strawberry toast', {
+      toast('strawberry toast', {
         toastId: 'a',
       });
     };
@@ -62,8 +67,9 @@ describe('mouse event test', () => {
       <React.Fragment>
         <button onClick={click}>click</button>
         <button onClick={clickWithToastId}>clickWithToastId</button>
+        <button onClick={infinityClick}>infinityClick</button>
         {toasts.map((toast) => (
-          <Toast key={toast.toastId} toast={toast} />
+          <Toast key={toast.toastId} toastProps={toast} />
         ))}
       </React.Fragment>
     );
@@ -135,9 +141,21 @@ describe('mouse event test', () => {
     expect(queryByText(/strawberry toast/i)).toBeInTheDocument();
 
     expect(() =>
-      headLessToast('strawberry toast', {
+      toast('strawberry toast', {
         toastId: 'a',
       })
     ).toThrowError('A duplicate custom ID is not available.');
+  });
+
+  test('should display up to max time', async () => {
+    const { getByRole, queryByText } = render(<App />);
+
+    fireEvent.click(getByRole('button', { name: 'infinityClick' }));
+
+    act(() => {
+      vi.advanceTimersByTime(MAX_TIMEOUT);
+    });
+
+    expect(queryByText(/infinite strawberry toast/i)).toBeInTheDocument();
   });
 });

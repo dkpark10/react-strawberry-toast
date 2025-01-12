@@ -40,6 +40,7 @@ const createToast =
 export const toast = (data: ToastState['data'], options: BaseOptions = {}) => createToast()(data, options);
 
 const handlers = toastHandlers(toastStore);
+toast.setActive = handlers.setActive;
 toast.isActive = handlers.isActive;
 toast.disappear = handlers.disappear;
 toast.resume = handlers.resume;

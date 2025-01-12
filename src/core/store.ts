@@ -7,7 +7,10 @@ export class ToastStore<T = ToastState> {
 
   listeners = new Set<Listener>();
 
-  /** @description key = toast id, value = timer id */
+  /** @description list containing toast activated since mount */
+  activatedToasts = new Set<ToastState['toastId']>();
+
+  /** @description list with a timer for toast */
   toastTimers = new Map<ToastState['toastId'], number>();
 
   constructor() {}

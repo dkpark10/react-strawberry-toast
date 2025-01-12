@@ -12,7 +12,11 @@ export const toastHandlers = <T = ToastState>(
     toastStore.toastTimers.delete(toastId);
   };
 
-  const isActive = (toastId: ToastState['toastId']): boolean => toastStore.toastTimers.has(toastId);
+  const setActive = (toastId: ToastState['toastId']): void => {
+    toastStore.activatedToasts.add(toastId);
+  }
+  
+  const isActive = (toastId: ToastState['toastId']): boolean => toastStore.activatedToasts.has(toastId);
 
   const remove = (toastId: ToastState['toastId'], timeOut = REMOVE_TIMEOUT) => {
     setTimeout(() => {
@@ -94,5 +98,5 @@ export const toastHandlers = <T = ToastState>(
     disappear(toastId, leftTimeout);
   };
 
-  return { isActive, disappear, resume, pause, replace, remove };
+  return { setActive, isActive, disappear, resume, pause, replace, remove };
 };
