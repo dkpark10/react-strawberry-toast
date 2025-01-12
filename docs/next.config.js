@@ -13,7 +13,7 @@ const nextConfig = {
   transpilePackages: ['react-strawberry-toast'],
 
   images: {
-    domains: ['localhost'],
+    unoptimized: true,
   },
 
   webpack: (config) => {
