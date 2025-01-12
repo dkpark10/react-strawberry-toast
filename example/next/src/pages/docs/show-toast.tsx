@@ -1,4 +1,5 @@
 import React, { type ReactElement } from 'react';
+import Head from 'next/head';
 import DocsLayout from '@/components/docs-layout';
 import { PrismLight } from 'react-syntax-highlighter';
 import { CodeTheme } from '@/constants/code-theme';
@@ -7,10 +8,12 @@ import SyntaxHighlight from '@/components/syntax-hilight';
 import { Docs } from '@/components/docs-title';
 import { Table } from '@/components/table';
 import { customToastPropsTableData } from '@/constants/table-data';
-
 export default function DocShowToast() {
   return (
     <React.Fragment>
+      <Head>
+        <title>Show Toast Docs | react-strawberry-toast</title>
+      </Head>
       <Docs.MainTitle>Show Toast</Docs.MainTitle>
       <Docs.SubTitle>Various Toast Functions</Docs.SubTitle>
       <p>
@@ -56,8 +59,7 @@ export default function DocShowToast() {
   success: 'success',
   error: 'error',
 });                     
-`
-        }
+`}
       </PrismLight>
       <Docs.SpaceMd />
 
@@ -72,8 +74,8 @@ export default function DocShowToast() {
       <Docs.SpaceLg />
 
       <p>
-        Basic toast can be customized in the form of a function. Basic style and animation are applied.
-        If you don't want this, use <SyntaxHighlight>toast.custom</SyntaxHighlight>
+        Basic toast can be customized in the form of a function. Basic style and animation are applied. If you
+        don't want this, use <SyntaxHighlight>toast.custom</SyntaxHighlight>
       </p>
 
       <Docs.SpaceMd />
@@ -87,10 +89,9 @@ export default function DocShowToast() {
       <Docs.SsubTitle>close function</Docs.SsubTitle>
       <p>
         Toast disappears <SyntaxHighlight>3000ms</SyntaxHighlight> after mounting and is completely removed
-        from the toast list after <SyntaxHighlight>200ms</SyntaxHighlight>.
-        This was intentionally removed after 200 ms for animation application when unmounted. 
-        If you want to remove it immediately, use <SyntaxHighlight>immediatelyClose</SyntaxHighlight> props
-        function.
+        from the toast list after <SyntaxHighlight>200ms</SyntaxHighlight>. This was intentionally removed
+        after 200 ms for animation application when unmounted. If you want to remove it immediately, use{' '}
+        <SyntaxHighlight>immediatelyClose</SyntaxHighlight> props function.
       </p>
 
       <Docs.SpaceSm />

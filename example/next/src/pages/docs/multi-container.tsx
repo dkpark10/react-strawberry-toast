@@ -7,6 +7,7 @@ import { codeSyntax } from '@/constants/code-syntax';
 import Image from 'next/image';
 import { ToastContainer, toast } from 'react-strawberry-toast';
 import clsx from 'clsx';
+import Head from 'next/head';
 
 export default function DocsMultiContainer() {
   const [msg, setMsg] = useState('');
@@ -33,6 +34,9 @@ export default function DocsMultiContainer() {
 
   return (
     <React.Fragment>
+      <Head>
+        <title>Multi Container Docs | react-strawberry-toast</title>
+      </Head>
       <Docs.MainTitle>Multi Container</Docs.MainTitle>
       <p>
         You can use multi-containers when you set an ID for a container. When using multi-containers, they

@@ -6,10 +6,14 @@ import { CodeTheme } from '@/constants/code-theme';
 import { codeSyntax } from '@/constants/code-syntax';
 import { ToastContainer } from 'react-strawberry-toast';
 import { Docs } from '@/components/docs-title';
+import Head from 'next/head';
 
 export default function DocsIndexPage() {
   return (
     <React.Fragment>
+      <Head>
+        <title>Get Started Docs | react-strawberry-toast</title>
+      </Head>
       <Docs.MainTitle>Get Started</Docs.MainTitle>
       <Docs.SsubTitle>npm</Docs.SsubTitle>
       <Docs.SpaceSm />
