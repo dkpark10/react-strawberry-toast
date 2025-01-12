@@ -1,3 +1,5 @@
+'use client';
+
 import React, { useState, type ReactElement } from 'react';
 import DocsLayout from '@/components/docs-layout';
 import { Docs } from '@/components/docs-title';

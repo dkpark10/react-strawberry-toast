@@ -1,11 +1,8 @@
-import Head from 'next/head';
+'use client';
+
 import React, { useState } from 'react';
-import Link from 'next/link';
 import Image from 'next/image';
-import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import clsx from 'clsx';
-import ShellCode from '@/components/shell-code';
-import Github from '@/components/github';
 import {
   ToastContainer,
   toast,
@@ -16,11 +13,9 @@ import { PrismLight } from 'react-syntax-highlighter';
 import { codeSyntax} from '@/constants/code-syntax';
 import { CodeTheme } from '@/constants/code-theme';
 
-const packagesName = ['npm', 'yarn', 'pnpm'] as const;
-
 const containerIds = Array.from({ length: 6 }, (_, i) => String(i + 1));
 
-export default function Home() {
+export default function HomePlayGround() {
   const [option, setOption] = useState<Position | '1' | '2' | '3' | '4' | '5' | '6'>('top-center');
 
   const [toastCode, setToastCode] = useState(codeSyntax.success);
@@ -107,73 +102,6 @@ export default function Home() {
 
   return (
     <>
-      <Head>
-        <title>react strawberry toast docs</title>
-        <meta name="description" content="react-strawberry-toast-docs" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <meta charSet="utf-8" />
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-
-      <header className="pt-8 pb-4">
-        <div className="flex justify-center flex-col gap-3">
-          <h1 className="text-center text-5xl font-bold">
-            React <span className="text-straw-berry">Strawberry</span> Toast
-          </h1>
-          <p className="text-lg text-center font-semibold">A simple and customizable React toast library</p>
-        </div>
-      </header>
-
-      <div id="btn-area" className="py-10 flex justify-center items-center gap-5">
-        <Link
-          className="text-primary-white bg-straw-berry text-xl py-2 px-4 shadow-xl font-bold rounded-md w-36 text-center h-11"
-          href="/docs"
-        >
-          Read Docs
-        </Link>
-        <Link
-          href="https://github.com/dkpark10/react-strawberry-toast"
-          className="shadow-xl w-36 h-11 flex justify-center items-center rounded-md"
-        >
-          <div className="flex gap-1">
-            <Github />
-            <span className="font-bold">Github</span>
-          </div>
-        </Link>
-      </div>
-
-      <div id="tab-area" className="flex justify-center">
-        <Tabs>
-          <TabList className="flex justify-center space-x-6 py-3">
-            {packagesName.map((packageName) => (
-              <Tab
-                key={packageName}
-                className="text-lg cursor-pointer font-bold"
-                selectedClassName="text-lg text-straw-berry cursor-pointer font-bold "
-              >
-                {packageName}
-              </Tab>
-            ))}
-          </TabList>
-
-          <TabPanel>
-            <ShellCode>npm i react-strawberry-toast</ShellCode>
-          </TabPanel>
-          <TabPanel>
-            <ShellCode>yarn add react-strawberry-toast</ShellCode>
-          </TabPanel>
-          <TabPanel>
-            <ShellCode>pnpm i react-strawberry-toast</ShellCode>
-          </TabPanel>
-        </Tabs>
-      </div>
-
-      <div id="code-area" className="flex justify-center py-8 text-sm">
-        <PrismLight language="jsx" style={CodeTheme}>
-          {codeSyntax['started']}
-        </PrismLight>
-      </div>
-
       <h3 className="font-bold text-2xl text-center py-5">container</h3>
 
       <div className="flex justify-center pb-8">
@@ -249,8 +177,6 @@ export default function Home() {
           {toastCode}
         </PrismLight>
       </div>
-
-      <ToastContainer />
     </>
   );
 }

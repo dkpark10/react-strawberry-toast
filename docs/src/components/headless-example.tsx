@@ -1,3 +1,5 @@
+'use client';
+
 import React, { useEffect } from 'react';
 import { useToasts, toast, type ToastState } from 'react-strawberry-toast/dist/headless';
 

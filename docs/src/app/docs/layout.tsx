@@ -1,7 +1,11 @@
 import Head from 'next/head';
 import Link from 'next/link';
 import Github from '@/components/github';
+import { PrismLight } from 'react-syntax-highlighter';
+import jsx from 'react-syntax-highlighter/dist/cjs/languages/prism/jsx';
 import type { PropsWithChildren } from 'react';
+
+PrismLight.registerLanguage('jsx', jsx);
 
 function DocsLinkItem({ href, children }: { href: string } & PropsWithChildren) {
   return (
@@ -61,7 +65,9 @@ export default function DocsLayout({ children }: PropsWithChildren) {
             </ul>
           </nav>
 
-          <main id="docs-main" className="w-7/12">{children}</main>
+          <main id="docs-main" className="w-7/12">
+            {children}
+          </main>
         </div>
       </aside>
     </>
