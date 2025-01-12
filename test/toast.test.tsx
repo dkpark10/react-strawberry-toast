@@ -3,7 +3,7 @@ import { afterEach, beforeEach, vi, describe, expect, test } from 'vitest';
 import { act, render, fireEvent } from '@testing-library/react';
 import { ToastContainer } from '../src/components/toast-container';
 import { toast } from '../src/core/toast';
-import { DISAPPEAR_TIMEOUT, MAX_TIMEOUT, REMOVE_TIMEOUT } from '../src/constants';
+import { DISAPPEAR_TIMEOUT, REMOVE_TIMEOUT } from '../src/constants';
 import '@testing-library/jest-dom';
 
 describe('toast', () => {

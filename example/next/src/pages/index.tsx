@@ -86,7 +86,7 @@ export default function Home() {
                 isVisible
                   ? 'react-strawberry-toast__fade-in'
                   : 'react-strawberry-toast__fade-out'
-              } bg-white p-4 flex justify-between gap-2 rounded-sm`}
+              } bg-white p-2 flex justify-between gap-2 rounded-sm`}
             >
               <span>custom toast</span>
               <button type="button" className="bg-straw-berry text-white w-6 h-6 rounded-sm" onClick={close}>

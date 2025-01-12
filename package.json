@@ -26,12 +26,12 @@
     },
     "./dist/headless": {
       "require": {
-        "types": "./dist/use-strawberry-toast.d.ts",
-        "default": "./dist/use-strawberry-toast.js"
+        "types": "./dist/headless.d.ts",
+        "default": "./dist/headless.js"
       },
       "import": {
-        "types": "./dist/use-strawberry-toast.d.mts",
-        "default": "./dist/use-strawberry-toast.mjs"
+        "types": "./dist/headless.d.mts",
+        "default": "./dist/headless.mjs"
       }
     },
     "./dist/index.css": "./dist/index.css"

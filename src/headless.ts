@@ -1,2 +1,2 @@
-export * from './hooks/use-strawberry-toast';
+export * from './hooks/use-toast';
 export { toast } from './core/headless-toast';

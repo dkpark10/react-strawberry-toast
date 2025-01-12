@@ -28,7 +28,7 @@ export default defineConfig(({ mode }) => {
   //       emptyOutDir: false,
   //       minify: true,
   //       lib: {
-  //         entry: path.resolve(__dirname, 'src/hooks/use-strawberry-toast.ts'),
+  //         entry: path.resolve(__dirname, 'src/hooks/use-toast.ts'),
   //         formats: ['es', 'cjs'],
   //         fileName: 'headless',
   //       },
