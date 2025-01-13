@@ -1,5 +1,4 @@
 import React from 'react';
-import Head from 'next/head';
 import { PrismLight } from 'react-syntax-highlighter';
 import { CodeTheme } from '@/constants/code-theme';
 import { codeSyntax } from '@/constants/code-syntax';
@@ -7,13 +6,15 @@ import Strong from '@/components/strong';
 import { Docs } from '@/components/docs-title';
 import { Table } from '@/components/table';
 import { customToastPropsTableData } from '@/constants/table-data';
+import type { Metadata } from 'next'
+ 
+export const metadata: Metadata = {
+  title: 'Show Toast Docs | react-strawberry-toast',
+}
 
 export default function DocShowToast() {
   return (
     <React.Fragment>
-      <Head>
-        <title>Show Toast Docs | react-strawberry-toast</title>
-      </Head>
       <Docs.MainTitle>Show Toast</Docs.MainTitle>
       <Docs.SubTitle>Various Toast Functions</Docs.SubTitle>
       <p>

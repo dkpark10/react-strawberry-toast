@@ -1,4 +1,3 @@
-import Head from 'next/head';
 import Link from 'next/link';
 import Github from '@/components/github';
 import { PrismLight } from 'react-syntax-highlighter';
@@ -18,13 +17,6 @@ function DocsLinkItem({ href, children }: { href: string } & PropsWithChildren) 
 export default function DocsLayout({ children }: PropsWithChildren) {
   return (
     <>
-      <Head>
-        <meta name="description" content="react-strawberry-toast-docs" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <meta charSet="utf-8" />
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-
       <header className="py-3 px-5 flex justify-between">
         <Link href="/">
           <div className="font-bold text-xl">

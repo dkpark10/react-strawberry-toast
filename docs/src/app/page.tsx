@@ -1,4 +1,3 @@
-import Head from 'next/head';
 import React from 'react';
 import Link from 'next/link';
 import Github from '@/components/github';
@@ -8,18 +7,16 @@ import { CodeTheme } from '@/constants/code-theme';
 import { ToastContainer } from 'react-strawberry-toast';
 import HomePlayGround from '@/app/_components/playground';
 import Install from '@/app/_components/install';
+import type { Metadata } from 'next'
+ 
+export const metadata: Metadata = {
+  title: 'react strawberry toast docs',
+  description: 'react-strawberry-toast-docs',
+};
 
 export default function Home() {
   return (
     <>
-      <Head>
-        <title>react strawberry toast docs</title>
-        <meta name="description" content="react-strawberry-toast-docs" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <meta charSet="utf-8" />
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-
       <header className="pt-8 pb-4">
         <div className="flex justify-center flex-col gap-3">
           <h1 className="text-center text-5xl font-bold">
