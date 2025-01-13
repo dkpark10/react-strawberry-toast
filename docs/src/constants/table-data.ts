@@ -61,3 +61,13 @@ export const toastApi: TableData<4> = {
     ['removeTimeOut', 'Time for toast to remove In List', 'Number', 'false'],
   ],
 };
+
+export const promiseTableData: TableData<3> = {
+  header: ['option', 'description', 'type'],
+  body: [
+    ['promise', 'promise variable', 'Promise'],
+    ['options.loading', 'Data to show when promise is pending', 'ReactNode'],
+    ['options.success', 'Data to show when promise is resolve', 'ReactNode'],
+    ['options.error', 'Data to show when promise is reject', 'ReactNode'],
+  ],
+};

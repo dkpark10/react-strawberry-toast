@@ -2,11 +2,11 @@ import React from 'react';
 import { Docs } from '@/components/docs-title';
 import { Table } from '@/components/table';
 import { toastContainerApi } from '@/constants/table-data';
-import type { Metadata } from 'next'
- 
+import type { Metadata } from 'next';
+
 export const metadata: Metadata = {
   title: 'Toast Container API Docs | react-strawberry-toast',
-}
+};
 
 export default function DocApiToastContainer() {
   return (
@@ -14,9 +14,8 @@ export default function DocApiToastContainer() {
       <Docs.MainTitle>Toast Container</Docs.MainTitle>
 
       <Docs.SubTitle>Props</Docs.SubTitle>
-      <Docs.SpaceSm />
-
       <Table headers={toastContainerApi.header} body={toastContainerApi.body} />
+      <div className="lg:pb-60 xl:pb-80" />
     </React.Fragment>
   );
 }

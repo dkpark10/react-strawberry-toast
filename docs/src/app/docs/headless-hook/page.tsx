@@ -23,7 +23,7 @@ export default function DocsHeadlessHook() {
 
       <Docs.SpaceSm />
       <HeadlessExample />
-      <Docs.SpaceMd />
+      <Docs.SpaceSm />
 
       <PrismLight language="jsx" style={CodeTheme}>
         {codeSyntax.headless}
@@ -35,8 +35,6 @@ export default function DocsHeadlessHook() {
         useToasts returns an array of the state of the toast. <br />
         The table below shows the properties of the returned toast array item.
       </p>
-
-      <Docs.SpaceMd />
 
       <Table headers={useToastsReturnValue.header} body={useToastsReturnValue.body} />
     </React.Fragment>

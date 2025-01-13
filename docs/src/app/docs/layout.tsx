@@ -44,6 +44,7 @@ export default function DocsLayout({ children }: PropsWithChildren) {
                 <ul className="ml-2">
                   <DocsLinkItem href="/docs/show-toast">Show Toast</DocsLinkItem>
                   <DocsLinkItem href="/docs/multi-container">Multi Container</DocsLinkItem>
+                  <DocsLinkItem href="/docs/promise">Promise</DocsLinkItem>
                   <DocsLinkItem href="/docs/headless-hook">Headless Hook</DocsLinkItem>
                 </ul>
               </li>

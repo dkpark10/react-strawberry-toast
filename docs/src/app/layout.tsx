@@ -7,7 +7,7 @@ import jsx from 'react-syntax-highlighter/dist/cjs/languages/prism/jsx';
 
 PrismLight.registerLanguage('jsx', jsx);
 
-export default function RootLayout({ children }: PropsWithChildren) {
+export default async function RootLayout({ children }: PropsWithChildren) {
   return (
     <html lang="en">
       <body>

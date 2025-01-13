@@ -69,7 +69,6 @@ export default function DocShowToast() {
       <Docs.SpaceMd />
 
       <Docs.SsubTitle>Props</Docs.SsubTitle>
-
       <Table headers={customToastPropsTableData.header} body={customToastPropsTableData.body} />
 
       <Docs.SpaceLg />

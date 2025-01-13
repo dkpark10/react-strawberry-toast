@@ -1,5 +1,4 @@
 import React, { type ReactElement } from 'react';
-import DocsLayout from '@/components/docs-layout';
 import { Docs } from '@/components/docs-title';
 import { PrismLight } from 'react-syntax-highlighter';
 import { CodeTheme } from '@/constants/code-theme';
@@ -34,7 +33,3 @@ export default function DocsMultiContainer() {
     </React.Fragment>
   );
 }
-
-DocsMultiContainer.getLayout = function getLayout(page: ReactElement) {
-  return <DocsLayout>{page}</DocsLayout>;
-};
