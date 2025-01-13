@@ -63,11 +63,26 @@ describe('mouse event test', () => {
       });
     };
 
+    const promiseClick = () => {
+      const toastId = toast('promise loading');
+      const promise = new Promise((resolve) => {
+        setTimeout(resolve, 3_000);
+      });
+  
+      promise.then(() => {
+        toast.replace(toastId, 'promise success');
+      }).catch(() => {
+        toast.replace(toastId, 'promise error');
+      });
+    };
+  
+
     return (
       <React.Fragment>
-        <button onClick={click}>click</button>
-        <button onClick={clickWithToastId}>clickWithToastId</button>
-        <button onClick={infinityClick}>infinityClick</button>
+        <button type="button" onClick={click}>click</button>
+        <button type="button" onClick={clickWithToastId}>clickWithToastId</button>
+        <button type="button" onClick={infinityClick}>infinityClick</button>
+        <button type="button" onClick={promiseClick}>promiseClick</button>
         {toasts.map((toast) => (
           <Toast key={toast.toastId} toastProps={toast} />
         ))}
@@ -157,5 +172,21 @@ describe('mouse event test', () => {
     });
 
     expect(queryByText(/infinite strawberry toast/i)).toBeInTheDocument();
+  });
+
+  test(`should display a loading toast when the promise is pending, then show a success message 3 seconds after the promise resolves`, async () => {
+    const { getByRole, queryByText } = render(<App />);
+
+    fireEvent.click(getByRole('button', { name: 'promiseClick' }));
+
+    expect(queryByText(/promise loading/i)).toBeInTheDocument();
+
+    await act(() => {
+      vi.advanceTimersByTime(DISAPPEAR_TIMEOUT);
+    });
+
+    expect(queryByText(/promise loading/i)).not.toBeInTheDocument();
+
+    expect(queryByText(/promise success/i)).toBeInTheDocument();
   });
 });

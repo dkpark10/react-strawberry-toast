@@ -30,7 +30,7 @@ export const toastHandlers = <T = ToastState>(
   const replace = (
     toastId: ToastState['toastId'],
     data: ToastState['data'],
-    options: Options & { toastType: NonHeadlessToastState['toastType'] }
+    options?: Options & { toastType: NonHeadlessToastState['toastType'] }
   ) => {
     toastStore.state = toastStore.state.map((toast) => {
       if (toast.toastId === toastId) {
