@@ -12,6 +12,13 @@ const nextConfig = {
 
   transpilePackages: ['react-strawberry-toast'],
 
+  trailingSlash: true,
+
+  assetPrefix:
+    process.env.NODE_ENV === 'production' && process.env.NEXT_BUILD !== 'LOCAL'
+      ? '/react-strawberry-toast'
+      : '',
+
   images: {
     unoptimized: true,
   },
