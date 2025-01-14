@@ -14,6 +14,8 @@ const nextConfig = {
 
   trailingSlash: true,
 
+  basePath: '/react-strawberry-toast',
+
   assetPrefix:
     process.env.NODE_ENV === 'production' && process.env.NEXT_BUILD !== 'LOCAL'
       ? '/react-strawberry-toast'
