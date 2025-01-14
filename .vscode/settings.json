@@ -1,0 +1,5 @@
+{
+  "typescript.tsdk": "node_modules/typescript/lib",
+  "editor.bracketPairColorization.enabled": true,
+  "editor.guides.bracketPairs": "active"
+}
