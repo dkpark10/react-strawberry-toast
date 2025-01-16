@@ -8,7 +8,7 @@
     "build:local": "NEXT_BUILD=LOCAL next build",
     "start": "npx serve@latest out -p 8080",
     "predeploy": "next build",
-    "deploy": "gh-pages -d out"
+    "deploy": "pnpm run predeploy && touch ./out/.nojekyll && gh-pages -d out"
   },
   "dependencies": {
     "@emotion/react": "^11.14.0",
