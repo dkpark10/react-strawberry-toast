@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import { Docs } from '@/components/docs-title';
 import { ToastContainer, toast } from 'react-strawberry-toast';
 import clsx from 'clsx';
+import DOMPurify from 'dompurify';
 import ProfileSvg from '/public/profile.svg';
 import SendSvg from '/public/send.svg';
 
@@ -20,7 +21,7 @@ export default function DocsMultiContainer() {
             isVisible ? 'animate-right-grow' : 'animate-left-shrink'
           )}`}
         >
-          {msg}
+          {DOMPurify.sanitize(msg)}
         </div>
       ),
       {
