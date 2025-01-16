@@ -5,6 +5,7 @@
   "author": "dkpark10",
   "scripts": {
     "dev": "next dev",
+    "build": "next build",
     "build:local": "NEXT_BUILD=LOCAL next build",
     "start": "npx serve@latest out -p 8080",
     "predeploy": "next build",
@@ -27,6 +28,7 @@
     "react-tabs": "^6.1.0"
   },
   "devDependencies": {
+    "@svgr/webpack": "^8.1.0",
     "@tailwindcss/typography": "^0.5.16",
     "@types/node": "^20",
     "@types/react": "^18.2.0",

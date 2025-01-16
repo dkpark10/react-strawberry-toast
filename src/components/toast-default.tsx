@@ -1,22 +1,18 @@
 import React, { type PropsWithChildren, type ReactNode } from 'react';
 import { STYLE_NAMESPACE } from '../constants';
-// import SuccessSvg from '../../public/assets/success.svg?react';
-// import ErrorSvg from '../../public/assets/error.svg?react';
-// import WarnSvg from '../../public/assets/warn.svg?react';
 import type { ToastType } from '../types';
 
-/** @todo svg component after deploy */
 function SuccessSvg() {
   return (
     <svg
       stroke="none"
       fill="none"
       strokeWidth="2"
-      viewBox="0 0 22 22"
+      viewBox="0 0 24 24"
       strokeLinecap="round"
       strokeLinejoin="round"
-      height="20"
-      width="20"
+      height="22"
+      width="22"
       xmlns="http://www.w3.org/2000/svg"
     >
       <path stroke="none" d="M0 0h24v24H0z"></path>
@@ -35,9 +31,9 @@ function ErrorSvg() {
       stroke="none"
       fill="#eb2639"
       strokeWidth="2"
-      viewBox="0 0 22 22"
-      height="20"
-      width="20"
+      viewBox="0 0 24 24"
+      height="22"
+      width="22"
       xmlns="http://www.w3.org/2000/svg"
     >
       <path d="M11.953 2C6.465 2 2 6.486 2 12s4.486 10 10 10 10-4.486 10-10S17.493 2 11.953 2zM13 17h-2v-2h2v2zm0-4h-2V7h2v6z"></path>
@@ -52,8 +48,8 @@ function WarnSvg() {
       fill="#fcba03"
       strokeWidth="0"
       viewBox="0 0 1024 1024"
-      height="20"
-      width="20"
+      height="22"
+      width="22"
       xmlns="http://www.w3.org/2000/svg"
     >
       <path d="M955.7 856l-416-720c-6.2-10.7-16.9-16-27.7-16s-21.6 5.3-27.7 16l-416 720C56 877.4 71.4 904 96 904h832c24.6 0 40-26.6 27.7-48zM480 416c0-4.4 3.6-8 8-8h48c4.4 0 8 3.6 8 8v184c0 4.4-3.6 8-8 8h-48c-4.4 0-8-3.6-8-8V416zm32 352a48.01 48.01 0 0 1 0-96 48.01 48.01 0 0 1 0 96z"></path>

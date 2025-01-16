@@ -2,9 +2,10 @@
 
 import React, { useState } from 'react';
 import { Docs } from '@/components/docs-title';
-import Image from 'next/image';
 import { ToastContainer, toast } from 'react-strawberry-toast';
 import clsx from 'clsx';
+import ProfileSvg from '/public/profile.svg';
+import SendSvg from '/public/send.svg';
 
 export default function DocsMultiContainer() {
   const [msg, setMsg] = useState('');
@@ -32,7 +33,7 @@ export default function DocsMultiContainer() {
   return (
     <div id="profile" className="border border-gray-300 p-2 w-10/12">
       <div className="flex items-center gap-2">
-        <Image src="/profile.svg" width={34} height={34} alt="profile icon" />
+        <ProfileSvg />
         <div>developer</div>
       </div>
 
@@ -50,7 +51,7 @@ export default function DocsMultiContainer() {
           placeholder="type a message"
         />
         <button type="button" onClick={onClick}>
-          <Image src="/send.svg" width={24} height={24} alt="send icon" />
+          <SendSvg />
         </button>
       </div>
     </div>
