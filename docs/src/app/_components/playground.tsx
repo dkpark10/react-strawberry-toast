@@ -1,7 +1,6 @@
 'use client';
 
 import React, { useState } from 'react';
-import Image from 'next/image';
 import clsx from 'clsx';
 import {
   ToastContainer,
@@ -12,8 +11,23 @@ import {
 import { PrismLight } from 'react-syntax-highlighter';
 import { codeSyntax} from '@/constants/code-syntax';
 import { CodeTheme } from '@/constants/code-theme';
+import SuccessSvg from '/public/success.svg';
+import ErrorSvg from '/public/error.svg';
+import WarnSvg from '/public/warn.svg';
+import PromiseSvg from '/public/promise.svg';
+import CustomSvg from '/public/custom.svg';
 
 const containerIds = Array.from({ length: 6 }, (_, i) => String(i + 1));
+
+type IconType = 'success' | 'warn' | 'error' | 'promise' | 'custom';
+
+const Icons: Record<IconType, any> = {
+  success: <SuccessSvg />,
+  error: <ErrorSvg />,
+  warn: <WarnSvg />,
+  promise: <PromiseSvg />,
+  custom: <CustomSvg />,
+};
 
 export default function HomePlayGround() {
   const [option, setOption] = useState<Position | '1' | '2' | '3' | '4' | '5' | '6'>('top-center');
@@ -25,7 +39,7 @@ export default function HomePlayGround() {
       ? ({ position: option } as ToastState)
       : ({ containerId: option } as ToastState);
 
-  const examples = [
+  const examples: Array<{ type: IconType; click: () => void }> = [
     {
       type: 'success',
       click: () => {
@@ -77,9 +91,7 @@ export default function HomePlayGround() {
           ({ close, isVisible }) => (
             <div
               className={`${
-                isVisible
-                  ? 'react-strawberry-toast__fade-in'
-                  : 'react-strawberry-toast__fade-out'
+                isVisible ? 'react-strawberry-toast__fade-in' : 'react-strawberry-toast__fade-out'
               } bg-white p-2 flex justify-between gap-2 rounded-sm`}
             >
               <span>custom toast</span>
@@ -88,7 +100,7 @@ export default function HomePlayGround() {
               </button>
             </div>
           ),
-          pos,
+          pos
         );
       },
     },
@@ -109,9 +121,7 @@ export default function HomePlayGround() {
           {containerIds.map((id) => (
             <div key={id}>
               <ToastContainer containerId={id} />
-              <span className="font-semibold flex items-center justify-center w-52 h-8 shadow-md">
-                {id}
-              </span>
+              <span className="font-semibold flex items-center justify-center w-52 h-8 shadow-md">{id}</span>
             </div>
           ))}
         </div>
@@ -123,16 +133,10 @@ export default function HomePlayGround() {
             <div key={example.type}>
               <button
                 type="button"
-                className="rounded w-40 h-11 shadow-md text-sm font-semibold py-2 px-2 flex items-center"
+                className="rounded w-40 h-11 shadow-md text-sm font-semibold py-2 px-2 gap-2 items-center flex"
                 onClick={example.click}
               >
-                <Image
-                  className="mr-3"
-                  src={`/${example.type}.svg`}
-                  alt={`${example.type} svg icon`}
-                  width={22}
-                  height={22}
-                />
+                {Icons[example.type]}
                 {example.type}
               </button>
             </div>

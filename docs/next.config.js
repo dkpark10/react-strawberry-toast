@@ -14,9 +14,7 @@ const nextConfig = {
 
   trailingSlash: true,
 
-  basePath: '/react-strawberry-toast',
-
-  assetPrefix:
+  basePath:
     process.env.NODE_ENV === 'production' && process.env.NEXT_BUILD !== 'LOCAL'
       ? '/react-strawberry-toast'
       : '',
@@ -25,7 +23,11 @@ const nextConfig = {
     unoptimized: true,
   },
 
-  webpack: (config) => {
+  webpack(config) {
+    config.module.rules.push({
+      test: /\.svg$/,
+      use: ['@svgr/webpack'],
+    });
     return config;
   },
 };
