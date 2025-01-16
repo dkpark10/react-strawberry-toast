@@ -19,6 +19,12 @@ export const toastHandlers = <T = ToastState>(
   const isActive = (toastId: ToastState['toastId']): boolean => toastStore.activatedToasts.has(toastId);
 
   const remove = (toastId: ToastState['toastId'], timeOut = REMOVE_TIMEOUT) => {
+    if (!isActive(toastId)) {
+      return;
+    }
+
+    toastStore.activatedToasts.delete(toastId);
+
     setTimeout(() => {
       toastStore.state = toastStore.state.filter((toast) => toast.toastId !== toastId);
       toastStore.setState([...toastStore.state]);
