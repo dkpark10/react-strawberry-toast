@@ -3793,12 +3793,15 @@ packages:
       domelementtype: 2.3.0
     dev: true
 
+<<<<<<< HEAD
   /dompurify@3.2.3:
     resolution: {integrity: sha512-U1U5Hzc2MO0oW3DF+G9qYN0aT7atAou4AgI0XjWz061nyBPbdxkfdhfy5uMgGn6+oLFCfn44ZGbdDqCzVmlOWA==}
     optionalDependencies:
       '@types/trusted-types': 2.0.7
     dev: false
 
+=======
+>>>>>>> 890ac86b9017f227e790929c3b3026491f552d2c
   /domutils@3.2.2:
     resolution: {integrity: sha512-6kZKyUajlDuqlHKVX1w7gyslj9MPIXzIFiz/rGu35uC1wMi+kMhQwGhl4lt9unC9Vb9INnY9Z3/ZA3+FhASLaw==}
     dependencies:
