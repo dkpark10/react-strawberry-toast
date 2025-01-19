@@ -4,8 +4,13 @@ import '@/styles/global.css';
 import 'react-strawberry-toast/dist/index.css';
 import { PrismLight } from 'react-syntax-highlighter';
 import jsx from 'react-syntax-highlighter/dist/cjs/languages/prism/jsx';
+import type { Metadata } from 'next'
 
 PrismLight.registerLanguage('jsx', jsx);
+
+export const metadata: Metadata = {
+  icons: '/react-strawberry-toast/favicon.ico',
+};
 
 export default async function RootLayout({ children }: PropsWithChildren) {
   return (
