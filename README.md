@@ -63,3 +63,7 @@ function App() {
 | ToastType      | Toast Type |  default, custom, success, error, laoding, warn | false |
 | TimeOut      | Time for toast to disappear  |  Number | false |
 | RemoveTimeOut      | Time for toast to remove In Toast List  |  Number | false |
+
+## License
+
+MIT
