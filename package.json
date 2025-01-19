@@ -1,7 +1,7 @@
 {
   "name": "react-strawberry-toast",
   "description": "simple headless free position react toast library",
-  "version": "0.3.0",
+  "version": "1.0.0-alpha.1",
   "author": "dkpark10",
   "license": "MIT",
   "repository": {
