@@ -134,6 +134,7 @@ function Toast({ toastProps }: { toastProps: ToastState }) {
 
   useEffect(() => {
     if (!toast.isActive(toastProps.toastId)) {
+      toast.setActive(toastProps.toastId);
       toast.disappear(toastProps.toastId, toastProps.timeOut || 3_000);
     }
   }, [toastProps.toastId]);
