@@ -1,7 +1,7 @@
 export const codeSyntax = {
   started: 
 `import { ToastContainer, toast } from 'react-strawberry-toast';
-import 'react-strawberry-toast/dist/index.css';
+import 'react-strawberry-toast/dist/style.css';
   
 function App() {
   const click = () => {

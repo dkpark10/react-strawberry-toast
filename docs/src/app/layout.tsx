@@ -1,7 +1,7 @@
 import React, { type PropsWithChildren } from 'react';
 import GlobalProvider from '@/app/global-provider';
 import '@/styles/global.css';
-import 'react-strawberry-toast/dist/index.css';
+import 'react-strawberry-toast/dist/style.css';
 import { PrismLight } from 'react-syntax-highlighter';
 import jsx from 'react-syntax-highlighter/dist/cjs/languages/prism/jsx';
 import type { Metadata } from 'next'

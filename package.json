@@ -41,7 +41,7 @@
         "default": "./dist/headless.mjs"
       }
     },
-    "./dist/index.css": "./dist/index.css"
+    "./dist/style.css": "./dist/style.css"
   },
   "files": [
     "dist"

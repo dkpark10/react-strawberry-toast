@@ -5,7 +5,7 @@ import { toast } from '../core/toast';
 import { DISAPPEAR_TIMEOUT, MAX_TIMEOUT } from '../constants';
 import { DefaultToast, ToastTypeIcons } from './toast-default';
 import type { NonHeadlessToastState as ToastState } from '../types';
-import '../styles/index.scss';
+import '../styles/style.scss';
 
 interface ToasterProps {
   toastProps: ToastState;

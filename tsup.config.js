@@ -1,5 +1,7 @@
-import { defineConfig } from 'tsup';
-import { sassPlugin } from 'esbuild-sass-plugin';
+const { defineConfig } = require('tsup');
+const { sassPlugin } = require('esbuild-sass-plugin');
+const path = require('path');
+const fs = require('fs');
 
 export default defineConfig([
   {
@@ -12,13 +14,18 @@ export default defineConfig([
     external: ['react', 'react-dom'],
     platform: 'browser',
     banner: {
-      js: '"use client";'
-    },  
+      js: '"use client";',
+    },
     esbuildPlugins: [
       sassPlugin({
         type: 'css',
       }),
     ],
+    onSuccess: async () => {
+      const indexCss = path.resolve('dist/index.css');
+      const styleCss = path.resolve('dist/style.css');
+      fs.renameSync(indexCss, styleCss);
+    },
   },
   {
     minify: true,
