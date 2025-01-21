@@ -1,6 +1,7 @@
 import React from 'react';
 import { Docs } from '@/components/docs-title';
 import { CodeTheme } from '@/constants/code-theme';
+import Strong from '@/components/strong';
 import { PrismLight } from 'react-syntax-highlighter';
 import { codeSyntax } from '@/constants/code-syntax';
 import HeadlessExample from '@/app/docs/headless-hook/_components/headless-example';
@@ -32,10 +33,11 @@ export default function DocsHeadlessHook() {
       <Docs.SpaceMd />
       <Docs.SubTitle>useToasts</Docs.SubTitle>
       <p>
-        useToasts returns an array of the state of the toast. <br />
+        <Strong>useToasts</Strong> returns an array of the state of the toast. <br />
         The table below shows the properties of the returned toast array item.
       </p>
 
+      <Docs.SpaceMd />
       <Table headers={useToastsReturnValue.header} body={useToastsReturnValue.body} />
     </React.Fragment>
   );

@@ -2,6 +2,7 @@ import React from 'react';
 import { PrismLight } from 'react-syntax-highlighter';
 import { CodeTheme } from '@/constants/code-theme';
 import { ToastContainer } from 'react-strawberry-toast';
+import Strong from '@/components/strong';
 import { Docs } from '@/components/docs-title';
 import ShowPromiseButton from '@/app/docs/promise/_components/show-promise';
 import { Table } from '@/components/table';
@@ -17,7 +18,7 @@ export default function DocPromise() {
     <React.Fragment>
       <Docs.MainTitle>Promise</Docs.MainTitle>
       <p>
-        toast.promise receives the status of the promis and displays the loading before resolve, reject, and
+        <Strong>toast.promise</Strong> receives the status of the promis and displays the loading before resolve, reject, and
         updates the data of the toast when the promis is fulfilled.
       </p>
 

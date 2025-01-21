@@ -17,23 +17,24 @@ function DocsLinkItem({ href, children }: { href: string } & PropsWithChildren) 
 export default function DocsLayout({ children }: PropsWithChildren) {
   return (
     <>
-      <header className="py-3 px-5 flex justify-between">
-        <Link href="/">
-          <div className="font-bold text-xl">
-            React <span className="text-straw-berry">Strawberry</span> Toast
-          </div>
-        </Link>
-        <Link href="https://github.com/dkpark10/react-strawberry-toast">
-          <Github />
-        </Link>
+      <header className="w-full h-14 fixed bg-primary-white">
+        <div className="py-3 px-5 flex justify-between ">
+          <Link href="/">
+            <div className="font-bold text-xl">
+              React <span className="text-straw-berry">Strawberry</span> Toast
+            </div>
+          </Link>
+          <Link href="https://github.com/dkpark10/react-strawberry-toast">
+            <Github />
+          </Link>
+        </div>
+        <div className="h-[2px] bg-[#ececec]" />
       </header>
 
-      <div className="h-[2px] bg-[#ececec]" />
-
-      <aside className="py-2 px-5">
+      <aside className="pt-16 px-5">
         <div id="layout-container" className="flex">
           <nav className="w-56">
-            <ul className="font-semibold text-primary-black text-lg">
+            <ul className="font-semibold text-primary-black text-lg fixed">
               <li>
                 <h3>
                   <Link href="/docs">Get Started</Link>
