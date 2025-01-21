@@ -44,7 +44,6 @@
     "./dist/index.css": "./dist/index.css"
   },
   "files": [
-    "src",
     "dist"
   ],
   "scripts": {
