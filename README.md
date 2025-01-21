@@ -24,7 +24,7 @@ pnpm i --save react-strawberry-toast
 
 ```jsx
 import { ToastContainer, toast } from 'react-strawberry-toast';
-import 'react-strawberry-toast/dist/style.css';
+import 'react-strawberry-toast/dist/index.css';
   
 function App() {
   const click = () => {
