@@ -19,26 +19,26 @@ describe('toast promise', () => {
    and display success toast after 3 seconds `, async () => {
     function App() {
       const resolveClick = () => {
-        const promise = new Promise((resolve) => {
-          setTimeout(resolve, 3_000);
+        const promise = new Promise<string>((resolve) => {
+          setTimeout(() => resolve('resolved value'), 3_000);
         });
 
         toast.promise(promise, {
           loading: 'loading',
-          success: 'success',
+          success: (res) => <div>{res} success</div>,
           error: 'error',
         });
       };
 
       const rejectClick = () => {
         const promise = new Promise((_, reject) => {
-          setTimeout(reject, 3_000);
+          setTimeout(() => reject('rejected value'), 3_000);
         });
 
         toast.promise(promise, {
           loading: 'loading',
           success: 'success',
-          error: 'error',
+          error: (err) => <div>{err}</div>
         });
       };
 
@@ -65,7 +65,7 @@ describe('toast promise', () => {
 
     expect(queryByText(/loading/i)).not.toBeInTheDocument();
 
-    expect(queryByText(/success/i)).toBeInTheDocument();
+    expect(queryByText(/resolved value/i)).toBeInTheDocument();
 
     act(() => {
       fireEvent.click(getByRole('button', { name: 'reject' }));
@@ -79,6 +79,6 @@ describe('toast promise', () => {
 
     expect(queryByText(/loading/i)).not.toBeInTheDocument();
 
-    expect(queryByText(/error/i)).toBeInTheDocument();
+    expect(queryByText(/rejected value/i)).toBeInTheDocument();
   });
 });

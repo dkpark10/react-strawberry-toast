@@ -66,12 +66,12 @@ toast.warn = createToast('warn');
 toast.loading = createToast('loading');
 toast.custom = createToast<ToastState['data'] | ToastDataWithCallback>('custom');
 
-toast.promise = (
-  promise: Promise<any>,
+toast.promise = <T>(
+  promise: Promise<T>,
   promiseOption: {
     loading: ReactNode;
-    success: ReactNode;
-    error: ReactNode;
+    success: ReactNode | ((response: T) => ReactNode);
+    error: ReactNode | ((err: any) => ReactNode);
   },
   options: Options = {}
 ) => {
@@ -83,14 +83,14 @@ toast.promise = (
   });
 
   promise
-    .then(() => {
-      toast.replace(toastId, success, {
+    .then((res) => {
+      toast.replace(toastId, typeof success === 'function' ? success(res) : success, {
         ...options,
         toastType: 'success',
       });
     })
-    .catch(() => {
-      toast.replace(toastId, error, {
+    .catch((err) => {
+      toast.replace(toastId, typeof error === 'function' ? error(err) : error, {
         ...options,
         toastType: 'error',
       });
