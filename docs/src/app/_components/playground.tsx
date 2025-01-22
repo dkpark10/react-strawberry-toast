@@ -109,14 +109,14 @@ export default function HomePlayGround() {
   const optionButtonClassName = (bool: boolean) =>
     `${clsx(
       bool && 'bg-straw-berry text-white'
-    )} active:bg-straw-berry active:text-white rounded w-36 h-10 shadow-md text-sm font-medium
+    )} active:bg-straw-berry active:text-white max-sm:text-xs rounded w-36 max-sm:w-28 h-10 shadow-md text-sm font-medium
    py-2 px-2 flex items-center justify-center hover:bg-straw-berry hover:text-white`;
 
   return (
     <>
-      <h3 className="font-bold text-2xl text-center py-5">container</h3>
+      <h3 className="font-bold text-2xl text-center sm:py-5">example</h3>
 
-      <div className="flex justify-center pb-8">
+      <div className="flex justify-center pb-8 max-sm:hidden">
         <div id="container-area" className="grid gap-x-16 gap-y-4 grid-cols-3">
           {containerIds.map((id) => (
             <div key={id}>
@@ -127,13 +127,13 @@ export default function HomePlayGround() {
         </div>
       </div>
 
-      <div className="gap-12 py-10 flex justify-center">
-        <div id="toast-example-btn-area" className="flex flex-col justify-between">
+      <div className="gap-12 py-10 justify-center sm:flex">
+        <div id="toast-example-btn-area" className="flex flex-col justify-between max-sm:pb-6 max-sm:grid max-sm:grid-cols-2">
           {examples.map((example) => (
             <div key={example.type}>
               <button
                 type="button"
-                className="rounded w-40 h-11 shadow-md text-sm font-semibold py-2 px-2 gap-2 items-center flex"
+                className="rounded w-40 h-11 shadow-md text-sm font-semibold py-2 px-2 gap-2 items-center flex max-sm:w-36"
                 onClick={example.click}
               >
                 {Icons[example.type]}
@@ -160,8 +160,8 @@ export default function HomePlayGround() {
             )}
           </div>
 
-          <h5 className="font-semibold text-center text-md p-7">container ID</h5>
-          <div className="grid gap-4 grid-cols-3">
+          <h5 className="font-semibold text-center text-md p-7 max-sm:hidden">container ID</h5>
+          <div className="grid gap-4 grid-cols-3 max-sm:hidden">
             {containerIds.map((p) => (
               <button
                 key={p}
