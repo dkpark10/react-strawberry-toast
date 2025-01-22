@@ -1,0 +1,16 @@
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+
+COMMIT_MSG=$(cat "${1:?Missing commit message file}")
+
+COMMIT_TYPE="${COMMIT_MSG%%:*}"
+
+if [ "$COMMIT_TYPE" = "test" ] || \
+   [ "$COMMIT_TYPE" = "feat" ] || \
+   [ "$COMMIT_TYPE" = "fix" ] || \
+   [ "$COMMIT_TYPE" = "chore" ] || \
+   [ "$COMMIT_TYPE" = "refactor" ]; then
+  pnpm run test --run
+fi
+
+npx --no-install commitlint --edit "$1"
