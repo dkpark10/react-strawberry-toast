@@ -86,12 +86,14 @@ toast.promise = <T>(
     .then((res) => {
       toast.replace(toastId, typeof success === 'function' ? success(res) : success, {
         ...options,
+        timeOut: options.timeOut || DISAPPEAR_TIMEOUT,
         toastType: 'success',
       });
     })
     .catch((err) => {
       toast.replace(toastId, typeof error === 'function' ? error(err) : error, {
         ...options,
+        timeOut: options.timeOut || DISAPPEAR_TIMEOUT,
         toastType: 'error',
       });
     });
