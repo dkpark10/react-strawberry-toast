@@ -19,7 +19,7 @@ export default function DocPromise() {
       <Docs.MainTitle>Promise</Docs.MainTitle>
       <p>
         <Strong>toast.promise</Strong> receives the status of the promis and displays the loading before resolve, reject, and
-        updates the data of the toast when the promis is fulfilled.
+        updates the data of the toast when the promise is fulfilled.
       </p>
 
       <Docs.SpaceMd />
