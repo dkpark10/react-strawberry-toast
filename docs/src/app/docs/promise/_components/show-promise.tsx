@@ -4,14 +4,13 @@ import { toast } from 'react-strawberry-toast';
 
 export default function ShowPromiseButton() {
   const onClick = () => {
-    const promise = new Promise((resolve, reject) => {
-      const func = Math.floor(Math.random() * 100) & 2 ? resolve : reject;
-      setTimeout(func, 3_000);
+    const promise = new Promise<number>((resolve) => {
+      setTimeout(() => resolve(123), 3_000);
     });
 
     toast.promise(promise, {
       loading: 'loading',
-      success: 'success',
+      success: (res) => <div>resolved value: {res}</div>,
       error: 'error',
     });
   };

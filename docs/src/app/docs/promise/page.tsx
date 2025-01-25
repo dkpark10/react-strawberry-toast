@@ -34,14 +34,13 @@ export default function DocPromise() {
 
 function ShowPromiseButton() {
   const onClick = () => {
-    const promise = new Promise((resolve, reject) => {
-      const func = Math.floor(Math.random() * 100) & 2 ? resolve : reject;
-      setTimeout(func, 3_000);
+    const promise = new Promise<number>((resolve) => {
+      setTimeout(() => resolve(123), 3_000);
     });
 
     toast.promise(promise, {
       loading: 'loading',
-      success: 'success',
+      success: (res) => <div>resolved value: {res}</div>,
       error: 'error',
     });
   };
@@ -71,13 +70,13 @@ function ShowPromiseButton() {
 function ShowPromiseButton() {
   const onClick = () => {
     const toastId = toast('loading');
-    const promise = new Promise((resolve, reject) => {
-      const func = Math.floor(Math.random() * 100) & 2 ? resolve : reject;
-      setTimeout(func, 3_000);
+
+    const promise = new Promise<number>((resolve) => {
+      setTimeout(() => resolve(123), 3_000);
     });
 
-    promise.then(() => {
-      toast.replace(toastId, 'success');
+    promise.then((res) => {
+      toast.replace(toastId, <div>{res}</div>);
     }).catch(() => {
       toast.replace(toastId, 'error');
     });

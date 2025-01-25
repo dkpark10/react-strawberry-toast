@@ -65,17 +65,17 @@ describe('mouse event test', () => {
 
     const promiseClick = () => {
       const toastId = toast('promise loading');
-      const promise = new Promise((resolve) => {
-        setTimeout(resolve, 3_000);
+
+      const promise = new Promise<number>((resolve) => {
+        setTimeout(() => resolve(123), 3_000);
       });
   
-      promise.then(() => {
-        toast.replace(toastId, 'promise success');
+      promise.then((res) => {
+        toast.replace(toastId, <div>{res} promise success</div>);
       }).catch(() => {
         toast.replace(toastId, 'promise error');
       });
     };
-  
 
     return (
       <React.Fragment>
@@ -187,6 +187,6 @@ describe('mouse event test', () => {
 
     expect(queryByText(/promise loading/i)).not.toBeInTheDocument();
 
-    expect(queryByText(/promise success/i)).toBeInTheDocument();
+    expect(queryByText(/123 promise success/i)).toBeInTheDocument();
   });
 });
