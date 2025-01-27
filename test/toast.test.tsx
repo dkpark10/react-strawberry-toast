@@ -221,4 +221,48 @@ describe('toast', () => {
       })
     ).toThrowError('A duplicate custom ID is not available.');
   });
+
+  test('should display the toast even after the default timeout if the toast is reactivated while inactive', async (context) => {
+    function App() {
+      const click = () => {
+        toast(context.task.id);
+      };
+
+      return (
+        <React.Fragment>
+          <ToastContainer />
+          <button onClick={click}>click</button>
+        </React.Fragment>
+      );
+    }
+
+    const { getByRole, queryByText } = render(<App />);
+
+    fireEvent.click(getByRole('button', { name: 'click' }));
+
+    const PASSED_TIME = 1_000;
+    act(() => {
+      vi.advanceTimersByTime(PASSED_TIME);
+    });
+
+    act(() => {
+      fireEvent.blur(window);
+    });
+    
+    act(() => {
+      vi.advanceTimersByTime(100_000);
+    });
+
+    act(() => {
+      fireEvent.focus(window);
+    });
+
+    expect(queryByText(new RegExp(context.task.id, 'i'))).toBeInTheDocument();
+
+    act(() => {
+      vi.advanceTimersByTime((DISAPPEAR_TIMEOUT - 1_000) + REMOVE_TIMEOUT);
+    });
+
+    expect(queryByText(new RegExp(context.task.id, 'i'))).not.toBeInTheDocument();
+  });
 });
