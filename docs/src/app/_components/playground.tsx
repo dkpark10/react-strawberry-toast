@@ -1,6 +1,7 @@
-'use client';
+/** @jsxImportSource @emotion/react */
+"use client";
 
-import React, { useState } from 'react';
+import { useState } from 'react';
 import clsx from 'clsx';
 import {
   ToastContainer,
@@ -8,6 +9,7 @@ import {
   type Position,
   type NonHeadlessToastState as ToastState,
 } from 'react-strawberry-toast';
+import Image from 'next/image';
 import { PrismLight } from 'react-syntax-highlighter';
 import { codeSyntax} from '@/constants/code-syntax';
 import { CodeTheme } from '@/constants/code-theme';
@@ -15,19 +17,11 @@ import SuccessSvg from '/public/success.svg';
 import ErrorSvg from '/public/error.svg';
 import WarnSvg from '/public/warn.svg';
 import PromiseSvg from '/public/promise.svg';
-import CustomSvg from '/public/custom.svg';
+import EmotionProvider from '@/components/emotion-provider';
 
 const containerIds = Array.from({ length: 6 }, (_, i) => String(i + 1));
 
-type IconType = 'success' | 'warn' | 'error' | 'promise' | 'custom';
-
-const Icons: Record<IconType, any> = {
-  success: <SuccessSvg />,
-  error: <ErrorSvg />,
-  warn: <WarnSvg />,
-  promise: <PromiseSvg />,
-  custom: <CustomSvg />,
-};
+type ExampleToastType = 'Success' | 'Warn' | 'Error' | 'Promise' | 'TailwindCSS' | 'Emotion';
 
 export default function HomePlayGround() {
   const [option, setOption] = useState<Position | '1' | '2' | '3' | '4' | '5' | '6'>('top-center');
@@ -39,30 +33,34 @@ export default function HomePlayGround() {
       ? ({ position: option } as ToastState)
       : ({ containerId: option } as ToastState);
 
-  const examples: Array<{ type: IconType; click: () => void }> = [
+  const examples: Array<{ type: ExampleToastType; icon: any | string; click: () => void }> = [
     {
-      type: 'success',
+      type: 'Success',
+      icon: <SuccessSvg />,
       click: () => {
         setToastCode(codeSyntax.success);
         toast.success('success', pos);
       },
     },
     {
-      type: 'error',
+      type: 'Error',
+      icon: <ErrorSvg />,
       click: () => {
         setToastCode(codeSyntax.error);
         toast.error('error', pos);
       },
     },
     {
-      type: 'warn',
+      type: 'Warn',
+      icon: <WarnSvg />,
       click: () => {
         setToastCode(codeSyntax.warn);
         toast.warn('warn', pos);
       },
     },
     {
-      type: 'promise',
+      type: 'Promise',
+      icon: <PromiseSvg />,
       click: () => {
         setToastCode(codeSyntax.promise);
 
@@ -83,19 +81,39 @@ export default function HomePlayGround() {
       },
     },
     {
-      type: 'custom',
+      type: 'TailwindCSS',
+      icon: '/tailwindcss.png',
       click: () => {
-        setToastCode(codeSyntax.custom);
+        setToastCode(codeSyntax.tailwindCss);
 
         toast(
-          ({ close, isVisible }) => (
-            <div
-              className={`${
-                isVisible ? 'react-strawberry-toast__fade-in' : 'react-strawberry-toast__fade-out'
-              } bg-white p-2 flex justify-between gap-2 rounded-sm`}
-            >
-              <span>custom toast</span>
-              <button type="button" className="bg-straw-berry text-white w-6 h-6 rounded-sm" onClick={close}>
+          ({ close }) => (
+            <div className="bg-white p-2 flex justify-between gap-2 rounded-sm">
+              <span>tailwind css toast</span>
+              <button type="button" className="bg-red-500 text-white w-6 h-6 rounded-sm" onClick={close}>
+                X
+              </button>
+            </div>
+          ),
+          pos
+        );
+      },
+    },
+    {
+      type: 'Emotion',
+      icon: '/emotion.png',
+      click: () => {
+        setToastCode(codeSyntax.emotion);
+
+        toast(
+          ({ close }) => (
+            <div>
+              <span>💅 emotion toast </span>
+              <button
+                type="button"
+                css={{ border: '1px solid white', width: 28, height: 28 }}
+                onClick={close}
+              >
                 X
               </button>
             </div>
@@ -113,8 +131,8 @@ export default function HomePlayGround() {
    py-2 px-2 flex items-center justify-center hover:bg-straw-berry hover:text-white`;
 
   return (
-    <>
-      <h3 className="font-bold text-2xl text-center sm:py-5">example</h3>
+    <EmotionProvider>
+      <h3 className="font-bold text-2xl text-center sm:py-5">Example</h3>
 
       <div className="flex justify-center pb-8 max-sm:hidden">
         <div id="container-area" className="grid gap-x-16 gap-y-4 grid-cols-3">
@@ -128,7 +146,10 @@ export default function HomePlayGround() {
       </div>
 
       <div className="gap-12 py-10 justify-center sm:flex">
-        <div id="toast-example-btn-area" className="flex flex-col justify-between max-sm:pb-6 max-sm:grid max-sm:grid-cols-2">
+        <div
+          id="toast-example-btn-area"
+          className="flex flex-col justify-between max-sm:pb-6 max-sm:grid max-sm:grid-cols-2"
+        >
           {examples.map((example) => (
             <div key={example.type}>
               <button
@@ -136,7 +157,11 @@ export default function HomePlayGround() {
                 className="rounded w-40 h-11 shadow-md text-sm font-semibold py-2 px-2 gap-2 items-center flex max-sm:w-36"
                 onClick={example.click}
               >
-                {Icons[example.type]}
+                {typeof example.icon === 'string' ? (
+                  <Image src={example.icon} width={20} height={20} alt="emotion icon" />
+                ) : (
+                  example.icon
+                )}
                 {example.type}
               </button>
             </div>
@@ -144,7 +169,7 @@ export default function HomePlayGround() {
         </div>
 
         <div id="option-area">
-          <h5 className="font-semibold text-center text-md pb-4">position</h5>
+          <h5 className="font-semibold text-center text-md pb-4">Position</h5>
           <div className="grid gap-4 grid-cols-3">
             {['top-left', 'top-center', 'top-right', 'bottom-left', 'bottom-center', 'bottom-right'].map(
               (p) => (
@@ -160,7 +185,7 @@ export default function HomePlayGround() {
             )}
           </div>
 
-          <h5 className="font-semibold text-center text-md p-7 max-sm:hidden">container ID</h5>
+          <h5 className="font-semibold text-center text-md p-7 max-sm:hidden">Container id</h5>
           <div className="grid gap-4 grid-cols-3 max-sm:hidden">
             {containerIds.map((p) => (
               <button
@@ -181,6 +206,6 @@ export default function HomePlayGround() {
           {toastCode}
         </PrismLight>
       </div>
-    </>
+    </EmotionProvider>
   );
 }

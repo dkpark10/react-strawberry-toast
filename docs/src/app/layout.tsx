@@ -1,5 +1,5 @@
 import React, { type PropsWithChildren } from 'react';
-import GlobalProvider from '@/app/global-provider';
+import GlobalProvider from '@/providers/global-provider';
 import '@/styles/global.css';
 import 'react-strawberry-toast/dist/style.css';
 import { PrismLight } from 'react-syntax-highlighter';

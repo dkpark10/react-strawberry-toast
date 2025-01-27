@@ -29,6 +29,7 @@
     "react-tabs": "^6.1.0"
   },
   "devDependencies": {
+    "@emotion/cache": "^11.14.0",
     "@svgr/webpack": "^8.1.0",
     "@tailwindcss/typography": "^0.5.16",
     "@types/node": "^20",

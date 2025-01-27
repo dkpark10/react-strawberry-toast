@@ -1,6 +1,7 @@
+/** @jsxImportSource @emotion/react */
 'use client';
 
-import React, { type PropsWithChildren } from 'react';
+import { type PropsWithChildren } from 'react';
 import { PrismLight } from 'react-syntax-highlighter';
 import jsx from 'react-syntax-highlighter/dist/cjs/languages/prism/jsx';
 

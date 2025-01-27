@@ -41,22 +41,39 @@ function App() {
          });                     
          
 `,
-  custom: 
+  tailwindCss: 
 `toast(
-  ({ close, isVisible }) => (
-    <div
-      className={${'`'}
-        ${"${isVisible ? 'react-strawberry-toast__fade-in' : 'react-strawberry-toast__fade-out'}"}
-        bg-white p-2 flex justify-between gap-2 rounded-sm
-      ${'`'}}
-    >
-      <span>custom toast</span>
-      <button type="button" onClick={close} className="bg-straw-berry text-white w-6 h-6 rounded-sm">
+  ({ close }) => (
+    <div className="bg-white p-2 flex justify-between gap-2 rounded-sm">
+      <span>tailwind css toast</span>
+      <button type="button" className="bg-red-500 text-white w-6 h-6 rounded-sm" onClick={close}>
         X
       </button>
     </div>
   )
 );`,
+
+emotion: `
+toast(
+  ({ close }) => (
+    <div
+      css={{
+        backgroundColor: '#020715',
+        color: 'white',
+      }}
+    >
+      <span>💅 emotion toast </span>
+      <button
+        type="button"
+        css={{ border: '1px solid white', width: 28, height: 28 }}
+        onClick={close}
+      >
+        X
+      </button>
+    </div>
+  )
+);
+`,
 
     multiContainer: 
 `import { ToastContainer, toast } from 'react-strawberry-toast';
