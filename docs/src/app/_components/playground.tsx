@@ -9,7 +9,7 @@ import {
   type Position,
   type NonHeadlessToastState as ToastState,
 } from 'react-strawberry-toast';
-import Image from 'next/image';
+import AssetImage from '@/components/asset-image';
 import { PrismLight } from 'react-syntax-highlighter';
 import { codeSyntax} from '@/constants/code-syntax';
 import { CodeTheme } from '@/constants/code-theme';
@@ -17,7 +17,7 @@ import SuccessSvg from '/public/success.svg';
 import ErrorSvg from '/public/error.svg';
 import WarnSvg from '/public/warn.svg';
 import PromiseSvg from '/public/promise.svg';
-import EmotionProvider from '@/components/emotion-provider';
+import EmotionProvider from '@/components/providers/emotion-provider';
 
 const containerIds = Array.from({ length: 6 }, (_, i) => String(i + 1));
 
@@ -158,10 +158,8 @@ export default function HomePlayGround() {
                 onClick={example.click}
               >
                 {typeof example.icon === 'string' ? (
-                  <Image
-                    src={`${process.env.NODE_ENV === 'production' ? '/react-strawberry-toast' : ''}${
-                      example.icon
-                    }`}
+                  <AssetImage
+                    src={example.icon}
                     width={20}
                     height={20}
                     alt={`${example.type} icon`}
