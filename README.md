@@ -59,7 +59,7 @@ function App() {
 | toastId      | Toast's unique Id  |  String | false |
 | Position      | Position per toast  | top-left, top-center, top-right, bottom-left, bottom-center, bottom-right | false |
 | ContainerId      | ID shown in the Toast Container Unique ID  |  String | false |
-| PauseOnHover      | he Option that sets the timer to stop or not when a hover event occurs  |  Boolean | false |
+| PauseOnHover      | Option that sets the timer to stop or not when a hover event occurs  |  Boolean | false |
 | ToastType      | Toast Type |  default, custom, success, error, laoding, warn | false |
 | TimeOut      | Time for toast to disappear  |  Number | false |
 | RemoveTimeOut      | Time for toast to remove In Toast List  |  Number | false |
