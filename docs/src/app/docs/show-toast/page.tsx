@@ -81,7 +81,7 @@ export default function DocShowToast() {
       <Docs.SpaceMd />
 
       <PrismLight language="jsx" style={CodeTheme}>
-        {codeSyntax.custom}
+        {codeSyntax.tailwindCss}
       </PrismLight>
 
       <Docs.SpaceMd />
