@@ -3,7 +3,7 @@ import { Condition, If, Else } from './condition';
 import { getAnimation } from '../utils/get-animation';
 import { toast } from '../core/toast';
 import { DISAPPEAR_TIMEOUT, MAX_TIMEOUT } from '../constants';
-import { DefaultToast, ToastTypeIcons } from './toast-default';
+import { ToastTypeIcons } from './toast-icons';
 import type { NonHeadlessToastState as ToastState } from '../types';
 import '../styles/style.scss';
 
@@ -13,18 +13,21 @@ interface ToasterProps {
 }
 
 export function Toast({ toastProps, ...rest }: ToasterProps) {
+  const { toastId, isVisible, timeOut, containerId, updated, toastType, position, data, pauseOnHover } =
+    toastProps;
+
   const animationClassName = getAnimation({
-    isVisible: toastProps.isVisible,
-    position: toastProps.position!,
+    isVisible: isVisible,
+    position: position!,
   });
 
   const content =
-    typeof toastProps.data === 'function'
-      ? toastProps.data({
-          close: () => toast.disappear(toastProps.toastId, 0),
+    typeof data === 'function'
+      ? data({
+          close: () => toast.disappear(toastId, 0),
           immediatelyClose: () => {
-            toast.disappear(toastProps.toastId, 0);
-            toast.remove(toastProps.toastId, 0);
+            toast.disappear(toastId, 0);
+            toast.remove(toastId, 0);
           },
           icons: {
             success: <ToastTypeIcons.success />,
@@ -32,50 +35,68 @@ export function Toast({ toastProps, ...rest }: ToasterProps) {
             warn: <ToastTypeIcons.warn />,
             loading: <ToastTypeIcons.loading />,
           },
-          isVisible: toastProps.isVisible,
+          isVisible: isVisible,
         })
-      : toastProps.data;
+      : data;
 
   const onMouseEnter = () => {
-    if (toastProps.pauseOnHover) {
-      toast.pause(toastProps.toastId);
+    if (pauseOnHover) {
+      toast.pause(toastId);
     }
   };
 
   const onMouseLeave = () => {
-    if (toastProps.pauseOnHover) {
-      toast.resume(toastProps.toastId);
+    if (pauseOnHover) {
+      toast.resume(toastId);
     }
   };
 
   /** @description disappear after mount */
   useEffect(() => {
-    if (!toast.isActive(toastProps.toastId)) {
-      toast.setActive(toastProps.toastId);
-      toast.disappear(toastProps.toastId, toastProps.timeOut);
+    if (!toast.isActive(toastId)) {
+      toast.setActive(toastId);
+      toast.disappear(toastId, timeOut);
     }
-  }, [toastProps.toastId]);
+  }, [toastId]);
 
   /** @description promise toast */
   useEffect(() => {
-    if (toastProps.updated !== undefined) {
-      const newTimeOut = toastProps.timeOut >= MAX_TIMEOUT ? DISAPPEAR_TIMEOUT : toastProps.timeOut;
-      toast.disappear(toastProps.toastId, newTimeOut);
+    if (updated !== undefined) {
+      const newTimeOut = timeOut >= MAX_TIMEOUT ? DISAPPEAR_TIMEOUT : timeOut;
+      toast.disappear(toastId, newTimeOut);
     }
-  }, [toastProps.updated]);
+  }, [updated]);
+
+  const Icon = toastType === 'custom' || toastType === 'default' ? null : ToastTypeIcons[toastType];
 
   return (
-    <div
-      role="alert"
-      data-testid={`container-${toastProps.containerId}`}
-      className={toastProps.toastType === 'custom' ? '' : animationClassName}
-      onMouseEnter={onMouseEnter}
-      onMouseLeave={onMouseLeave}
-      {...rest}
-    >
-      <Condition condition={toastProps.toastType !== 'custom'}>
+    <div {...rest}>
+      <Condition condition={toastType !== 'custom'}>
         <If>
-          <DefaultToast status={toastProps.toastType}>{content}</DefaultToast>
+          <div
+            role="alert"
+            className={toastType === 'custom' ? '' : animationClassName}
+            data-testid={`container-${containerId}`}
+            onMouseEnter={onMouseEnter}
+            onMouseLeave={onMouseLeave}
+            style={{
+              boxSizing: 'border-box',
+              backgroundColor: 'white',
+              padding: '12px 14px 12px 12px',
+              display: 'flex',
+              alignItems: 'center',
+              gap: 5,
+              borderRadius: 8,
+              boxShadow: '2px 4px 10px rgba(0, 0, 0, 0.1)',
+            }}
+          >
+            {Icon && (
+              <span style={{ minWidth: 20, maxWidth: 20 }}>
+                <Icon />
+              </span>
+            )}
+            {content}
+          </div>
         </If>
         <Else>{content}</Else>
       </Condition>

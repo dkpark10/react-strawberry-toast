@@ -41,7 +41,7 @@ function App() {
          });                     
          
 `,
-  tailwindCss: 
+  tailwindCss:
 `toast(
   ({ close }) => (
     <div className="bg-white p-2 flex justify-between gap-2 rounded-sm">
@@ -56,13 +56,8 @@ function App() {
 emotion: `
 toast(
   ({ close }) => (
-    <div
-      css={{
-        backgroundColor: '#020715',
-        color: 'white',
-      }}
-    >
-      <span>💅 emotion toast </span>
+    <div>
+      <span css={{ color: 'red' }}>💅 emotion toast </span>
       <button
         type="button"
         css={{ border: '1px solid white', width: 28, height: 28 }}

@@ -1,4 +1,4 @@
-import React, { type PropsWithChildren, type ReactNode } from 'react';
+import React, { type ReactNode } from 'react';
 import { STYLE_NAMESPACE } from '../constants';
 import type { ToastType } from '../types';
 
@@ -63,34 +63,3 @@ export const ToastTypeIcons: Record<Exclude<ToastType, 'custom' | 'default'>, ()
   loading: () => <div className={`${STYLE_NAMESPACE}__loading`} />,
   warn: WarnSvg,
 };
-
-interface DefaultToastProps {
-  status: ToastType;
-}
-
-export function DefaultToast({ status, children }: DefaultToastProps & PropsWithChildren) {
-  const Icon = status === 'custom' || status === 'default' ? null : ToastTypeIcons[status];
-
-  return (
-    <div
-      style={{
-        boxSizing: 'border-box',
-        backgroundColor: 'white',
-        padding: '12px 14px 12px 12px',
-        display: 'flex',
-        alignItems: 'center',
-        gap: 5,
-        borderRadius: 8,
-        boxShadow: '2px 4px 10px rgba(0, 0, 0, 0.1)',
-      }}
-    >
-      {Icon && (
-        <span style={{ minWidth: 20, maxWidth: 20 }}>
-          <Icon />
-        </span>
-      )}
-
-      {children}
-    </div>
-  );
-}

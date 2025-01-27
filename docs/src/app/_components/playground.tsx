@@ -108,7 +108,7 @@ export default function HomePlayGround() {
         toast(
           ({ close }) => (
             <div>
-              <span>💅 emotion toast </span>
+              <span css={{ color: 'red' }}>💅 emotion toast </span>
               <button
                 type="button"
                 css={{ border: '1px solid white', width: 28, height: 28 }}
