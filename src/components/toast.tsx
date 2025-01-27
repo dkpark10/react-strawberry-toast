@@ -51,6 +51,23 @@ export function Toast({ toastProps, ...rest }: ToasterProps) {
     }
   };
 
+  useEffect(() => {
+    const focusHandler = () => {
+      toast.resume(toastId);
+    };
+
+    const blurHandler = () => {
+      toast.pause(toastId);
+    }
+
+    window.addEventListener('focus', focusHandler);
+    window.addEventListener('blur', blurHandler);
+    return () => {
+      window.removeEventListener('focus', focusHandler);
+      window.removeEventListener('blur', blurHandler);
+    };
+  }, []);
+
   /** @description disappear after mount */
   useEffect(() => {
     if (!toast.isActive(toastId)) {

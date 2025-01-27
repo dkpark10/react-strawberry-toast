@@ -4,15 +4,7 @@ import { ToastContainer } from '../../src/components/toast-container';
 
 export default function App() {
   const click = () => {
-    const promise = new Promise<number>((resolve) => {
-      setTimeout(() => resolve(123), 3_000);
-    });
-
-    toast.promise(promise, {
-      loading: 'loading',
-      success: (res) => <div>{res}</div>,
-      error: 'error',
-    });
+    toast.success('asdads');
   };
 
   return (
