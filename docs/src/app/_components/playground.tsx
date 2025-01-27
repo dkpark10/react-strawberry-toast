@@ -158,7 +158,14 @@ export default function HomePlayGround() {
                 onClick={example.click}
               >
                 {typeof example.icon === 'string' ? (
-                  <Image src={example.icon} width={20} height={20} alt="emotion icon" />
+                  <Image
+                    src={`${process.env.NODE_ENV === 'production' ? '/react-strawberry-toast' : ''}${
+                      example.icon
+                    }`}
+                    width={20}
+                    height={20}
+                    alt={`${example.type} icon`}
+                  />
                 ) : (
                   example.icon
                 )}
