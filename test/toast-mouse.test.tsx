@@ -15,10 +15,10 @@ describe('mouse enter mouse leave', () => {
     vi.useRealTimers();
   });
 
-  test('should pause the toast when the mouseenter event occurs, and resume the toast timer when the mouseleave event occurs', async () => {
+  test('should pause the toast when the mouseenter event occurs, and resume the toast timer when the mouseleave event occurs', async (context) => {
     function App() {
       const click = () => {
-        toast(<div>strawberry toast</div>);
+        toast(<div>{context.task.id}</div>);
       };
 
       return (
@@ -33,43 +33,44 @@ describe('mouse enter mouse leave', () => {
 
     fireEvent.click(getByRole('button', { name: 'click' }));
 
-    expect(queryByText(/strawberry toast/i)).toBeInTheDocument();
+    const regExp = new RegExp(context.task.id, 'i');
+    expect(queryByText(regExp)).toBeInTheDocument();
 
     act(() => {
       vi.advanceTimersByTime(1_000);
     });
 
-    fireEvent.mouseEnter(getByText('strawberry toast'));
+    fireEvent.mouseEnter(getByText(regExp));
 
     act(() => {
       vi.advanceTimersByTime(60_000);
     });
 
-    expect(queryByText(/strawberry toast/i)).toBeInTheDocument();
+    expect(queryByText(regExp)).toBeInTheDocument();
 
-    fireEvent.mouseLeave(getByText('strawberry toast'));
+    fireEvent.mouseLeave(getByText(regExp));
 
-    expect(queryByText(/strawberry toast/i)).toBeInTheDocument();
+    expect(queryByText(regExp)).toBeInTheDocument();
 
     act(() => {
       vi.advanceTimersByTime(2_000 + REMOVE_TIMEOUT);
     });
 
-    expect(queryByText(/strawberry toast/i)).not.toBeInTheDocument();
+    expect(queryByText(regExp)).not.toBeInTheDocument();
   });
 
   test(`should pause the toast when the mouseenter event occurs, and resume the toast timer 
-    when the mouseleave event occurs in multiple container`, async () => {
+    when the mouseleave event occurs in multiple container`, async (context) => {
     function App() {
       const click = () => {
-        toast(<div>strawberry toast</div>);
-        toast(<div>strawberry toast1</div>, {
+        toast(<div>{context.task.id} strawberry toast1</div>);
+        toast(<div>{context.task.id} strawberry toast2</div>, {
           containerId: '1',
         });
-        toast(<div>strawberry toast2</div>, {
+        toast(<div>{context.task.id} strawberry toast3</div>, {
           containerId: '2',
         });
-        toast(<div>strawberry toast3</div>, {
+        toast(<div>{context.task.id} strawberry toast4</div>, {
           containerId: '3',
         });
       };
@@ -89,25 +90,25 @@ describe('mouse enter mouse leave', () => {
 
     fireEvent.click(getByRole('button', { name: 'click' }));
 
-    expect(queryAllByText(/strawberry toast/i)).toHaveLength(4);
+    expect(queryAllByText(new RegExp(`${context.task.id} strawberry toast(1|2|3|4)`))).toHaveLength(4);
 
-    fireEvent.mouseEnter(getByText('strawberry toast1'));
+    fireEvent.mouseEnter(getByText(`${context.task.id} strawberry toast2`));
 
     act(() => {
       vi.advanceTimersByTime(DISAPPEAR_TIMEOUT + REMOVE_TIMEOUT);
     });
 
-    expect(queryByText('strawberry toast')).not.toBeInTheDocument();
-    expect(queryByText('strawberry toast2')).not.toBeInTheDocument();
-    expect(queryByText('strawberry toast3')).not.toBeInTheDocument();
+    expect(queryByText(`${context.task.id} strawberry toast1`)).not.toBeInTheDocument();
+    expect(queryByText(`${context.task.id} strawberry toast3`)).not.toBeInTheDocument();
+    expect(queryByText(`${context.task.id} strawberry toast4`)).not.toBeInTheDocument();
 
-    expect(queryByText('strawberry toast1')).toBeInTheDocument();
+    expect(queryByText(`${context.task.id} strawberry toast2`)).toBeInTheDocument();
   });
 
-  test('should not display toast when the mouseenter event occurs if pauseOnHover option is set', async () => {
+  test('should not display toast when the mouseenter event occurs if pauseOnHover option is set', async (context) => {
     function App() {
       const click = () => {
-        toast(<div>strawberry toast</div>, {
+        toast(<div>{context.task.id}</div>, {
           pauseOnHover: false,
         });
       };
@@ -124,14 +125,15 @@ describe('mouse enter mouse leave', () => {
 
     fireEvent.click(getByRole('button', { name: 'click' }));
 
-    fireEvent.mouseEnter(getByText(/strawberry toast/i));
+    const regExp = new RegExp(context.task.id, 'i');
+    fireEvent.mouseEnter(getByText(regExp));
 
-    expect(queryByText(/strawberry toast/i)).toBeInTheDocument();
+    expect(queryByText(regExp)).toBeInTheDocument();
 
     act(() => {
       vi.advanceTimersByTime(DISAPPEAR_TIMEOUT + REMOVE_TIMEOUT);
     });
     
-    expect(queryByText(/strawberry toast/i)).not.toBeInTheDocument();
+    expect(queryByText(regExp)).not.toBeInTheDocument();
   });
 });

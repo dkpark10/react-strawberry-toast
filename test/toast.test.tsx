@@ -15,10 +15,10 @@ describe('toast', () => {
     vi.useRealTimers();
   });
 
-  test('should display toast when the button is clicked and hide it after 3 seconds', async () => {
+  test('should display toast when the button is clicked and hide it after 3 seconds', async (context) => {
     function App() {
       const click = () => {
-        toast('strawberry toast');
+        toast(context.task.id);
       };
 
       return (
@@ -29,36 +29,37 @@ describe('toast', () => {
       );
     }
 
-    const { getByRole, queryByText } = render(<App />);
+    const { getByRole, queryByText, getByText } = render(<App />);
 
     fireEvent.click(getByRole('button', { name: 'click' }));
 
-    expect(queryByText(/strawberry toast/i)).toBeInTheDocument();
+    const regex = new RegExp(context.task.id, "i");
+    expect(getByText(regex)).toBeInTheDocument();
 
     act(() => {
       vi.advanceTimersByTime(1_000);
     });
 
-    expect(queryByText(/strawberry toast/i)).toBeInTheDocument();
+    expect(queryByText(regex)).toBeInTheDocument();
 
     act(() => {
       vi.advanceTimersByTime(2_000 + REMOVE_TIMEOUT);
     });
 
-    expect(queryByText(/strawberry toast/i)).not.toBeInTheDocument();
+    expect(queryByText(regex)).not.toBeInTheDocument();
   });
 
-  test('should have exactly 4 toasts', async () => {
+  test('should have exactly 4 toasts', async (context) => {
     function App() {
       const click = () => {
-        toast(<div>strawberry toast1</div>);
-        toast(<div>strawberry toast2</div>, {
+        toast(<div>{context.task.id}</div>);
+        toast(<div>{context.task.id}</div>, {
           position: 'bottom-left',
         });
-        toast(<div>strawberry toast3</div>, {
+        toast(<div>{context.task.id}</div>, {
           position: 'bottom-center',
         });
-        toast(<div>strawberry toast4</div>, {
+        toast(<div>{context.task.id}</div>, {
           position: 'bottom-right',
         });
       };
@@ -75,17 +76,13 @@ describe('toast', () => {
 
     fireEvent.click(getByRole('button', { name: 'click' }));
 
-    expect(queryAllByText(/strawberry toast/i)).toHaveLength(4);
-
-    act(() => {
-      vi.advanceTimersByTime(DISAPPEAR_TIMEOUT + REMOVE_TIMEOUT);
-    });
+    expect(queryAllByText(new RegExp(context.task.id, 'i'))).toHaveLength(4);
   });
 
-  test('should have no style and no animation if data is function.', async () => {
+  test('should have no style and no animation if data is function.', async (context) => {
     function App() {
       const click = () => {
-        toast(() => <div>strawberry toast</div>);
+        toast(() => <div>{context.task.id}</div>);
       };
 
       return (
@@ -101,24 +98,20 @@ describe('toast', () => {
     fireEvent.click(getByRole('button', { name: 'click' }));
 
     // @ts-ignore
-    expect(queryByText(/strawberry toast/i)?.style._values).empty;
-
-    act(() => {
-      vi.advanceTimersByTime(DISAPPEAR_TIMEOUT + REMOVE_TIMEOUT);
-    });
+    expect(queryByText(new RegExp(context.task.id, 'i'))?.style._values).empty;
   });
 
-  test('should display toasts in each toast container.', async () => {
+  test('should display toasts in each toast container.', async (context) => {
     function App() {
       const click = () => {
-        toast(<div>strawberry toast</div>);
-        toast(<div>strawberry toast</div>, {
+        toast(<div>{context.task.id}</div>);
+        toast(<div>{context.task.id}</div>, {
           containerId: '1',
         });
-        toast(<div>strawberry toast</div>, {
+        toast(<div>{context.task.id}</div>, {
           containerId: '2',
         });
-        toast(<div>strawberry toast</div>, {
+        toast(<div>{context.task.id}</div>, {
           containerId: '3',
         });
       };
@@ -138,25 +131,21 @@ describe('toast', () => {
 
     fireEvent.click(getByRole('button', { name: 'click' }));
 
-    expect(queryAllByText(/strawberry toast/i)).toHaveLength(4);
+    expect(queryAllByText(new RegExp(context.task.id, 'i'))).toHaveLength(4);
 
     expect(getAllByTestId('container-1')).toHaveLength(1);
     expect(getAllByTestId('container-2')).toHaveLength(1);
     expect(getAllByTestId('container-3')).toHaveLength(1);
-
-    act(() => {
-      vi.advanceTimersByTime(DISAPPEAR_TIMEOUT + REMOVE_TIMEOUT);
-    });
   });
 
-  test('should display toasts at the global position when global-position is set.', async () => {
+  test('should display toasts at the global position when global-position is set.', async (context) => {
     function App() {
       const click = () => {
-        toast(<div>strawberry toast bottom left</div>);
+        toast(<div>{context.task.id}</div>);
       };
 
       const click2 = () => {
-        toast(<div>strawberry toast</div>, {
+        toast(<div>{context.task.id}</div>, {
           position: 'top-right',
         });
       };
@@ -177,16 +166,12 @@ describe('toast', () => {
 
     expect(queryByTestId('bottom-left')).toBeInTheDocument();
     expect(queryByTestId('top-right')).toBeInTheDocument();
-
-    act(() => {
-      vi.advanceTimersByTime(DISAPPEAR_TIMEOUT + REMOVE_TIMEOUT);
-    });
   });
 
-  test('should display the toast after 3200ms even if removeTimeout is greater than or equal to 1000ms', async () => {
+  test('should display the toast after 3200ms even if removeTimeout is greater than or equal to 1000ms', async (context) => {
     function App() {
       const click = () => {
-        toast('strawberry toast', { removeTimeOut: 1_000 });
+        toast(context.task.id, { removeTimeOut: 1_000 });
       };
 
       return (
@@ -205,17 +190,13 @@ describe('toast', () => {
       vi.advanceTimersByTime(DISAPPEAR_TIMEOUT + REMOVE_TIMEOUT);
     });
 
-    expect(queryByText(/strawberry toast/i)).toBeInTheDocument();
-
-    act(() => {
-      vi.advanceTimersByTime(8_000);
-    });
+    expect(queryByText(new RegExp(context.task.id, 'i'))).toBeInTheDocument();
   });
 
-  test('should not display duplicated toast id', async () => {
+  test('should not display duplicated toast id', async (context) => {
     function App() {
       const click = () => {
-        toast('strawberry toast', {
+        toast(context.task.id, {
           toastId: 'a',
         });
       };
@@ -232,10 +213,10 @@ describe('toast', () => {
 
     fireEvent.click(getByRole('button', { name: 'click' }));
 
-    expect(queryByText(/strawberry toast/i)).toBeInTheDocument();
+    expect(queryByText(new RegExp(context.task.id, 'i'))).toBeInTheDocument();
 
     expect(() =>
-      toast('strawberry toast', {
+      toast(context.task.id, {
         toastId: 'a',
       })
     ).toThrowError('A duplicate custom ID is not available.');

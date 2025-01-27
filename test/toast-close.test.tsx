@@ -15,13 +15,13 @@ describe('toast close test', () => {
     vi.useRealTimers();
   });
 
-  test('should not display the toast when the close button is clicked', async () => {
+  test('should not display the toast when the close button is clicked', async (context) => {
     function App() {
       const click = () => {
         toast(
           ({ close }) => (
             <div>
-              <span>strawberry toast</span>
+              <span>{context.task.id}</span>
               <button onClick={close}>close</button>
             </div>
           ),
@@ -43,7 +43,7 @@ describe('toast close test', () => {
 
     fireEvent.click(getByRole('button', { name: 'click' }));
 
-    expect(queryByText(/strawberry toast/i)).toBeInTheDocument();
+    expect(queryByText(new RegExp(context.task.id, 'i'))).toBeInTheDocument();
 
     fireEvent.click(getByRole('button', { name: 'close' }));
 
@@ -51,17 +51,17 @@ describe('toast close test', () => {
       vi.advanceTimersByTime(REMOVE_TIMEOUT);
     });
 
-    expect(queryByText(/strawberry toast/i)).not.toBeInTheDocument();
+    expect(queryByText(new RegExp(context.task.id, 'i'))).not.toBeInTheDocument();
   });
 
   test(`should remain visible even after an infinite amount of time has passed for the toast and
-        not immediately display the toast when the immediatelyClose button is clicked`, async () => {
+        not immediately display the toast when the immediatelyClose button is clicked`, async (context) => {
     function App() {
       const click = () => {
         toast(
           ({ immediatelyClose }) => (
             <div>
-              <span>strawberry toast</span>
+              <span>{context.task.id}</span>
               <button onClick={immediatelyClose}>close</button>
             </div>
           ),
@@ -87,7 +87,7 @@ describe('toast close test', () => {
       vi.advanceTimersByTime(MAX_TIMEOUT - 1);
     });
 
-    expect(queryByText(/strawberry toast/i)).toBeInTheDocument();
+    expect(queryByText(new RegExp(context.task.id, 'i'))).toBeInTheDocument();
 
     fireEvent.click(getByRole('button', { name: 'close' }));
 
@@ -95,7 +95,6 @@ describe('toast close test', () => {
       vi.advanceTimersByTime(0);
     });
 
-    expect(queryByText(/strawberry toast/i)).not.toBeInTheDocument();
+    expect(queryByText(new RegExp(context.task.id, 'i'))).not.toBeInTheDocument();
   });
-
 });
