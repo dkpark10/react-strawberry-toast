@@ -19,11 +19,21 @@ module.exports = {
           '0%': { transform: 'scaleX(1)', opacity: '1', transformOrigin: 'right' },
           '100%': { transform: 'scaleX(0.1)', opacity: '0', transformOrigin: 'right' },
         },
+        'left-to-right': {
+          '0%': { transform: 'translateX(-100%)', opacity: '0.8' },
+          '100%': { transform: 'translateX(0)', opacity: '1' },
+        },
+        'right-to-left': {
+          '0%': { transform: 'translateX(0)', opacity: '1' },
+          '100%': { transform: 'translateX(-100%)', opacity: '0.8' },
+        },
       },
 
       animation: {
         'right-grow': 'right-grow 0.4s ease-in-out',
         'left-shrink': 'left-shrink 0.4s ease-in-out',
+        'left-to-right': 'left-to-right 0.2s ease-in-out',
+        'right-to-left': 'right-to-left 0.2s ease-in-out',
       },
 
       colors: {

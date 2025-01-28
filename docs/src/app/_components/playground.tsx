@@ -127,7 +127,7 @@ export default function HomePlayGround() {
   const optionButtonClassName = (bool: boolean) =>
     `${clsx(
       bool && 'bg-straw-berry text-white'
-    )} active:bg-straw-berry active:text-white max-sm:text-xs rounded w-36 max-sm:w-28 h-10 shadow-md text-sm font-medium
+    )} active:bg-straw-berry active:text-white max-sm:text-xs rounded w-36 max-sm:w-full h-10 shadow-md text-sm font-medium
    py-2 px-2 flex items-center justify-center hover:bg-straw-berry hover:text-white`;
 
   return (
@@ -148,13 +148,13 @@ export default function HomePlayGround() {
       <div className="gap-12 py-10 justify-center sm:flex">
         <div
           id="toast-example-btn-area"
-          className="flex flex-col justify-between max-sm:pb-6 max-sm:grid max-sm:grid-cols-2"
+          className="flex flex-col justify-between max-sm:pb-6 gap-2 max-sm:grid max-sm:grid-cols-2"
         >
           {examples.map((example) => (
             <div key={example.type}>
               <button
                 type="button"
-                className="rounded w-40 h-11 shadow-md text-sm font-semibold py-2 px-2 gap-2 items-center flex max-sm:w-36"
+                className="rounded w-40 h-11 shadow-md text-sm font-semibold py-2 px-2 gap-2 items-center flex max-sm:w-full"
                 onClick={example.click}
               >
                 {typeof example.icon === 'string' ? (
@@ -175,7 +175,7 @@ export default function HomePlayGround() {
 
         <div id="option-area">
           <h5 className="font-semibold text-center text-md pb-4">Position</h5>
-          <div className="grid gap-4 grid-cols-3">
+          <div className="grid gap-2 grid-cols-3">
             {['top-left', 'top-center', 'top-right', 'bottom-left', 'bottom-center', 'bottom-right'].map(
               (p) => (
                 <button

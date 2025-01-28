@@ -32,7 +32,7 @@ export default function DocsMultiContainer() {
   };
 
   return (
-    <div id="profile" className="border border-gray-300 p-2 w-10/12">
+    <div id="profile" className="border border-gray-300 p-2 w-10/12 max-sm:w-full">
       <div className="flex items-center gap-2">
         <ProfileSvg />
         <div>developer</div>
