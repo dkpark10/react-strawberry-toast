@@ -10,9 +10,10 @@ import '../styles/style.scss';
 interface ToasterProps {
   toastProps: ToastState;
   style: React.CSSProperties;
+  pauseOnActivate: boolean;
 }
 
-export function Toast({ toastProps, ...rest }: ToasterProps) {
+export function Toast({ toastProps, pauseOnActivate, ...rest }: ToasterProps) {
   const { toastId, isVisible, timeOut, containerId, updated, toastType, position, data, pauseOnHover } =
     toastProps;
 
@@ -52,13 +53,14 @@ export function Toast({ toastProps, ...rest }: ToasterProps) {
   };
 
   useEffect(() => {
+    if (!pauseOnActivate) return;
     const focusHandler = () => {
       toast.resume(toastId);
     };
 
     const blurHandler = () => {
       toast.pause(toastId);
-    }
+    };
 
     window.addEventListener('focus', focusHandler);
     window.addEventListener('blur', blurHandler);

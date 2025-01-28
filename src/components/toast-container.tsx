@@ -44,6 +44,7 @@ interface ToastContainerProps {
   containerId?: string;
   reverse?: boolean;
   gap?: number;
+  pauseOnActivate?: boolean;
 }
 
 export function ToastContainer({
@@ -51,6 +52,7 @@ export function ToastContainer({
   containerId = '',
   gap = 9,
   reverse = false,
+  pauseOnActivate = true,
 }: ToastContainerProps) {
   const toastList = useSyncExternalStore(
     toastStore.subscribe.bind(toastStore),
@@ -91,6 +93,7 @@ export function ToastContainer({
               .map((toast) => (
                 <Toast
                   key={toast.toastId}
+                  pauseOnActivate={pauseOnActivate}
                   toastProps={toast}
                   style={{
                     display: 'flex',
@@ -137,6 +140,7 @@ export function ToastContainer({
                   <Toast
                     key={toast.toastId}
                     toastProps={toast}
+                    pauseOnActivate={pauseOnActivate}
                     style={{
                       display: 'flex',
                       justifyContent: 'center',
