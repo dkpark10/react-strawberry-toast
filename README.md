@@ -44,25 +44,26 @@ function App() {
 
 ### &lt;ToastContainer /&gt;
 
-| Option | Description | Type | Required |
+| Option | Description | Type | Default |
 |:-----------|:-----------|:-----------|:-----------|
-| Position      | Global toast's Position  |  top-left, top-center, top-right, bottom-left, bottom-center, bottom-right | false |
-| ContainerId      | ToastContainer's unique id  |  String | false |
-| Reverse      | Direction when toast appear  |  Boolean | false |
-| Gap      | Gap Between toasts  |  Boolean | false |
+| position      | Global toast's Position  |  top-left, top-center, top-right, bottom-left, bottom-center, bottom-right | top-center |
+| containerId      | ToastContainer's unique id  |  String |  |
+| reverse      | Direction when toast appear  |  Boolean | false |
+| gap      | Gap Between toasts  |  Number | 9 |
+| pauseOnActivate      | Pause Toast timer when blur events occurs  |  Boolean | true |
 
 
 ### toast
 
-| Option | Description | Type | Required |
+| Option | Description | Type | Default |
 |:-----------|:-----------|:-----------|:-----------|
-| toastId      | Toast's unique Id  |  String | false |
-| Position      | Position per toast  | top-left, top-center, top-right, bottom-left, bottom-center, bottom-right | false |
-| ContainerId      | ID shown in the Toast Container Unique ID  |  String | false |
-| PauseOnHover      | Option that sets the timer to stop or not when a hover event occurs  |  Boolean | false |
-| ToastType      | Toast Type |  default, custom, success, error, laoding, warn | false |
-| TimeOut      | Time for toast to disappear  |  Number | false |
-| RemoveTimeOut      | Time for toast to remove In Toast List  |  Number | false |
+| toastId      | Toast's unique Id  |  String | |
+| position      | Position per toast  | top-left, top-center, top-right, bottom-left, bottom-center, bottom-right | top-center |
+| containerId      | ID shown in the Toast Container Unique ID  |  String | |
+| pauseOnHover      | Option that sets the timer to stop or not when a hover event occurs  |  Boolean | true |
+| toastType      | Toast Type |  default, custom, success, error, loading, warn | default |
+| timeOut      | Time for toast to disappear  |  Number | 3000 |
+| removeTimeOut      | Time for toast to remove In Toast List  |  Number | 200 |
 
 ## License
 

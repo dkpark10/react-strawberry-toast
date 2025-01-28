@@ -9,7 +9,7 @@ export const customToastPropsTableData: TableData<3> = {
   header: ['option', 'description', 'type'],
   body: [
     ['close', 'closing function', 'Function'],
-    ['immediatelyClose', 'immediatelyClosing function', 'Function'],
+    ['immediatelyClose', 'immediately Closing function', 'Function'],
     ['icons', 'Toast A collection of icons in all states', 'ReactNode'],
     ['isVisible', 'Toast exposure status value', 'Boolean'],
   ],
@@ -41,6 +41,7 @@ export const toastContainerApi: TableData<4> = {
     ['containerId', "ToastContainer's unique id", 'String', 'false'],
     ['reverse', 'Direction when toast appear', 'Boolean', 'false'],
     ['gap', 'Gap Between toasts', 'Boolean', 'false'],
+    ['pauseOnActivate', 'Pause Toast timer when blur events occurs', 'Boolean', 'false'],
   ],
 };
 
