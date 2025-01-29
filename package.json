@@ -9,7 +9,8 @@
     "toast",
     "snackbar",
     "modal",
-    "alert"
+    "alert",
+    "notification"
   ],
   "repository": {
     "type": "git",
