@@ -59,6 +59,7 @@ toast.resume = handlers.resume;
 toast.pause = handlers.pause;
 toast.replace = handlers.replace;
 toast.remove = handlers.remove;
+toast.allClear = handlers.allClear;
 
 toast.success = createToast('success');
 toast.error = createToast('error');

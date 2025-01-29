@@ -33,6 +33,10 @@ export const toastHandlers = <T = ToastState>(
     deleteTimer(toastId);
   };
 
+  const allClear = () => {
+    toastStore.setState([]);
+  };
+
   const replace = (
     toastId: ToastState['toastId'],
     data: ToastState['data'],
@@ -104,5 +108,5 @@ export const toastHandlers = <T = ToastState>(
     disappear(toastId, leftTimeout);
   };
 
-  return { setActive, isActive, disappear, resume, pause, replace, remove };
+  return { setActive, isActive, disappear, resume, pause, replace, remove, allClear };
 };

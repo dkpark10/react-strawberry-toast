@@ -33,7 +33,7 @@ describe('toast', () => {
 
     fireEvent.click(getByRole('button', { name: 'click' }));
 
-    const regex = new RegExp(context.task.id, "i");
+    const regex = new RegExp(context.task.id, 'i');
     expect(getByText(regex)).toBeInTheDocument();
 
     act(() => {
@@ -248,7 +248,7 @@ describe('toast', () => {
     act(() => {
       fireEvent.blur(window);
     });
-    
+
     act(() => {
       vi.advanceTimersByTime(100_000);
     });
@@ -260,7 +260,7 @@ describe('toast', () => {
     expect(queryByText(new RegExp(context.task.id, 'i'))).toBeInTheDocument();
 
     act(() => {
-      vi.advanceTimersByTime((DISAPPEAR_TIMEOUT - 1_000) + REMOVE_TIMEOUT);
+      vi.advanceTimersByTime(DISAPPEAR_TIMEOUT - 1_000 + REMOVE_TIMEOUT);
     });
 
     expect(queryByText(new RegExp(context.task.id, 'i'))).not.toBeInTheDocument();
