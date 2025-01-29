@@ -12,6 +12,7 @@ describe('toast close test', () => {
   });
 
   afterEach(() => {
+    toast.allClear();
     vi.useRealTimers();
   });
 

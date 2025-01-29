@@ -12,6 +12,7 @@ describe('toast', () => {
   });
 
   afterEach(() => {
+    toast.allClear();
     vi.useRealTimers();
   });
 

@@ -13,6 +13,7 @@ describe('mouse event test', () => {
   });
 
   afterEach(() => {
+    toast.allClear();
     vi.useRealTimers();
   });
 

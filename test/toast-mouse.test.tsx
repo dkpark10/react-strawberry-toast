@@ -12,6 +12,7 @@ describe('mouse enter mouse leave', () => {
   });
 
   afterEach(() => {
+    toast.allClear();
     vi.useRealTimers();
   });
 

@@ -14,6 +14,7 @@ describe('toast promise', () => {
   });
 
   afterEach(() => {
+    toast.allClear();
     vi.useRealTimers();
   });
 
