@@ -21,7 +21,7 @@ export interface ToastBaseState {
   isVisible: boolean;
   createdAt: number;
   pausedAt: number | null;
-  updated: boolean | null;
+  updated: number | null;
 }
 
 export interface Options extends BaseOptions {

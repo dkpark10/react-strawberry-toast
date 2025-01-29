@@ -47,7 +47,7 @@ export const toastHandlers = <T = ToastState>(
         return {
           ...toast,
           ...options,
-          updated: true,
+          updated: new Date().getTime(),
           data,
         };
       }
