@@ -14,6 +14,9 @@ export default function DocApiToast() {
       <Docs.MainTitle>Toast</Docs.MainTitle>
 
       <Docs.SubTitle>Props</Docs.SubTitle>
+      <p>The table below shows the properties of second parameters of toast function</p>
+      <Docs.SpaceSm />
+      
       <Table headers={toastApi.header} body={toastApi.body} />
       <div className="lg:pb-30 xl:pb-40" />
     </React.Fragment>

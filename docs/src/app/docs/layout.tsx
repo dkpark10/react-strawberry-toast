@@ -37,6 +37,7 @@ function Menus() {
           <ul className="ml-2">
             <DocsLinkItem href="/docs/toast-container">toastContainer</DocsLinkItem>
             <DocsLinkItem href="/docs/toast">toast</DocsLinkItem>
+            <DocsLinkItem href="/docs/use-toasts">useToasts</DocsLinkItem>
           </ul>
         </li>
       </ul>

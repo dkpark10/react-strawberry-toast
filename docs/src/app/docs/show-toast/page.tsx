@@ -63,8 +63,7 @@ export default function DocShowToast() {
 });                     
 `}
       </PrismLight>
-      <Docs.SpaceMd />
-
+      <Docs.SpaceSm />
       <p>For more detailed promise information, please refer to the <Link href='/docs/promise'><b className="text-straw-berry">promise</b></Link> page</p>
 
       <Docs.SpaceLg />

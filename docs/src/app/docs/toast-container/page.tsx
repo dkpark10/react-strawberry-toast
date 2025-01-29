@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 export default function DocApiToastContainer() {
   return (
     <React.Fragment>
-      <Docs.MainTitle>Toast Container</Docs.MainTitle>
+      <Docs.MainTitle>{'<ToastContainer>'}</Docs.MainTitle>
 
       <Docs.SubTitle>Props</Docs.SubTitle>
       <Table headers={toastContainerApi.header} body={toastContainerApi.body} />

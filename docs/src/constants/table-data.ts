@@ -73,3 +73,26 @@ export const promiseTableData: TableData<3> = {
     ['options.error', 'Data to show when promise is reject', 'ReactNode'],
   ],
 };
+
+export const useToastsTableData: TableData<4> = {
+  header: ['option', 'description', 'type', 'default'],
+  body: [
+    ['toastId', "Toast's unique Id", 'String', ''],
+    ['data', "Content of toast", 'ReactNode | () => ReactNode', ''],
+    [
+      'position',
+      'Position per toast',
+      `'top-left' | 'top-center' | 'top-right' | 'bottom-left' | 'bottom-center' | 'bottom-right'`,
+      'top-center',
+    ],
+    ['containerId', "ID shown in the Toast Container Unique ID", 'String', ''],
+    ['pauseOnHover', "The Option that sets the timer to stop or not when a hover event occurs", 'Boolean', 'true'],
+    ['toastType', "Toast Type", `'default' | 'custom' | 'success' | 'error' | 'loading' | 'warn'`, 'default'],
+    ['createdAt', "Time that toast was created", 'Date', ''],
+    ['timeOut', 'Time for toast to disappear', 'Number', '3000'],
+    ['removeTimeOut', 'Time for toast to remove In List', 'Number', '200'],
+    ['updated', 'Whether the content on toast has changed or not', 'Boolean | null', 'null'],
+    ['pausedAt', 'Time for toast to remove In List', 'Date | null', 'null'],
+    ['isVisible', 'Toast exposure status value', 'Boolean', 'true'],
+  ],
+};
