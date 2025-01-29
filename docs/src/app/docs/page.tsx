@@ -14,7 +14,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Get Started Docs | react-strawberry-toast',
     description: 'Explanation of the basic usage of react-strawberry-toast.',
-    images: '/strawberry.png',
+    images: '/react-strawberry-toast/strawberry.png',
     type: 'website',
     url: 'https://dkpark10.github.io/react-strawberry-toast/docs'
   },

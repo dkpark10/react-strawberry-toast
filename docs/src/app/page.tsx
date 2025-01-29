@@ -13,9 +13,9 @@ export const metadata: Metadata = {
   title: 'react strawberry toast docs',
   description: 'react-strawberry-toast-docs',
   openGraph: {
-    title: 'react strawberry toast docs',
+    title: 'React strawberry toast docs',
     description: 'React strawberry toast documentation',
-    images: '/strawberry.png',
+    images: '/react-strawberry-toast/strawberry.png',
     type: 'website',
     url: 'https://dkpark10.github.io/react-strawberry-toast'
   },
