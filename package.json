@@ -56,7 +56,8 @@
     "test:watch": "vitest --watch",
     "test:ui": "vitest --ui",
     "test:coverage": "vitest --coverage",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "deploy": "pnpm run build && npm publish --access=public"
   },
   "devDependencies": {
     "@commitlint/cli": "^19.6.1",
