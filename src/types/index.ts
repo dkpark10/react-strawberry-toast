@@ -32,6 +32,7 @@ export interface Options extends BaseOptions {
   toastType?: ToastType;
 }
 interface ToastDataCallback {
+  toastId: ToastBaseState['toastId'];
   close: () => void;
   immediatelyClose: () => void;
   isVisible: boolean;

@@ -25,6 +25,7 @@ export function Toast({ toastProps, pauseOnActivate, ...rest }: ToasterProps) {
   const content =
     typeof data === 'function'
       ? data({
+          toastId,
           close: () => toast.disappear(toastId, 0),
           immediatelyClose: () => {
             toast.disappear(toastId, 0);
