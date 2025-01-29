@@ -56,7 +56,7 @@ export function ToastContainer({
   const toastList = useToasts();
 
   const toastsByPosition: Record<Position, Array<ToastState>> = toastList
-    .filter((toast) => toast.containerId === '')
+    .filter((toast) => toast.containerId === null)
     .reduce((acc, toast) => {
       const key = toast.position || globalPosition;
       toast.position = key;

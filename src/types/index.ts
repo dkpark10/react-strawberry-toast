@@ -25,8 +25,8 @@ export interface ToastBaseState {
 }
 
 export interface Options extends BaseOptions {
-  position?: Position;
-  containerId?: string;
+  position?: Position | null;
+  containerId?: string | null;
   pauseOnHover?: boolean;
   toastType?: ToastType;
 }

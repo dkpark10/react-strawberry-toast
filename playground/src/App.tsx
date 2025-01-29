@@ -5,19 +5,14 @@ import { ToastContainer } from '../../src/components/toast-container';
 export default function App() {
   const click = () => {
     toast.success('asdads', { timeOut: Infinity });
-    toast.success('asdads', { timeOut: Infinity });
-  };
-
-  const clear = () => {
-    toast.allClear();
+    toast.success('brbbrbrb', { timeOut: Infinity, position: 'bottom-left' });
   };
 
   return (
     <React.Fragment>
       <div>example</div>
       <button onClick={click}>click</button>
-      <button onClick={clear}>click2</button>
-      <ToastContainer />
+      <ToastContainer position='bottom-center' />
     </React.Fragment>
   );
 }
