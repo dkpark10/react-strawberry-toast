@@ -1,9 +1,8 @@
 'use client';
 
 import React from 'react';
-import { useSyncExternalStore } from 'react';
 import { Toast } from './toast';
-import { toastStore } from '../core/toast';
+import { useToasts } from '../hooks/use-toasts';
 import { getDirection } from '../utils/get-direction';
 import type { Position, NonHeadlessToastState as ToastState } from '../types';
 import { Condition, If, Else } from './condition';
@@ -54,11 +53,7 @@ export function ToastContainer({
   reverse = false,
   pauseOnActivate = true,
 }: ToastContainerProps) {
-  const toastList = useSyncExternalStore(
-    toastStore.subscribe.bind(toastStore),
-    toastStore.getSnapShot.bind(toastStore),
-    toastStore.getSnapShot.bind(toastStore)
-  );
+  const toastList = useToasts();
 
   const toastsByPosition: Record<Position, Array<ToastState>> = toastList
     .filter((toast) => toast.containerId === undefined)

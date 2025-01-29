@@ -1,8 +1,8 @@
 import { useSyncExternalStore } from 'react';
-import { toastStore } from '../core/toast';
-import type { NonHeadlessToastState } from '../types';
+import { toastStore } from '../core/headless-toast';
+import type { ToastState } from '../types';
 
-export const useToasts = (): Array<NonHeadlessToastState> => {
+export const useToasts = (): Array<ToastState> => {
   return useSyncExternalStore(
     toastStore.subscribe.bind(toastStore),
     toastStore.getSnapShot.bind(toastStore),
