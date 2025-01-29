@@ -6,11 +6,19 @@ import { codeSyntax } from '@/constants/code-syntax';
 import { ToastContainer } from 'react-strawberry-toast';
 import { Docs } from '@/components/docs-title';
 
-import type { Metadata } from 'next'
- 
+import type { Metadata } from 'next';
+
 export const metadata: Metadata = {
   title: 'Get Started Docs | react-strawberry-toast',
-}
+  description: 'Explanation of the basic usage of react-strawberry-toast.',
+  openGraph: {
+    title: 'Get Started Docs | react-strawberry-toast',
+    description: 'Explanation of the basic usage of react-strawberry-toast.',
+    images: '/strawberry.png',
+    type: 'website',
+    url: 'https://dkpark10.github.io/react-strawberry-toast/docs'
+  },
+};
 
 export default function DocsIndexPage() {
   return (
