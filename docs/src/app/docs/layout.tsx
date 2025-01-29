@@ -47,7 +47,7 @@ function Menus() {
 export default function DocsLayout({ children }: PropsWithChildren) {
   return (
     <>
-      <header className="w-full h-14 sm:px-5 max-sm:pl-2 fixed bg-primary-white z-10">
+      <header className="w-full h-14 fixed bg-primary-white z-10 sm:pr-5">
         <div className="py-3 pr-5 flex justify-between ">
           <div className="flex">
             <Link href="/">
@@ -60,16 +60,15 @@ export default function DocsLayout({ children }: PropsWithChildren) {
             <Github />
           </Link>
         </div>
-
+        <div className="-mx-5 h-[2px] bg-[#ececec]" />
       </header>
       
-      <div className="h-[2px] bg-[#ececec] relative top-14" />
 
-      <div className="pt-16 sm:px-5 max-sm:px-2">
+      <div className="pt-16 sm:hidden">
         <Menus />
       </div>
 
-      <div className="pt-16 sm:px-5 max-sm:px-2">
+      <div className="pt-16">
         <aside id="layout-container" className="flex max-sm:hidden fixed">
          <Menus />
         </aside>
