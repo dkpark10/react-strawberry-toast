@@ -4,18 +4,13 @@ import { ToastContainer } from '../../src/components/toast-container';
 
 export default function App() {
   const click = () => {
-    toast.success('asdads');
-    toast.success('asdads');
-    toast.success('asdads');
-    toast.success('asdads');
-    toast.success('asdads');
-    toast.success('asdads');
-    toast.success('asdads');
+    toast.success('asdads', { timeOut: Infinity });
+    toast.success('asdads', { timeOut: Infinity });
   };
 
   const clear = () => {
     toast.allClear();
-  }
+  };
 
   return (
     <React.Fragment>

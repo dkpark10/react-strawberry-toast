@@ -175,7 +175,7 @@ export default function HeadlessExample() {
 
   return (
     <React.Fragment>
-      <button className="p-2 bg-straw-berry text-white" type="button" onClick={click}>
+      <button className="p-2 bg-red-500 text-white" type="button" onClick={click}>
         show toast
       </button>
       <div id="toast-container" className="top-4 left-4 right-4 bottom-4 fixed z-[9999] pointer-events-none">

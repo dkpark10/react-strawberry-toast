@@ -3,6 +3,7 @@ import { PrismLight } from 'react-syntax-highlighter';
 import { CodeTheme } from '@/constants/code-theme';
 import { codeSyntax } from '@/constants/code-syntax';
 import Strong from '@/components/strong';
+import Link from 'next/link';
 import { Docs } from '@/components/docs-title';
 import { Table } from '@/components/table';
 import { customToastPropsTableData } from '@/constants/table-data';
@@ -63,6 +64,8 @@ export default function DocShowToast() {
 `}
       </PrismLight>
       <Docs.SpaceMd />
+
+      <p>For more detailed promise information, please refer to the <Link href='/docs/promise'><b className="text-straw-berry">promise</b></Link> page</p>
 
       <Docs.SpaceLg />
       <Docs.SubTitle>Custom Toast</Docs.SubTitle>

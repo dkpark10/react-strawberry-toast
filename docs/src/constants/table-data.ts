@@ -8,6 +8,7 @@ type TableData<N extends number> = {
 export const customToastPropsTableData: TableData<3> = {
   header: ['option', 'description', 'type'],
   body: [
+    ['toastId', "Toast's unique Id", 'String'],
     ['close', 'closing function', 'Function'],
     ['immediatelyClose', 'immediately Closing function', 'Function'],
     ['icons', 'Toast A collection of icons in all states', 'ReactNode'],
@@ -30,36 +31,36 @@ export const useToastsReturnValue: TableData<3> = {
 };
 
 export const toastContainerApi: TableData<4> = {
-  header: ['option', 'description', 'type', 'required'],
+  header: ['option', 'description', 'type', 'default'],
   body: [
     [
       'position',
       "Global toast's Position",
       `'top-left' | 'top-center' | 'top-right' | 'bottom-left' | 'bottom-center' | 'bottom-right'`,
-      'false',
+      'top-center',
     ],
-    ['containerId', "ToastContainer's unique id", 'String', 'false'],
+    ['containerId', "ToastContainer's unique id", 'String', ''],
     ['reverse', 'Direction when toast appear', 'Boolean', 'false'],
-    ['gap', 'Gap Between toasts', 'Boolean', 'false'],
-    ['pauseOnActivate', 'Pause Toast timer when blur events occurs', 'Boolean', 'false'],
+    ['gap', 'Gap Between toasts', 'Number', '9'],
+    ['pauseOnActivate', 'Pause Toast timer when blur events occurs', 'Boolean', 'true'],
   ],
 };
 
 export const toastApi: TableData<4> = {
-  header: ['option', 'description', 'type', 'required'],
+  header: ['option', 'description', 'type', 'default'],
   body: [
-    ['toastId', "Toast's unique Id", 'String', 'false'],
+    ['toastId', "Toast's unique Id", 'String', ''],
     [
       'position',
       'Position per toast',
       `'top-left' | 'top-center' | 'top-right' | 'bottom-left' | 'bottom-center' | 'bottom-right'`,
-      'false',
+      'top-center',
     ],
-    ['containerId', "ID shown in the Toast Container Unique ID", 'String', 'false'],
-    ['pauseOnHover', "The Option that sets the timer to stop or not when a hover event occurs", 'String', 'false'],
-    ['toastType', "Toast Type", `'default' | 'custom' | 'success' | 'error' | 'loading' | 'warn'`, 'false'],
-    ['timeOut', 'Time for toast to disappear', 'Number', 'false'],
-    ['removeTimeOut', 'Time for toast to remove In List', 'Number', 'false'],
+    ['containerId', "ID shown in the Toast Container Unique ID", 'String', ''],
+    ['pauseOnHover', "The Option that sets the timer to stop or not when a hover event occurs", 'Boolean', 'true'],
+    ['toastType', "Toast Type", `'default' | 'custom' | 'success' | 'error' | 'loading' | 'warn'`, 'default'],
+    ['timeOut', 'Time for toast to disappear', 'Number', '3000'],
+    ['removeTimeOut', 'Time for toast to remove In List', 'Number', '200'],
   ],
 };
 
