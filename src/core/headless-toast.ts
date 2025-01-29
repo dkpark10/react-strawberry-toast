@@ -22,10 +22,11 @@ const createToast =
     const createdAt = new Date().getTime();
 
     const value: ToastState = {
-      ...options,
       timeOut: timeOut > MAX_TIMEOUT ? MAX_TIMEOUT : timeOut,
       toastId,
       data,
+      pausedAt: null,
+      updated: null,
       createdAt,
       removeTimeOut,
       isVisible: true,

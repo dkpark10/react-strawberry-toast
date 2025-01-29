@@ -81,7 +81,7 @@ export function Toast({ toastProps, pauseOnActivate, ...rest }: ToasterProps) {
 
   /** @description promise toast */
   useEffect(() => {
-    if (updated !== undefined) {
+    if (updated !== null) {
       const newTimeOut = timeOut >= MAX_TIMEOUT ? DISAPPEAR_TIMEOUT : timeOut;
       toast.disappear(toastId, newTimeOut);
     }

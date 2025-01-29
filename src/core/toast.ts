@@ -31,7 +31,10 @@ const createToast =
     const createdAt = new Date().getTime();
 
     const value: NonHeadlessToastState = {
-      ...options,
+      updated: null,
+      pausedAt: null,
+      containerId: options.containerId || '',
+      position: options.position || 'top-center',
       timeOut: timeOut > MAX_TIMEOUT ? MAX_TIMEOUT : timeOut,
       toastId,
       data,
