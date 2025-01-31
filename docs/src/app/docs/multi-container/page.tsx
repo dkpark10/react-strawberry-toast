@@ -1,4 +1,4 @@
-import React, { type ReactElement } from 'react';
+import React from 'react';
 import { Docs } from '@/components/docs-title';
 import { PrismLight } from 'react-syntax-highlighter';
 import { CodeTheme } from '@/constants/code-theme';
@@ -7,7 +7,15 @@ import HomePlayGround from '@/app/docs/multi-container/_components/playground';
 import type { Metadata } from 'next'
  
 export const metadata: Metadata = {
-  title: 'Multi Container Docs | react-strawberry-toast',
+  title: 'Multi Container | react-strawberry-toast',
+  description: 'Multi container usage of react-strawberry-toast',
+  openGraph: {
+    title: 'Multi Container | react-strawberry-toast',
+    description: 'Multi container usage of react-strawberry-toast',
+    images: 'https://dkpark10.github.io/react-strawberry-toast/strawberry.png',
+    type: 'website',
+    url: 'https://dkpark10.github.io/react-strawberry-toast/docs/multi-container',
+  },
 }
 
 export default function DocsMultiContainer() {

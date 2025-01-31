@@ -5,7 +5,15 @@ import { toastContainerApi } from '@/constants/table-data';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Toast Container API Docs | react-strawberry-toast',
+  title: 'Toast Container API | react-strawberry-toast',
+  description: 'Description of the Toast Container component options',
+  openGraph: {
+    title: 'Toast Container API | react-strawberry-toast',
+    description: 'Description of the Toast Container component options',
+    images: 'https://dkpark10.github.io/react-strawberry-toast/strawberry.png',
+    type: 'website',
+    url: 'https://dkpark10.github.io/react-strawberry-toast/docs/toast-container',
+  },
 };
 
 export default function DocApiToastContainer() {

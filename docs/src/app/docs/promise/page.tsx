@@ -10,8 +10,17 @@ import { promiseTableData } from '@/constants/table-data';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Promise Docs | react-strawberry-toast',
-};
+  title: 'Promise | react-strawberry-toast',
+  description: 'Promise function of react-strawberry-toast',
+  openGraph: {
+    title: 'Promise | react-strawberry-toast',
+    description: 'Promise function of react-strawberry-toast',
+    images: 'https://dkpark10.github.io/react-strawberry-toast/strawberry.png',
+    type: 'website',
+    url: 'https://dkpark10.github.io/react-strawberry-toast/docs/promise',
+  },
+}
+
 
 export default function DocPromise() {
   return (

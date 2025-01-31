@@ -10,8 +10,16 @@ import { customToastPropsTableData } from '@/constants/table-data';
 import type { Metadata } from 'next'
  
 export const metadata: Metadata = {
-  title: 'Show Toast Docs | react-strawberry-toast',
-}
+  title: 'Show Toast | react-strawberry-toast',
+  description: 'Various functions for displaying a toast',
+  openGraph: {
+    title: 'Show Toast | react-strawberry-toast',
+    description: 'Various functions for displaying a toast',
+    images: 'https://dkpark10.github.io/react-strawberry-toast/strawberry.png',
+    type: 'website',
+    url: 'https://dkpark10.github.io/react-strawberry-toast/docs/show-toast'
+  },
+};
 
 export default function DocShowToast() {
   return (

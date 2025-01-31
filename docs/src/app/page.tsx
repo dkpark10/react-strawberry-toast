@@ -10,10 +10,10 @@ import Install from '@/app/_components/install';
 import type { Metadata } from 'next'
  
 export const metadata: Metadata = {
-  title: 'React strawberry toast docs',
+  title: 'React strawberry toast',
   description: 'React strawberry toast documentation',
   openGraph: {
-    title: 'React strawberry toast docs',
+    title: 'React strawberry toast',
     description: 'React strawberry toast documentation',
     images: 'https://dkpark10.github.io/react-strawberry-toast/strawberry.png',
     type: 'website',

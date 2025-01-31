@@ -9,14 +9,14 @@ import { Docs } from '@/components/docs-title';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Get Started Docs | react-strawberry-toast',
-  description: 'Explanation of the basic usage of react-strawberry-toast.',
+  title: 'Get Started | react-strawberry-toast',
+  description: 'Explanation of the basic usage of react-strawberry-toast',
   openGraph: {
     title: 'Get Started Docs | react-strawberry-toast',
-    description: 'Explanation of the basic usage of react-strawberry-toast.',
+    description: 'Explanation of the basic usage of react-strawberry-toast',
     images: 'https://dkpark10.github.io/react-strawberry-toast/strawberry.png',
     type: 'website',
-    url: 'https://dkpark10.github.io/react-strawberry-toast/docs'
+    url: 'https://dkpark10.github.io/react-strawberry-toast/docs',
   },
 };
 
