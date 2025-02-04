@@ -137,6 +137,7 @@ describe('toast', () => {
 
     expect(queryAllByText(new RegExp(context.task.id, 'i'))).toHaveLength(4);
 
+    expect(getAllByTestId('container-default')).toHaveLength(1);
     expect(getAllByTestId('container-1')).toHaveLength(1);
     expect(getAllByTestId('container-2')).toHaveLength(1);
     expect(getAllByTestId('container-3')).toHaveLength(1);

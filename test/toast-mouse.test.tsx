@@ -87,11 +87,14 @@ describe('mouse enter mouse leave', () => {
       );
     }
 
-    const { getByRole, getByText, queryAllByText, queryByText } = render(<App />);
+    const { getByRole, getByText, getAllByTestId, queryByText } = render(<App />);
 
     fireEvent.click(getByRole('button', { name: 'click' }));
 
-    expect(queryAllByText(new RegExp(`${context.task.id} strawberry toast(1|2|3|4)`))).toHaveLength(4);
+    expect(getAllByTestId('container-default')).toHaveLength(1);
+    expect(getAllByTestId('container-1')).toHaveLength(1);
+    expect(getAllByTestId('container-2')).toHaveLength(1);
+    expect(getAllByTestId('container-3')).toHaveLength(1);
 
     fireEvent.mouseEnter(getByText(`${context.task.id} strawberry toast2`));
 

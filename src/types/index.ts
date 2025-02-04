@@ -25,7 +25,7 @@ export interface ToastBaseState {
 }
 
 export interface Options extends BaseOptions {
-  icon?: ReactNode | string;
+  icon?: ReactNode;
   position?: Position | null;
   containerId?: string | null;
   pauseOnHover?: boolean;

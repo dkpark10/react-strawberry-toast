@@ -97,18 +97,14 @@ export function Toast({ toastProps, pauseOnActivate }: ToasterProps) {
       className={`${STYLE_NAMESPACE}__toast${
         /center/i.test(position as Position) && !containerId ? '-center' : ''
       } ${toastType === 'custom' ? '' : animationClassName}`}
-      data-testid={`container-${containerId}`}
+      data-testid={`container-${containerId || 'default'}`}
       onMouseEnter={onMouseEnter}
       onMouseLeave={onMouseLeave}
     >
       <Condition condition={toastType !== 'custom'}>
         <If>
           <div className={`${STYLE_NAMESPACE}__toast-content`}>
-            {renderIcon && (
-              <span className={`${STYLE_NAMESPACE}__toast-icon`}>
-                {renderIcon}
-              </span>
-            )}
+            {renderIcon && <span className={`${STYLE_NAMESPACE}__toast-icon`}>{renderIcon}</span>}
             {content}
           </div>
         </If>
