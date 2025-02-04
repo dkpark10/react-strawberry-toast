@@ -1,18 +1,24 @@
 {
   "name": "react-strawberry-toast-playground",
-  "private": true,
   "version": "0.0.0",
-  "type": "module",
+  "private": true,
+  "author": "dkpark10",
   "scripts": {
-    "dev": "vite"
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start -p 8080"
   },
   "dependencies": {
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "@emotion/cache": "^11.13.1",
+    "@emotion/react": "^11.13.3",
+    "@emotion/styled": "^11.13.0",
+    "next": "^14",
+    "react": "^18",
+    "react-dom": "^18"
   },
   "devDependencies": {
-    "@types/react": "^18.2.66",
-    "@types/react-dom": "^18.2.22",
-    "@vitejs/plugin-react": "^4.2.1"
+    "@types/react": "^18",
+    "@types/react-dom": "^18",
+    "typescript": "^5.7.2"
   }
 }
