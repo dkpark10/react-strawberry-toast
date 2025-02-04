@@ -104,12 +104,13 @@ $offset: 16px;
 .#{$react-strawberry-toast-namespace}__toast-content {
   box-sizing: border-box;
   background-color: white;
-  padding: 12px 12px 10px 12px;
+  padding: 10px;
   display: flex;
   align-items: center;
   gap: 5px;
   border-radius: 8px;
-  box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.1),
+  box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.1);
+  min-height: 47px;
 }
 .#{$react-strawberry-toast-namespace}__toast-icon {
   width: 20px;
@@ -132,11 +133,11 @@ $offset: 16px;
 }
 
 .#{$react-strawberry-toast-namespace}__loading {
-  width: 15px;
-  padding: 3px;
+  width: 18px;
+  padding: 3.5px;
   aspect-ratio: 1;
   border-radius: 50%;
-  background: #6b6875;
+  background: #6f6f70;
   --_m: conic-gradient(#0000 10%, #000),
     linear-gradient(#000 0 0) content-box;
   -webkit-mask: var(--_m);

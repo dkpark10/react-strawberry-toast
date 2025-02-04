@@ -38,7 +38,7 @@ export function ToastContainer({
   }, {} as Record<Position, Array<ToastState>>);
 
   return (
-    <React.Fragment>
+    <div id={`${STYLE_NAMESPACE}__root`}>
       {Object.entries(toastsByPosition).map(([position, toasts]) => {
         const flexDirection = getDirection({
           position: position as Position,
@@ -68,6 +68,6 @@ export function ToastContainer({
           </div>
         );
       })}
-    </React.Fragment>
+    </div>
   );
 }
