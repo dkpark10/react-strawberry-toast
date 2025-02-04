@@ -50,11 +50,7 @@ export function ToastContainer({
             {toastList
               .filter((toast) => toast.containerId === containerId)
               .map((toast) => (
-                <Toast
-                  key={toast.toastId}
-                  pauseOnActivate={pauseOnActivate}
-                  toastProps={toast}
-                />
+                <Toast key={toast.toastId} pauseOnActivate={pauseOnActivate} toastProps={toast} />
               ))}
           </div>
         </div>
@@ -78,11 +74,7 @@ export function ToastContainer({
                 }}
               >
                 {toasts.map((toast) => (
-                  <Toast
-                    key={toast.toastId}
-                    toastProps={toast}
-                    pauseOnActivate={pauseOnActivate}
-                  />
+                  <Toast key={toast.toastId} toastProps={toast} pauseOnActivate={pauseOnActivate} />
                 ))}
               </div>
             );

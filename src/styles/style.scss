@@ -56,7 +56,7 @@ $offset: 16px;
 }
 
 .#{$react-strawberry-toast-namespace}__toast-container {
-  position: absolute;
+  position: fixed;
   z-index: 9999;
   pointer-events: none;
 }
@@ -90,7 +90,7 @@ $offset: 16px;
 
 .#{$react-strawberry-toast-namespace}__bottom-center {
   bottom: $offset;
-  left: $offset;
+  left: 50%;
   transform: translateX(-50%);
 }
 
