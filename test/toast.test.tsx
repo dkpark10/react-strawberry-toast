@@ -19,7 +19,9 @@ describe('toast', () => {
   test('should display toast when the button is clicked and hide it after 3 seconds', async (context) => {
     function App() {
       const click = () => {
-        toast(context.task.id);
+        toast(context.task.id, {
+          icon: '🚀',
+        });
       };
 
       return (
@@ -30,12 +32,13 @@ describe('toast', () => {
       );
     }
 
-    const { getByRole, queryByText, getByText } = render(<App />);
+    const { getByRole, queryByText } = render(<App />);
 
     fireEvent.click(getByRole('button', { name: 'click' }));
 
     const regex = new RegExp(context.task.id, 'i');
-    expect(getByText(regex)).toBeInTheDocument();
+    expect(queryByText(regex)).toBeInTheDocument();
+    expect(queryByText(regex)).toHaveTextContent(`🚀${context.task.id}`);
 
     act(() => {
       vi.advanceTimersByTime(1_000);

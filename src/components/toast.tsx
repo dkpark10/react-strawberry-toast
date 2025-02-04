@@ -12,7 +12,7 @@ interface ToasterProps {
 }
 
 export function Toast({ toastProps, pauseOnActivate }: ToasterProps) {
-  const { toastId, isVisible, timeOut, containerId, updated, toastType, position, data, pauseOnHover } =
+  const { toastId, isVisible, timeOut, containerId, icon, updated, toastType, position, data, pauseOnHover } =
     toastProps;
 
   const animationClassName = getAnimation({
@@ -30,10 +30,10 @@ export function Toast({ toastProps, pauseOnActivate }: ToasterProps) {
             toast.remove(toastId, 0);
           },
           icons: {
-            success: <ToastTypeIcons.success />,
-            error: <ToastTypeIcons.error />,
-            warn: <ToastTypeIcons.warn />,
-            loading: <ToastTypeIcons.loading />,
+            success: ToastTypeIcons.success,
+            error: ToastTypeIcons.error,
+            warn: ToastTypeIcons.warn,
+            loading: ToastTypeIcons.loading,
           },
           isVisible: isVisible,
         })
@@ -85,7 +85,11 @@ export function Toast({ toastProps, pauseOnActivate }: ToasterProps) {
     }
   }, [updated]);
 
-  const Icon = toastType === 'custom' || toastType === 'default' ? null : ToastTypeIcons[toastType];
+  const renderIcon = icon
+    ? icon
+    : toastType === 'custom' || toastType === 'default'
+    ? null
+    : ToastTypeIcons[toastType];
 
   return (
     <div
@@ -100,9 +104,9 @@ export function Toast({ toastProps, pauseOnActivate }: ToasterProps) {
       <Condition condition={toastType !== 'custom'}>
         <If>
           <div className={`${STYLE_NAMESPACE}__toast-content`}>
-            {Icon && (
+            {renderIcon && (
               <span className={`${STYLE_NAMESPACE}__toast-icon`}>
-                <Icon />
+                {renderIcon}
               </span>
             )}
             {content}

@@ -8,30 +8,22 @@ export default function App() {
       timeOut: Infinity,
     });
     toast(<div>123123</div>, {
+      icon: '🚀',
       timeOut: Infinity,
     });
-    toast.custom(<div>asdasdasdasdsdasdas</div>, {
+    toast.error(<div>123123</div>, {
       timeOut: Infinity,
     });
-    toast.success(<div>12</div>, {
+    toast.warn(<div>deploy</div>, {
+      icon: '🚀',
       timeOut: Infinity,
-      position: 'top-center',
-    });
-    toast(<div>123123</div>, {
-      timeOut: Infinity,
-      position: 'top-center',
-    });
-    toast.custom(<div>asdas</div>, {
-      timeOut: Infinity,
-      position: 'top-center',
-      containerId: '1',
     });
   };
 
   return (
     <React.Fragment>
       <button onClick={click}>click</button>
-      <ToastContainer position="bottom-left" />
+      <ToastContainer position="top-right" />
     </React.Fragment>
   );
 }

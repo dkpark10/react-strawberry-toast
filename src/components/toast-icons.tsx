@@ -57,9 +57,9 @@ function WarnSvg() {
   );
 }
 
-export const ToastTypeIcons: Record<Exclude<ToastType, 'custom' | 'default'>, () => ReactNode> = {
-  success: SuccessSvg,
-  error: ErrorSvg,
-  loading: () => <div className={`${STYLE_NAMESPACE}__loading`} />,
-  warn: WarnSvg,
+export const ToastTypeIcons: Record<Exclude<ToastType, 'custom' | 'default'>, ReactNode> = {
+  success: <SuccessSvg />,
+  error: <ErrorSvg />,
+  loading: <div className={`${STYLE_NAMESPACE}__loading`} />,
+  warn: <WarnSvg />,
 };

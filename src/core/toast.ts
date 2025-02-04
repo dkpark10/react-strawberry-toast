@@ -33,6 +33,7 @@ const createToast =
     const value: NonHeadlessToastState = {
       updated: null,
       pausedAt: null,
+      icon: options.icon || null,
       containerId: options.containerId || null,
       position: options.position || null,
       timeOut: timeOut > MAX_TIMEOUT ? MAX_TIMEOUT : timeOut,
