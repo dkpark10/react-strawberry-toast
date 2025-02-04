@@ -9,6 +9,8 @@ import { STYLE_NAMESPACE } from '../constants';
 import '../styles/style.scss';
 
 interface ToastContainerProps {
+  className?: string;
+  style?: React.CSSProperties;
   position?: Position;
   containerId?: string;
   reverse?: boolean;
@@ -17,6 +19,8 @@ interface ToastContainerProps {
 }
 
 export function ToastContainer({
+  className,
+  style,
   position: globalPosition = 'top-center',
   containerId = '',
   gap = 9,
@@ -34,7 +38,7 @@ export function ToastContainer({
   }, {} as Record<Position, Array<ToastState>>);
 
   return (
-    <div className={`${STYLE_NAMESPACE}__toast-container`}>
+    <React.Fragment>
       {Object.entries(toastsByPosition).map(([position, toasts]) => {
         const flexDirection = getDirection({
           position: position as Position,
@@ -45,10 +49,13 @@ export function ToastContainer({
           <div
             key={position}
             data-testid={position}
-            className={`${STYLE_NAMESPACE}__toast-inner-container ${STYLE_NAMESPACE}__${position}`}
+            className={
+              className ? className : `${STYLE_NAMESPACE}__toast-container ${STYLE_NAMESPACE}__${position}`
+            }
             style={{
               flexDirection,
               gap,
+              ...style,
             }}
           >
             {toasts
@@ -61,6 +68,6 @@ export function ToastContainer({
           </div>
         );
       })}
-    </div>
+    </React.Fragment>
   );
 }

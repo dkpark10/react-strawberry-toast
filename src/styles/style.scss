@@ -56,14 +56,9 @@ $offset: 16px;
 }
 
 .#{$react-strawberry-toast-namespace}__toast-container {
-  position: fixed;
-  z-index: 9999;
-  pointer-events: none;
-}
-
-.#{$react-strawberry-toast-namespace}__toast-inner-container {
   pointer-events: auto;
   position: fixed;
+  z-index: 9999;
   display: flex;
 }
 
