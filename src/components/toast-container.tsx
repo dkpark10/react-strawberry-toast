@@ -5,38 +5,9 @@ import { Toast } from './toast';
 import { useToasts } from '../hooks/use-toasts';
 import { getDirection } from '../utils/get-direction';
 import type { Position, NonHeadlessToastState as ToastState } from '../types';
+import { STYLE_NAMESPACE } from '../constants';
 import { Condition, If, Else } from './condition';
-
-const OFFSET = 16;
-
-const positionStyle: Record<Position, React.CSSProperties> = {
-  'top-left': {
-    top: OFFSET,
-    left: OFFSET,
-  },
-  'top-center': {
-    top: OFFSET,
-    left: '50%',
-    transform: 'translateX(-50%)',
-  },
-  'top-right': {
-    top: OFFSET,
-    right: OFFSET,
-  },
-  'bottom-left': {
-    bottom: OFFSET,
-    left: OFFSET,
-  },
-  'bottom-center': {
-    bottom: OFFSET,
-    left: '50%',
-    transform: 'translateX(-50%)',
-  },
-  'bottom-right': {
-    bottom: OFFSET,
-    right: OFFSET,
-  },
-};
+import '../styles/style.scss';
 
 interface ToastContainerProps {
   position?: Position;
@@ -68,17 +39,10 @@ export function ToastContainer({
   return (
     <Condition condition={!!containerId}>
       <If>
-        <div
-          style={{
-            position: 'absolute',
-            zIndex: 9999,
-            pointerEvents: 'none',
-          }}
-        >
+        <div className={`${STYLE_NAMESPACE}__toast-container`}>
           <div
+            className={`${STYLE_NAMESPACE}__toast-inner-container`}
             style={{
-              pointerEvents: 'auto',
-              display: 'flex',
               flexDirection: reverse ? 'column-reverse' : 'column',
               gap,
             }}
@@ -90,29 +54,14 @@ export function ToastContainer({
                   key={toast.toastId}
                   pauseOnActivate={pauseOnActivate}
                   toastProps={toast}
-                  style={{
-                    display: 'flex',
-                  }}
                 />
               ))}
           </div>
         </div>
       </If>
       <Else>
-        <div
-          style={{
-            position: 'fixed',
-            zIndex: 9999,
-            top: OFFSET,
-            left: OFFSET,
-            right: OFFSET,
-            bottom: OFFSET,
-            pointerEvents: 'none',
-          }}
-        >
+        <div className={`${STYLE_NAMESPACE}__toast-container`}>
           {Object.entries(toastsByPosition).map(([position, toasts]) => {
-            const style = positionStyle[position as Position];
-
             const flexDirection = getDirection({
               position: position as Position,
               reverse,
@@ -122,13 +71,10 @@ export function ToastContainer({
               <div
                 key={position}
                 data-testid={position}
+                className={`${STYLE_NAMESPACE}__toast-inner-container ${STYLE_NAMESPACE}__${position}`}
                 style={{
-                  pointerEvents: 'auto',
-                  position: 'fixed',
-                  display: 'flex',
                   flexDirection,
                   gap,
-                  ...style,
                 }}
               >
                 {toasts.map((toast) => (
@@ -136,10 +82,6 @@ export function ToastContainer({
                     key={toast.toastId}
                     toastProps={toast}
                     pauseOnActivate={pauseOnActivate}
-                    style={{
-                      display: 'flex',
-                      justifyContent: 'center',
-                    }}
                   />
                 ))}
               </div>

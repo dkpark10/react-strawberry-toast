@@ -1,4 +1,5 @@
 $react-strawberry-toast-namespace: 'react-strawberry-toast';
+$offset: 16px;
 
 @keyframes l3 {
   to {
@@ -52,6 +53,71 @@ $react-strawberry-toast-namespace: 'react-strawberry-toast';
     transform: translateY(100%);
     opacity: 0;
   }
+}
+
+.#{$react-strawberry-toast-namespace}__toast-container {
+  position: absolute;
+  z-index: 9999;
+  pointer-events: none;
+}
+
+.#{$react-strawberry-toast-namespace}__toast-inner-container {
+  pointer-events: auto;
+  position: fixed;
+  display: flex;
+}
+
+.#{$react-strawberry-toast-namespace}__top-left {
+  top: $offset;
+  left: $offset;
+}
+
+.#{$react-strawberry-toast-namespace}__top-center {
+  top: $offset;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.#{$react-strawberry-toast-namespace}__top-right {
+  top: $offset;
+  right: $offset;
+}
+
+.#{$react-strawberry-toast-namespace}__bottom-left {
+  bottom: $offset;
+  left: $offset;
+}
+
+.#{$react-strawberry-toast-namespace}__bottom-center {
+  bottom: $offset;
+  left: $offset;
+  transform: translateX(-50%);
+}
+
+.#{$react-strawberry-toast-namespace}__bottom-right {
+  bottom: $offset;
+  right: $offset;
+}
+
+.#{$react-strawberry-toast-namespace}__toast {
+  display: flex;
+}
+.#{$react-strawberry-toast-namespace}__toast-center {
+  display: flex;
+  justify-content: center;
+}
+.#{$react-strawberry-toast-namespace}__toast-content {
+  box-sizing: border-box;
+  background-color: white;
+  padding: 12px 12px 10px 12px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  border-radius: 8px;
+  box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.1),
+}
+.#{$react-strawberry-toast-namespace}__toast-icon {
+  width: 20px;
 }
 
 .#{$react-strawberry-toast-namespace}__fade-in {

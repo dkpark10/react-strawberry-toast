@@ -2,18 +2,16 @@ import React, { useEffect } from 'react';
 import { Condition, If, Else } from './condition';
 import { getAnimation } from '../utils/get-animation';
 import { toast } from '../core/toast';
-import { DISAPPEAR_TIMEOUT, MAX_TIMEOUT } from '../constants';
+import { DISAPPEAR_TIMEOUT, MAX_TIMEOUT, STYLE_NAMESPACE } from '../constants';
 import { ToastTypeIcons } from './toast-icons';
-import type { NonHeadlessToastState as ToastState } from '../types';
-import '../styles/style.scss';
+import type { Position, NonHeadlessToastState as ToastState } from '../types';
 
 interface ToasterProps {
   toastProps: ToastState;
-  style: React.CSSProperties;
   pauseOnActivate: boolean;
 }
 
-export function Toast({ toastProps, pauseOnActivate, ...rest }: ToasterProps) {
+export function Toast({ toastProps, pauseOnActivate }: ToasterProps) {
   const { toastId, isVisible, timeOut, containerId, updated, toastType, position, data, pauseOnHover } =
     toastProps;
 
@@ -90,28 +88,20 @@ export function Toast({ toastProps, pauseOnActivate, ...rest }: ToasterProps) {
   const Icon = toastType === 'custom' || toastType === 'default' ? null : ToastTypeIcons[toastType];
 
   return (
-    <div {...rest}>
+    <div
+      role="alert"
+      className={`${STYLE_NAMESPACE}__toast${
+        /center/i.test(position as Position) && !containerId ? '-center' : ''
+      } ${toastType === 'custom' ? '' : animationClassName}`}
+      data-testid={`container-${containerId}`}
+      onMouseEnter={onMouseEnter}
+      onMouseLeave={onMouseLeave}
+    >
       <Condition condition={toastType !== 'custom'}>
         <If>
-          <div
-            role="alert"
-            className={toastType === 'custom' ? '' : animationClassName}
-            data-testid={`container-${containerId}`}
-            onMouseEnter={onMouseEnter}
-            onMouseLeave={onMouseLeave}
-            style={{
-              boxSizing: 'border-box',
-              backgroundColor: 'white',
-              padding: '12px 14px 12px 12px',
-              display: 'flex',
-              alignItems: 'center',
-              gap: 5,
-              borderRadius: 8,
-              boxShadow: '2px 4px 10px rgba(0, 0, 0, 0.1)',
-            }}
-          >
+          <div className={`${STYLE_NAMESPACE}__toast-content`}>
             {Icon && (
-              <span style={{ minWidth: 20, maxWidth: 20 }}>
+              <span className={`${STYLE_NAMESPACE}__toast-icon`}>
                 <Icon />
               </span>
             )}
