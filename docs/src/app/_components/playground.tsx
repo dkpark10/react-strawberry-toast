@@ -158,12 +158,7 @@ export default function HomePlayGround() {
                 onClick={example.click}
               >
                 {typeof example.icon === 'string' ? (
-                  <AssetImage
-                    src={example.icon}
-                    width={20}
-                    height={20}
-                    alt={`${example.type} icon`}
-                  />
+                  <AssetImage src={example.icon} width={20} height={20} alt={`${example.type} icon`} />
                 ) : (
                   example.icon
                 )}
