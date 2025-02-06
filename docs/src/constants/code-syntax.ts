@@ -71,18 +71,21 @@ toast(
 `import { ToastContainer, toast } from 'react-strawberry-toast';
 
 function App() {
-  const onClick = () => {
+  const showClick = () => {
     toast('show toast', {
       containerId: '1',
     });
+  }
 
+  const notShowClick = () => {
     toast('not show toast');
   }
 
   return (
     <>
       <ToastContainer containerId="1" />
-      <button type="button" onClick={onClick}>click</button>
+      <button type="button" onClick={showClick}>show click</button>
+      <button type="button" onClick={notShowClick}>not show click</button>
     </>
   )
 }
