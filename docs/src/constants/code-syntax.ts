@@ -1,6 +1,5 @@
 export const codeSyntax = {
-  started: 
-`import { ToastContainer, toast } from 'react-strawberry-toast';
+  started: `import { ToastContainer, toast } from 'react-strawberry-toast';
 import 'react-strawberry-toast/dist/style.css';
   
 function App() {
@@ -41,8 +40,7 @@ function App() {
          });                     
          
 `,
-  tailwindCss:
-`toast(
+  tailwindCss: `toast(
   ({ close }) => (
     <div className="bg-white p-2 flex justify-between gap-2 rounded-sm">
       <span>tailwind css toast</span>
@@ -53,7 +51,7 @@ function App() {
   )
 );`,
 
-emotion: `
+  emotion: `
 toast(
   ({ close }) => (
     <div>
@@ -69,64 +67,80 @@ toast(
   )
 );
 `,
+  multiContainer: `
+import { ToastContainer, toast } from 'react-strawberry-toast';
 
-    multiContainer: 
-`import { ToastContainer, toast } from 'react-strawberry-toast';
-      
 function App() {
-  const [msg, setMsg] = useState('');
-
   const onClick = () => {
-    if (!msg) return;
-    toast.custom(
-      ({ isVisible }) => (
-        <div
-          role="alert"
-          className={${'`'}bg-red-500 rounded-md px-2 text-white ${'${clsx('}
-            isVisible ? 'animate-right-grow' : 'animate-left-shrink'
-          )}${'`'}}
-        >
-          {msg}
-        </div>
-      ), 
-      {
-        containerId: '1',
-      }
-    );
-    setMsg('');
-  };
-          
+    toast('show toast', {
+      containerId: '1',
+    });
+
+    toast('not show toast');
+  }
+
   return (
     <>
-      <div id="profile" className="border border-primary-gray p-2 w-10/12">
-        <div className="flex items-center gap-2">
-          <Image src="/profile.svg" width={34} height={34} alt="profile icon" />
-          <div>developer</div>
-        </div>
-
-        <div className="py-1" />
-        <ToastContainer containerId="1" />
-        <div className="py-2" />
-        <div className="py-2" />
-
-        <div className="flex items-center gap-2">
-          <input
-            type="text"
-            value={msg}
-            onChange={(e) => setMsg(e.target.value)}
-            className="w-full border border-primary-gray px-1"
-            placeholder="type a message"
-          />
-          <button type="button" onClick={onClick}>
-            <Image src="/send.svg" width={24} height={24} alt="send icon" />
-          </button>
-        </div>
-      </div>
+      <ToastContainer containerId="1" />
+      <button type="button" onClick={onClick}>click</button>
     </>
-  );
-}`,
-  headless: 
-`
+  )
+}
+`,
+
+  //     multiContainer:
+  // `import { ToastContainer, toast } from 'react-strawberry-toast';
+
+  // function App() {
+  //   const [msg, setMsg] = useState('');
+
+  //   const onClick = () => {
+  //     if (!msg) return;
+  //     toast.custom(
+  //       ({ isVisible }) => (
+  //         <div
+  //           role="alert"
+  //           className={${'`'}bg-red-500 rounded-md px-2 text-white ${'${clsx('}
+  //             isVisible ? 'animate-right-grow' : 'animate-left-shrink'
+  //           )}${'`'}}
+  //         >
+  //           {msg}
+  //         </div>
+  //       ),
+  //     );
+  //     setMsg('');
+  //   };
+
+  //   return (
+  //     <>
+  //       <div id="profile" className="border border-gray-300 p-2 w-10/12 max-sm:w-full relative">
+  //         <div className="flex items-center gap-2">
+  //           <Image src="/profile.svg" width={34} height={34} alt="profile icon" />
+  //           <div>developer</div>
+  //         </div>
+
+  //         <div className="py-1" />
+  //         <ToastContainer className="absolute" />
+  //         <div className="py-2" />
+  //         <div className="py-2" />
+
+  //         <div className="flex items-center gap-2">
+  //           <input
+  //             type="text"
+  //             value={msg}
+  //             onChange={(e) => setMsg(e.target.value)}
+  //             className="w-full border border-primary-gray px-1"
+  //             placeholder="type a message"
+  //           />
+  //           <button type="button" onClick={onClick}>
+  //             <Image src="/send.svg" width={24} height={24} alt="send icon" />
+  //           </button>
+  //         </div>
+  //       </div>
+  //     </>
+  //   );
+  // }`,
+  headless: `
 import React, { useEffect } from 'react';
 import { useToasts, toast, type ToastState } from 'react-strawberry-toast/dist/headless';
 
