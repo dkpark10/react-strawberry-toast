@@ -67,8 +67,8 @@ toast(
   )
 );
 `,
-  multiContainer: `
-import { ToastContainer, toast } from 'react-strawberry-toast';
+  multiContainer: 
+`import { ToastContainer, toast } from 'react-strawberry-toast';
 
 function App() {
   const onClick = () => {
@@ -88,60 +88,61 @@ function App() {
 }
 `,
 
-  //     multiContainer:
-  // `import { ToastContainer, toast } from 'react-strawberry-toast';
+containerStyling:
+  `import { ToastContainer, toast } from 'react-strawberry-toast';
 
-  // function App() {
-  //   const [msg, setMsg] = useState('');
+  function App() {
+    const [msg, setMsg] = useState('');
 
-  //   const onClick = () => {
-  //     if (!msg) return;
-  //     toast.custom(
-  //       ({ isVisible }) => (
-  //         <div
-  //           role="alert"
-  //           className={${'`'}bg-red-500 rounded-md px-2 text-white ${'${clsx('}
-  //             isVisible ? 'animate-right-grow' : 'animate-left-shrink'
-  //           )}${'`'}}
-  //         >
-  //           {msg}
-  //         </div>
-  //       ),
-  //     );
-  //     setMsg('');
-  //   };
+    const onClick = () => {
+      if (!msg) return;
+      toast.custom(
+        ({ isVisible }) => (
+          <div
+            role="alert"
+            className={${'`'}bg-red-500 rounded-md px-2 text-white ${'${clsx('}
+              isVisible ? 'animate-right-grow' : 'animate-left-shrink'
+            )}${'`'}}
+          >
+            {msg}
+          </div>
+        ),
+      );
+      setMsg('');
+    };
 
-  //   return (
-  //     <>
-  //       <div id="profile" className="border border-gray-300 p-2 w-10/12 max-sm:w-full relative">
-  //         <div className="flex items-center gap-2">
-  //           <Image src="/profile.svg" width={34} height={34} alt="profile icon" />
-  //           <div>developer</div>
-  //         </div>
+    return (
+      <>
+        <div id="profile" className="border border-gray-300 p-2 w-10/12 max-sm:w-full relative">
+          <div className="flex items-center gap-2">
+            <Image src="/profile.svg" width={34} height={34} alt="profile icon" />
+            <div>developer</div>
+          </div>
 
-  //         <div className="py-1" />
-  //         <ToastContainer className="absolute" />
-  //         <div className="py-2" />
-  //         <div className="py-2" />
+          <div className="py-1" />
+          <ToastContainer className="absolute" />
+          <div className="py-2" />
+          <div className="py-2" />
 
-  //         <div className="flex items-center gap-2">
-  //           <input
-  //             type="text"
-  //             value={msg}
-  //             onChange={(e) => setMsg(e.target.value)}
-  //             className="w-full border border-primary-gray px-1"
-  //             placeholder="type a message"
-  //           />
-  //           <button type="button" onClick={onClick}>
-  //             <Image src="/send.svg" width={24} height={24} alt="send icon" />
-  //           </button>
-  //         </div>
-  //       </div>
-  //     </>
-  //   );
-  // }`,
-  headless: `
-import React, { useEffect } from 'react';
+          <div className="flex items-center gap-2">
+            <input
+              type="text"
+              value={msg}
+              onChange={(e) => setMsg(e.target.value)}
+              className="w-full border border-primary-gray px-1"
+              placeholder="type a message"
+            />
+            <button type="button" onClick={onClick}>
+              <Image src="/send.svg" width={24} height={24} alt="send icon" />
+            </button>
+          </div>
+        </div>
+      </>
+    );
+  }`,
+
+  headless: 
+`import React, { useEffect } from 'react';
 import { useToasts, toast, type ToastState } from 'react-strawberry-toast/dist/headless';
 
 function Toast({ toastProps }: { toastProps: ToastState }) {

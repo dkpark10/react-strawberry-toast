@@ -27,6 +27,7 @@ function Menus() {
           <h3 className="pt-3">Guides</h3>
           <ul className="ml-2">
             <DocsLinkItem href="/docs/show-toast">Show Toast</DocsLinkItem>
+            <DocsLinkItem href="/docs/styling">Styling</DocsLinkItem>
             <DocsLinkItem href="/docs/multi-container">Multi Container</DocsLinkItem>
             <DocsLinkItem href="/docs/promise">Promise</DocsLinkItem>
             <DocsLinkItem href="/docs/headless-hook">Headless Hook</DocsLinkItem>

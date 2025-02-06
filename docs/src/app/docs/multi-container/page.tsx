@@ -3,7 +3,6 @@ import { Docs } from '@/components/docs-title';
 import { PrismLight } from 'react-syntax-highlighter';
 import { CodeTheme } from '@/constants/code-theme';
 import { codeSyntax } from '@/constants/code-syntax';
-import MultiContainerPlayGround from '@/app/docs/multi-container/_components/playground';
 import type { Metadata } from 'next'
  
 export const metadata: Metadata = {
@@ -32,13 +31,6 @@ export default function DocsMultiContainer() {
       <PrismLight language="jsx" style={CodeTheme}>
         {codeSyntax.multiContainer}
       </PrismLight>
-
-      {/* <MultiContainerPlayGround />
-      <Docs.SpaceMd />
-
-      <PrismLight language="jsx" style={CodeTheme}>
-        {codeSyntax.multiContainer}
-      </PrismLight> */}
     </React.Fragment>
   );
 }
