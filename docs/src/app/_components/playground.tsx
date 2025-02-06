@@ -137,8 +137,8 @@ export default function HomePlayGround() {
       <div className="flex justify-center pb-8 max-sm:hidden">
         <div id="container-area" className="grid gap-x-16 gap-y-4 grid-cols-3">
           {containerIds.map((id) => (
-            <div key={id}>
-              <ToastContainer containerId={id} />
+            <div key={id} className="relative">
+              <ToastContainer containerId={id} className="absolute flex" />
               <span className="font-semibold flex items-center justify-center w-52 h-8 shadow-md">{id}</span>
             </div>
           ))}

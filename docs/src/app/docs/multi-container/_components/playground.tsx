@@ -24,22 +24,19 @@ export default function DocsMultiContainer() {
           {DOMPurify.sanitize(msg)}
         </div>
       ),
-      {
-        containerId: '1',
-      }
     );
     setMsg('');
   };
 
   return (
-    <div id="profile" className="border border-gray-300 p-2 w-10/12 max-sm:w-full">
+    <div id="profile" className="border border-gray-300 p-2 w-10/12 max-sm:w-full relative">
       <div className="flex items-center gap-2">
         <ProfileSvg />
         <div>developer</div>
       </div>
 
       <Docs.SpaceSm />
-      <ToastContainer containerId="1" />
+      <ToastContainer className="absolute" />
       <Docs.SpaceMd />
       <Docs.SpaceMd />
 
