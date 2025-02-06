@@ -49,6 +49,8 @@ function App() {
 | position      | Global toast's Position  |  top-left, top-center, top-right, bottom-left, bottom-center, bottom-right | top-center |
 | containerId      | ToastContainer's unique id  |  String |  |
 | reverse      | Direction when toast appear  |  Boolean | false |
+| className      | Class of ToastContainer  |  String |  |
+| style      | Style of ToastContainer  |  Object | |
 | gap      | Gap Between toasts  |  Number | 9 |
 | pauseOnActivate      | Pause Toast timer when blur events occurs  |  Boolean | true |
 
@@ -61,6 +63,7 @@ function App() {
 | position      | Position per toast  | top-left, top-center, top-right, bottom-left, bottom-center, bottom-right | top-center |
 | containerId      | ID shown in the Toast Container Unique ID  |  String | |
 | pauseOnHover      | Option that sets the timer to stop or not when a hover event occurs  |  Boolean | true |
+| icon      | The icon to be displayed in the toast  |  ReactNode | |
 | toastType      | Toast Type |  default, custom, success, error, loading, warn | default |
 | timeOut      | Time for toast to disappear  |  Number | 3000 |
 | removeTimeOut      | Time for toast to remove In Toast List  |  Number | 200 |
