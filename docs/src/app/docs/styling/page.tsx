@@ -32,7 +32,7 @@ export default function DocsHeadlessHook() {
       <p>
         This is the CSS file used for the react-strawberry-toast. <br />
         <Link href="https://github.com/dkpark10/react-strawberry-toast/blob/master/src/styles/style.scss">
-          here is <b className="text-straw-berry">CSS file link</b>
+          Here is <b className="text-straw-berry">CSS file link</b>
         </Link>
       </p>
 
@@ -200,7 +200,7 @@ $offset: 16px;
       </p>
 
       <AssetImage
-        className="relative left-[-1px]"
+        className="relative left-[-4px]"
         src="/toast-structure.png"
         alt="toast-structure"
         width={1748}

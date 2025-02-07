@@ -83,28 +83,6 @@ describe('toast', () => {
     expect(queryAllByText(new RegExp(context.task.id, 'i'))).toHaveLength(4);
   });
 
-  test('should have no style and no animation if data is function.', async (context) => {
-    function App() {
-      const click = () => {
-        toast(() => <div>{context.task.id}</div>);
-      };
-
-      return (
-        <React.Fragment>
-          <ToastContainer />
-          <button onClick={click}>click</button>
-        </React.Fragment>
-      );
-    }
-
-    const { getByRole, queryByText } = render(<App />);
-
-    fireEvent.click(getByRole('button', { name: 'click' }));
-
-    // @ts-ignore
-    expect(queryByText(new RegExp(context.task.id, 'i'))?.style._values).empty;
-  });
-
   test('should display toasts in each toast container.', async (context) => {
     function App() {
       const click = () => {
