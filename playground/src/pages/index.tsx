@@ -8,7 +8,17 @@ export default function HomePage() {
       timeOut: Infinity,
     });
 
+    toast.success('strawberry 123', {
+      position: 'top-left',
+      timeOut: Infinity,
+    });
+
     toast.success('strawberry', {
+      position: 'top-right',
+      timeOut: Infinity,
+    });
+
+    toast.success('strawberry 123', {
       position: 'top-right',
       timeOut: Infinity,
     });
@@ -18,8 +28,26 @@ export default function HomePage() {
       timeOut: Infinity,
     });
 
+    toast.success('strawberry 123', {
+      position: 'bottom-left',
+      timeOut: Infinity,
+    });
+
     toast.success('strawberry', {
       position: 'bottom-right',
+      timeOut: Infinity,
+    });
+
+    toast.success('strawberry 123', {
+      position: 'bottom-right',
+      timeOut: Infinity,
+    });
+
+    toast.success('strawberry', {
+      timeOut: Infinity,
+    });
+
+    toast.success('strawberry 123', {
       timeOut: Infinity,
     });
 
@@ -28,7 +56,8 @@ export default function HomePage() {
       timeOut: Infinity,
     });
 
-    toast.success('strawberry', {
+    toast.success('strawberry 123', {
+      position: 'bottom-center',
       timeOut: Infinity,
     });
   };

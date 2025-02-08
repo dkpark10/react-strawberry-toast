@@ -20,6 +20,13 @@ export function Toast({ toastProps, pauseOnActivate }: ToasterProps) {
     position: position!,
   });
 
+  const toastDirection = /center/i.test(position as Position)
+    ? '-center'
+    : /left/i.test(position as Position)
+    ? '-left'
+    : '-right';
+  const toastClassName = !position ? '' : toastDirection;
+  
   const content =
     typeof data === 'function'
       ? data({
@@ -94,9 +101,9 @@ export function Toast({ toastProps, pauseOnActivate }: ToasterProps) {
   return (
     <div
       role="alert"
-      className={`${STYLE_NAMESPACE}__toast${
-        /center/i.test(position as Position) && !containerId ? '-center' : ''
-      } ${toastType === 'custom' ? '' : animationClassName}`}
+      className={`${STYLE_NAMESPACE}__toast${toastClassName} ${
+        toastType === 'custom' ? '' : animationClassName
+      }`}
       data-testid={`container-${containerId || 'default'}`}
       onMouseEnter={onMouseEnter}
       onMouseLeave={onMouseLeave}
