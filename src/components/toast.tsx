@@ -12,8 +12,20 @@ interface ToasterProps {
 }
 
 export function Toast({ toastProps, pauseOnActivate }: ToasterProps) {
-  const { toastId, isVisible, timeOut, containerId, icon, updated, toastType, position, data, pauseOnHover } =
-    toastProps;
+  const {
+    toastId,
+    isVisible,
+    timeOut,
+    containerId,
+    className,
+    style: toastStyle,
+    icon,
+    updated,
+    toastType,
+    position,
+    data,
+    pauseOnHover,
+  } = toastProps;
 
   const animationClassName = getAnimation({
     isVisible: isVisible,
@@ -91,14 +103,14 @@ export function Toast({ toastProps, pauseOnActivate }: ToasterProps) {
     ? null
     : ToastTypeIcons[toastType];
 
-  const toastDirection = /center/i.test(position as Position)
+  const toastPosition = /center/i.test(position as Position)
     ? '-center'
     : /left/i.test(position as Position)
     ? '-left'
     : '-right';
 
   const toastClassName =
-    toastType === 'custom' ? '' : `${STYLE_NAMESPACE}__toast${toastDirection} ${animationClassName}`;
+    toastType === 'custom' ? '' : `${STYLE_NAMESPACE}__toast${toastPosition} ${animationClassName}`;
 
   return (
     <div
@@ -110,7 +122,7 @@ export function Toast({ toastProps, pauseOnActivate }: ToasterProps) {
     >
       <Condition condition={toastType !== 'custom'}>
         <If>
-          <div className={`${STYLE_NAMESPACE}__toast-content`}>
+          <div className={className || `${STYLE_NAMESPACE}__toast-content`} style={toastStyle}>
             {renderIcon && <span className={`${STYLE_NAMESPACE}__toast-icon`}>{renderIcon}</span>}
             {content}
           </div>

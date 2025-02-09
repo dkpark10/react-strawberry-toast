@@ -50,7 +50,7 @@ export function ToastContainer({
             key={position}
             data-testid={position}
             className={`${`${STYLE_NAMESPACE}__z9999`} ${
-              className ? className : `${STYLE_NAMESPACE}__toast-container ${STYLE_NAMESPACE}__${position}`
+              className || `${STYLE_NAMESPACE}__toast-container ${STYLE_NAMESPACE}__${position}`
             }`}
             style={{
               flexDirection,
