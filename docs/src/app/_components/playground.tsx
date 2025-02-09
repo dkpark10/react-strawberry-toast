@@ -1,5 +1,5 @@
 /** @jsxImportSource @emotion/react */
-"use client";
+'use client';
 
 import { useState } from 'react';
 import clsx from 'clsx';
@@ -11,7 +11,7 @@ import {
 } from 'react-strawberry-toast';
 import AssetImage from '@/components/asset-image';
 import { PrismLight } from 'react-syntax-highlighter';
-import { codeSyntax} from '@/constants/code-syntax';
+import { codeSyntax } from '@/constants/code-syntax';
 import { CodeTheme } from '@/constants/code-theme';
 import SuccessSvg from '/public/success.svg';
 import ErrorSvg from '/public/error.svg';
