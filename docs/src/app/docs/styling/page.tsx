@@ -137,13 +137,20 @@ $offset: 16px;
   right: $offset;
 }
 
-.#{$react-strawberry-toast-namespace}__toast {
+.#{$react-strawberry-toast-namespace}__toast-left {
   display: flex;
 }
+
 .#{$react-strawberry-toast-namespace}__toast-center {
   display: flex;
   justify-content: center;
 }
+
+.#{$react-strawberry-toast-namespace}__toast-right {
+  display: flex;
+  justify-content: flex-end;
+}
+
 .#{$react-strawberry-toast-namespace}__toast-content {
   box-sizing: border-box;
   background-color: white;
@@ -155,24 +162,25 @@ $offset: 16px;
   box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.1);
   min-height: 47px;
 }
+
 .#{$react-strawberry-toast-namespace}__toast-icon {
   width: 20px;
 }
 
 .#{$react-strawberry-toast-namespace}__fade-in {
-  animation: react-strawberry-toast_fade-in 0.3s ease-out;
+  animation: react-strawberry-toast_fade-in 0.3s cubic-bezier(0.43, 0.14, 0.2, 1.05);
 }
 
 .#{$react-strawberry-toast-namespace}__fade-out {
-  animation: react-strawberry-toast_fade-out 0.3s ease-out;
+  animation: react-strawberry-toast_fade-out 0.3s cubic-bezier(0.43, 0.14, 0.2, 1.05);
 }
 
 .#{$react-strawberry-toast-namespace}__fade-in-reverse {
-  animation: react-strawberry-toast_fade-in-reverse 0.3s ease-out;
+  animation: react-strawberry-toast_fade-in-reverse 0.3s cubic-bezier(0.43, 0.14, 0.2, 1.05);
 }
 
 .#{$react-strawberry-toast-namespace}__fade-out-reverse {
-  animation: react-strawberry-toast_fade-out-reverse 0.3s ease-out;
+  animation: react-strawberry-toast_fade-out-reverse 0.3s cubic-bezier(0.43, 0.14, 0.2, 1.05);
 }
 
 .#{$react-strawberry-toast-namespace}__loading {
