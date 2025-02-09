@@ -20,6 +20,8 @@ const createToast =
       removeTimeOut = REMOVE_TIMEOUT,
       pauseOnHover = true,
       toastId: optionToastId,
+      className,
+      style,
     } = options;
 
     const toastId = optionToastId || idGenerator();
@@ -33,6 +35,8 @@ const createToast =
     const value: NonHeadlessToastState = {
       updated: null,
       pausedAt: null,
+      className: className || '',
+      style: style || {},
       icon: options.icon || null,
       containerId: options.containerId || null,
       position: options.position || null,
