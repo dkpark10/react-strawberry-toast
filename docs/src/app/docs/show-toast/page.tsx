@@ -73,50 +73,6 @@ export default function DocShowToast() {
       </PrismLight>
       <Docs.SpaceSm />
       <p>For more detailed promise information, please refer to the <Link href='/docs/promise'><b className="text-straw-berry">promise</b></Link> page</p>
-
-      <Docs.SpaceLg />
-      <Docs.SubTitle>Custom Toast</Docs.SubTitle>
-      <Docs.SpaceMd />
-
-      <Docs.SsubTitle>Props</Docs.SsubTitle>
-      <Table headers={customToastPropsTableData.header} body={customToastPropsTableData.body} />
-
-      <Docs.SpaceLg />
-
-      <p>
-        Basic toast can be customized in the form of a function. Basic style and animation are applied. If you
-        don't want this, use <Strong>toast.custom</Strong>
-      </p>
-
-      <Docs.SpaceMd />
-
-      <PrismLight language="jsx" style={CodeTheme}>
-        {codeSyntax.tailwindCss}
-      </PrismLight>
-
-      <Docs.SpaceMd />
-
-      <Docs.SsubTitle>close function</Docs.SsubTitle>
-      <p>
-        Toast disappears <Strong>3000ms</Strong> after mounting and is completely removed
-        from the toast list after <Strong>200ms</Strong>. This was intentionally removed
-        after 200 ms for animation application when unmounted. If you want to remove it immediately, use{' '}
-        <Strong>immediatelyClose</Strong> props function.
-      </p>
-
-      <Docs.SpaceSm />
-      <PrismLight language="jsx" style={CodeTheme}>
-        {`toast(({ immediatelyClose }) => <div onClick={immediatelyClose}>...</div>)`}
-      </PrismLight>
-
-      <Docs.SpaceMd />
-      <Docs.SsubTitle>icons</Docs.SsubTitle>
-      <p>You can receive and render icons used in success, error, warn, loading as props.</p>
-
-      <Docs.SpaceSm />
-      <PrismLight language="jsx" style={CodeTheme}>
-        {`toast(({ icons }) => <div>{icons.success}</div>)`}
-      </PrismLight>
     </React.Fragment>
   );
 }

@@ -25,8 +25,6 @@ export default function DocsHeadlessHook() {
   return (
     <React.Fragment>
       <Docs.MainTitle>Styling</Docs.MainTitle>
-      <p>You can customize the style.</p>
-      <Docs.SpaceMd />
 
       <Docs.SubTitle>CSS</Docs.SubTitle>
       <p>
@@ -226,7 +224,7 @@ $offset: 16px;
           If you set className or style, the previously applied className and style will be completely reset.
         </p>
       </div>
-      <Docs.SpaceLg />
+      <Docs.SpaceSm />
 
       <p>
         The <b>{'<ToastContainer />'}</b> provides className and style as options.
@@ -236,7 +234,7 @@ $offset: 16px;
         The example below is code that changes the position of the existing toast container using Tailwind. <br />
         Type a Message
       </p>
-      <Docs.SpaceMd />
+      <Docs.SpaceSm />
 
       <StylingPlayGround />
       <Docs.SpaceMd />
