@@ -123,7 +123,7 @@ containerStyling:
           </div>
 
           <div className="py-1" />
-          <ToastContainer className="absolute" />
+          <ToastContainer className="absolute flex gap-2 flex-col" />
           <div className="py-2" />
           <div className="py-2" />
 

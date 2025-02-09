@@ -52,14 +52,11 @@ export function ToastContainer({
             className={`${`${STYLE_NAMESPACE}__z9999`} ${
               className ? className : `${STYLE_NAMESPACE}__toast-container ${STYLE_NAMESPACE}__${position}`
             }`}
-            style={
-              style
-                ? style
-                : {
-                    flexDirection,
-                    gap,
-                  }
-            }
+            style={{
+              flexDirection,
+              gap,
+              ...style,
+            }}
           >
             {toasts
               .filter((toast) =>

@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { CodeTheme } from '@/constants/code-theme';
 import { PrismLight } from 'react-syntax-highlighter';
 import { codeSyntax } from '@/constants/code-syntax';
-import MultiContainerPlayGround from '@/app/docs/multi-container/_components/playground';
+import StylingPlayGround from '@/app/docs/styling/_components/playground';
 import WarnSvg from '/public/warn.svg';
 import type { Metadata } from 'next';
 import AssetImage from '@/components/asset-image';
@@ -230,7 +230,7 @@ $offset: 16px;
       </p>
       <Docs.SpaceMd />
 
-      <MultiContainerPlayGround />
+      <StylingPlayGround />
       <Docs.SpaceMd />
 
       <PrismLight language="jsx" style={CodeTheme}>

@@ -36,7 +36,7 @@ export default function DocsMultiContainer() {
       </div>
 
       <Docs.SpaceSm />
-      <ToastContainer className="absolute" />
+      <ToastContainer className="absolute flex gap-2 flex-col" />
       <Docs.SpaceMd />
       <Docs.SpaceMd />
 
