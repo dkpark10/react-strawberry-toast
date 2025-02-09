@@ -103,7 +103,7 @@ containerStyling:
         ({ isVisible }) => (
           <div
             role="alert"
-            className={${'`'}bg-red-500 rounded-md px-2 text-white ${'${clsx('}
+            className={${'`'}bg-red-500 rounded-md px-2 text-white inline-block ${'${clsx('}
               isVisible ? 'animate-right-grow' : 'animate-left-shrink'
             )}${'`'}}
           >

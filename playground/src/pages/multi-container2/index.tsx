@@ -2,12 +2,23 @@ import React from 'react';
 import { css } from '@emotion/react';
 import { toast, ToastContainer } from '../../../../src/index';
 
+const toastCss = css`
+  background-color: red;
+  display: inline-block;
+`;
+
 export default function MultiContainer() {
   const onClick = () => {
-    toast.success('no container id', {
+    toast.custom(<div css={toastCss}>no container id</div>, {
       timeOut: Infinity,
     });
-    toast.success('no container id 123123', {
+    toast.custom(<div css={toastCss}>no container id 123123</div>, {
+      timeOut: Infinity,
+    });
+    toast(<div css={toastCss}>no container id</div>, {
+      timeOut: Infinity,
+    });
+    toast(<div css={toastCss}>no container id 123123</div>, {
       timeOut: Infinity,
     });
   };

@@ -20,13 +20,6 @@ export function Toast({ toastProps, pauseOnActivate }: ToasterProps) {
     position: position!,
   });
 
-  const toastDirection = /center/i.test(position as Position)
-    ? '-center'
-    : /left/i.test(position as Position)
-    ? '-left'
-    : '-right';
-  const toastClassName = !position ? '' : toastDirection;
-  
   const content =
     typeof data === 'function'
       ? data({
@@ -98,12 +91,19 @@ export function Toast({ toastProps, pauseOnActivate }: ToasterProps) {
     ? null
     : ToastTypeIcons[toastType];
 
+  const toastDirection = /center/i.test(position as Position)
+    ? '-center'
+    : /left/i.test(position as Position)
+    ? '-left'
+    : '-right';
+
+  const toastClassName =
+    toastType === 'custom' ? '' : `${STYLE_NAMESPACE}__toast${toastDirection} ${animationClassName}`;
+
   return (
     <div
       role="alert"
-      className={`${STYLE_NAMESPACE}__toast${toastClassName} ${
-        toastType === 'custom' ? '' : animationClassName
-      }`}
+      className={toastClassName}
       data-testid={`container-${containerId || 'default'}`}
       onMouseEnter={onMouseEnter}
       onMouseLeave={onMouseLeave}

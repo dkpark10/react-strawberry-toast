@@ -16,8 +16,7 @@ export default function DocsMultiContainer() {
     toast.custom(
       ({ isVisible }) => (
         <div
-          role="alert"
-          className={`bg-straw-berry rounded-md px-2 text-white ${clsx(
+          className={`bg-straw-berry rounded-md px-2 text-white inline-block ${clsx(
             isVisible ? 'animate-right-grow' : 'animate-left-shrink'
           )}`}
         >
