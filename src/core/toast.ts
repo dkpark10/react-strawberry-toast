@@ -1,9 +1,17 @@
 import { generateId } from '../utils/generate-id';
 import { ToastStore } from '../core/store';
 import { REMOVE_TIMEOUT, MAX_TIMEOUT, DISAPPEAR_TIMEOUT } from '../constants';
+import { ToastTypeIcons } from '../components/toast-icons';
 import { toastHandlers } from './toast-handler';
 import type { ReactNode } from 'react';
-import type { NonHeadlessToastState, ToastState, Options, ToastType, ToastDataWithCallback } from '../types';
+import type {
+  NonHeadlessToastState,
+  ToastState,
+  Options,
+  ToastType,
+  ToastDataWithCallback,
+  ToastDataCallback,
+} from '../types';
 
 export const toastStore = new ToastStore<NonHeadlessToastState>();
 
@@ -79,8 +87,8 @@ toast.promise = <T>(
   promise: Promise<T>,
   promiseOption: {
     loading: ReactNode;
-    success: ReactNode | ((response: T) => ReactNode);
-    error: ReactNode | ((err: any) => ReactNode);
+    success: ReactNode | ((response: T, opt: ToastDataCallback) => ReactNode);
+    error: ReactNode | ((err: any, opt: ToastDataCallback) => ReactNode);
   },
   options: Options = {}
 ) => {
@@ -91,18 +99,36 @@ toast.promise = <T>(
     timeOut: MAX_TIMEOUT,
   });
 
+  const opt: ToastDataCallback = {
+    toastId,
+    close: () => toast.disappear(toastId, 0),
+    immediatelyClose: () => {
+      toast.disappear(toastId, 0);
+      toast.remove(toastId, 0);
+    },
+    icons: {
+      success: ToastTypeIcons.success,
+      error: ToastTypeIcons.error,
+      warn: ToastTypeIcons.warn,
+      loading: ToastTypeIcons.loading,
+    },
+    isVisible: true,
+  };
+
+  const timeOut = options?.timeOut || DISAPPEAR_TIMEOUT;
+
   promise
     .then((res) => {
-      toast.replace(toastId, typeof success === 'function' ? success(res) : success, {
+      toast.replace(toastId, typeof success === 'function' ? success(res, opt) : success, {
         ...options,
-        timeOut: options.timeOut || DISAPPEAR_TIMEOUT,
+        timeOut: timeOut,
         toastType: 'success',
       });
     })
     .catch((err) => {
-      toast.replace(toastId, typeof error === 'function' ? error(err) : error, {
+      toast.replace(toastId, typeof error === 'function' ? error(err, opt) : error, {
         ...options,
-        timeOut: options.timeOut || DISAPPEAR_TIMEOUT,
+        timeOut: timeOut,
         toastType: 'error',
       });
     });
