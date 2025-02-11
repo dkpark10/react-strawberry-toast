@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import { Condition, If, Else } from './condition';
 import { getAnimation } from '../utils/get-animation';
 import { toast } from '../core/toast';
@@ -25,6 +25,7 @@ export function Toast({ toastProps, pauseOnActivate }: ToasterProps) {
     position,
     data,
     pauseOnHover,
+    align,
   } = toastProps;
 
   const animationClassName = getAnimation({
@@ -110,7 +111,9 @@ export function Toast({ toastProps, pauseOnActivate }: ToasterProps) {
     : '-right';
 
   const toastClassName =
-    toastType === 'custom' ? '' : `${STYLE_NAMESPACE}__toast${toastPosition} ${animationClassName}`;
+    toastType === 'custom'
+      ? ''
+      : `${STYLE_NAMESPACE}__toast${align ? `-${align}` : toastPosition} ${animationClassName}`;
 
   return (
     <div

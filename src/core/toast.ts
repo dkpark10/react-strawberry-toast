@@ -30,6 +30,7 @@ const createToast =
       toastId: optionToastId,
       className,
       style,
+      align,
     } = options;
 
     const toastId = optionToastId || idGenerator();
@@ -49,6 +50,7 @@ const createToast =
       containerId: options.containerId || null,
       position: options.position || null,
       timeOut: timeOut > MAX_TIMEOUT ? MAX_TIMEOUT : timeOut,
+      align: align || '',
       toastId,
       data,
       createdAt,

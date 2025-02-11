@@ -32,6 +32,7 @@ export interface Options extends BaseOptions {
   containerId?: string | null;
   pauseOnHover?: boolean;
   toastType?: ToastType;
+  align?: 'left' | 'center' | 'right' | '';
 }
 export interface ToastDataCallback {
   toastId: ToastBaseState['toastId'];

@@ -17,9 +17,11 @@ export default function MultiContainer() {
     });
     toast(<div css={toastCss}>no container id</div>, {
       timeOut: Infinity,
+      align: 'left',
     });
     toast(<div css={toastCss}>no container id 123123</div>, {
       timeOut: Infinity,
+      align: 'left',
     });
   };
 
