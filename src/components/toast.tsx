@@ -47,7 +47,7 @@ export function Toast({ toastProps, pauseOnActivate }: ToasterProps) {
             warn: ToastTypeIcons.warn,
             loading: ToastTypeIcons.loading,
           },
-          isVisible: isVisible,
+          isVisible,
         })
       : data;
 

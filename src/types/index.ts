@@ -33,7 +33,7 @@ export interface Options extends BaseOptions {
   pauseOnHover?: boolean;
   toastType?: ToastType;
 }
-interface ToastDataCallback {
+export interface ToastDataCallback {
   toastId: ToastBaseState['toastId'];
   close: () => void;
   immediatelyClose: () => void;
