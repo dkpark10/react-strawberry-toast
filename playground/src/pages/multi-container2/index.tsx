@@ -28,7 +28,7 @@ export default function MultiContainer() {
       <button css={{ color: 'red' }} type="button" onClick={onClick}>
         click
       </button>
-      <div css={{ height: 600, border: '1px solid red' }}>long article</div>
+      <div css={{ height: 400, border: '1px solid red' }}>long article</div>
       <div
         css={{ border: '1px solid blue', position: 'relative', top: 200, left: 200, width: 200, height: 200 }}
       >
