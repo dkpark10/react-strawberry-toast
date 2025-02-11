@@ -1,10 +1,10 @@
 import React, { useEffect } from 'react';
 import { afterEach, beforeEach, vi, describe, expect, test } from 'vitest';
 import { act, render, fireEvent } from '@testing-library/react';
-import { useToasts } from '../src/hooks/use-headless-toasts';
-import { toast } from '../src/core/headless-toast';
-import { ToastState } from '../src/types';
-import { DISAPPEAR_TIMEOUT, MAX_TIMEOUT, REMOVE_TIMEOUT } from '../src/constants';
+import { useToasts } from '../../src/hooks/use-headless-toasts';
+import { toast } from '../../src/core/headless-toast';
+import { ToastState } from '../../src/types';
+import { DISAPPEAR_TIMEOUT, MAX_TIMEOUT, REMOVE_TIMEOUT } from '../../src/constants';
 import '@testing-library/jest-dom';
 
 describe('mouse event test', () => {
