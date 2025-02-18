@@ -248,4 +248,31 @@ describe('toast', () => {
 
     expect(queryByText(new RegExp(context.task.id, 'i'))).not.toBeInTheDocument();
   });
+
+  test('Should display no more toast than 6 per container', async (context) => {
+    function App() {
+      const click = () => {
+        for (let i = 0; i < 10; i += 1) {
+          toast(context.task.id);
+          toast(`${context.task.id}-containerid`, {
+            containerId: '1',
+          });
+        }
+      };
+
+      return (
+        <React.Fragment>
+          <ToastContainer limit={6} />
+          <ToastContainer containerId="1" limit={6} />
+          <button onClick={click}>click</button>
+        </React.Fragment>
+      );
+    }
+
+    const { getByRole, queryAllByText } = render(<App />);
+
+    fireEvent.click(getByRole('button', { name: 'click' }));
+
+    expect(queryAllByText(new RegExp(`${context.task.id}-containerid`, 'i'))).toHaveLength(6);
+  });
 });

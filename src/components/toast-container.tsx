@@ -16,11 +16,13 @@ interface ToastContainerProps {
   reverse?: boolean;
   gap?: number;
   pauseOnActivate?: boolean;
+  limit?: number;
 }
 
 export function ToastContainer({
   className,
   style,
+  limit,
   position: globalPosition = 'top-center',
   containerId = '',
   gap = 9,
@@ -62,6 +64,7 @@ export function ToastContainer({
               .filter((toast) =>
                 containerId ? toast.containerId === containerId : toast.containerId ? false : true
               )
+              .slice(0, limit)
               .map((toast) => (
                 <Toast key={toast.toastId} toastProps={toast} pauseOnActivate={pauseOnActivate} />
               ))}
