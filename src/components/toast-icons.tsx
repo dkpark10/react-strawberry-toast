@@ -1,4 +1,4 @@
-import React, { type ReactNode } from 'react';
+import { type ReactNode } from 'react';
 import { STYLE_NAMESPACE } from '../constants';
 import type { ToastType } from '../types';
 
