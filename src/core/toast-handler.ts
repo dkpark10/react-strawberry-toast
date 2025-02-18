@@ -71,7 +71,6 @@ export const toastHandlers = <T = ToastState>(
     });
 
     deleteTimer(toastId);
-    toastStore.setState([...toastStore.state]);
   };
 
   const disappear = (toastId: ToastState['toastId'], timeOut: number): void => {
