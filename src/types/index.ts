@@ -31,7 +31,6 @@ export interface Options extends BaseOptions {
   position?: Position | null;
   containerId?: string | null;
   pauseOnHover?: boolean;
-  toastType?: ToastType;
   align?: 'left' | 'center' | 'right' | '';
 }
 export interface ToastDataCallback {
@@ -46,7 +45,7 @@ export type ToastState = ToastBaseState & BaseOptions;
 
 export type ToastDataWithCallback = (props: ToastDataCallback) => ReactNode;
 
-export type NonHeadlessToastState = Required<Options> &
+export type NonHeadlessToastState = Required<Options & { toastType: ToastType }> &
   Omit<ToastState, 'data'> & {
     data: ToastDataWithCallback | ReactNode;
   };
