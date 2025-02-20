@@ -8,3 +8,5 @@ dt.txt
 /playwright-report/
 /blob-report/
 /playwright/.cache/
+
+/playground/src/pages/ignore/**/*

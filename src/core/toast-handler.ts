@@ -94,6 +94,7 @@ export const toastHandlers = <T = ToastState>(
       timeOut > MAX_TIMEOUT ? MAX_TIMEOUT : timeOut
     );
 
+    // @ts-ignore
     toastStore.toastTimers.set(toastId, timer);
   };
 
