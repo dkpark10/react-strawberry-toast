@@ -65,12 +65,13 @@ export function Toast({ toastProps, pauseOnActivate }: ToasterProps) {
   };
 
   useEffect(() => {
-    if (!pauseOnActivate) return;
     const focusHandler = () => {
+      if (!pauseOnActivate) return;
       toast.resume(toastId);
     };
 
     const blurHandler = () => {
+      if (!pauseOnActivate) return;
       toast.pause(toastId);
     };
 
