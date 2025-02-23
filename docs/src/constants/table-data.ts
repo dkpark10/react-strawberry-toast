@@ -60,7 +60,6 @@ export const toastApi: TableData<4> = {
     ],
     ['containerId', "ID shown in the Toast Container Unique ID", 'String', ''],
     ['pauseOnHover', "The Option that sets the timer to stop or not when a hover event occurs", 'Boolean', 'true'],
-    ['toastType', "Toast Type", `'default' | 'custom' | 'success' | 'error' | 'loading' | 'warn'`, 'default'],
     ['icon', 'The icon to be displayed in the toast.', 'ReactNode', ''],
     ['timeOut', 'Time for toast to disappear', 'Number', '3000'],
     ['removeTimeOut', 'Time for toast to remove In List', 'Number', '200'],

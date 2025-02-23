@@ -64,7 +64,6 @@ function App() {
 | containerId      | ID shown in the Toast Container Unique ID  |  String | |
 | pauseOnHover      | Option that sets the timer to stop or not when a hover event occurs  |  Boolean | true |
 | icon      | The icon to be displayed in the toast  |  ReactNode | |
-| toastType      | Toast Type |  default, custom, success, error, loading, warn | default |
 | timeOut      | Time for toast to disappear  |  Number | 3000 |
 | removeTimeOut      | Time for toast to remove In Toast List  |  Number | 200 |
 
