@@ -28,7 +28,7 @@ export default function DocsHeadlessHook() {
 
       <Docs.SubTitle>CSS</Docs.SubTitle>
       <p>
-        This is the CSS file used for the react-strawberry-toast. <br />
+        This is the CSS classes used for the react-strawberry-toast. <br />
         <Link href="https://github.com/dkpark10/react-strawberry-toast/blob/master/src/styles/style.scss">
           Here is <b className="text-straw-berry">CSS file link</b>
         </Link>
@@ -38,164 +38,41 @@ export default function DocsHeadlessHook() {
         {`$react-strawberry-toast-namespace: 'react-strawberry-toast';
 $offset: 16px;
 
-@keyframes l3 {
-  to {
-    transform: rotate(1turn);
-  }
-}
+.#{$react-strawberry-toast-namespace}__z9999 {}
 
-@keyframes react-strawberry-toast_fade-in {
-  from {
-    transform: translateY(-100%);
-    opacity: 0;
-  }
+.#{$react-strawberry-toast-namespace}__toast-container {}
 
-  to {
-    transform: translateY(0);
-    opacity: 1;
-  }
-}
+.#{$react-strawberry-toast-namespace}__top-left {}
 
-@keyframes react-strawberry-toast_fade-out {
-  from {
-    transform: translateY(0);
-    opacity: 1;
-  }
+.#{$react-strawberry-toast-namespace}__top-center {}
 
-  to {
-    transform: translateY(-100%);
-    opacity: 0;
-  }
-}
+.#{$react-strawberry-toast-namespace}__top-right {}
 
-@keyframes react-strawberry-toast_fade-in-reverse {
-  from {
-    transform: translateY(100%);
-    opacity: 0;
-  }
+.#{$react-strawberry-toast-namespace}__bottom-left {}
 
-  to {
-    transform: translateY(0);
-    opacity: 1;
-  }
-}
+.#{$react-strawberry-toast-namespace}__bottom-center {}
 
-@keyframes react-strawberry-toast_fade-out-reverse {
-  from {
-    transform: translateY(0);
-    opacity: 1;
-  }
+.#{$react-strawberry-toast-namespace}__bottom-right {}
 
-  to {
-    transform: translateY(100%);
-    opacity: 0;
-  }
-}
+.#{$react-strawberry-toast-namespace}__toast-left {}
 
-.#{$react-strawberry-toast-namespace}__z9999 {
-  z-index: 9999;
-}
+.#{$react-strawberry-toast-namespace}__toast-center {}
 
-.#{$react-strawberry-toast-namespace}__toast-container {
-  pointer-events: auto;
-  position: fixed;
-  z-index: 9999;
-  display: flex;
-}
+.#{$react-strawberry-toast-namespace}__toast-right {}
 
-.#{$react-strawberry-toast-namespace}__top-left {
-  top: $offset;
-  left: $offset;
-}
+.#{$react-strawberry-toast-namespace}__toast-content {}
 
-.#{$react-strawberry-toast-namespace}__top-center {
-  top: $offset;
-  left: 50%;
-  transform: translateX(-50%);
-}
+.#{$react-strawberry-toast-namespace}__toast-icon {}
 
-.#{$react-strawberry-toast-namespace}__top-right {
-  top: $offset;
-  right: $offset;
-}
+.#{$react-strawberry-toast-namespace}__fade-in {}
 
-.#{$react-strawberry-toast-namespace}__bottom-left {
-  bottom: $offset;
-  left: $offset;
-}
+.#{$react-strawberry-toast-namespace}__fade-out {}
 
-.#{$react-strawberry-toast-namespace}__bottom-center {
-  bottom: $offset;
-  left: 50%;
-  transform: translateX(-50%);
-}
+.#{$react-strawberry-toast-namespace}__fade-in-reverse {}
 
-.#{$react-strawberry-toast-namespace}__bottom-right {
-  bottom: $offset;
-  right: $offset;
-}
+.#{$react-strawberry-toast-namespace}__fade-out-reverse {}
 
-.#{$react-strawberry-toast-namespace}__toast-left {
-  display: flex;
-}
-
-.#{$react-strawberry-toast-namespace}__toast-center {
-  display: flex;
-  justify-content: center;
-}
-
-.#{$react-strawberry-toast-namespace}__toast-right {
-  display: flex;
-  justify-content: flex-end;
-}
-
-.#{$react-strawberry-toast-namespace}__toast-content {
-  box-sizing: border-box;
-  background-color: white;
-  padding: 10px;
-  display: flex;
-  align-items: center;
-  gap: 5px;
-  border-radius: 8px;
-  box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.1);
-  min-height: 47px;
-}
-
-.#{$react-strawberry-toast-namespace}__toast-icon {
-  width: 20px;
-}
-
-.#{$react-strawberry-toast-namespace}__fade-in {
-  animation: react-strawberry-toast_fade-in 0.3s cubic-bezier(0.43, 0.14, 0.2, 1.05);
-}
-
-.#{$react-strawberry-toast-namespace}__fade-out {
-  animation: react-strawberry-toast_fade-out 0.3s cubic-bezier(0.43, 0.14, 0.2, 1.05);
-}
-
-.#{$react-strawberry-toast-namespace}__fade-in-reverse {
-  animation: react-strawberry-toast_fade-in-reverse 0.3s cubic-bezier(0.43, 0.14, 0.2, 1.05);
-}
-
-.#{$react-strawberry-toast-namespace}__fade-out-reverse {
-  animation: react-strawberry-toast_fade-out-reverse 0.3s cubic-bezier(0.43, 0.14, 0.2, 1.05);
-}
-
-.#{$react-strawberry-toast-namespace}__loading {
-  width: 18px;
-  padding: 3.5px;
-  aspect-ratio: 1;
-  border-radius: 50%;
-  background: #6f6f70;
-  --_m: conic-gradient(#0000 10%, #000),
-    linear-gradient(#000 0 0) content-box;
-  -webkit-mask: var(--_m);
-  mask: var(--_m);
-  -webkit-mask-composite: source-out;
-  mask-composite: subtract;
-  animation: l3 1s infinite linear;
-}
-          
+.#{$react-strawberry-toast-namespace}__loading {}
 `}
       </PrismLight>
 
