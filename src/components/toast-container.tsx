@@ -1,12 +1,14 @@
 'use client';
 
-import React from 'react';
+import React, { useRef } from 'react';
 import { Toast } from './toast';
 import { useToasts } from '../hooks/use-toasts';
 import { getDirection } from '../utils/get-direction';
 import type { Position, NonHeadlessToastState as ToastState } from '../types';
 import { STYLE_NAMESPACE } from '../constants';
 import '../styles/style.scss';
+
+type ChildRef = Record<ToastState['toastId'], HTMLDivElement>;
 
 interface ToastContainerProps {
   className?: string;
@@ -30,6 +32,8 @@ export function ToastContainer({
   pauseOnActivate = true,
 }: ToastContainerProps) {
   const toastList = useToasts();
+
+  const childListRef = useRef<ChildRef>({});
 
   const toastsByPosition: Record<Position, Array<ToastState>> = toastList.reduce((acc, toast) => {
     const key = toast.position || globalPosition;
@@ -65,8 +69,26 @@ export function ToastContainer({
                 containerId ? toast.containerId === containerId : toast.containerId ? false : true
               )
               .slice(0, limit)
-              .map((toast) => (
-                <Toast key={toast.toastId} toastProps={toast} pauseOnActivate={pauseOnActivate} />
+              .map((toast, idx, self) => (
+                <Toast
+                  ref={(element) => {
+                    if (!element) return;
+                    childListRef.current[toast.toastId] = element;
+
+                    if (idx <= 0) {
+                      return;
+                    }
+
+                    const prevToastId = self[idx - 1].toastId;
+                    const prevNode = childListRef.current[prevToastId];
+                    const bottom = prevNode.getBoundingClientRect().bottom;
+
+                    element.style.transform = `translate(-50%, ${bottom}px)`;
+                  }}
+                  key={toast.toastId}
+                  toastProps={toast}
+                  pauseOnActivate={pauseOnActivate}
+                />
               ))}
           </div>
         );

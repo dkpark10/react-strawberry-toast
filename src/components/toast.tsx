@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, forwardRef } from 'react';
 import { Condition, If, Else } from './condition';
 import { getAnimation } from '../utils/get-animation';
 import { toast } from '../core/toast';
@@ -12,7 +12,10 @@ interface ToasterProps {
   pauseOnActivate: boolean;
 }
 
-export function Toast({ toastProps, pauseOnActivate }: ToasterProps) {
+export const Toast = forwardRef<HTMLDivElement, ToasterProps>(function Toast(
+  { toastProps, pauseOnActivate },
+  elementRef
+) {
   const {
     toastId,
     isVisible,
@@ -95,6 +98,7 @@ export function Toast({ toastProps, pauseOnActivate }: ToasterProps) {
   return (
     <div
       role="alert"
+      ref={elementRef}
       className={`${STYLE_NAMESPACE}__toast-content-container`}
       data-testid={`container-${containerId || 'default'}`}
       onMouseEnter={onMouseEnter}
@@ -113,4 +117,4 @@ export function Toast({ toastProps, pauseOnActivate }: ToasterProps) {
       </div>
     </div>
   );
-}
+});
