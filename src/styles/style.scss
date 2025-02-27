@@ -112,6 +112,12 @@ $offset: 16px;
   justify-content: flex-end;
 }
 
+.#{$react-strawberry-toast-namespace}__toast-content-container {
+  position: absolute;
+  min-width: 246px;
+  transform: translateX(-50%);
+}
+
 .#{$react-strawberry-toast-namespace}__toast-content {
   box-sizing: border-box;
   background-color: white;

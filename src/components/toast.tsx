@@ -95,20 +95,22 @@ export function Toast({ toastProps, pauseOnActivate }: ToasterProps) {
   return (
     <div
       role="alert"
-      className={toastClassName}
+      className={`${STYLE_NAMESPACE}__toast-content-container`}
       data-testid={`container-${containerId || 'default'}`}
       onMouseEnter={onMouseEnter}
       onMouseLeave={onMouseLeave}
     >
-      <Condition condition={toastType !== 'custom'}>
-        <If>
-          <div className={className || `${STYLE_NAMESPACE}__toast-content`} style={toastStyle}>
-            {renderIcon && <span className={`${STYLE_NAMESPACE}__toast-icon`}>{renderIcon}</span>}
-            {content}
-          </div>
-        </If>
-        <Else>{content}</Else>
-      </Condition>
+      <div className={toastClassName}>
+        <Condition condition={toastType !== 'custom'}>
+          <If>
+            <div className={className || `${STYLE_NAMESPACE}__toast-content`} style={toastStyle}>
+              {renderIcon && <span className={`${STYLE_NAMESPACE}__toast-icon`}>{renderIcon}</span>}
+              {content}
+            </div>
+          </If>
+          <Else>{content}</Else>
+        </Condition>
+      </div>
     </div>
   );
 }
