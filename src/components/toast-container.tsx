@@ -72,17 +72,23 @@ export function ToastContainer({
               .map((toast, idx, self) => (
                 <Toast
                   ref={(element) => {
-                    if (!element) return;
+                    if (!element) {
+                      delete childListRef.current[toast.toastId];
+                      return;
+                    }
                     childListRef.current[toast.toastId] = element;
 
                     if (idx <= 0) {
+                      element.style.transition = 'transform 0.2s cubic-bezier(0.43, 0.14, 0.2, 1.05)';
+                      element.style.transform = `translate(-50%, ${0}px)`;
                       return;
                     }
 
-                    const prevToastId = self[idx - 1].toastId;
-                    const prevNode = childListRef.current[prevToastId];
+                    const prevToast = self[idx - 1];
+                    const prevNode = childListRef.current[prevToast.toastId];
                     const bottom = prevNode.getBoundingClientRect().bottom;
 
+                    element.style.transition = 'transform 0.2s cubic-bezier(0.43, 0.14, 0.2, 1.05)';
                     element.style.transform = `translate(-50%, ${bottom}px)`;
                   }}
                   key={toast.toastId}
