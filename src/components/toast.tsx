@@ -3,6 +3,7 @@ import { Condition, If, Else } from './condition';
 import { getAnimation } from '../utils/get-animation';
 import { toast } from '../core/toast';
 import { DISAPPEAR_TIMEOUT, MAX_TIMEOUT, STYLE_NAMESPACE } from '../constants';
+import { useEventListener } from '../hooks/use-event-listener';
 import { ToastTypeIcons } from './toast-icons';
 import type { Position, NonHeadlessToastState as ToastState } from '../types';
 
@@ -45,24 +46,18 @@ export function Toast({ toastProps, pauseOnActivate }: ToasterProps) {
     }
   };
 
-  useEffect(() => {
-    const focusHandler = () => {
-      if (!pauseOnActivate) return;
-      toast.resume(toastId);
-    };
+  const focusHandler = () => {
+    if (!pauseOnActivate) return;
+    toast.resume(toastId);
+  };
 
-    const blurHandler = () => {
-      if (!pauseOnActivate) return;
-      toast.pause(toastId);
-    };
+  const blurHandler = () => {
+    if (!pauseOnActivate) return;
+    toast.pause(toastId);
+  };
 
-    window.addEventListener('focus', focusHandler);
-    window.addEventListener('blur', blurHandler);
-    return () => {
-      window.removeEventListener('focus', focusHandler);
-      window.removeEventListener('blur', blurHandler);
-    };
-  }, []);
+  useEventListener('focus', focusHandler);
+  useEventListener('blur', blurHandler);
 
   /** @description disappear after mount */
   useEffect(() => {
