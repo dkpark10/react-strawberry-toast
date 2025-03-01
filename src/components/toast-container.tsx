@@ -33,7 +33,7 @@ export function ToastContainer({
 }: ToastContainerProps) {
   const toastList = useToasts();
 
-  const childListRef = useRef<ChildRef>({});
+  const heights = useRef<ChildRef>({});
 
   const toastsByPosition: Record<Position, Array<ToastState>> = toastList.reduce((acc, toast) => {
     const key = toast.position || globalPosition;
@@ -72,14 +72,14 @@ export function ToastContainer({
                 <Toast
                   ref={(element) => {
                     if (!element) {
-                      delete childListRef.current[toast.toastId];
+                      delete heights.current[toast.toastId];
                       return;
                     }
 
                     const transition = 'transform 0.2s cubic-bezier(0.43, 0.14, 0.2, 1.05)';
 
-                    const height = element.getBoundingClientRect().height;
-                    childListRef.current[toast.toastId] = height;
+                    const height = heights.current[toast.toastId] || element.getBoundingClientRect().height;
+                    heights.current[toast.toastId] = height;
 
                     if (idx <= 0) {
                       element.style.transition = transition;
@@ -90,7 +90,7 @@ export function ToastContainer({
                     const top = self
                       .filter((_, order) => order <= idx - 1)
                       .reduce((acc, t) => {
-                        return (acc += gap + childListRef.current[t.toastId]);
+                        return (acc += gap + heights.current[t.toastId]);
                       }, 0);
 
                     element.style.transition = transition;
