@@ -81,9 +81,11 @@ export function ToastContainer({
                     const height = heights.current[toast.toastId] || element.getBoundingClientRect().height;
                     heights.current[toast.toastId] = height;
 
+                    const x = /left/.test(position) ? 0 : /center/.test(position) ? -50 : -100;
+
                     if (idx <= 0) {
                       element.style.transition = transition;
-                      element.style.transform = `translate(-50%, ${0}px)`;
+                      element.style.transform = `translate(${x}%, ${0}px)`;
                       return;
                     }
 
@@ -94,7 +96,7 @@ export function ToastContainer({
                       }, 0);
 
                     element.style.transition = transition;
-                    element.style.transform = `translate(-50%, ${top}px)`;
+                    element.style.transform = `translate(${x}%, ${top}px)`;
                   }}
                   key={toast.toastId}
                   toastProps={toast}
