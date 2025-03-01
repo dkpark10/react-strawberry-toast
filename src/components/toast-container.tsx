@@ -8,7 +8,7 @@ import type { Position, NonHeadlessToastState as ToastState } from '../types';
 import { STYLE_NAMESPACE } from '../constants';
 import '../styles/style.scss';
 
-type ChildRef = Record<ToastState['toastId'], HTMLDivElement>;
+type ChildRef = Record<ToastState['toastId'], number>;
 
 interface ToastContainerProps {
   className?: string;
@@ -34,6 +34,7 @@ export function ToastContainer({
   const toastList = useToasts();
 
   const childListRef = useRef<ChildRef>({});
+  console.log(childListRef.current);
 
   const toastsByPosition: Record<Position, Array<ToastState>> = toastList.reduce((acc, toast) => {
     const key = toast.position || globalPosition;
@@ -60,7 +61,6 @@ export function ToastContainer({
             }`}
             style={{
               flexDirection,
-              gap,
               ...style,
             }}
           >
@@ -76,20 +76,26 @@ export function ToastContainer({
                       delete childListRef.current[toast.toastId];
                       return;
                     }
-                    childListRef.current[toast.toastId] = element;
+
+                    const transition = 'transform 0.2s cubic-bezier(0.43, 0.14, 0.2, 1.05)';
+
+                    const height = element.getBoundingClientRect().height;
+                    childListRef.current[toast.toastId] = height;
 
                     if (idx <= 0) {
-                      element.style.transition = 'transform 0.2s cubic-bezier(0.43, 0.14, 0.2, 1.05)';
+                      element.style.transition = transition;
                       element.style.transform = `translate(-50%, ${0}px)`;
                       return;
                     }
 
-                    const prevToast = self[idx - 1];
-                    const prevNode = childListRef.current[prevToast.toastId];
-                    const bottom = prevNode.getBoundingClientRect().bottom;
+                    const top = self
+                      .filter((_, order) => order <= idx - 1)
+                      .reduce((acc, t) => {
+                        return (acc += gap + childListRef.current[t.toastId]);
+                      }, 0);
 
-                    element.style.transition = 'transform 0.2s cubic-bezier(0.43, 0.14, 0.2, 1.05)';
-                    element.style.transform = `translate(-50%, ${bottom}px)`;
+                    element.style.transition = transition;
+                    element.style.transform = `translate(-50%, ${top}px)`;
                   }}
                   key={toast.toastId}
                   toastProps={toast}

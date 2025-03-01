@@ -1,7 +1,7 @@
 import { toastStore } from '../core/toast';
-import { ToastState } from '../types';
+import { NonHeadlessToastState as ToastState } from '../types';
 
-export const getPrevToastBySamePosition = (toastId: ToastState['toastId']): ToastState['toastId'] | null => {
+export const getPrevToastsBySamePosition = (toastId: ToastState['toastId']): Array<ToastState> => {
   const currentToastPosition = toastStore.state.find((t) => toastId === t.toastId)?.position || 'top-center';
 
   const isTop = /top/.test(currentToastPosition);
@@ -19,8 +19,5 @@ export const getPrevToastBySamePosition = (toastId: ToastState['toastId']): Toas
       return /right/.test(t.position!);
     });
 
-  const prevIndex = toastsBySamePosition.findIndex((t) => t.toastId === toastId) - 1;
-  if (prevIndex <= -1) return null;
-
-  return toastsBySamePosition[prevIndex].toastId;
+  return toastsBySamePosition;
 };
