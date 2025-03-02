@@ -93,7 +93,9 @@ export const Toast = forwardRef<HTMLDivElement, ToasterProps>(function Toast(
   const toastClassName =
     toastType === 'custom'
       ? ''
-      : `${STYLE_NAMESPACE}__toast${align ? `-${align}` : toastPosition} ${animationClassName}`;
+      : `${STYLE_NAMESPACE}__toast${align ? `-${align}` : toastPosition} ${
+          !toast.isActive(toastId) ? animationClassName : ''
+        }`;
 
   return (
     <div
