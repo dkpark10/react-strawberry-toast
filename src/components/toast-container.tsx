@@ -81,7 +81,7 @@ export function ToastContainer({
                     const height = heights.current[toast.toastId] || element.getBoundingClientRect().height;
                     heights.current[toast.toastId] = height;
 
-                    const x = /left/.test(position) ? 0 : /center/.test(position) ? -50 : -100;
+                    const x = /left/.test(position) ? 50 : /center/.test(position) ? 0 : -50;
 
                     if (idx <= 0) {
                       element.style.transition = transition;
@@ -92,7 +92,9 @@ export function ToastContainer({
                     const top = self
                       .filter((_, order) => order <= idx - 1)
                       .reduce((acc, t) => {
-                        return (acc += gap + heights.current[t.toastId]);
+                        return /bottom/.test(position)
+                          ? (acc -= gap + heights.current[t.toastId])
+                          : (acc += gap + heights.current[t.toastId]);
                       }, 0);
 
                     element.style.transition = transition;
