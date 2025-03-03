@@ -2,7 +2,7 @@ import { useEffect, forwardRef } from 'react';
 import { Condition, If, Else } from './condition';
 import { getAnimation } from '../utils/get-animation';
 import { toast } from '../core/toast';
-import { DISAPPEAR_TIMEOUT, MAX_TIMEOUT, STYLE_NAMESPACE } from '../constants';
+import { STYLE_NAMESPACE } from '../constants';
 import { useEventListener } from '../hooks/use-event-listener';
 import { ToastTypeIcons } from './toast-icons';
 import type { Position, NonHeadlessToastState as ToastState } from '../types';
@@ -27,7 +27,7 @@ export const Toast = forwardRef<HTMLDivElement, ToasterProps>(function Toast(
     updated,
     toastType,
     position,
-    data: content,
+    data,
     pauseOnHover,
     align,
   } = toastProps;
@@ -36,6 +36,25 @@ export const Toast = forwardRef<HTMLDivElement, ToasterProps>(function Toast(
     isVisible: isVisible,
     position: position!,
   });
+
+  const content =
+    typeof data === 'function'
+      ? data({
+          toastId,
+          close: () => toast.disappear(toastId, 0),
+          immediatelyClose: () => {
+            toast.disappear(toastId, 0);
+            toast.remove(toastId, 0);
+          },
+          icons: {
+            success: ToastTypeIcons.success,
+            error: ToastTypeIcons.error,
+            warn: ToastTypeIcons.warn,
+            loading: ToastTypeIcons.loading,
+          },
+          isVisible,
+        })
+      : data;
 
   const onMouseEnter = () => {
     if (pauseOnHover) {
@@ -73,8 +92,7 @@ export const Toast = forwardRef<HTMLDivElement, ToasterProps>(function Toast(
   /** @description promise toast */
   useEffect(() => {
     if (updated !== null) {
-      const newTimeOut = timeOut >= MAX_TIMEOUT ? DISAPPEAR_TIMEOUT : timeOut;
-      toast.disappear(toastId, newTimeOut);
+      toast.disappear(toastId, timeOut);
     }
   }, [updated]);
 
