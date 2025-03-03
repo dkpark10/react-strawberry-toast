@@ -77,14 +77,10 @@ export function ToastContainer({
 
                   const x = /left/.test(position) ? 50 : /center/.test(position) ? 0 : -50;
 
-                  if (idx <= 0) {
-                    element.style.transition = transition;
-                    element.style.transform = `translate(${x}%, ${0}px)`;
-                    return;
-                  }
+                  const limitIdx = /bottom/.test(position) ? 0 : 1;
 
                   const top = self
-                    .filter((_, order) => order <= idx - 1)
+                    .filter((_, order) => order <= idx - limitIdx)
                     .reduce((acc, t) => {
                       return /bottom/.test(position)
                         ? (acc -= gap + heights.current[t.toastId])
