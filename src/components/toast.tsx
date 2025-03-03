@@ -108,12 +108,7 @@ export const Toast = forwardRef<HTMLDivElement, ToasterProps>(function Toast(
     ? '-left'
     : '-right';
 
-  const toastClassName =
-    toastType === 'custom'
-      ? ''
-      : `${STYLE_NAMESPACE}__toast${align ? `-${align}` : toastPosition} ${
-          !toast.isActive(toastId) ? animationClassName : ''
-        }`;
+  const toastAlignClassName = `${STYLE_NAMESPACE}__toast${align ? `-${align}` : toastPosition}`;
 
   return (
     <div
@@ -124,7 +119,7 @@ export const Toast = forwardRef<HTMLDivElement, ToasterProps>(function Toast(
       onMouseEnter={onMouseEnter}
       onMouseLeave={onMouseLeave}
     >
-      <div className={toastClassName}>
+      <div className={`${toastAlignClassName} ${!toast.isActive(toastId) ? animationClassName : ''}`}>
         <Condition condition={toastType !== 'custom'}>
           <If>
             <div className={className || `${STYLE_NAMESPACE}__toast-content`} style={toastStyle}>
