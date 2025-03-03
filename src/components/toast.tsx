@@ -24,7 +24,7 @@ export function Toast({ toastProps, pauseOnActivate }: ToasterProps) {
     updated,
     toastType,
     position,
-    data: content,
+    data,
     pauseOnHover,
     align,
   } = toastProps;
@@ -33,6 +33,25 @@ export function Toast({ toastProps, pauseOnActivate }: ToasterProps) {
     isVisible: isVisible,
     position: position!,
   });
+
+  const content =
+    typeof data === 'function'
+      ? data({
+          toastId,
+          close: () => toast.disappear(toastId, 0),
+          immediatelyClose: () => {
+            toast.disappear(toastId, 0);
+            toast.remove(toastId, 0);
+          },
+          icons: {
+            success: ToastTypeIcons.success,
+            error: ToastTypeIcons.error,
+            warn: ToastTypeIcons.warn,
+            loading: ToastTypeIcons.loading,
+          },
+          isVisible,
+        })
+      : data;
 
   const onMouseEnter = () => {
     if (pauseOnHover) {

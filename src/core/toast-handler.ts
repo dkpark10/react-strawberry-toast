@@ -3,7 +3,7 @@ import { REMOVE_TIMEOUT, MAX_TIMEOUT, DISAPPEAR_TIMEOUT } from '../constants';
 import type { ToastState, Options, NonHeadlessToastState } from '../types';
 
 export const toastHandlers = <T = ToastState>(
-  toastStore: ToastStore<T extends NonHeadlessToastState ? NonHeadlessToastState : ToastState>
+  toastStore: ToastStore<T extends ToastState ? ToastState : NonHeadlessToastState>
 ) => {
   const deleteTimer = (toastId: ToastState['toastId']) => {
     const timerId = toastStore.toastTimers.get(toastId);

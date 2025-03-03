@@ -17,25 +17,12 @@ export const toastStore = new ToastStore<NonHeadlessToastState>();
 
 const idGenerator = generateId();
 
-const dataCallbackOption = (toastId: NonHeadlessToastState['toastId']): ToastDataCallback => ({
-  toastId,
-  close: () => toast.disappear(toastId, 0),
-  immediatelyClose: () => {
-    toast.disappear(toastId, 0);
-    toast.remove(toastId, 0);
-  },
-  icons: {
-    success: ToastTypeIcons.success,
-    error: ToastTypeIcons.error,
-    warn: ToastTypeIcons.warn,
-    loading: ToastTypeIcons.loading,
-  },
-  isVisible: true,
-});
-
 const createToast =
-  <T = ToastState['data'] | ToastDataWithCallback>(toastType: ToastType = 'default') =>
-  (data: T, options: Options = {}): ToastState['toastId'] => {
+  <T = ToastState['data']>(toastType: ToastType = 'default') =>
+  (
+    data: T extends ToastState['data'] ? ToastState['data'] : ToastDataWithCallback,
+    options: Options = {}
+  ): ToastState['toastId'] => {
     const {
       timeOut = DISAPPEAR_TIMEOUT,
       removeTimeOut = REMOVE_TIMEOUT,
@@ -54,11 +41,6 @@ const createToast =
 
     const createdAt = new Date().getTime();
 
-    const content =
-      typeof data === 'function'
-        ? data(dataCallbackOption(toastId))
-        : data;
-
     const value: NonHeadlessToastState = {
       updated: null,
       pausedAt: null,
@@ -70,7 +52,7 @@ const createToast =
       timeOut: timeOut > MAX_TIMEOUT ? MAX_TIMEOUT : timeOut,
       align: align || '',
       toastId,
-      data: content,
+      data,
       createdAt,
       toastType,
       pauseOnHover,
@@ -119,7 +101,21 @@ toast.promise = <T>(
     timeOut: MAX_TIMEOUT,
   });
 
-  const opt = dataCallbackOption(toastId);
+  const opt: ToastDataCallback = {
+    toastId,
+    close: () => toast.disappear(toastId, 0),
+    immediatelyClose: () => {
+      toast.disappear(toastId, 0);
+      toast.remove(toastId, 0);
+    },
+    icons: {
+      success: ToastTypeIcons.success,
+      error: ToastTypeIcons.error,
+      warn: ToastTypeIcons.warn,
+      loading: ToastTypeIcons.loading,
+    },
+    isVisible: true,
+  };
 
   const timeOut = options?.timeOut || DISAPPEAR_TIMEOUT;
 

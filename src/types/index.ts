@@ -45,4 +45,7 @@ export type ToastState = ToastBaseState & BaseOptions;
 
 export type ToastDataWithCallback = (props: ToastDataCallback) => ReactNode;
 
-export type NonHeadlessToastState = Required<Options & { toastType: ToastType }> & ToastState;
+export type NonHeadlessToastState = Required<Options & { toastType: ToastType }> &
+  Omit<ToastState, 'data'> & {
+    data: ToastDataWithCallback | ReactNode;
+  };
