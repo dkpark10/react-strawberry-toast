@@ -117,20 +117,20 @@ toast.promise = <T>(
     isVisible: true,
   };
 
-  const timeOut = options?.timeOut || DISAPPEAR_TIMEOUT;
+  const timeOut = options.timeOut ||= DISAPPEAR_TIMEOUT;
 
   promise
     .then((res) => {
       toast.replace(toastId, typeof success === 'function' ? success(res, opt) : success, {
         ...options,
-        timeOut: timeOut,
+        timeOut: timeOut > MAX_TIMEOUT ? MAX_TIMEOUT : timeOut,
         toastType: 'success',
       });
     })
     .catch((err) => {
       toast.replace(toastId, typeof error === 'function' ? error(err, opt) : error, {
         ...options,
-        timeOut: timeOut,
+        timeOut: timeOut > MAX_TIMEOUT ? MAX_TIMEOUT : timeOut,
         toastType: 'error',
       });
     });

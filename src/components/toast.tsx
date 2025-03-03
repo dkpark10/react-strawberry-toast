@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { Condition, If, Else } from './condition';
 import { getAnimation } from '../utils/get-animation';
 import { toast } from '../core/toast';
-import { DISAPPEAR_TIMEOUT, MAX_TIMEOUT, STYLE_NAMESPACE } from '../constants';
+import { STYLE_NAMESPACE } from '../constants';
 import { useEventListener } from '../hooks/use-event-listener';
 import { ToastTypeIcons } from './toast-icons';
 import type { Position, NonHeadlessToastState as ToastState } from '../types';
@@ -89,8 +89,7 @@ export function Toast({ toastProps, pauseOnActivate }: ToasterProps) {
   /** @description promise toast */
   useEffect(() => {
     if (updated !== null) {
-      const newTimeOut = timeOut >= MAX_TIMEOUT ? DISAPPEAR_TIMEOUT : timeOut;
-      toast.disappear(toastId, newTimeOut);
+      toast.disappear(toastId, timeOut);
     }
   }, [updated]);
 

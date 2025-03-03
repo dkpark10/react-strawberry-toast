@@ -3,7 +3,7 @@ import { afterEach, beforeEach, vi, describe, expect, test } from 'vitest';
 import { act, render, fireEvent } from '@testing-library/react';
 import { ToastContainer } from '../../src/components/toast-container';
 import { toast } from '../../src/core/toast';
-import { REMOVE_TIMEOUT } from '../../src/constants';
+import { MAX_TIMEOUT, REMOVE_TIMEOUT } from '../../src/constants';
 import '@testing-library/jest-dom';
 
 const fulfilledTimeout = 5_000;
@@ -52,7 +52,7 @@ describe('toast promise', () => {
             error: (err) => <div>{err}</div>,
           },
           {
-            timeOut: 20_000,
+            timeOut: Infinity,
           }
         );
       };
@@ -99,9 +99,9 @@ describe('toast promise', () => {
     expect(queryByText(/rejected value/i)).toBeInTheDocument();
 
     act(() => {
-      vi.advanceTimersByTime(20_000 + REMOVE_TIMEOUT);
+      vi.advanceTimersByTime(MAX_TIMEOUT - fulfilledTimeout);
     });
 
-    expect(queryByText(/rejected value/i)).not.toBeInTheDocument();
+    expect(queryByText(/rejected value/i)).toBeInTheDocument();
   });
 });
