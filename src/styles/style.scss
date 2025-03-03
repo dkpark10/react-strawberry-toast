@@ -60,10 +60,11 @@ $offset: 16px;
 }
 
 .#{$react-strawberry-toast-namespace}__toast-container {
-  pointer-events: auto;
   position: fixed;
   z-index: 9999;
   display: flex;
+  align-items: center;
+  flex-direction: column;
 }
 
 .#{$react-strawberry-toast-namespace}__top-left {
@@ -112,7 +113,14 @@ $offset: 16px;
   justify-content: flex-end;
 }
 
+.#{$react-strawberry-toast-namespace}__toast-content-container {
+  position: absolute;
+  min-width: 246px;
+  pointer-events: none;
+}
+
 .#{$react-strawberry-toast-namespace}__toast-content {
+  pointer-events: auto;
   box-sizing: border-box;
   background-color: white;
   padding: 10px;

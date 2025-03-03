@@ -4,7 +4,6 @@ import Github from '@/components/github';
 import { PrismLight } from 'react-syntax-highlighter';
 import { codeSyntax } from '@/constants/code-syntax';
 import { CodeTheme } from '@/constants/code-theme';
-import { ToastContainer } from 'react-strawberry-toast';
 import HomePlayGround from '@/app/_components/playground';
 import Install from '@/app/_components/install';
 import type { Metadata } from 'next'
@@ -62,7 +61,6 @@ export default function Home() {
 
         <HomePlayGround />
       </main>
-      <ToastContainer />
     </>
   );
 }

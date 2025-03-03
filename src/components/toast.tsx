@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, forwardRef } from 'react';
 import { Condition, If, Else } from './condition';
 import { getAnimation } from '../utils/get-animation';
 import { toast } from '../core/toast';
@@ -12,7 +12,10 @@ interface ToasterProps {
   pauseOnActivate: boolean;
 }
 
-export function Toast({ toastProps, pauseOnActivate }: ToasterProps) {
+export const Toast = forwardRef<HTMLDivElement, ToasterProps>(function Toast(
+  { toastProps, pauseOnActivate },
+  elementRef
+) {
   const {
     toastId,
     isVisible,
@@ -108,25 +111,30 @@ export function Toast({ toastProps, pauseOnActivate }: ToasterProps) {
   const toastClassName =
     toastType === 'custom'
       ? ''
-      : `${STYLE_NAMESPACE}__toast${align ? `-${align}` : toastPosition} ${animationClassName}`;
+      : `${STYLE_NAMESPACE}__toast${align ? `-${align}` : toastPosition} ${
+          !toast.isActive(toastId) ? animationClassName : ''
+        }`;
 
   return (
     <div
       role="alert"
-      className={toastClassName}
+      ref={elementRef}
+      className={`${STYLE_NAMESPACE}__toast-content-container`}
       data-testid={`container-${containerId || 'default'}`}
       onMouseEnter={onMouseEnter}
       onMouseLeave={onMouseLeave}
     >
-      <Condition condition={toastType !== 'custom'}>
-        <If>
-          <div className={className || `${STYLE_NAMESPACE}__toast-content`} style={toastStyle}>
-            {renderIcon && <span className={`${STYLE_NAMESPACE}__toast-icon`}>{renderIcon}</span>}
-            {content}
-          </div>
-        </If>
-        <Else>{content}</Else>
-      </Condition>
+      <div className={toastClassName}>
+        <Condition condition={toastType !== 'custom'}>
+          <If>
+            <div className={className || `${STYLE_NAMESPACE}__toast-content`} style={toastStyle}>
+              {renderIcon && <span className={`${STYLE_NAMESPACE}__toast-icon`}>{renderIcon}</span>}
+              {content}
+            </div>
+          </If>
+          <Else>{content}</Else>
+        </Condition>
+      </div>
     </div>
   );
-}
+});
