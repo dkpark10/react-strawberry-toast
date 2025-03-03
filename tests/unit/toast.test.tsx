@@ -231,4 +231,31 @@ describe('toast', () => {
 
     expect(queryAllByText(new RegExp(`${context.task.id}-containerid`, 'i'))).toHaveLength(6);
   });
+
+  test('Should update the toast message when isVisible state change', async () => {
+    function App() {
+      const click = () => {
+        toast(({ isVisible }) => <div>{isVisible ? 'visible' : 'invisible'}</div>)
+      };
+
+      return (
+        <React.Fragment>
+          <ToastContainer />
+          <button onClick={click}>click</button>
+        </React.Fragment>
+      );
+    }
+
+    const { getByRole, queryByText } = render(<App />);
+
+    fireEvent.click(getByRole('button', { name: 'click' }));
+    
+    expect(queryByText('visible')).toBeInTheDocument();
+
+    act(() => {
+      vi.advanceTimersByTime(DISAPPEAR_TIMEOUT);
+    });
+
+    expect(queryByText('invisible')).toBeInTheDocument();
+  });
 });
