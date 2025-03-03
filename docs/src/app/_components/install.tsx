@@ -1,5 +1,6 @@
 "use client";
 
+import { ToastContainer, toast } from 'react-strawberry-toast';
 import React from 'react';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import ShellCode from '@/components/shell-code';
@@ -32,6 +33,8 @@ export default function Install() {
           <ShellCode>pnpm i react-strawberry-toast</ShellCode>
         </TabPanel>
       </Tabs>
+
+      <ToastContainer containerId="code" />
     </div>
   );
 }

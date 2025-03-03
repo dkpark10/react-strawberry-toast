@@ -19,14 +19,16 @@ import WarnSvg from '/public/warn.svg';
 import PromiseSvg from '/public/promise.svg';
 import EmotionProvider from '@/components/providers/emotion-provider';
 
-const containerIds = Array.from({ length: 6 }, (_, i) => String(i + 1));
-
 type ExampleToastType = 'Success' | 'Warn' | 'Error' | 'Promise' | 'TailwindCSS' | 'Emotion';
 
 export default function HomePlayGround() {
   const [option, setOption] = useState<Position | '1' | '2' | '3' | '4' | '5' | '6'>('top-center');
 
   const [toastCode, setToastCode] = useState(codeSyntax.success);
+
+  const [reverse, setReverse] = useState(false);
+
+  const [gap, setGap] = useState(9);
 
   const pos =
     /top/i.test(option) || /bottom/i.test(option)
@@ -127,23 +129,12 @@ export default function HomePlayGround() {
   const optionButtonClassName = (bool: boolean) =>
     `${clsx(
       bool && 'bg-straw-berry text-white'
-    )} active:bg-straw-berry active:text-white max-sm:text-xs rounded w-36 max-sm:w-full h-10 shadow-md text-sm font-medium
-   py-2 px-2 flex items-center justify-center hover:bg-straw-berry hover:text-white`;
+    )} max-sm:text-xs rounded w-full max-sm:w-full h-10 shadow-md text-sm font-medium
+   py-2 px-5 flex items-center justify-center hover:bg-straw-berry hover:text-white`;
 
   return (
     <EmotionProvider>
       <h3 className="font-bold text-2xl text-center sm:py-5">Example</h3>
-
-      <div className="flex justify-center pb-8 max-sm:hidden">
-        <div id="container-area" className="grid gap-x-16 gap-y-4 grid-cols-3">
-          {containerIds.map((id) => (
-            <div key={id} className="relative">
-              <ToastContainer containerId={id} className="absolute flex" />
-              <span className="font-semibold flex items-center justify-center w-52 h-8 shadow-md">{id}</span>
-            </div>
-          ))}
-        </div>
-      </div>
 
       <div className="gap-12 py-10 justify-center sm:flex">
         <div
@@ -169,8 +160,7 @@ export default function HomePlayGround() {
         </div>
 
         <div id="option-area">
-          <h5 className="font-semibold text-center text-md pb-4">Position</h5>
-          <div className="grid gap-2 grid-cols-3">
+          <div className="grid gap-4 grid-cols-3 w-[450px]">
             {['top-left', 'top-center', 'top-right', 'bottom-left', 'bottom-center', 'bottom-right'].map(
               (p) => (
                 <button
@@ -185,18 +175,34 @@ export default function HomePlayGround() {
             )}
           </div>
 
-          <h5 className="font-semibold text-center text-md p-7 max-sm:hidden">Container id</h5>
-          <div className="grid gap-4 grid-cols-3 max-sm:hidden">
-            {containerIds.map((p) => (
-              <button
-                key={p}
-                type="button"
-                className={optionButtonClassName(option === p)}
-                onClick={() => setOption(p as Position)}
-              >
-                {p}
-              </button>
-            ))}
+          <div id="reverse-gap" className="pt-4 flex gap-5">
+            <button
+              type="button"
+              className={optionButtonClassName(reverse)}
+              onClick={() => setReverse((prev) => !prev)}
+            >
+              reverse
+            </button>
+            <div className="flex items-center gap-1">
+              <span className="font-semibold text-sm">gap</span>
+              <input
+                value={gap}
+                onChange={(e) => {
+                  if (isNaN(Number(e.target.value))) return;
+                  setGap(Number(e.target.value));
+                }}
+                className="w-full border-2 border-gray-300 h-full rounded-md pl-1"
+                type="text"
+              />
+            </div>
+          </div>
+
+          <div className="pt-5">
+            <PrismLight language="jsx" style={CodeTheme}>
+              {`
+<ToastContainer reverse={${reverse}} gap={${gap}} />
+              `}
+            </PrismLight>
           </div>
         </div>
       </div>
@@ -206,6 +212,8 @@ export default function HomePlayGround() {
           {toastCode}
         </PrismLight>
       </div>
+
+      <ToastContainer reverse={reverse} gap={gap} />
     </EmotionProvider>
   );
 }

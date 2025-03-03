@@ -9,7 +9,9 @@ export default function ShellCode({ children }: PropsWithChildren) {
     window.navigator.clipboard
       .writeText(text)
       .then(() => {
-        toast.success('Copied');
+        toast.success('Copied', {
+          containerId: 'code',
+        });
       })
       .catch((error) => {
         console.error(error);
