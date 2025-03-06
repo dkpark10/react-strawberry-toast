@@ -45,7 +45,7 @@ export default function DocsIndexPage() {
         {codeSyntax['started']}
       </PrismLight>
 
-      <ToastContainer />
+      <ToastContainer containerId='code' />
     </React.Fragment>
   );
 }

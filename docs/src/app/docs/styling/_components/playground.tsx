@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Docs } from '@/components/docs-title';
 import { ToastContainer, toast } from 'react-strawberry-toast';
 import clsx from 'clsx';
@@ -11,8 +11,7 @@ import SendSvg from '/public/send.svg';
 export default function DocsMultiContainer() {
   const [msg, setMsg] = useState('');
 
-  const onClick = () => {
-    if (!msg) return;
+  const showToast = () => {
     toast.custom(
       ({ isVisible }) => (
         <div
@@ -23,9 +22,30 @@ export default function DocsMultiContainer() {
           {DOMPurify.sanitize(msg)}
         </div>
       ),
+      {
+        align: 'left',
+      }
     );
+  };
+
+  const onClick = () => {
+    if (!msg) return;
+    showToast();
     setMsg('');
   };
+
+  useEffect(() => {
+    const handler = (e: KeyboardEvent) => {
+      if (e.key === 'Enter' && msg) {
+        showToast();
+        setMsg('');
+      }
+    };
+    window.addEventListener('keydown', handler);
+    return () => {
+      window.removeEventListener('keydown', handler);
+    };
+  }, [msg]);
 
   return (
     <div id="profile" className="border border-gray-300 p-2 w-10/12 max-sm:w-full relative">

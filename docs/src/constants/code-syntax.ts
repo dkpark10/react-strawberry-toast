@@ -69,6 +69,7 @@ toast(
 `,
   multiContainer: 
 `import { ToastContainer, toast } from 'react-strawberry-toast';
+import 'react-strawberry-toast/dist/style.css';
 
 function App() {
   const showClick = () => {
@@ -93,12 +94,12 @@ function App() {
 
 containerStyling:
   `import { ToastContainer, toast } from 'react-strawberry-toast';
+  import 'react-strawberry-toast/dist/style.css';
 
   function App() {
     const [msg, setMsg] = useState('');
 
-    const onClick = () => {
-      if (!msg) return;
+    const showToast = () => {
       toast.custom(
         ({ isVisible }) => (
           <div
@@ -110,9 +111,30 @@ containerStyling:
             {msg}
           </div>
         ),
+        {
+          align: 'left',
+        }
       );
+    }
+
+    const onClick = () => {
+      if (!msg) return;
+      showToast();
       setMsg('');
     };
+
+    useEffect(() => {
+      const handler = (e: KeyboardEvent) => {
+        if (e.key === 'Enter' && msg) {
+          showToast();
+          setMsg('');
+        }
+      };
+      window.addEventListener('keydown', handler);
+      return () => {
+        window.removeEventListener('keydown', handler);
+      };
+    }, [msg]);
 
     return (
       <>

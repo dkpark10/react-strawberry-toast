@@ -53,6 +53,7 @@ function App() {
 | style      | Style of ToastContainer  |  Object | |
 | gap      | Gap Between toasts  |  Number | 9 |
 | pauseOnActivate      | Pause Toast timer when blur events occurs  |  Boolean | true |
+| limit      | Limit the number of toast to be displayed |  Number | |
 
 
 ### toast
@@ -66,6 +67,9 @@ function App() {
 | icon      | The icon to be displayed in the toast  |  ReactNode | |
 | timeOut      | Time for toast to disappear  |  Number | 3000 |
 | removeTimeOut      | Time for toast to remove In Toast List  |  Number | 200 |
+| className      | Class of toast  |  String |  |
+| style      | Style of toast  |  Object | |
+| align      | Align per toast  |  left, center, right | center |
 
 ## License
 

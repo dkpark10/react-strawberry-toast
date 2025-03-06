@@ -45,6 +45,7 @@ export const toastContainerApi: TableData<4> = {
     ['reverse', 'Direction when toast appear', 'Boolean', 'false'],
     ['gap', 'Gap Between toasts', 'Number', '9'],
     ['pauseOnActivate', 'Pause Toast timer when blur events occurs', 'Boolean', 'true'],
+    ['limit', 'Limit the number of toast to be displayed', 'Number', ''],
   ],
 };
 
@@ -65,7 +66,7 @@ export const toastApi: TableData<4> = {
     ['removeTimeOut', 'Time for toast to remove in List', 'Number', '200'],
     ['className', 'Class of per toast', 'String', `''`],
     ['style', 'Class of per style', 'Object', '{}'],
-    ['align', 'Time for toast to remove In List', `'left' | 'center' | 'right' | ''`, `''`],
+    ['align', 'Align per toast', `'left' | 'center' | 'right' | ''`, `''`],
   ],
 };
 
