@@ -32,13 +32,7 @@ export default function MultiContainer() {
       <div
         css={{ border: '1px solid blue', position: 'relative', top: 200, left: 200, width: 200, height: 200 }}
       >
-        <ToastContainer
-          className="n"
-          css={css`
-            position: absolute;
-            display: flex;
-          `}
-        />
+        <ToastContainer className="" />
       </div>
     </React.Fragment>
   );

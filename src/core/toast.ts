@@ -43,7 +43,7 @@ const createToast =
     const value: NonHeadlessToastState = {
       updated: null,
       pausedAt: null,
-      className: className || '',
+      className: className || null,
       style: style || {},
       icon: options.icon || null,
       containerId: options.containerId || null,

@@ -113,7 +113,7 @@ export const Toast = forwardRef<HTMLDivElement, ToasterProps>(function Toast(
       <div className={`${!toast.isActive(toastId) ? animationClassName : ''}`}>
         <Condition condition={toastType !== 'custom'}>
           <If>
-            <div className={className || `${STYLE_NAMESPACE}__toast-content`} style={toastStyle}>
+            <div className={className ?? `${STYLE_NAMESPACE}__toast-content`} style={toastStyle}>
               {renderIcon && <span className={`${STYLE_NAMESPACE}__toast-icon`}>{renderIcon}</span>}
               {content}
             </div>

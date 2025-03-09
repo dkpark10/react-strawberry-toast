@@ -14,7 +14,7 @@ export interface BaseOptions {
   toastId?: string;
   timeOut?: number;
   removeTimeOut?: number;
-  className?: string;
+  className?: string | null;
   style?: React.CSSProperties;
 }
 export interface ToastBaseState {
