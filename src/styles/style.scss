@@ -9,7 +9,7 @@ $offset: 16px;
 
 @keyframes react-strawberry-toast_fade-in {
   from {
-    transform: translateY(-100%) scale(0.6);
+    transform: translateY(-100%) scale(0.2);
     opacity: 0.2;
   }
 
@@ -33,7 +33,7 @@ $offset: 16px;
 
 @keyframes react-strawberry-toast_fade-in-reverse {
   from {
-    transform: translateY(100%) scale(0.6);
+    transform: translateY(100%) scale(0.2);
     opacity: 0.2;
   }
 

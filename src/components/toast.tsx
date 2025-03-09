@@ -110,17 +110,21 @@ export const Toast = forwardRef<HTMLDivElement, ToasterProps>(function Toast(
       onMouseEnter={onMouseEnter}
       onMouseLeave={onMouseLeave}
     >
-      <div className={`${!toast.isActive(toastId) ? animationClassName : ''}`}>
-        <Condition condition={toastType !== 'custom'}>
-          <If>
-            <div className={className ?? `${STYLE_NAMESPACE}__toast-content`} style={toastStyle}>
-              {renderIcon && <span className={`${STYLE_NAMESPACE}__toast-icon`}>{renderIcon}</span>}
-              {content}
-            </div>
-          </If>
-          <Else>{content}</Else>
-        </Condition>
-      </div>
+      <Condition condition={toastType !== 'custom'}>
+        <If>
+          <div
+            className={
+              className ??
+              `${STYLE_NAMESPACE}__toast-content ${!toast.isActive(toastId) ? animationClassName : ''}`
+            }
+            style={toastStyle}
+          >
+            {renderIcon && <span className={`${STYLE_NAMESPACE}__toast-icon`}>{renderIcon}</span>}
+            {content}
+          </div>
+        </If>
+        <Else>{content}</Else>
+      </Condition>
     </div>
   );
 });
