@@ -50,6 +50,15 @@ function App() {
     </div>
   )
 );`,
+    darkTheme: `
+      toast('Dark Theme', {
+        style: {
+          color: 'white',
+          backgroundColor: 'black',    
+        },
+      });
+
+`,
 
   emotion: `
 toast(
@@ -111,9 +120,6 @@ containerStyling:
             {msg}
           </div>
         ),
-        {
-          align: 'left',
-        }
       );
     }
 

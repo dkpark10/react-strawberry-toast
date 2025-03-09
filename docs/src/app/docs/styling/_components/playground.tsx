@@ -22,9 +22,6 @@ export default function DocsMultiContainer() {
           {DOMPurify.sanitize(msg)}
         </div>
       ),
-      {
-        align: 'left',
-      }
     );
   };
 

@@ -66,7 +66,6 @@ export const toastApi: TableData<4> = {
     ['removeTimeOut', 'Time for toast to remove in List', 'Number', '200'],
     ['className', 'Class of per toast', 'String', `''`],
     ['style', 'Class of per style', 'Object', '{}'],
-    ['align', 'Align per toast', `'left' | 'center' | 'right' | ''`, `''`],
   ],
 };
 

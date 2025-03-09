@@ -3,26 +3,22 @@
 
 import { useState } from 'react';
 import clsx from 'clsx';
-import {
-  ToastContainer,
-  toast,
-  type Position,
-  type NonHeadlessToastState as ToastState,
-} from 'react-strawberry-toast';
+import { ToastContainer, toast, type Position } from 'react-strawberry-toast';
 import AssetImage from '@/components/asset-image';
 import { PrismLight } from 'react-syntax-highlighter';
 import { codeSyntax } from '@/constants/code-syntax';
 import { CodeTheme } from '@/constants/code-theme';
+import { primaryBlack } from '@/constants/style-variable';
 import SuccessSvg from '/public/success.svg';
 import ErrorSvg from '/public/error.svg';
 import WarnSvg from '/public/warn.svg';
 import PromiseSvg from '/public/promise.svg';
 import EmotionProvider from '@/components/providers/emotion-provider';
 
-type ExampleToastType = 'Success' | 'Warn' | 'Error' | 'Promise' | 'TailwindCSS' | 'Emotion';
+type ExampleToastType = 'Success' | 'Warn' | 'Error' | 'Promise' | 'TailwindCSS' | 'Emotion' | 'Dark Theme';
 
 export default function HomePlayGround() {
-  const [option, setOption] = useState<Position | '1' | '2' | '3' | '4' | '5' | '6'>('top-center');
+  const [position, setPosition] = useState<Position>('top-center');
 
   const [toastCode, setToastCode] = useState(codeSyntax.success);
 
@@ -30,18 +26,15 @@ export default function HomePlayGround() {
 
   const [gap, setGap] = useState(9);
 
-  const pos =
-    /top/i.test(option) || /bottom/i.test(option)
-      ? ({ position: option } as ToastState)
-      : ({ containerId: option } as ToastState);
-
   const examples: Array<{ type: ExampleToastType; icon: any | string; click: () => void }> = [
     {
       type: 'Success',
       icon: <SuccessSvg />,
       click: () => {
         setToastCode(codeSyntax.success);
-        toast.success('success', pos);
+        toast.success('success', {
+          position,
+        });
       },
     },
     {
@@ -49,7 +42,9 @@ export default function HomePlayGround() {
       icon: <ErrorSvg />,
       click: () => {
         setToastCode(codeSyntax.error);
-        toast.error('error', pos);
+        toast.error('error', {
+          position,
+        });
       },
     },
     {
@@ -57,7 +52,9 @@ export default function HomePlayGround() {
       icon: <WarnSvg />,
       click: () => {
         setToastCode(codeSyntax.warn);
-        toast.warn('warn', pos);
+        toast.warn('warn', {
+          position,
+        });
       },
     },
     {
@@ -78,7 +75,9 @@ export default function HomePlayGround() {
             success: 'success',
             error: 'error',
           },
-          pos
+          {
+            position,
+          }
         );
       },
     },
@@ -97,8 +96,25 @@ export default function HomePlayGround() {
               </button>
             </div>
           ),
-          pos
+          {
+            position,
+          }
         );
+      },
+    },
+    {
+      type: 'Dark Theme',
+      icon: '/dark-theme.png',
+      click: () => {
+        setToastCode(codeSyntax.darkTheme);
+
+        toast('Dark Theme', {
+          position,
+          style: {
+            color: 'white',
+            backgroundColor: primaryBlack,
+          },
+        });
       },
     },
     {
@@ -120,7 +136,9 @@ export default function HomePlayGround() {
               </button>
             </div>
           ),
-          pos
+          {
+            position,
+          }
         );
       },
     },
@@ -130,7 +148,7 @@ export default function HomePlayGround() {
     `${clsx(
       bool && 'bg-straw-berry text-white'
     )} max-sm:text-xs rounded w-full max-sm:w-full h-10 shadow-md text-sm font-medium
-   py-2 px-5 flex items-center justify-center hover:bg-straw-berry hover:text-white`;
+   py-2 px-2 flex items-center justify-center hover:bg-straw-berry hover:text-white`;
 
   return (
     <EmotionProvider>
@@ -160,14 +178,14 @@ export default function HomePlayGround() {
         </div>
 
         <div id="option-area">
-          <div className="grid gap-4 grid-cols-3 w-[450px]">
+          <div className="grid gap-4 grid-cols-3 w-full">
             {['top-left', 'top-center', 'top-right', 'bottom-left', 'bottom-center', 'bottom-right'].map(
               (p) => (
                 <button
                   key={p}
                   type="button"
-                  className={optionButtonClassName(option === p)}
-                  onClick={() => setOption(p as Position)}
+                  className={optionButtonClassName(position === p)}
+                  onClick={() => setPosition(p as Position)}
                 >
                   {p}
                 </button>

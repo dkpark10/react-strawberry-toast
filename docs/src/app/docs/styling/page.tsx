@@ -54,11 +54,7 @@ $offset: 16px;
 
 .#{$react-strawberry-toast-namespace}__bottom-right {}
 
-.#{$react-strawberry-toast-namespace}__toast-left {}
-
-.#{$react-strawberry-toast-namespace}__toast-center {}
-
-.#{$react-strawberry-toast-namespace}__toast-right {}
+.#{$react-strawberry-toast-namespace}__toast-content-container {}
 
 .#{$react-strawberry-toast-namespace}__toast-content {}
 

@@ -69,7 +69,6 @@ function App() {
 | removeTimeOut      | Time for toast to remove In Toast List  |  Number | 200 |
 | className      | Class of toast  |  String |  |
 | style      | Style of toast  |  Object | |
-| align      | Align per toast  |  left, center, right | center |
 
 ## License
 
