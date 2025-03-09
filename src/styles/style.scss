@@ -85,18 +85,18 @@ $offset: 16px;
 }
 
 .#{$react-strawberry-toast-namespace}__bottom-left {
-  bottom: $offset;
+  bottom: $offset - 8;
   left: calc(-50% + $offset);
 }
 
 .#{$react-strawberry-toast-namespace}__bottom-center {
-  bottom: $offset;
+  bottom: $offset - 8;
   left: 50%;
   transform: translateX(-50%);
 }
 
 .#{$react-strawberry-toast-namespace}__bottom-right {
-  bottom: $offset;
+  bottom: $offset - 8;
   right: calc(-50% + $offset);
 }
 
