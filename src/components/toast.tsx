@@ -5,7 +5,7 @@ import { toast } from '../core/toast';
 import { STYLE_NAMESPACE } from '../constants';
 import { useEventListener } from '../hooks/use-event-listener';
 import { ToastTypeIcons } from './toast-icons';
-import type { Position, NonHeadlessToastState as ToastState } from '../types';
+import type { NonHeadlessToastState as ToastState } from '../types';
 
 interface ToasterProps {
   toastProps: ToastState;
@@ -29,7 +29,6 @@ export const Toast = forwardRef<HTMLDivElement, ToasterProps>(function Toast(
     position,
     data,
     pauseOnHover,
-    align,
   } = toastProps;
 
   const animationClassName = getAnimation({
@@ -102,14 +101,6 @@ export const Toast = forwardRef<HTMLDivElement, ToasterProps>(function Toast(
     ? null
     : ToastTypeIcons[toastType];
 
-  const toastPosition = /center/i.test(position as Position)
-    ? '-center'
-    : /left/i.test(position as Position)
-    ? '-left'
-    : '-right';
-
-  const toastAlignClassName = `${STYLE_NAMESPACE}__toast${align ? `-${align}` : toastPosition}`;
-
   return (
     <div
       role="alert"
@@ -119,7 +110,7 @@ export const Toast = forwardRef<HTMLDivElement, ToasterProps>(function Toast(
       onMouseEnter={onMouseEnter}
       onMouseLeave={onMouseLeave}
     >
-      <div className={`${toastAlignClassName} ${!toast.isActive(toastId) ? animationClassName : ''}`}>
+      <div className={`${!toast.isActive(toastId) ? animationClassName : ''}`}>
         <Condition condition={toastType !== 'custom'}>
           <If>
             <div className={className || `${STYLE_NAMESPACE}__toast-content`} style={toastStyle}>

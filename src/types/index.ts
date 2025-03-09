@@ -31,8 +31,8 @@ export interface Options extends BaseOptions {
   position?: Position | null;
   containerId?: string | null;
   pauseOnHover?: boolean;
-  align?: 'left' | 'center' | 'right' | '';
 }
+
 export interface ToastDataCallback {
   toastId: ToastBaseState['toastId'];
   close: () => void;
