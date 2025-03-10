@@ -34,16 +34,39 @@ export function ToastContainer({
 
   const heights = useRef<ChildRef>({});
 
-  const toastsByPosition: Record<Position, Array<ToastState>> = toastList.reduce((acc, toast) => {
-    const key = toast.position || globalPosition;
-    toast.position = key;
-    acc[key] = acc[key] || [];
-    acc[key].push(toast);
-    return acc;
-  }, {} as Record<Position, Array<ToastState>>);
+  const absoluteToastsFilter = (toast: ToastState) => toast.target?.element;
+
+  const absoluteToasts = toastList.filter(absoluteToastsFilter);
+
+  const toastsByPosition: Record<Position, Array<ToastState>> = toastList
+    .filter((toast) => !absoluteToastsFilter(toast))
+    .reduce((acc, toast) => {
+      const key = toast.position || globalPosition;
+      toast.position = key;
+      acc[key] = acc[key] || [];
+      acc[key].push(toast);
+      return acc;
+    }, {} as Record<Position, Array<ToastState>>);
 
   return (
     <div id={`${STYLE_NAMESPACE}__root`}>
+      {absoluteToasts.map((toast) => (
+        <Toast
+          ref={(element) => {
+            const target = toast.target;
+            if (!target || !element) return;
+            const rect = target.element.getBoundingClientRect();
+
+            const [x, y] = target.offset || [0, 0];
+
+            element.style.top = `${rect.y + x}px`;
+            element.style.left = `${rect.x + y}px`;
+          }}
+          key={toast.toastId}
+          toastProps={toast}
+          pauseOnActivate={pauseOnActivate}
+        />
+      ))}
       {Object.entries(toastsByPosition).map(([position, toastByPosition]) => {
         const filteredToasts = toastByPosition
           .filter((toast) =>
@@ -70,8 +93,6 @@ export function ToastContainer({
                     return;
                   }
 
-                  const transition = 'transform 0.2s cubic-bezier(0.43, 0.14, 0.2, 1.05)';
-
                   const height = heights.current[toast.toastId] || element.getBoundingClientRect().height;
                   heights.current[toast.toastId] = height;
 
@@ -87,7 +108,7 @@ export function ToastContainer({
                         : (acc += gap + heights.current[t.toastId]);
                     }, 0);
 
-                  element.style.transition = transition;
+                  element.style.transition = 'transform 0.2s cubic-bezier(0.43, 0.14, 0.2, 1.05)';
                   element.style.transform = `translate(${x}%, ${top}px)`;
                 }}
                 key={toast.toastId}
@@ -101,4 +122,3 @@ export function ToastContainer({
     </div>
   );
 }
-

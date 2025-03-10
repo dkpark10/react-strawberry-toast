@@ -33,7 +33,7 @@ export const Toast = forwardRef<HTMLDivElement, ToasterProps>(function Toast(
 
   const animationClassName = getAnimation({
     isVisible: isVisible,
-    position: position!,
+    position,
   });
 
   const content =
