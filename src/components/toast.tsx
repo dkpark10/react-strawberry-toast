@@ -55,18 +55,6 @@ export const Toast = forwardRef<HTMLDivElement, ToasterProps>(function Toast(
         })
       : data;
 
-  const onMouseEnter = () => {
-    if (pauseOnHover) {
-      toast.pause(toastId);
-    }
-  };
-
-  const onMouseLeave = () => {
-    if (pauseOnHover) {
-      toast.resume(toastId);
-    }
-  };
-
   const focusHandler = () => {
     if (!pauseOnActivate) return;
     toast.resume(toastId);
@@ -107,8 +95,16 @@ export const Toast = forwardRef<HTMLDivElement, ToasterProps>(function Toast(
       ref={elementRef}
       className={`${STYLE_NAMESPACE}__toast-content-container`}
       data-testid={`container-${containerId || 'default'}`}
-      onMouseEnter={onMouseEnter}
-      onMouseLeave={onMouseLeave}
+      onMouseEnter={() => {
+        if (pauseOnHover) {
+          toast.pause(toastId);
+        }
+      }}
+      onMouseLeave={() => {
+        if (pauseOnHover) {
+          toast.resume(toastId);
+        }
+      }}
     >
       <Condition condition={toastType !== 'custom'}>
         <If>

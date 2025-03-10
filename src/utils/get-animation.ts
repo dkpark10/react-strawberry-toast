@@ -10,7 +10,9 @@ export const getAnimation = ({
   isVisible: boolean;
   position: Position | null;
 }): ReturnGetAnimation => {
-  if (!position) return `${STYLE_NAMESPACE}__fade-in`;
+  if (!position) {
+      return isVisible ? `${STYLE_NAMESPACE}__fade-in` : `${STYLE_NAMESPACE}__fade-out`;
+  }
 
   if (isVisible) {
     return /top/i.test(position) ? `${STYLE_NAMESPACE}__fade-in` : `${STYLE_NAMESPACE}__fade-in-reverse`;
