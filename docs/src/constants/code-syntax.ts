@@ -55,6 +55,7 @@ function App() {
         style: {
           color: 'white',
           backgroundColor: 'black',    
+          border: '1px solid white'
         },
       });
 

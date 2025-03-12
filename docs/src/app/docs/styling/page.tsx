@@ -3,10 +3,9 @@ import { Docs } from '@/components/docs-title';
 import Link from 'next/link';
 import { CodeTheme } from '@/constants/code-theme';
 import { PrismLight } from 'react-syntax-highlighter';
-import { codeSyntax } from '@/constants/code-syntax';
-import StylingPlayGround from '@/app/docs/styling/_components/playground';
 import WarnSvg from '/public/warn.svg';
 import type { Metadata } from 'next';
+import { codeSyntax } from '@/constants/code-syntax';
 import AssetImage from '@/components/asset-image';
 
 export const metadata: Metadata = {
@@ -93,27 +92,35 @@ $offset: 16px;
         <div className="flex">
           <WarnSvg /> <strong>WARN</strong>
         </div>
-        <p>
-          If you set className or style, the previously applied className and style will be completely reset.
-        </p>
+        <p>If you set className, the previously applied className will be completely reset.</p>
       </div>
       <Docs.SpaceSm />
 
       <p>
-        The <b>{'<ToastContainer />'}</b> provides className and style as options.
+        The <b>{'<ToastContainer />'}</b> and <b>toast function</b> provides className and style as options.
       </p>
-
-      <p>
-        The example below is code that changes the position of the existing toast container using Tailwind. <br />
-        Type a Message
-      </p>
-      <Docs.SpaceSm />
-
-      <StylingPlayGround />
-      <Docs.SpaceMd />
 
       <PrismLight language="jsx" style={CodeTheme}>
-        {codeSyntax.containerStyling}
+        {`
+    <ToastContainer style={style} className="class" />
+
+`}
+      </PrismLight>
+
+      <Docs.SpaceMd />
+      <Docs.SubTitle>Toast Styling</Docs.SubTitle>
+      <PrismLight language="jsx" style={CodeTheme}>
+        {`
+            toast('Dark Theme', {
+              className: 'toast-class',
+              style: {
+                color: 'white',
+                backgroundColor: 'black',    
+                border: '1px solid white'
+              },
+            });
+
+`}
       </PrismLight>
     </React.Fragment>
   );

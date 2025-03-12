@@ -82,6 +82,22 @@ export default function HomePlayGround() {
       },
     },
     {
+      type: 'Dark Theme',
+      icon: '/dark-theme.png',
+      click: () => {
+        setToastCode(codeSyntax.darkTheme);
+
+        toast('Dark Theme', {
+          position,
+          style: {
+            color: 'white',
+            backgroundColor: primaryBlack,
+            border: '1px solid white'
+          },
+        });
+      },
+    },
+    {
       type: 'TailwindCSS',
       icon: '/tailwindcss.png',
       click: () => {
@@ -100,21 +116,6 @@ export default function HomePlayGround() {
             position,
           }
         );
-      },
-    },
-    {
-      type: 'Dark Theme',
-      icon: '/dark-theme.png',
-      click: () => {
-        setToastCode(codeSyntax.darkTheme);
-
-        toast('Dark Theme', {
-          position,
-          style: {
-            color: 'white',
-            backgroundColor: primaryBlack,
-          },
-        });
       },
     },
     {
@@ -215,7 +216,7 @@ export default function HomePlayGround() {
             </div>
           </div>
 
-          <div className="pt-5">
+          <div className="pt-5 sm:pt-10">
             <PrismLight language="jsx" style={CodeTheme}>
               {`
 <ToastContainer reverse={${reverse}} gap={${gap}} />

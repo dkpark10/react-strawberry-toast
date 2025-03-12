@@ -22,6 +22,9 @@ export default function DocsMultiContainer() {
           {DOMPurify.sanitize(msg)}
         </div>
       ),
+      {
+        containerId: 'asd',
+      }
     );
   };
 
@@ -52,7 +55,7 @@ export default function DocsMultiContainer() {
       </div>
 
       <Docs.SpaceSm />
-      <ToastContainer className="absolute flex gap-2 flex-col" />
+      <ToastContainer className="absolute flex gap-2 flex-col" containerId="asd" />
       <Docs.SpaceMd />
       <Docs.SpaceMd />
 

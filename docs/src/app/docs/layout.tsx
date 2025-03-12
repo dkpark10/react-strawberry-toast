@@ -29,6 +29,7 @@ function Menus() {
             <DocsLinkItem href="/docs/show-toast">Show Toast</DocsLinkItem>
             <DocsLinkItem href="/docs/customize">Customize</DocsLinkItem>
             <DocsLinkItem href="/docs/styling">Styling</DocsLinkItem>
+            <DocsLinkItem href="/docs/positioning">Positioning</DocsLinkItem>
             <DocsLinkItem href="/docs/multi-container">Multi Container</DocsLinkItem>
             <DocsLinkItem href="/docs/promise">Promise</DocsLinkItem>
             <DocsLinkItem href="/docs/headless-hook">Headless Hook</DocsLinkItem>
