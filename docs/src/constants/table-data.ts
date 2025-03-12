@@ -101,3 +101,11 @@ export const useToastsTableData: TableData<4> = {
     ['isVisible', 'Toast exposure status value', 'Boolean', 'true'],
   ],
 };
+
+export const targetOption: TableData<4> = {
+  header: ['option', 'description', 'type', 'required'],
+  body: [
+    ['element', 'Target Element', 'HTMLElement', 'true'],
+    ['offset', 'Offset away from element', '[number, number]', 'false'],
+  ],
+};

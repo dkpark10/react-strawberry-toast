@@ -3,6 +3,8 @@ import { Docs } from '@/components/docs-title';
 import { PrismLight } from 'react-syntax-highlighter';
 import { CodeTheme } from '@/constants/code-theme';
 import { codeSyntax } from '@/constants/code-syntax';
+import { targetOption } from '@/constants/table-data';
+import { Table } from '@/components/table';
 import TargetPlayGround from '@/app/docs/positioning/_components/target';
 import StylingPlayGround from '@/app/docs/styling/_components/playground';
 import type { Metadata } from 'next';
@@ -45,6 +47,12 @@ export default function DocsCustomize() {
 
       <Docs.SpaceMd />
       <Docs.SubTitle>Toast target option</Docs.SubTitle>
+      <Docs.SpaceSm />
+      <p>You can adjust the position of the toast by giving the style option.</p>
+      <Docs.SpaceSm />
+
+      <Table headers={targetOption.header} body={targetOption.body} />
+
       <TargetPlayGround />
 
       <PrismLight language="jsx" style={CodeTheme}>
