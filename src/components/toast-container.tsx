@@ -49,24 +49,28 @@ export function ToastContainer({
     }, {} as Record<Position, Array<ToastState>>);
 
   return (
-    <div id={`${STYLE_NAMESPACE}__root`}>
-      {absoluteToasts.map((toast) => (
-        <Toast
-          ref={(element) => {
-            const target = toast.target;
-            if (!target || !element) return;
-            const rect = target.element.getBoundingClientRect();
+    <div id={`${STYLE_NAMESPACE}__root`} data-container-id={containerId}>
+      {absoluteToasts
+        .filter((toast) =>
+          containerId ? toast.containerId === containerId : toast.containerId ? false : true
+        )
+        .map((toast) => (
+          <Toast
+            ref={(element) => {
+              const target = toast.target;
+              if (!target || !element) return;
+              const rect = target.element.getBoundingClientRect();
 
-            const [x, y] = target.offset || [0, 0];
+              const [x, y] = target.offset || [0, 0];
 
-            element.style.top = `${rect.y + x}px`;
-            element.style.left = `${rect.x + y}px`;
-          }}
-          key={toast.toastId}
-          toastProps={toast}
-          pauseOnActivate={pauseOnActivate}
-        />
-      ))}
+              element.style.top = `${rect.y + y + window.scrollY}px`;
+              element.style.left = `${rect.x + x + window.scrollX}px`;
+            }}
+            key={toast.toastId}
+            toastProps={toast}
+            pauseOnActivate={pauseOnActivate}
+          />
+        ))}
       {Object.entries(toastsByPosition).map(([position, toastByPosition]) => {
         const filteredToasts = toastByPosition
           .filter((toast) =>
