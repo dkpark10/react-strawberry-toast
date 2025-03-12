@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { afterEach, beforeEach, vi, describe, expect, test } from 'vitest';
 import { act, render, fireEvent } from '@testing-library/react';
 import { ToastContainer } from '../../src/components/toast-container';
@@ -85,6 +85,8 @@ describe('toast', () => {
 
   test('should display toasts in each toast container.', async (context) => {
     function App() {
+      const buttonRef = useRef<HTMLButtonElement>(null);
+
       const click = () => {
         toast(<div>{context.task.id}</div>);
         toast(<div>{context.task.id}</div>, {
@@ -96,6 +98,11 @@ describe('toast', () => {
         toast(<div>{context.task.id}</div>, {
           containerId: '3',
         });
+        toast(<div>{context.task.id}</div>, {
+          target: {
+            element: buttonRef.current!,
+          },
+        });
       };
 
       return (
@@ -104,7 +111,9 @@ describe('toast', () => {
           <ToastContainer containerId="1" />
           <ToastContainer containerId="2" />
           <ToastContainer containerId="3" />
-          <button onClick={click}>click</button>
+          <button ref={buttonRef} onClick={click}>
+            click
+          </button>
         </React.Fragment>
       );
     }
@@ -113,9 +122,9 @@ describe('toast', () => {
 
     fireEvent.click(getByRole('button', { name: 'click' }));
 
-    expect(queryAllByText(new RegExp(context.task.id, 'i'))).toHaveLength(4);
+    expect(queryAllByText(new RegExp(context.task.id, 'i'))).toHaveLength(5);
 
-    expect(getAllByTestId('container-default')).toHaveLength(1);
+    expect(getAllByTestId('container-default')).toHaveLength(2);
     expect(getAllByTestId('container-1')).toHaveLength(1);
     expect(getAllByTestId('container-2')).toHaveLength(1);
     expect(getAllByTestId('container-3')).toHaveLength(1);
@@ -235,7 +244,7 @@ describe('toast', () => {
   test('Should update the toast message when isVisible state change', async () => {
     function App() {
       const click = () => {
-        toast(({ isVisible }) => <div>{isVisible ? 'visible' : 'invisible'}</div>)
+        toast(({ isVisible }) => <div>{isVisible ? 'visible' : 'invisible'}</div>);
       };
 
       return (
@@ -249,7 +258,7 @@ describe('toast', () => {
     const { getByRole, queryByText } = render(<App />);
 
     fireEvent.click(getByRole('button', { name: 'click' }));
-    
+
     expect(queryByText('visible')).toBeInTheDocument();
 
     act(() => {
