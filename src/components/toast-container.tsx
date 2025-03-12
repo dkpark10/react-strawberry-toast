@@ -8,6 +8,7 @@ import { STYLE_NAMESPACE } from '../constants';
 import '../styles/style.scss';
 
 type ChildRef = Record<ToastState['toastId'], number>;
+type CoordsRef = Record<ToastState['toastId'], { y: number, x: number }>;
 
 interface ToastContainerProps {
   className?: string;
@@ -33,6 +34,7 @@ export function ToastContainer({
   const toastList = useToasts();
 
   const heights = useRef<ChildRef>({});
+  const coords = useRef<CoordsRef>({});
 
   const absoluteToastsFilter = (toast: ToastState) => toast.target?.element;
 
@@ -58,8 +60,16 @@ export function ToastContainer({
           <Toast
             ref={(element) => {
               const target = toast.target;
-              if (!target || !element) return;
-              const rect = target.element.getBoundingClientRect();
+              if (!target || !element) {
+                delete coords.current[toast.toastId];
+                return;
+              }
+              const rect = coords.current[toast.toastId] || target.element.getBoundingClientRect();
+
+              coords.current[toast.toastId] = {
+                y: rect.y,
+                x: rect.x,
+              };
 
               const [x, y] = target.offset || [0, 0];
 
