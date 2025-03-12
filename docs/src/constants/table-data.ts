@@ -66,6 +66,7 @@ export const toastApi: TableData<4> = {
     ['removeTimeOut', 'Time for toast to remove in List', 'Number', '200'],
     ['className', 'Class of per toast', 'String', `''`],
     ['style', 'Class of per style', 'Object', '{}'],
+    ['target', 'Target element where toast will be located', 'Object', '{}'],
   ],
 };
 
@@ -105,7 +106,7 @@ export const useToastsTableData: TableData<4> = {
 export const targetOption: TableData<4> = {
   header: ['option', 'description', 'type', 'required'],
   body: [
-    ['element', 'Target Element', 'HTMLElement', 'true'],
+    ['element', 'Target element where toast will be located', 'HTMLElement', 'true'],
     ['offset', 'Offset away from element', '[number, number]', 'false'],
   ],
 };

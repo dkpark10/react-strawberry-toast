@@ -69,6 +69,8 @@ function App() {
 | removeTimeOut      | Time for toast to remove In Toast List  |  Number | 200 |
 | className      | Class of toast  |  String |  |
 | style      | Style of toast  |  Object | |
+| target      | Target element where toast will be located  |  Object | |
+
 
 ## License
 
