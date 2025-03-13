@@ -8,7 +8,7 @@ import { STYLE_NAMESPACE } from '../constants';
 import '../styles/style.scss';
 
 type ChildRef = Record<ToastState['toastId'], number>;
-type CoordsRef = Record<ToastState['toastId'], { y: number, x: number }>;
+type CoordsRef = Record<ToastState['toastId'], { y: number; x: number }>;
 
 interface ToastContainerProps {
   className?: string;
@@ -32,13 +32,12 @@ export function ToastContainer({
   pauseOnActivate = true,
 }: ToastContainerProps) {
   const toastList = useToasts();
-
   const heights = useRef<ChildRef>({});
   const coords = useRef<CoordsRef>({});
 
   const absoluteToastsFilter = (toast: ToastState) => toast.target?.element;
-
-  const absoluteToasts = toastList.filter(absoluteToastsFilter);
+  const containerIdFilter = (toast: ToastState) =>
+    containerId ? toast.containerId === containerId : toast.containerId ? false : true;
 
   const toastsByPosition: Record<Position, Array<ToastState>> = toastList
     .filter((toast) => !absoluteToastsFilter(toast))
@@ -52,10 +51,9 @@ export function ToastContainer({
 
   return (
     <div id={`${STYLE_NAMESPACE}__root`} data-container-id={containerId}>
-      {absoluteToasts
-        .filter((toast) =>
-          containerId ? toast.containerId === containerId : toast.containerId ? false : true
-        )
+      {toastList
+        .filter(absoluteToastsFilter)
+        .filter(containerIdFilter)
         .map((toast) => (
           <Toast
             ref={(element) => {
@@ -82,11 +80,7 @@ export function ToastContainer({
           />
         ))}
       {Object.entries(toastsByPosition).map(([position, toastByPosition]) => {
-        const filteredToasts = toastByPosition
-          .filter((toast) =>
-            containerId ? toast.containerId === containerId : toast.containerId ? false : true
-          )
-          .slice(0, limit);
+        const filteredToasts = toastByPosition.filter(containerIdFilter).slice(0, limit);
 
         const toasts = reverse ? filteredToasts.reverse() : filteredToasts;
 
@@ -94,7 +88,7 @@ export function ToastContainer({
           <div
             key={position}
             data-testid={position}
-            className={`${`${STYLE_NAMESPACE}__z9999`} ${
+            className={`${STYLE_NAMESPACE}__z9999 ${
               className ?? `${STYLE_NAMESPACE}__toast-container ${STYLE_NAMESPACE}__${position}`
             }`}
             style={style}
