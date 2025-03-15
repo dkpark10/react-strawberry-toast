@@ -12,7 +12,7 @@ $react-strawberry-toast-warn: #fcba03;
   display: flex;
   align-items: center;
   gap: 5px;
-  width: 309px;
+  width: 314px;
   border-radius: 8px;
   box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.1);
   min-height: 54px;
@@ -52,4 +52,11 @@ $react-strawberry-toast-warn: #fcba03;
     @include left-bar;
     background-color: $react-strawberry-toast-warn;
   }
+}
+
+.#{$react-strawberry-toast-namespace}__close-button {
+  @include close-button;
+  position: absolute;
+  right: 0;
+  transform: translateX(-10px);
 }

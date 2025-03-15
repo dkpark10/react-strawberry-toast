@@ -31,6 +31,7 @@ const createToast =
       className,
       style,
       target,
+      closeButton,
     } = options;
 
     const toastId = optionToastId || idGenerator();
@@ -56,6 +57,7 @@ const createToast =
       toastType,
       pauseOnHover,
       removeTimeOut,
+      closeButton: closeButton || false, 
       target: target || null,
       isVisible: true,
     };

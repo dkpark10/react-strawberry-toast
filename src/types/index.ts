@@ -31,6 +31,7 @@ export interface Options extends BaseOptions {
   position?: Position | null;
   containerId?: string | null;
   pauseOnHover?: boolean;
+  closeButton?: boolean;
   target?: {
     element: HTMLElement;
     offset?: [number, number];

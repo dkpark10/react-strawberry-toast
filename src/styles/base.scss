@@ -143,3 +143,12 @@ $offset: 16px;
   mask-composite: subtract;
   animation: l3 1s infinite linear;
 }
+
+@mixin close-button {
+  background: transparent;
+  border: none;
+  outline: none;
+  width: 15px;
+  height: 15px;
+  cursor: pointer;
+}

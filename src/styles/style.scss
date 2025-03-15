@@ -13,3 +13,7 @@
   min-height: 47px;
   max-width: 368px;
 }
+
+.#{$react-strawberry-toast-namespace}__close-button {
+  @include close-button;
+}

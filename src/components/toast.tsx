@@ -4,7 +4,7 @@ import { getAnimation } from '../utils/get-animation';
 import { toast } from '../core/toast';
 import { STYLE_NAMESPACE } from '../constants';
 import { useEventListener } from '../hooks/use-event-listener';
-import { ToastTypeIcons } from './toast-icons';
+import { ToastTypeIcons, CloseButton } from './toast-icons';
 import type { NonHeadlessToastState as ToastState } from '../types';
 
 interface ToasterProps {
@@ -29,6 +29,7 @@ export const Toast = forwardRef<HTMLDivElement, ToasterProps>(function Toast(
     position,
     data,
     pauseOnHover,
+    closeButton,
   } = toastProps;
 
   const animationClassName = getAnimation({
@@ -111,12 +112,25 @@ export const Toast = forwardRef<HTMLDivElement, ToasterProps>(function Toast(
           <div
             className={
               className ??
-              `${STYLE_NAMESPACE}__toast-content ${STYLE_NAMESPACE}__toast-${toastType} ${!toast.isActive(toastId) ? animationClassName : ''}`
+              `${STYLE_NAMESPACE}__toast-content ${STYLE_NAMESPACE}__toast-${toastType} ${
+                !toast.isActive(toastId) ? animationClassName : ''
+              }`
             }
             style={toastStyle}
           >
             {renderIcon && <span className={`${STYLE_NAMESPACE}__toast-icon`}>{renderIcon}</span>}
             {content}
+            {closeButton && (
+              <button
+                className={`${STYLE_NAMESPACE}__close-button`}
+                onClick={() => {
+                  toast.disappear(toastId, 0);
+                }}
+                type="button"
+              >
+                <CloseButton />
+              </button>
+            )}
           </div>
         </If>
         <Else>{content}</Else>
