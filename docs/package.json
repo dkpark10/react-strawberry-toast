@@ -25,7 +25,7 @@
     "next": "^14",
     "react": "^18",
     "react-dom": "18",
-    "react-strawberry-toast": "^1.5.4",
+    "react-strawberry-toast": "^1.6.0",
     "react-syntax-highlighter": "^15.6.1",
     "react-tabs": "^6.1.0"
   },
