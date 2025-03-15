@@ -5,7 +5,7 @@ import { Toast } from './toast';
 import { useToasts } from '../hooks/use-toasts';
 import type { Position, NonHeadlessToastState as ToastState } from '../types';
 import { STYLE_NAMESPACE } from '../constants';
-import '../styles/style.scss';
+import '../styles/style2.scss';
 
 type ChildRef = Record<ToastState['toastId'], number>;
 type CoordsRef = Record<ToastState['toastId'], { y: number; x: number }>;

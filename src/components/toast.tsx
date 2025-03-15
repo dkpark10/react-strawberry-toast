@@ -111,7 +111,7 @@ export const Toast = forwardRef<HTMLDivElement, ToasterProps>(function Toast(
           <div
             className={
               className ??
-              `${STYLE_NAMESPACE}__toast-content ${!toast.isActive(toastId) ? animationClassName : ''}`
+              `${STYLE_NAMESPACE}__toast-content ${STYLE_NAMESPACE}__toast-${toastType} ${!toast.isActive(toastId) ? animationClassName : ''}`
             }
             style={toastStyle}
           >

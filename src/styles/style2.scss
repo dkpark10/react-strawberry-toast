@@ -1,0 +1,55 @@
+@import "base";
+
+$react-strawberry-toast-success: #1dca82;
+$react-strawberry-toast-error: #eb2639;
+$react-strawberry-toast-warn: #fcba03;
+
+.#{$react-strawberry-toast-namespace}__toast-content {
+  pointer-events: auto;
+  box-sizing: border-box;
+  background-color: white;
+  padding: 10px 10px 10px 15px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  width: 309px;
+  border-radius: 8px;
+  box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.1);
+  min-height: 54px;
+  max-width: 368px;
+  position: relative;
+}
+
+@mixin left-bar {
+  content: '';
+  display: inline-block;
+  top: 0;
+  left: 0;
+  width: 7px;
+  height: 100%;
+  position: absolute;
+  border-top-left-radius: 8px;
+  border-bottom-left-radius: 8px;
+}
+
+
+.#{$react-strawberry-toast-namespace}__toast-success {
+  &::before {
+    @include left-bar;
+    background-color: $react-strawberry-toast-success;
+  }
+}
+
+.#{$react-strawberry-toast-namespace}__toast-error {
+  &::before {
+    @include left-bar;
+    background-color: $react-strawberry-toast-error;
+  }
+}
+
+.#{$react-strawberry-toast-namespace}__toast-warn {
+  &::before {
+    @include left-bar;
+    background-color: $react-strawberry-toast-warn;
+  }
+}
