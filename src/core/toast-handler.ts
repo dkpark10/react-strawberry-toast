@@ -34,7 +34,9 @@ export const toastHandlers = <T = ToastState>(
   };
 
   const allClear = () => {
-    toastStore.setState([]);
+    toastStore.state.forEach((t) => {
+      disappear(t.toastId, 0);
+    });
   };
 
   const replace = (
