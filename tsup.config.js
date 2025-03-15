@@ -16,16 +16,15 @@ export default defineConfig([
     banner: {
       js: '"use client";',
     },
+  },
+  {
+    entry: ['src/styles/style.scss', 'src/styles/style2.scss', 'src/styles/style3.scss'],
+    minify: true,
     esbuildPlugins: [
       sassPlugin({
         type: 'css',
       }),
     ],
-    onSuccess: async () => {
-      const indexCss = path.resolve('dist/index.css');
-      const styleCss = path.resolve('dist/style.css');
-      fs.renameSync(indexCss, styleCss);
-    },
   },
   {
     minify: true,
