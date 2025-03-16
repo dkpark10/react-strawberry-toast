@@ -67,6 +67,7 @@ export const toastApi: TableData<4> = {
     ['className', 'Class of per toast', 'String', `''`],
     ['style', 'Class of per style', 'Object', '{}'],
     ['target', 'Target element where toast will be located', 'Object', '{}'],
+    ['closeButton', 'Option to show or hide the close button', 'Boolean', 'false'],
   ],
 };
 
