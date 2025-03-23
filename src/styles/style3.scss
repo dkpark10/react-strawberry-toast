@@ -18,17 +18,17 @@
 
 .#{$react-strawberry-toast-namespace}__toast-success {
   color: white;
-  background-color: $react-strawberry-toast-success !important;
+  background-color: $react-strawberry-toast-success;
 }
 
 .#{$react-strawberry-toast-namespace}__toast-error {
   color: white;
-  background-color: $react-strawberry-toast-error !important;
+  background-color: $react-strawberry-toast-error;
 }
 
 .#{$react-strawberry-toast-namespace}__toast-warn {
   color: white;
-  background-color: $react-strawberry-toast-warn !important;
+  background-color: $react-strawberry-toast-warn;
 }
 
 .#{$react-strawberry-toast-namespace}__close-button {

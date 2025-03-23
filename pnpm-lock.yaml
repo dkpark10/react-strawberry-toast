@@ -104,6 +104,9 @@ importers:
       dompurify:
         specifier: ^3.2.3
         version: 3.2.3
+      loadjs:
+        specifier: ^4.3.0
+        version: 4.3.0
       next:
         specifier: ^14
         version: 14.2.23(@babel/core@7.26.0)(@playwright/test@1.50.1)(react-dom@18.3.1)(react@18.3.1)(sass@1.83.0)
@@ -129,6 +132,9 @@ importers:
       '@tailwindcss/typography':
         specifier: ^0.5.16
         version: 0.5.16(tailwindcss@3.4.17)
+      '@types/loadjs':
+        specifier: ^4.0.4
+        version: 4.0.4
       '@types/react':
         specifier: ^18
         version: 18.3.12
@@ -2900,6 +2906,10 @@ packages:
       '@types/unist': 3.0.3
     dev: false
 
+  /@types/loadjs@4.0.4:
+    resolution: {integrity: sha512-IrO82vQKb37H9R+CJYoKTJBlMcIcSCA64ZPIBrLScH2vHMgXLnXtLc76PyKKzdbkj/lRLIhoH+fFAZ0UvIP5Dw==}
+    dev: true
+
   /@types/mdast@4.0.4:
     resolution: {integrity: sha512-kGaNbPh1k7AFzgpud/gMdvIm5xuECykRR+JnWKQno9TAXVa6WIVCGTPvYGekIDL4uwCZQSYbUxNBSb1aUo79oA==}
     dependencies:
@@ -4626,6 +4636,10 @@ packages:
     resolution: {integrity: sha512-IXO6OCs9yg8tMKzfPZ1YmheJbZCiEsnBdcB03l0OcfK9prKnJb96siuHCr5Fl37/yo9DnKU+TLpxzTUspw9shg==}
     engines: {node: ^12.20.0 || ^14.13.1 || >=16.0.0}
     dev: true
+
+  /loadjs@4.3.0:
+    resolution: {integrity: sha512-vNX4ZZLJBeDEOBvdr2v/F+0aN5oMuPu7JTqrMwp+DtgK+AryOlpy6Xtm2/HpNr+azEa828oQjOtWsB6iDtSfSQ==}
+    dev: false
 
   /local-pkg@0.5.1:
     resolution: {integrity: sha512-9rrA30MRRP3gBD3HTGnC6cDFpaE1kVDWxWgqWJUN0RvDNAo+Nz/9GxB+nHOH0ifbVFy0hSA1V6vFDvnx54lTEQ==}

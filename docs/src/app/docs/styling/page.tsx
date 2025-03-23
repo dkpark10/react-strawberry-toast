@@ -6,6 +6,9 @@ import { PrismLight } from 'react-syntax-highlighter';
 import WarnSvg from '/public/warn.svg';
 import type { Metadata } from 'next';
 import AssetImage from '@/components/asset-image';
+import { ToastContainer } from 'react-strawberry-toast';
+import Theme2 from './_components/theme2';
+import Theme3 from './_components/theme3';
 
 export const metadata: Metadata = {
   title: 'Styling | react-strawberry-toast',
@@ -23,6 +26,23 @@ export default function DocsHeadlessHook() {
   return (
     <React.Fragment>
       <Docs.MainTitle>Styling</Docs.MainTitle>
+
+      <Docs.SubTitle>Various theme</Docs.SubTitle>
+      <p>
+        Various themed styles are available. You can import and use them as shown below.
+      </p>
+
+      <ToastContainer />
+      <Theme2 />
+      <Docs.SpaceSm />
+      <Theme3 />
+      <Docs.SpaceSm />
+      <PrismLight language="jsx" style={CodeTheme}>
+        {`import 'react-strawberry-toast/dist/style2.css';
+import 'react-strawberry-toast/dist/style3.css';
+`}
+      </PrismLight>
+      <Docs.SpaceMd />
 
       <Docs.SubTitle>CSS</Docs.SubTitle>
       <p>
