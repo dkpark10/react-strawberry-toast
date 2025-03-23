@@ -1,7 +1,7 @@
 {
   "name": "react-strawberry-toast",
   "description": "A simple and customizable React toast library",
-  "version": "1.6.0",
+  "version": "1.6.1",
   "author": "dkpark10",
   "license": "MIT",
   "keywords": [
