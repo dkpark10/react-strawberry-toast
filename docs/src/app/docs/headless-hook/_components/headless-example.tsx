@@ -2,6 +2,7 @@
 
 import React, { useEffect } from 'react';
 import { useToasts, toast, type ToastState } from 'react-strawberry-toast/dist/headless';
+import PlayGroundButton from '@/components/playground-button';
 
 function Toast({ toastProps }: { toastProps: ToastState }) {
   const onMouseEnter = () => {
@@ -48,9 +49,7 @@ export default function HeadlessExample() {
 
   return (
     <React.Fragment>
-      <button className="p-2 bg-straw-berry text-white" type="button" onClick={click}>
-        show toast
-      </button>
+      <PlayGroundButton onClick={click}>show toast</PlayGroundButton>
       <div id="toast-container" className="top-4 left-4 right-4 bottom-4 fixed z-[9999] pointer-events-none">
         {toasts.map((toast) => (
           <div key={toast.toastId} className="pointer-events-auto">

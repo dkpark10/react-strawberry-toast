@@ -5,19 +5,14 @@ import React from 'react';
 import { PrismLight } from 'react-syntax-highlighter';
 import { CodeTheme } from '@/constants/code-theme';
 import { ToastContainer, toast } from 'react-strawberry-toast';
+import PlayGroundButton from '@/components/playground-button';
 
 export default function CustomizePlayGround() {
   return (
     <React.Fragment>
       <ToastContainer />
       <Docs.SpaceMd />
-      <button
-        onClick={() => toast('toast')}
-        type="button"
-        className="text-white font-semibold rounded-md flex items-center justify-center w-40 h-10 shadow-md bg-straw-berry"
-      >
-        toast()
-      </button>
+      <PlayGroundButton onClick={() => toast('toast')}>toast()</PlayGroundButton>
       <Docs.SpaceSm />
       <PrismLight language="jsx" style={CodeTheme}>
         {`toast('toast')`}
@@ -25,13 +20,9 @@ export default function CustomizePlayGround() {
 
       <Docs.SpaceMd />
 
-      <button
-        onClick={() => toast.custom(<span className='bg-red-500 text-white'>toast</span>)}
-        type="button"
-        className="text-white font-semibold rounded-md flex items-center justify-center w-40 h-10 shadow-md bg-straw-berry"
-      >
+      <PlayGroundButton onClick={() => toast.custom(<span className="bg-red-500 text-white">toast</span>)}>
         toast.custom()
-      </button>
+      </PlayGroundButton>
       <Docs.SpaceSm />
       <PrismLight language="jsx" style={CodeTheme}>
         {`toast.custom(<span className='bg-red-500 text-white'>toast</span>)`}

@@ -7,7 +7,7 @@ export default function TargetPlayGround() {
   const elementRef = useRef<HTMLButtonElement>(null);
 
   const click = () => {
-    toast.success('toast target toast target toast target', {
+    toast.success('This toast is positioned 30px away from the target in both directions.', {
       containerId: 'target',
       target: {
         element: elementRef.current!,
@@ -24,9 +24,9 @@ export default function TargetPlayGround() {
           onClick={click}
           ref={elementRef}
           type="button"
-          className="bg-straw-berry w-40 h-10 text-white flex items-center justify-center"
+          className="bg-straw-berry w-40 h-10 text-white flex items-center justify-center rounded-md"
         >
-          Show Toast
+          target
         </button>
       </div>
     </React.Fragment>

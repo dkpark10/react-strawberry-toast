@@ -5,7 +5,6 @@ import { CodeTheme } from '@/constants/code-theme';
 import { PrismLight } from 'react-syntax-highlighter';
 import WarnSvg from '/public/warn.svg';
 import type { Metadata } from 'next';
-import { codeSyntax } from '@/constants/code-syntax';
 import AssetImage from '@/components/asset-image';
 
 export const metadata: Metadata = {
@@ -36,6 +35,9 @@ export default function DocsHeadlessHook() {
       <PrismLight language="css" style={CodeTheme}>
         {`$react-strawberry-toast-namespace: 'react-strawberry-toast';
 $offset: 16px;
+$react-strawberry-toast-success: #1dca82;
+$react-strawberry-toast-error: #eb2639;
+$react-strawberry-toast-warn: #fcba03;
 
 .#{$react-strawberry-toast-namespace}__z9999 {}
 
