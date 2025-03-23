@@ -1,9 +1,5 @@
 @import "base";
 
-$react-strawberry-toast-success: #1dca82;
-$react-strawberry-toast-error: #eb2639;
-$react-strawberry-toast-warn: #fcba03;
-
 .#{$react-strawberry-toast-namespace}__toast-content {
   pointer-events: auto;
   box-sizing: border-box;
