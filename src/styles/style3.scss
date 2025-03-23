@@ -13,19 +13,22 @@
   min-height: 54px;
   max-width: 368px;
   position: relative;
-  color: white;
+  background-color: white;
 }
 
 .#{$react-strawberry-toast-namespace}__toast-success {
-  background-color: $react-strawberry-toast-success;
+  color: white;
+  background-color: $react-strawberry-toast-success !important;
 }
 
 .#{$react-strawberry-toast-namespace}__toast-error {
-  background-color: $react-strawberry-toast-error;
+  color: white;
+  background-color: $react-strawberry-toast-error !important;
 }
 
 .#{$react-strawberry-toast-namespace}__toast-warn {
-  background-color: $react-strawberry-toast-warn;
+  color: white;
+  background-color: $react-strawberry-toast-warn !important;
 }
 
 .#{$react-strawberry-toast-namespace}__close-button {
