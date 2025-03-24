@@ -8,7 +8,8 @@ export default function Theme3() {
   return (
     <PlayGroundButton
     onClick={() => {
-      loadjs('/style3.css', {
+      const cssPath = process.env.NODE_ENV === 'development' ? '/style3.css' : '/react-strawberry-toast/style3.css';
+      loadjs(cssPath, {
         success: () => {
           toast.success('theme3');
         },

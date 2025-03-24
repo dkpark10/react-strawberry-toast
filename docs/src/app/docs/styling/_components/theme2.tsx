@@ -8,7 +8,8 @@ export default function Theme2() {
   return (
     <PlayGroundButton
       onClick={() => {
-        loadjs('/style2.css', {
+        const cssPath = process.env.NODE_ENV === 'development' ? '/style2.css' : '/react-strawberry-toast/style2.css';
+        loadjs(cssPath, {
           success: () => {
             toast.success('theme2');
           },
