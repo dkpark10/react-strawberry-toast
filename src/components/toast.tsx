@@ -133,7 +133,11 @@ export const Toast = forwardRef<HTMLDivElement, ToasterProps>(function Toast(
             )}
           </div>
         </If>
-        <Else>{content}</Else>
+        <Else>
+          <div className={className ?? `${!toast.isActive(toastId) ? animationClassName : ''}`}>
+            {content}
+          </div>
+        </Else>
       </Condition>
     </div>
   );
