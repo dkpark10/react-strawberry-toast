@@ -12,10 +12,11 @@ import { primaryBlack } from '@/constants/style-variable';
 import SuccessSvg from '/public/success.svg';
 import ErrorSvg from '/public/error.svg';
 import WarnSvg from '/public/warn.svg';
+import InfoSvg from '/public/info.svg';
 import PromiseSvg from '/public/promise.svg';
 import EmotionProvider from '@/components/providers/emotion-provider';
 
-type ExampleToastType = 'Success' | 'Warn' | 'Error' | 'Promise' | 'TailwindCSS' | 'Emotion' | 'Dark Theme';
+type ExampleToastType = 'Success' | 'Warn' | 'Error' | 'Promise' | 'TailwindCSS' | 'Emotion' | 'Dark Theme' | 'Info';
 
 export default function HomePlayGround() {
   const [position, setPosition] = useState<Position>('top-center');
@@ -53,6 +54,16 @@ export default function HomePlayGround() {
       click: () => {
         setToastCode(codeSyntax.warn);
         toast.warn('warn', {
+          position,
+        });
+      },
+    },
+    {
+      type: 'Info',
+      icon: <InfoSvg />,
+      click: () => {
+        setToastCode(codeSyntax.info);
+        toast.info('info', {
           position,
         });
       },
