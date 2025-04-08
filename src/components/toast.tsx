@@ -51,6 +51,7 @@ export const Toast = forwardRef<HTMLDivElement, ToasterProps>(function Toast(
             error: ToastTypeIcons.error,
             warn: ToastTypeIcons.warn,
             loading: ToastTypeIcons.loading,
+            info: ToastTypeIcons.info,
           },
           isVisible,
         })

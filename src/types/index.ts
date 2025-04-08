@@ -8,7 +8,7 @@ export type Position =
   | 'top-center'
   | 'top-right';
 
-export type ToastType = 'default' | 'custom' | 'success' | 'error' | 'loading' | 'warn';
+export type ToastType = 'default' | 'custom' | 'success' | 'error' | 'loading' | 'warn' | 'info';
 
 export interface BaseOptions {
   toastId?: string;

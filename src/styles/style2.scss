@@ -50,6 +50,13 @@
   }
 }
 
+.#{$react-strawberry-toast-namespace}__toast-info {
+  &::before {
+    @include left-bar;
+    background-color: $react-strawberry-toast-info;
+  }
+}
+
 .#{$react-strawberry-toast-namespace}__close-button {
   @include close-button;
   position: absolute;

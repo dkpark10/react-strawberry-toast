@@ -84,6 +84,7 @@ toast.allClear = handlers.allClear;
 toast.success = createToast('success');
 toast.error = createToast('error');
 toast.warn = createToast('warn');
+toast.info = createToast('info');
 toast.loading = createToast('loading');
 toast.custom = createToast<ToastState['data'] | ToastDataWithCallback>('custom');
 
@@ -115,6 +116,7 @@ toast.promise = <T>(
       error: ToastTypeIcons.error,
       warn: ToastTypeIcons.warn,
       loading: ToastTypeIcons.loading,
+      info: ToastTypeIcons.info,
     },
     isVisible: true,
   };

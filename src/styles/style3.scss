@@ -31,6 +31,11 @@
   background-color: $react-strawberry-toast-warn;
 }
 
+.#{$react-strawberry-toast-namespace}__toast-info {
+  color: white;
+  background-color: $react-strawberry-toast-info;
+}
+
 .#{$react-strawberry-toast-namespace}__close-button {
   @include close-button;
   position: absolute;
