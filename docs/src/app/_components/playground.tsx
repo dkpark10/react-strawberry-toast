@@ -12,10 +12,11 @@ import { primaryBlack } from '@/constants/style-variable';
 import SuccessSvg from '/public/success.svg';
 import ErrorSvg from '/public/error.svg';
 import WarnSvg from '/public/warn.svg';
+import InfoSvg from '/public/info.svg';
 import PromiseSvg from '/public/promise.svg';
 import EmotionProvider from '@/components/providers/emotion-provider';
 
-type ExampleToastType = 'Success' | 'Warn' | 'Error' | 'Promise' | 'TailwindCSS' | 'Emotion' | 'Dark Theme';
+type ExampleToastType = 'Success' | 'Warn' | 'Error' | 'Promise' | 'TailwindCSS' | 'Emotion' | 'Dark Theme' | 'Info';
 
 export default function HomePlayGround() {
   const [position, setPosition] = useState<Position>('top-center');
@@ -53,6 +54,16 @@ export default function HomePlayGround() {
       click: () => {
         setToastCode(codeSyntax.warn);
         toast.warn('warn', {
+          position,
+        });
+      },
+    },
+    {
+      type: 'Info',
+      icon: <InfoSvg />,
+      click: () => {
+        setToastCode(codeSyntax.info);
+        toast.info('info', {
           position,
         });
       },
@@ -178,7 +189,7 @@ export default function HomePlayGround() {
           ))}
         </div>
 
-        <div id="option-area">
+        <div id="option-area" >
           <div className="grid gap-4 grid-cols-3 w-full">
             {['top-left', 'top-center', 'top-right', 'bottom-left', 'bottom-center', 'bottom-right'].map(
               (p) => (
@@ -216,10 +227,10 @@ export default function HomePlayGround() {
             </div>
           </div>
 
-          <div className="pt-5 sm:pt-10">
+          <div className="pt-5 sm:pt-10 sm:w-[480px]">
             <PrismLight language="jsx" style={CodeTheme}>
               {`
-<ToastContainer reverse={${reverse}} gap={${gap}} />
+  <ToastContainer reverse={${reverse}} gap={${gap}} />  
               `}
             </PrismLight>
           </div>

@@ -69,6 +69,7 @@ function App() {
 | className      | Class of toast  |  String |  |
 | style      | Style of toast  |  Object | |
 | target      | Target element where toast will be located  |  Object | |
+| closeButton      | Option to show or hide the close button  | Boolean | false |
 
 
 ## License

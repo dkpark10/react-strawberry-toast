@@ -1,6 +1,7 @@
 'use client';
 
 import { toast } from 'react-strawberry-toast';
+import PlayGroundButton from '@/components/playground-button';
 
 export default function ShowPromiseButton() {
   const onClick = () => {
@@ -15,9 +16,5 @@ export default function ShowPromiseButton() {
     });
   };
 
-  return (
-    <button className="p-2 bg-straw-berry text-white" type="button" onClick={onClick}>
-      show promise
-    </button>
-  );
+  return <PlayGroundButton onClick={onClick}>show promise</PlayGroundButton>;
 }

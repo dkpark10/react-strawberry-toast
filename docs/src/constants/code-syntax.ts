@@ -32,6 +32,13 @@ function App() {
 
 
 `,
+  info: `
+
+      toast.info('info');     
+
+
+`,
+
   promise: `
          toast.promise(promise, {
            loading: 'loading',           
@@ -50,7 +57,7 @@ function App() {
     </div>
   )
 );`,
-    darkTheme: `
+  darkTheme: `
       toast('Dark Theme', {
         style: {
           color: 'white',
@@ -77,8 +84,7 @@ toast(
   )
 );
 `,
-  multiContainer: 
-`import { ToastContainer, toast } from 'react-strawberry-toast';
+  multiContainer: `import { ToastContainer, toast } from 'react-strawberry-toast';
 import 'react-strawberry-toast/dist/style.css';
 
 function App() {
@@ -102,8 +108,7 @@ function App() {
 }
 `,
 
-containerStyling:
-  `import { ToastContainer, toast } from 'react-strawberry-toast';
+  containerStyling: `import { ToastContainer, toast } from 'react-strawberry-toast';
   import 'react-strawberry-toast/dist/style.css';
 
   function App() {
@@ -173,8 +178,7 @@ containerStyling:
     );
   }`,
 
-  headless: 
-`import React, { useEffect } from 'react';
+  headless: `import React, { useEffect } from 'react';
 import { useToasts, toast, type ToastState } from 'react-strawberry-toast/dist/headless';
 
 function Toast({ toastProps }: { toastProps: ToastState }) {

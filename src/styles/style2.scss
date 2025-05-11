@@ -1,9 +1,5 @@
 @import "base";
 
-$react-strawberry-toast-success: #1dca82;
-$react-strawberry-toast-error: #eb2639;
-$react-strawberry-toast-warn: #fcba03;
-
 .#{$react-strawberry-toast-namespace}__toast-content {
   pointer-events: auto;
   box-sizing: border-box;
@@ -51,6 +47,13 @@ $react-strawberry-toast-warn: #fcba03;
   &::before {
     @include left-bar;
     background-color: $react-strawberry-toast-warn;
+  }
+}
+
+.#{$react-strawberry-toast-namespace}__toast-info {
+  &::before {
+    @include left-bar;
+    background-color: $react-strawberry-toast-info;
   }
 }
 

@@ -5,8 +5,10 @@ import { CodeTheme } from '@/constants/code-theme';
 import { PrismLight } from 'react-syntax-highlighter';
 import WarnSvg from '/public/warn.svg';
 import type { Metadata } from 'next';
-import { codeSyntax } from '@/constants/code-syntax';
 import AssetImage from '@/components/asset-image';
+import { ToastContainer } from 'react-strawberry-toast';
+import Theme2 from './_components/theme2';
+import Theme3 from './_components/theme3';
 
 export const metadata: Metadata = {
   title: 'Styling | react-strawberry-toast',
@@ -25,6 +27,23 @@ export default function DocsHeadlessHook() {
     <React.Fragment>
       <Docs.MainTitle>Styling</Docs.MainTitle>
 
+      <Docs.SubTitle>Various theme</Docs.SubTitle>
+      <p>
+        Various themed styles are available. You can import and use them as shown below.
+      </p>
+
+      <ToastContainer />
+      <Theme2 />
+      <Docs.SpaceSm />
+      <Theme3 />
+      <Docs.SpaceSm />
+      <PrismLight language="jsx" style={CodeTheme}>
+        {`import 'react-strawberry-toast/dist/style2.css';
+import 'react-strawberry-toast/dist/style3.css';
+`}
+      </PrismLight>
+      <Docs.SpaceMd />
+
       <Docs.SubTitle>CSS</Docs.SubTitle>
       <p>
         This is the CSS classes used for the react-strawberry-toast. <br />
@@ -36,6 +55,9 @@ export default function DocsHeadlessHook() {
       <PrismLight language="css" style={CodeTheme}>
         {`$react-strawberry-toast-namespace: 'react-strawberry-toast';
 $offset: 16px;
+$react-strawberry-toast-success: #1dca82;
+$react-strawberry-toast-error: #eb2639;
+$react-strawberry-toast-warn: #fcba03;
 
 .#{$react-strawberry-toast-namespace}__z9999 {}
 

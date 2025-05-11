@@ -26,11 +26,11 @@ function SuccessSvg() {
   );
 }
 
-function ErrorSvg() {
+function ErrorInfoSvg({ fill }: { fill: string }) {
   return (
     <svg
       stroke="none"
-      fill="#eb2639"
+      fill={fill}
       strokeWidth="2"
       viewBox="0 0 24 24"
       height="22"
@@ -84,7 +84,8 @@ export function CloseButton() {
 
 export const ToastTypeIcons: Record<Exclude<ToastType, 'custom' | 'default'>, ReactNode> = {
   success: <SuccessSvg />,
-  error: <ErrorSvg />,
+  error: <ErrorInfoSvg fill='#eb2639' />,
   loading: <div className={`${STYLE_NAMESPACE}__loading`} />,
   warn: <WarnSvg />,
+  info: <ErrorInfoSvg fill='#5365e7' />,
 };
