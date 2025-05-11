@@ -45,7 +45,6 @@ export const toastContainerApi: TableData<4> = {
     ['reverse', 'Direction when toast appear', 'Boolean', 'false'],
     ['gap', 'Gap Between toasts', 'Number', '9'],
     ['pauseOnActivate', 'Pause Toast timer when blur events occurs', 'Boolean', 'true'],
-    ['limit', 'Limit the number of toast to be displayed', 'Number', ''],
   ],
 };
 

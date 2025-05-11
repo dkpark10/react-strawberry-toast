@@ -53,7 +53,6 @@ function App() {
 | style      | Style of ToastContainer  |  Object | |
 | gap      | Gap Between toasts  |  Number | 9 |
 | pauseOnActivate      | Pause Toast timer when blur events occurs  |  Boolean | true |
-| limit      | Limit the number of toast to be displayed |  Number | |
 
 
 ### toast

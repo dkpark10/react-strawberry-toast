@@ -17,13 +17,11 @@ interface ToastContainerProps {
   reverse?: boolean;
   gap?: number;
   pauseOnActivate?: boolean;
-  limit?: number;
 }
 
 export function ToastContainer({
   className,
   style,
-  limit,
   position: globalPosition = 'top-center',
   containerId = '',
   gap = 9,
@@ -79,7 +77,7 @@ export function ToastContainer({
           />
         ))}
       {Object.entries(toastsByPosition).map(([position, toastByPosition]) => {
-        const filteredToasts = toastByPosition.filter(containerIdFilter).slice(0, limit);
+        const filteredToasts = toastByPosition.filter(containerIdFilter);
 
         const toasts = reverse ? filteredToasts.reverse() : filteredToasts;
 
