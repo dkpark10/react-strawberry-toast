@@ -17,6 +17,7 @@ interface ToastContainerProps {
   reverse?: boolean;
   gap?: number;
   pauseOnActivate?: boolean;
+  stack?: boolean;
 }
 
 export function ToastContainer({
@@ -27,6 +28,7 @@ export function ToastContainer({
   gap = 9,
   reverse = false,
   pauseOnActivate = true,
+  stack = false,
 }: ToastContainerProps) {
   const toastList = useToasts();
   const heights = useRef<ChildRef>({});
@@ -98,23 +100,35 @@ export function ToastContainer({
                     return;
                   }
 
-                  const height = heights.current[toast.toastId] || element.getBoundingClientRect().height;
-                  heights.current[toast.toastId] = height;
+                  const transition = 'transform 0.2s cubic-bezier(0.43, 0.14, 0.2, 1.05)';
 
                   const x = /left/.test(position) ? 50 : /center/.test(position) ? 0 : -50;
 
-                  const limitIdx = /bottom/.test(position) ? 0 : 1;
+                  const isBottom = /bottom/.test(position);
+                  const limitIdx = isBottom ? 0 : 1;
+
+                  const height = heights.current[toast.toastId] || element.getBoundingClientRect().height;
+                  heights.current[toast.toastId] = height;
+
+                  if (stack) {
+                    const depth = self.length - 1 - idx;
+                    const y = !isBottom ? depth * 9 : -height + depth * -14;
+
+                    element.style.transform = `scale(${1 - depth * 0.05}) translate(${x}%, ${y}px)`;
+                    element.style.transition = transition;
+                    return;
+                  }
 
                   const top = self
                     .filter((_, order) => order <= idx - limitIdx)
                     .reduce((acc, t) => {
-                      return /bottom/.test(position)
+                      return isBottom
                         ? (acc -= gap + heights.current[t.toastId])
                         : (acc += gap + heights.current[t.toastId]);
                     }, 0);
 
-                  element.style.transition = 'transform 0.2s cubic-bezier(0.43, 0.14, 0.2, 1.05)';
                   element.style.transform = `translate(${x}%, ${top}px)`;
+                  element.style.transition = transition;
                 }}
                 key={toast.toastId}
                 toastProps={toast}
