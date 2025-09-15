@@ -12,7 +12,7 @@ interface ToasterProps {
   pauseOnActivate: boolean;
 }
 
-export const Toast = forwardRef<HTMLDivElement, ToasterProps>(function Toast(
+export const Toast = forwardRef<HTMLOutputElement, ToasterProps>(function Toast(
   { toastProps, pauseOnActivate },
   elementRef
 ) {
@@ -92,8 +92,8 @@ export const Toast = forwardRef<HTMLDivElement, ToasterProps>(function Toast(
     : ToastTypeIcons[toastType];
 
   return (
-    <div
-      role="alert"
+    <output
+      role="status"
       ref={elementRef}
       className={`${STYLE_NAMESPACE}__toast-content-container`}
       data-testid={`container-${containerId || 'default'}`}
@@ -140,6 +140,6 @@ export const Toast = forwardRef<HTMLDivElement, ToasterProps>(function Toast(
           </div>
         </Else>
       </Condition>
-    </div>
+    </output>
   );
 });
