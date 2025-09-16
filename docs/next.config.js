@@ -1,6 +1,18 @@
 const createMDX = require('@next/mdx');
+const remarkFrontmatter = require("remark-frontmatter");
+const remarkMdxFrontmatter = require("remark-mdx-frontmatter");
+const remarkGfm = require("remark-gfm");
 
-const withMdx = createMDX();
+const withMdx = createMDX({
+  extension: /\.(md|mdx)$/,
+  options: {
+    remarkPlugins: [
+      remarkFrontmatter,
+      remarkGfm,
+      [remarkMdxFrontmatter, { name: "frontmatter" }],
+    ],
+  },
+});
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
