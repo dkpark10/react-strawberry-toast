@@ -3,10 +3,4 @@ dist
 dt.txt
 .next
 
-# Playwright
-/test-results/
-/playwright-report/
-/blob-report/
-/playwright/.cache/
-
 /playground/src/pages/ignore/**/*
