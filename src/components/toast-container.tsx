@@ -56,7 +56,6 @@ export function ToastContainer({
             ref={(element) => {
               const target = toast.target;
               if (!target || !element) {
-                delete coords.current[toast.toastId];
                 return;
               }
               const rect = coords.current[toast.toastId] || target.element.getBoundingClientRect();
@@ -74,6 +73,9 @@ export function ToastContainer({
             key={toast.toastId}
             toastProps={toast}
             pauseOnActivate={pauseOnActivate}
+            unMountCallback={() => {
+              delete coords.current[toast.toastId];
+            }}
           />
         ))}
       {Object.entries(toastsByPosition).map(([position, toastByPosition]) => {
@@ -94,7 +96,6 @@ export function ToastContainer({
               <Toast
                 ref={(element) => {
                   if (!element) {
-                    delete heights.current[toast.toastId];
                     return;
                   }
 
@@ -119,6 +120,9 @@ export function ToastContainer({
                 key={toast.toastId}
                 toastProps={toast}
                 pauseOnActivate={pauseOnActivate}
+                unMountCallback={() => {
+                  delete heights.current[toast.toastId];
+                }}
               />
             ))}
           </div>

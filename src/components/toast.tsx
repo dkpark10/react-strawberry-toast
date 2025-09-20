@@ -10,10 +10,11 @@ import type { NonHeadlessToastState as ToastState } from '../types';
 interface ToasterProps {
   toastProps: ToastState;
   pauseOnActivate: boolean;
+  unMountCallback?: () => void;
 }
 
 export const Toast = forwardRef<HTMLOutputElement, ToasterProps>(function Toast(
-  { toastProps, pauseOnActivate },
+  { toastProps, pauseOnActivate, unMountCallback },
   elementRef
 ) {
   const {
@@ -75,6 +76,10 @@ export const Toast = forwardRef<HTMLOutputElement, ToasterProps>(function Toast(
     if (!toast.isActive(toastId)) {
       toast.setActive(toastId);
       toast.disappear(toastId, timeOut);
+    }
+
+    return () => {
+      unMountCallback?.();
     }
   }, [toastId]);
 
