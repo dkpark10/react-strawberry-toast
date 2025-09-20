@@ -10,7 +10,7 @@ if [ "$COMMIT_TYPE" = "test" ] || \
    [ "$COMMIT_TYPE" = "fix" ] || \
    [ "$COMMIT_TYPE" = "chore" ] || \
    [ "$COMMIT_TYPE" = "refactor" ]; then
-  pnpm run test --run
+  pnpm --filter=react-strawberry-toast run test --run
 fi
 
 npx --no-install commitlint --edit "$1"
