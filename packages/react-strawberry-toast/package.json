@@ -14,11 +14,13 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/dkpark10/react-strawberry-toast.git"
+    "url": "https://github.com/dkpark10/react-strawberry-toast.git",
+    "directory": "packages/react-strawberry-toast"
   },
   "bugs": {
     "url": "https://github.com/dkpark10/react-strawberry-toast/issues"
   },
+  "homepage": "https://dkpark10.github.io/react-strawberry-toast/",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "exports": {
