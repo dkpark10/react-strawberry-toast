@@ -1,12 +1,11 @@
 import React from 'react';
-import { toast, ToastContainer } from '../../../src/index';
-// import '../../../src/styles/style.scss';
+import { toast, ToastContainer } from 'react-strawberry-toast';
+import '../../../../packages/react-strawberry-toast/src/styles/style.scss';
 
 export default function HomePage() {
   const onClick = () => {
     toast.success('strawberry', {
       position: 'top-left',
-      closeButton: true,
     });
 
     // toast.success('strawberry 123', {

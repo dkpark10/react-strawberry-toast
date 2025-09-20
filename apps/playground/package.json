@@ -14,10 +14,13 @@
     "@emotion/styled": "^11.13.0",
     "next": "^14",
     "react": "^18",
-    "react-dom": "^18"
+    "react-dom": "^18",
+    "react-strawberry-toast": "workspace:*"
   },
   "devDependencies": {
+    "@types/node": "^20",
     "@types/react": "^18",
-    "@types/react-dom": "^18"
+    "@types/react-dom": "^18",
+    "typescript": "^5.7.2"
   }
 }
