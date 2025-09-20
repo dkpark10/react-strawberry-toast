@@ -105,8 +105,8 @@ importers:
         specifier: '18'
         version: 18.3.1(react@18.3.1)
       react-strawberry-toast:
-        specifier: ^1.6.0
-        version: 1.6.2(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+        specifier: ^2.0.0
+        version: link:..
       react-syntax-highlighter:
         specifier: ^15.6.1
         version: 15.6.1(react@18.3.1)
@@ -3320,12 +3320,6 @@ packages:
 
   react-is@18.3.1:
     resolution: {integrity: sha512-/LLMVyas0ljjAtoYiPqYiL8VWXzUUdThrmU5+n20DZv+a+ClRoevUzw5JxU+Ieh5/c87ytoTBV9G1FiKfNJdmg==}
-
-  react-strawberry-toast@1.6.2:
-    resolution: {integrity: sha512-pTxda9MuR+WBFOTJIfxnfK3SxA818Y5HPjz9yCBx9UdfZY9fhfLzZqW5wNAS8UjLy79xPXzbaDWDKajUZ5rWeg==}
-    peerDependencies:
-      react: '>=18'
-      react-dom: '>=18'
 
   react-syntax-highlighter@15.6.1:
     resolution: {integrity: sha512-OqJ2/vL7lEeV5zTJyG7kmARppUjiB9h9udl4qHQjjgEos66z00Ia0OckwYfRxCSFrW8RJIBnsBwQsHZbVPspqg==}
@@ -7622,11 +7616,6 @@ snapshots:
   react-is@17.0.2: {}
 
   react-is@18.3.1: {}
-
-  react-strawberry-toast@1.6.2(react-dom@18.3.1(react@18.3.1))(react@18.3.1):
-    dependencies:
-      react: 18.3.1
-      react-dom: 18.3.1(react@18.3.1)
 
   react-syntax-highlighter@15.6.1(react@18.3.1):
     dependencies:
