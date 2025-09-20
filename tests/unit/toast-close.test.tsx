@@ -98,4 +98,36 @@ describe('toast close test', () => {
 
     expect(queryByText(new RegExp(context.task.id, 'i'))).not.toBeInTheDocument();
   });
+
+  test(`should dismiss the toast when the close button is clicked with closeButton option enabled`, async (context) => {
+    function App() {
+      const click = () => {
+        toast(context.task.id, {
+          closeButton: true,
+          toastId: '1'
+        });
+      };
+
+      return (
+        <React.Fragment>
+          <ToastContainer />
+          <button onClick={click}>click</button>
+        </React.Fragment>
+      );
+    }
+
+    const { getByRole, queryByText, getByTestId } = render(<App />);
+
+    fireEvent.click(getByRole('button', { name: 'click' }));
+
+    expect(queryByText(new RegExp(context.task.id, 'i'))).toBeInTheDocument();
+
+    fireEvent.click(getByTestId('1__close-button'));
+
+    act(() => {
+      vi.advanceTimersByTime(REMOVE_TIMEOUT);
+    });
+
+    expect(queryByText(new RegExp(context.task.id, 'i'))).not.toBeInTheDocument();
+  });
 });

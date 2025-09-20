@@ -128,6 +128,7 @@ export const Toast = forwardRef<HTMLOutputElement, ToasterProps>(function Toast(
             {content}
             {closeButton && (
               <button
+                data-testid={`${toastId}__close-button`}
                 className={`${STYLE_NAMESPACE}__close-button`}
                 onClick={() => {
                   toast.disappear(toastId, 0);
