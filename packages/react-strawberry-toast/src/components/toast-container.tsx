@@ -67,7 +67,8 @@ export function ToastContainer({
 
               const [x, y] = target.offset || [0, 0];
 
-              element.style.transform = `translate(${rect.x + x}px, ${rect.y + y}px)`;
+              element.style.top = `${rect.y + y + window.scrollY}px`;
+              element.style.left = `${rect.x + x + window.scrollX}px`;
             }}
             key={toast.toastId}
             toastProps={toast}
