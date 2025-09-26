@@ -1,13 +1,14 @@
 'use client';
 
 import React, { useRef } from 'react';
-import { ToastContainer, toast } from 'react-strawberry-toast';
+import { ToastContainer, toast } from '@react-strawberry-toast/src';
 
 export default function TargetPlayGround() {
   const elementRef = useRef<HTMLButtonElement>(null);
 
   const click = () => {
     toast.success('This toast is positioned 30px away from the target in both directions.', {
+      timeOut: Infinity,
       containerId: 'target',
       target: {
         element: elementRef.current!,

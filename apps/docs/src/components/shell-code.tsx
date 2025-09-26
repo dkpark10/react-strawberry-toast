@@ -1,6 +1,6 @@
 'use client';
 
-import { toast } from 'react-strawberry-toast';
+import { toast } from '@react-strawberry-toast/src';
 import type { PropsWithChildren } from 'react';
 
 export default function ShellCode({ children }: PropsWithChildren) {

@@ -3,7 +3,7 @@ import ShellCode from '@/components/shell-code';
 import { PrismLight } from 'react-syntax-highlighter';
 import { CodeTheme } from '@/constants/code-theme';
 import { codeSyntax } from '@/constants/code-syntax';
-import { ToastContainer } from 'react-strawberry-toast';
+import { ToastContainer } from '@react-strawberry-toast/src';
 import { Docs } from '@/components/docs-title';
 
 import type { Metadata } from 'next';

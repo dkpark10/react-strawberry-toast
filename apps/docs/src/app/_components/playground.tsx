@@ -3,7 +3,7 @@
 
 import { useState } from 'react';
 import clsx from 'clsx';
-import { ToastContainer, toast, type Position } from 'react-strawberry-toast';
+import { ToastContainer, toast, type Position } from '@react-strawberry-toast/src';
 import AssetImage from '@/components/asset-image';
 import { PrismLight } from 'react-syntax-highlighter';
 import { codeSyntax } from '@/constants/code-syntax';

@@ -1,6 +1,6 @@
 "use client";
 
-import { ToastContainer, toast } from 'react-strawberry-toast';
+import { ToastContainer } from '@react-strawberry-toast/src';
 import React from 'react';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import ShellCode from '@/components/shell-code';

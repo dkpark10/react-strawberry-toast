@@ -6,7 +6,7 @@ import { PrismLight } from 'react-syntax-highlighter';
 import WarnSvg from '/public/warn.svg';
 import type { Metadata } from 'next';
 import AssetImage from '@/components/asset-image';
-import { ToastContainer } from 'react-strawberry-toast';
+import { ToastContainer } from '@react-strawberry-toast/src';
 import Theme2 from './_components/theme2';
 import Theme3 from './_components/theme3';
 

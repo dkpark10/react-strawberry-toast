@@ -1,7 +1,7 @@
 import React from 'react';
 import { PrismLight } from 'react-syntax-highlighter';
 import { CodeTheme } from '@/constants/code-theme';
-import { ToastContainer } from 'react-strawberry-toast';
+import { ToastContainer } from '@react-strawberry-toast/src';
 import Strong from '@/components/strong';
 import { Docs } from '@/components/docs-title';
 import ShowPromiseButton from '@/app/docs/promise/_components/show-promise';

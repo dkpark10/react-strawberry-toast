@@ -4,7 +4,7 @@ import { Docs } from '@/components/docs-title';
 import React from 'react';
 import { PrismLight } from 'react-syntax-highlighter';
 import { CodeTheme } from '@/constants/code-theme';
-import { ToastContainer, toast } from 'react-strawberry-toast';
+import { ToastContainer, toast } from '@react-strawberry-toast/src';
 import PlayGroundButton from '@/components/playground-button';
 
 export default function CustomizePlayGround() {

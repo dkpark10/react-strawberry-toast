@@ -1,6 +1,6 @@
 'use client';
 
-import { toast } from 'react-strawberry-toast';
+import { toast } from '@react-strawberry-toast/src';
 import PlayGroundButton from '@/components/playground-button';
 
 export default function ShowPromiseButton() {

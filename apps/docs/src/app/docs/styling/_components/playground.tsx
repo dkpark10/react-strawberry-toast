@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from 'react';
 import { Docs } from '@/components/docs-title';
-import { ToastContainer, toast } from 'react-strawberry-toast';
+import { ToastContainer, toast } from '@react-strawberry-toast/src';
 import clsx from 'clsx';
 import DOMPurify from 'dompurify';
 import ProfileSvg from '/public/profile.svg';

@@ -23,6 +23,9 @@
     "paths": {
       "@/*": [
         "./src/*"
+      ],
+      "@react-strawberry-toast/*": [
+        "../../packages/react-strawberry-toast/*"
       ]
     },
     "plugins": [
