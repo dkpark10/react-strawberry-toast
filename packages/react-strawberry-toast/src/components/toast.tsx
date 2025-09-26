@@ -1,4 +1,4 @@
-import { useEffect, forwardRef } from 'react';
+import { useEffect, useRef } from 'react';
 import { Condition, If, Else } from './condition';
 import { getAnimation } from '../utils/get-animation';
 import { toast } from '../core/toast';
@@ -7,16 +7,22 @@ import { useEventListener } from '../hooks/use-event-listener';
 import { ToastTypeIcons, CloseButton } from './toast-icons';
 import type { NonHeadlessToastState as ToastState } from '../types';
 
-interface ToasterProps {
-  toastProps: ToastState;
+export interface OtherProps {
+  gap: number;
+  order: number;
+  samePositionLists: Array<ToastState>;
   pauseOnActivate: boolean;
-  unMountCallback?: () => void;
 }
 
-export const Toast = forwardRef<HTMLOutputElement, ToasterProps>(function Toast(
-  { toastProps, pauseOnActivate, unMountCallback },
-  elementRef
-) {
+interface ToasterProps {
+  toastProps: ToastState & OtherProps;
+}
+
+const heights = new Map<ToastState['toastId'], number>;
+
+export function Toast({ toastProps }: ToasterProps) {
+  const elementRef = useRef<HTMLOutputElement>(null);
+
   const {
     toastId,
     isVisible,
@@ -25,12 +31,17 @@ export const Toast = forwardRef<HTMLOutputElement, ToasterProps>(function Toast(
     className,
     style: toastStyle,
     icon,
+    pauseOnActivate,
     updated,
     toastType,
     position,
     data,
     pauseOnHover,
     closeButton,
+    samePositionLists,
+    gap,
+    order,
+    target,
   } = toastProps;
 
   const animationClassName = getAnimation({
@@ -41,21 +52,21 @@ export const Toast = forwardRef<HTMLOutputElement, ToasterProps>(function Toast(
   const content =
     typeof data === 'function'
       ? data({
-          toastId,
-          close: () => toast.disappear(toastId, 0),
-          immediatelyClose: () => {
-            toast.disappear(toastId, 0);
-            toast.remove(toastId, 0);
-          },
-          icons: {
-            success: ToastTypeIcons.success,
-            error: ToastTypeIcons.error,
-            warn: ToastTypeIcons.warn,
-            loading: ToastTypeIcons.loading,
-            info: ToastTypeIcons.info,
-          },
-          isVisible,
-        })
+        toastId,
+        close: () => toast.disappear(toastId, 0),
+        immediatelyClose: () => {
+          toast.disappear(toastId, 0);
+          toast.remove(toastId, 0);
+        },
+        icons: {
+          success: ToastTypeIcons.success,
+          error: ToastTypeIcons.error,
+          warn: ToastTypeIcons.warn,
+          loading: ToastTypeIcons.loading,
+          info: ToastTypeIcons.info,
+        },
+        isVisible,
+      })
       : data;
 
   const focusHandler = () => {
@@ -68,20 +79,60 @@ export const Toast = forwardRef<HTMLOutputElement, ToasterProps>(function Toast(
     toast.pause(toastId);
   };
 
+  const resizeHandler = () => {
+    if (target) {
+      requestAnimationFrame(() => {
+        if (elementRef.current) {
+          const rect = target.element.getBoundingClientRect();
+          const [x, y] = target.offset || [0, 0];
+          elementRef.current!.style.top = `${rect.y + y + window.scrollY}px`;
+          elementRef.current!.style.left = `${rect.x + x + window.scrollX}px`;
+        }
+
+      });
+    }
+  };
+
   useEventListener('focus', focusHandler);
   useEventListener('blur', blurHandler);
+  useEventListener('resize', resizeHandler);
 
-  /** @description disappear after mount */
   useEffect(() => {
+    /** @description disappear after mount */
     if (!toast.isActive(toastId)) {
       toast.setActive(toastId);
       toast.disappear(toastId, timeOut);
     }
 
-    return () => {
-      unMountCallback?.();
-    }
+    resizeHandler();
   }, [toastId]);
+
+  /** @description calculate the position when the order of toasts changes */
+  useEffect(() => {
+    if (elementRef.current && !target) {
+      const height = heights.get(toastId) || elementRef.current.getBoundingClientRect().height;
+      heights.set(toastId, height);
+
+      const x = /left/.test(position!) ? 50 : /center/.test(position!) ? 0 : -50;
+
+      const limitIdx = /bottom/.test(position!) ? 0 : 1;
+
+      const top = samePositionLists
+        .filter((_, idx) => idx <= order - limitIdx)
+        .reduce((acc, t) => {
+          return /bottom/.test(position!)
+            ? (acc -= gap + (heights.get(t.toastId) || 0))
+            : (acc += gap + (heights.get(t.toastId) || 0));
+        }, 0);
+
+      elementRef.current.style.transition = 'transform 0.2s cubic-bezier(0.43, 0.14, 0.2, 1.05)';
+      elementRef.current.style.transform = `translate(${x}%, ${top}px)`;
+    }
+
+    return () => {
+      heights.delete(toastId);
+    }
+  }, [order]);
 
   /** @description promise toast */
   useEffect(() => {
@@ -93,8 +144,8 @@ export const Toast = forwardRef<HTMLOutputElement, ToasterProps>(function Toast(
   const renderIcon = icon
     ? icon
     : toastType === 'custom' || toastType === 'default'
-    ? null
-    : ToastTypeIcons[toastType];
+      ? null
+      : ToastTypeIcons[toastType];
 
   return (
     <output
@@ -118,8 +169,7 @@ export const Toast = forwardRef<HTMLOutputElement, ToasterProps>(function Toast(
           <div
             className={
               className ??
-              `${STYLE_NAMESPACE}__toast-content ${STYLE_NAMESPACE}__toast-${toastType} ${
-                !toast.isActive(toastId) ? animationClassName : ''
+              `${STYLE_NAMESPACE}__toast-content ${STYLE_NAMESPACE}__toast-${toastType} ${!toast.isActive(toastId) ? animationClassName : ''
               }`
             }
             style={toastStyle}
@@ -148,4 +198,4 @@ export const Toast = forwardRef<HTMLOutputElement, ToasterProps>(function Toast(
       </Condition>
     </output>
   );
-});
+}

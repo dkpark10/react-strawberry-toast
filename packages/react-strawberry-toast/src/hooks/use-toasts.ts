@@ -1,3 +1,5 @@
+"use client";
+
 import { useSyncExternalStore } from 'react';
 import { toastStore } from '../core/toast';
 import type { NonHeadlessToastState } from '../types';
