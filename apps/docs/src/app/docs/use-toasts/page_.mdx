@@ -1,0 +1,39 @@
+# useToasts
+
+useToasts hook that provides a toasty list.
+There are two hooks that are basically provided and the other is provided by Headless.
+
+<br />
+
+```javascript
+import { useToasts } from 'react-strawberry-toast';
+import { useToasts as useHeadlessToasts } from 'react-strawberry-toast/dist/headless';
+
+const toasts = useToasts();
+```
+
+<br />
+The difference between the two hooks is the attribute of the toast item.
+<br />
+
+### API reference
+
+The table below shows the item properties table of the list returned from the useToasts hook.
+Headless hooks don't include **position, containerId, pauseOnHover, toastType**.
+
+<br />
+
+| Option | Description | Type | Default |
+|:-----------|:-----------|:-----------|:-----------|
+| toastId | Toast's unique Id | String | |
+| data | Content of toast | ReactNode \| () => ReactNode | |
+| position | Position per toast | 'top-left' \| 'top-center' \| 'top-right' \| 'bottom-left' \| 'bottom-center' \| 'bottom-right' | top-center |
+| containerId | ID shown in the Toast Container Unique ID | String | |
+| pauseOnHover | The Option that sets the timer to stop or not when a hover event occurs | Boolean | true |
+| toastType | Toast Type | 'default' \| 'custom' \| 'success' \| 'error' \| 'loading' \| 'warn' | default |
+| createdAt | Time that toast was created | Date | |
+| timeOut | Time for toast to disappear | Number | 3000 |
+| removeTimeOut | Time for toast to remove In List | Number | 200 |
+| updated | Whether the content on toast has changed or not | Boolean \| null | null |
+| pausedAt | Time for toast to remove In List | Date \| null | null |
+| isVisible | Toast exposure status value | Boolean | true |

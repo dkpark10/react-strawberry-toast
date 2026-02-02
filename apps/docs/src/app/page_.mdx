@@ -1,0 +1,329 @@
+import React from 'react';
+import NextLink from 'next/link';
+import Github from '@/components/github';
+import { PrismLight } from 'react-syntax-highlighter';
+import { CodeTheme } from '@/constants/code-theme';
+import { HomeToastBtn } from '@/app/_components/toast-button';
+import Install from '@/app/_components/install';
+import { ToastTabs, ToastPositionTabs, ToastDirectionTabs, ToastGapTabs } from '@/app/_components/toast-tabs';
+import { Tabs, Container, Link, Heading, Text, Flex, Box, Button } from '@radix-ui/themes';
+import { ToastContainer } from '@react-strawberry-toast/src';
+
+<ToastContainer />
+
+<Box asChild pt="8" pb="4">
+  <header>
+    <Flex direction="column" gap="3" align="center">
+      <Heading align="center" size="9" weight="bold">
+        React <Text color="ruby">Strawberry</Text> Toast
+      </Heading>
+      <Text size="4" align="center" weight="bold">
+        A simple and customizable React toast library
+      </Text>
+    </Flex>
+  </header>
+</Box>
+
+<main>
+  <Flex id="btn-area" pt="7" pb="2" justify="center" align="center" gap="3">
+    <HomeToastBtn />
+
+    <Button
+      asChild
+      size="3"
+      color="gray"
+      style={{
+        width: '144px',
+        backgroundColor: 'white',
+        color: 'var(--gray-12)',
+        boxShadow: 'var(--shadow-4)',
+      }}
+    >
+      <NextLink href="https://github.com/dkpark10/react-strawberry-toast">
+        <Flex gap="1" align="center">
+          <Github />
+          <Text weight="bold">Github</Text>
+        </Flex>
+      </NextLink>
+    </Button>
+  </Flex>
+
+  <Flex justify="center" pb="7">
+    <Link asChild color="gray" size="3" underline="always">
+      <NextLink href="/docs">
+        documentation
+      </NextLink>
+    </Link>
+  </Flex> 
+
+  <Flex justify="center">
+    <Install />
+  </Flex> 
+
+  <Flex id="code-area" justify="center" py="7">
+    <Container style={{ fontSize: 'var(--font-size-2)' }}>
+      ## usage
+      ```javascript
+      import { ToastContainer, toast } from 'react-strawberry-toast';
+      import 'react-strawberry-toast/dist/style.css';
+        
+      function App() {
+        const click = () => {
+          toast('hello strawberry toast');
+        };
+            
+        return (
+          <>
+            <ToastContainer />
+            <button type='button' onClick={click}>click</button>
+          </>
+        );
+      }
+      ```
+    </Container>
+  </Flex>
+
+  <Flex justify="center" py="7">
+    <Container style={{ fontSize: 'var(--font-size-2)' }}>
+      ## Toast Type
+
+      <ToastTabs defaultValue="Success">
+       {/* trigger는  ToastTabs 내부에 */}
+        <Box>
+          <Tabs.Content value="Success">
+            ```javascript
+            toast.success('Success');
+            ```
+          </Tabs.Content>
+
+          <Tabs.Content value="Error">
+            ```javascript
+            toast.error('Error');
+            ```
+          </Tabs.Content>
+
+          <Tabs.Content value="Warn">
+            ```javascript
+            toast.warn('Warn');
+            ```
+          </Tabs.Content>
+
+          <Tabs.Content value="Info">
+            ```javascript
+            toast.info('Info');
+            ```
+          </Tabs.Content>
+
+          <Tabs.Content value="Promise">
+            ```javascript
+            toast.promise(promise, {
+              loading: 'loading',           
+              success: 'success',
+              error: 'error',
+            });                     
+            ```
+          </Tabs.Content>
+
+          <Tabs.Content value="DarkTheme">
+            ```javascript
+            toast('Dark Theme', {
+              style: {
+                color: 'white',
+                backgroundColor: 'black',    
+                border: '1px solid white'
+              },
+            });
+            ```
+          </Tabs.Content>
+
+          <Tabs.Content value="TailwindCSS">
+            ```javascript
+            toast(
+              ({ close }) => (
+                <div className="bg-white p-2 flex justify-between gap-2 rounded-sm">
+                  <span>tailwind css toast</span>
+                  <button 
+                    type="button" 
+                    className="bg-red-500 text-white w-6 h-6 rounded-sm" 
+                    onClick={close}
+                  >
+                    X
+                  </button>
+                </div>
+              )
+            );
+            ```
+          </Tabs.Content>
+
+          <Tabs.Content value="Emotion">
+            ```javascript
+            toast(
+              ({ close }) => (
+                <div>
+                  <span css={{ color: 'red' }}>💅 emotion toast </span>
+                  <button
+                    type="button"
+                    css={{ border: '1px solid white', width: 28, height: 28 }}
+                    onClick={close}
+                  >
+                    X
+                  </button>
+                </div>
+              )
+            );
+            ```
+          </Tabs.Content>
+        </Box>
+      </ToastTabs>
+    </Container>
+  </Flex>
+
+  <Flex justify="center" py="7">
+    <Container style={{ fontSize: 'var(--font-size-2)' }}>
+      ## Toast Position
+
+      <ToastPositionTabs defaultValue="top-center">
+       {/* trigger는  ToastTabs 내부에 */}
+        <Box>
+          <Tabs.Content value="top-center">
+            ```javascript
+            toast('top-center', { 
+              position: 'top-center' 
+            });
+            ```
+          </Tabs.Content>
+
+          <Tabs.Content value="top-left">
+            ```javascript
+            toast('top-left', { 
+              position: 'top-left' 
+            });
+            ```
+          </Tabs.Content>
+
+          <Tabs.Content value="top-right">
+            ```javascript
+            toast('top-right', { 
+              position: 'top-right'
+            });
+            ```
+          </Tabs.Content>
+
+          <Tabs.Content value="bottom-center">
+            ```javascript
+            toast('bottom-center', { 
+              position: 'bottom-center'
+            });
+            ```
+          </Tabs.Content>
+
+          <Tabs.Content value="bottom-left">
+            ```javascript
+            toast('bottom-left', { 
+              position: 'bottom-left'
+            });
+            ```
+          </Tabs.Content>
+
+          <Tabs.Content value="bottom-right">
+            ```javascript
+            toast('bottom-right', { 
+              position: 'bottom-right'
+            });
+            ```
+          </Tabs.Content>
+        </Box>
+      </ToastPositionTabs>
+    </Container>
+  </Flex>
+
+  <Flex justify="center" py="7">
+    <Container style={{ fontSize: 'var(--font-size-2)' }}>
+      ## Toast Direction
+
+      <ToastDirectionTabs defaultValue="forward">
+       {/* trigger는  ToastTabs 내부에 */}
+        <Box>
+          <Tabs.Content value="forward">
+            ```javascript
+            <ToastContainer />
+            ```
+          </Tabs.Content>
+
+          <Tabs.Content value="reverse">
+            ```javascript
+            <ToastContainer reverse />
+            ```
+          </Tabs.Content>
+        </Box>
+      </ToastDirectionTabs>
+    </Container>
+  </Flex>
+
+  <Flex justify="center" py="7">
+    <Container style={{ fontSize: 'var(--font-size-2)' }}>
+      ## Toast Gap
+
+      <ToastGapTabs defaultValue="9">
+       {/* trigger는  ToastTabs 내부에 */}
+        <Box>
+          <Tabs.Content value="1">
+            ```javascript
+            <ToastContainer gap={1} />
+            ```
+          </Tabs.Content>
+
+          <Tabs.Content value="3">
+            ```javascript
+            <ToastContainer gap={3} />
+            ```
+          </Tabs.Content>
+
+          <Tabs.Content value="5">
+            ```javascript
+            <ToastContainer gap={5} />
+            ```
+          </Tabs.Content>
+
+          <Tabs.Content value="7">
+            ```javascript
+            <ToastContainer gap={7} />
+            ```
+          </Tabs.Content>
+          
+          <Tabs.Content value="9">
+            ```javascript
+            <ToastContainer gap={9} />
+            ```
+          </Tabs.Content>
+
+          <Tabs.Content value="11">
+            ```javascript
+            <ToastContainer gap={11} />
+            ```
+          </Tabs.Content>
+
+          <Tabs.Content value="13">
+            ```javascript
+            <ToastContainer gap={13} />
+            ```
+          </Tabs.Content>
+
+          <Tabs.Content value="15">
+            ```javascript
+            <ToastContainer gap={15} />
+            ```
+          </Tabs.Content>
+
+          <Tabs.Content value="17">
+            ```javascript
+            <ToastContainer gap={17} />
+            ```
+          </Tabs.Content>
+
+        </Box>
+      </ToastGapTabs>
+    </Container>
+  </Flex>
+
+</main>

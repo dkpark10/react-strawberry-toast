@@ -1,6 +1,7 @@
 'use client';
 
 import { toast } from '@react-strawberry-toast/src';
+import { Code } from '@radix-ui/themes';
 import type { PropsWithChildren } from 'react';
 
 export default function ShellCode({ children }: PropsWithChildren) {
@@ -19,8 +20,13 @@ export default function ShellCode({ children }: PropsWithChildren) {
   };
 
   return (
-    <code onClick={click} className="px-4 py-3 bg-primary-black text-[#c3c6c1] rounded-md cursor-pointer">
+    <Code onClick={click} size="3" color="gray" variant="solid" highContrast 
+      style={{
+        cursor: 'var(--cursor-button)',
+        padding: 'var(--space-3)'
+      }}
+    >
       {children}
-    </code>
+    </Code>
   );
 }

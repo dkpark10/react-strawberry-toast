@@ -1,0 +1,27 @@
+import TargetPlayGround from '@/app/docs/positioning/_components/target';
+
+# Positioning
+
+### Toast target option
+
+Toasts can be displayed at a relative position to a specific element, similar to a tooltip, using the target option.
+
+<br />
+
+| option | description | type | required |
+|--------|-------------|------|----------|
+| element | Target element where toast will be located | HTMLElement | true |
+| offset | Offset away from element | [number, number] | false |
+
+<br />
+<TargetPlayGround />
+<br />
+
+```jsx
+toast('toast target', {
+  target: {
+    element: element.current,
+    offset: [30, 30],
+  },
+});
+```

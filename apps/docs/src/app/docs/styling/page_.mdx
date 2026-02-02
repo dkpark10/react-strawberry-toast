@@ -1,0 +1,85 @@
+import { ToastContainer } from '@react-strawberry-toast/src';
+import { Callout } from '@radix-ui/themes';
+import StylingButtonGroups from '@/app/docs/styling/_components/styling-button-groups';
+
+<ToastContainer gap={12} />
+
+# Styling
+
+### Various theme
+
+Various themed styles are available. Import and use them as shown below.
+
+<br />
+<StylingButtonGroups />
+<br />
+
+```jsx
+import 'react-strawberry-toast/dist/style2.css';
+import 'react-strawberry-toast/dist/style3.css';
+```
+
+<br />
+
+### CSS
+
+This is the CSS classes used for the react-strawberry-toast.
+Here is [**CSS file link**](https://github.com/dkpark10/react-strawberry-toast/blob/master/src/styles/style.scss)
+
+```css
+$react-strawberry-toast-namespace: 'react-strawberry-toast';
+$offset: 16px;
+$react-strawberry-toast-success: #1dca82;
+$react-strawberry-toast-error: #eb2639;
+$react-strawberry-toast-warn: #fcba03;
+
+.#{$react-strawberry-toast-namespace}__z9999 {}
+
+.#{$react-strawberry-toast-namespace}__toast-container {}
+
+.#{$react-strawberry-toast-namespace}__top-left {}
+
+.#{$react-strawberry-toast-namespace}__top-center {}
+
+.#{$react-strawberry-toast-namespace}__top-right {}
+
+.#{$react-strawberry-toast-namespace}__bottom-left {}
+
+.#{$react-strawberry-toast-namespace}__bottom-center {}
+
+.#{$react-strawberry-toast-namespace}__bottom-right {}
+
+.#{$react-strawberry-toast-namespace}__toast-content-container {}
+
+.#{$react-strawberry-toast-namespace}__toast-content {}
+
+.#{$react-strawberry-toast-namespace}__toast-icon {}
+
+.#{$react-strawberry-toast-namespace}__fade-in {}
+
+.#{$react-strawberry-toast-namespace}__fade-out {}
+
+.#{$react-strawberry-toast-namespace}__fade-in-reverse {}
+
+.#{$react-strawberry-toast-namespace}__fade-out-reverse {}
+
+.#{$react-strawberry-toast-namespace}__loading {}
+```
+
+<br />
+
+The image below shows the class assigned to the element when the toast is displayed.
+The text highlighted in red is a dynamic class determined by the position of the toast.
+
+![toast-structure](/toast-structure.png)
+
+<br />
+
+### Toast Container Styling
+
+<br />
+The **\<ToastContainer />** and **toast function** provides className and style as options.
+<br />
+```jsx
+<ToastContainer style={style} className="className" />
+```

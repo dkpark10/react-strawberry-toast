@@ -1,0 +1,60 @@
+# Customize
+
+### API reference
+
+| option | description | type |
+|--------|-------------|------|
+| toastId | Toast's unique Id | String |
+| close | closing function | Function |
+| immediatelyClose | immediately Closing function | Function |
+| icons | Toast A collection of icons in all states | ReactNode |
+| isVisible | Toast exposure status value | Boolean |
+
+<br />
+Basic toast can be customized in the form of a function. Basic style and animation are applied. If you don't want this, use **toast.custom**
+<br />
+
+```jsx
+toast(
+  ({ close }) => (
+    <div className="bg-white p-2 flex justify-between gap-2 rounded-sm">
+      <span>tailwind css toast</span>
+      <button type="button" className="bg-red-500 text-white w-6 h-6 rounded-sm" onClick={close}>
+        X
+      </button>
+    </div>
+  )
+);
+```
+
+<br />
+
+### close function
+
+Toast disappears **3000ms** after mounting and is completely removed from the toast list after **200ms**. This was intentionally removed after 200 ms for animation application when unmounted. If you want to remove it immediately, use **immediatelyClose** props function.
+
+<br />
+
+```jsx
+toast(({ immediatelyClose }) => <div onClick={immediatelyClose}>...</div>)
+```
+
+<br />
+
+### icons
+
+Icons for success, error, warn, and loading states are available as props.
+
+<br />
+
+```jsx
+toast(({ icons }) => <div>{icons.success}</div>)
+```
+
+<br />
+
+## toast.custom
+
+The main difference from a **toast()** is that when using a **toast.custom()**, all default animations and styles are removed, allowing for more flexible customization
+
+{/* <CustomizePlayGround /> */}

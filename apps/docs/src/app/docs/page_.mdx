@@ -1,0 +1,46 @@
+import ShellCode from '@/components/shell-code';
+import { ToastContainer } from '@react-strawberry-toast/src';
+
+<ToastContainer containerId="code" />
+
+# Getting Started
+
+### npm
+<br />
+<ShellCode>npm i react-strawberry-toast</ShellCode>
+
+<br />
+<br />
+
+### yarn
+<br />
+<ShellCode>yarn add react-strawberry-toast</ShellCode>
+
+<br />
+<br />
+
+### pnpm
+<br />
+<ShellCode>pnpm i react-strawberry-toast</ShellCode>
+
+<br />
+<br />
+
+### usage
+```javascript
+import { ToastContainer, toast } from 'react-strawberry-toast';
+import 'react-strawberry-toast/dist/style.css';
+  
+function App() {
+  const click = () => {
+    toast('hello strawberry toast');
+  };
+      
+  return (
+    <>
+      <ToastContainer />
+      <button type='button' onClick={click}>click</button>
+    </>
+  );
+}
+```

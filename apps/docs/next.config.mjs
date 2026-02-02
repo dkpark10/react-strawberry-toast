@@ -1,7 +1,7 @@
-const createMDX = require('@next/mdx');
-const remarkFrontmatter = require("remark-frontmatter");
-const remarkMdxFrontmatter = require("remark-mdx-frontmatter");
-const remarkGfm = require("remark-gfm");
+import createMDX from '@next/mdx';
+import remarkFrontmatter from 'remark-frontmatter';
+import remarkMdxFrontmatter from 'remark-mdx-frontmatter';
+import remarkGfm from 'remark-gfm';
 
 const withMdx = createMDX({
   extension: /\.(md|mdx)$/,
@@ -44,4 +44,4 @@ const nextConfig = {
   },
 };
 
-module.exports = withMdx(nextConfig);
+export default withMdx(nextConfig);

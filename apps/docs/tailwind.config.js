@@ -1,4 +1,4 @@
-import { primaryBlack, primaryGray, primaryWhite, strawBerry } from './src/constants/style-variable';
+import { primaryBlack, primaryWhite, strawBerry } from './src/constants/style-variable';
 
 /** @type {import('tailwindcss').Config} */
 module.exports = {
@@ -39,7 +39,6 @@ module.exports = {
       colors: {
         'primary-black': primaryBlack,
         'primary-white': primaryWhite,
-        'primary-gray': primaryGray,
         'straw-berry': strawBerry,
       },
     },

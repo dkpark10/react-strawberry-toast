@@ -1,7 +1,4 @@
 import React from 'react';
-import { Docs } from '@/components/docs-title';
-import { Table } from '@/components/table';
-import { toastContainerApi } from '@/constants/table-data';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
@@ -16,14 +13,7 @@ export const metadata: Metadata = {
   },
 };
 
-export default function DocApiToastContainer() {
-  return (
-    <React.Fragment>
-      <Docs.MainTitle>{'<ToastContainer>'}</Docs.MainTitle>
-
-      <Docs.SubTitle>Props</Docs.SubTitle>
-      <Table headers={toastContainerApi.header} body={toastContainerApi.body} />
-      <div className="lg:pb-60 xl:pb-80" />
-    </React.Fragment>
-  );
+export default async function DocApiToastContainer() {
+  const { default: Page } = await import('./page_.mdx');
+  return <Page />;
 }

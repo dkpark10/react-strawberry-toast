@@ -1,40 +1,41 @@
 "use client";
 
 import { ToastContainer } from '@react-strawberry-toast/src';
-import React from 'react';
-import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
+import React, { useState } from 'react';
+import { Tabs, Text } from '@radix-ui/themes';
 import ShellCode from '@/components/shell-code';
 
 const packagesName = ['npm', 'yarn', 'pnpm'] as const;
 
 export default function Install() {
-  return (
-    <div id="tab-area" className="flex justify-center">
-      <Tabs>
-        <TabList className="flex justify-center space-x-6 py-3">
-          {packagesName.map((packageName) => (
-            <Tab
-              key={packageName}
-              className="text-lg cursor-pointer font-bold"
-              selectedClassName="text-lg text-straw-berry cursor-pointer font-bold "
-            >
-              {packageName}
-            </Tab>
-          ))}
-        </TabList>
+  const [activeTab, setActiveTab] = useState<typeof packagesName[number]>('npm');
 
-        <TabPanel>
+  return (
+    <>
+      <Tabs.Root defaultValue="npm" onValueChange={(value) => setActiveTab(value as typeof packagesName[number])}>
+        <Tabs.List justify="center" size="2" mb="2">
+          {packagesName.map((packageName) => (
+            <Tabs.Trigger
+              value={packageName}
+              key={packageName}
+            >
+              <Text size="4" align="center" weight="bold" color={activeTab === packageName ? "ruby" : "gray"}>{packageName}</Text>
+            </Tabs.Trigger>
+          ))}
+        </Tabs.List>
+
+        <Tabs.Content value="npm">
           <ShellCode>npm i react-strawberry-toast</ShellCode>
-        </TabPanel>
-        <TabPanel>
+        </Tabs.Content>
+        <Tabs.Content value="yarn">
           <ShellCode>yarn add react-strawberry-toast</ShellCode>
-        </TabPanel>
-        <TabPanel>
+        </Tabs.Content>
+        <Tabs.Content value="pnpm">
           <ShellCode>pnpm i react-strawberry-toast</ShellCode>
-        </TabPanel>
-      </Tabs>
+        </Tabs.Content>
+      </Tabs.Root>
 
       <ToastContainer containerId="code" />
-    </div>
+    </>
   );
 }

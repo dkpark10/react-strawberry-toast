@@ -1,0 +1,32 @@
+# Multi Container
+
+When assigning a container ID, only the toast with the same toast ID set in the toast function options is displayed.
+
+<br />
+
+### usage
+
+```javascript
+import { ToastContainer, toast } from 'react-strawberry-toast';
+import 'react-strawberry-toast/dist/style.css';
+
+function App() {
+  const showClick = () => {
+    toast('show toast', {
+      containerId: '1',
+    });
+  }
+
+  const notShowClick = () => {
+    toast('not show toast');
+  }
+
+  return (
+    <>
+      <ToastContainer containerId="1" />
+      <button type="button" onClick={showClick}>show click</button>
+      <button type="button" onClick={notShowClick}>not show click</button>
+    </>
+  )
+}
+```

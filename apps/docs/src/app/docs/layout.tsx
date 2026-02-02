@@ -1,86 +1,109 @@
-import Link from 'next/link';
+import NextLink from 'next/link';
 import Github from '@/components/github';
-import { PrismLight } from 'react-syntax-highlighter';
-import jsx from 'react-syntax-highlighter/dist/cjs/languages/prism/jsx';
 import { type PropsWithChildren } from 'react';
-
-PrismLight.registerLanguage('jsx', jsx);
+import { Box, Flex, Separator, Link, Text, Container } from '@radix-ui/themes';
 
 function DocsLinkItem({ href, children }: { href: string } & PropsWithChildren) {
   return (
-    <li className="py-1 text-base font-medium hover:text-straw-berry opacity-75">
-      <Link href={href}>{children}</Link>
-    </li>
+    <Link asChild>
+      <NextLink href={href}>
+        <Text size="2" color="gray">{children}</Text>
+      </NextLink>
+    </Link>
   );
 }
 
 function Menus() {
   return (
-    <nav className="w-56">
-      <ul className="font-semibold text-primary-black text-lg">
-        <li>
-          <h3>
-            <Link href="/docs">Get Started</Link>
-          </h3>
-        </li>
-        <li>
-          <h3 className="pt-3">Guides</h3>
-          <ul className="ml-2">
-            <DocsLinkItem href="/docs/show-toast">Show Toast</DocsLinkItem>
-            <DocsLinkItem href="/docs/customize">Customize</DocsLinkItem>
-            <DocsLinkItem href="/docs/styling">Styling</DocsLinkItem>
-            <DocsLinkItem href="/docs/positioning">Positioning</DocsLinkItem>
-            <DocsLinkItem href="/docs/multi-container">Multi Container</DocsLinkItem>
-            <DocsLinkItem href="/docs/promise">Promise</DocsLinkItem>
-            <DocsLinkItem href="/docs/headless-hook">Headless Hook</DocsLinkItem>
-          </ul>
-        </li>
-        <li>
-          <h3 className="pt-3">API</h3>
-          <ul className="ml-2">
-            <DocsLinkItem href="/docs/toast-container">toastContainer</DocsLinkItem>
-            <DocsLinkItem href="/docs/toast">toast</DocsLinkItem>
-            <DocsLinkItem href="/docs/use-toasts">useToasts</DocsLinkItem>
-          </ul>
-        </li>
-      </ul>
-    </nav>
+    <Box pl="4">
+      <Flex direction="column" gap="2" asChild>
+        <ul>
+          <li>
+            <Link asChild>
+              <NextLink href="/docs">
+                <Text color="gray" highContrast weight="bold">Getting Started</Text>
+              </NextLink>
+            </Link>
+          </li>
+          <li>
+            <Text color="gray" highContrast weight="bold">Guides</Text>
+            <Flex direction="column" gap="1" asChild>
+              <ul className="ml-2">
+                <DocsLinkItem href="/docs/show-toast">Show Toast</DocsLinkItem>
+                <DocsLinkItem href="/docs/customize">Customize</DocsLinkItem>
+                <DocsLinkItem href="/docs/styling">Styling</DocsLinkItem>
+                <DocsLinkItem href="/docs/positioning">Positioning</DocsLinkItem>
+                <DocsLinkItem href="/docs/multi-container">Multi Container</DocsLinkItem>
+                <DocsLinkItem href="/docs/headless-hook">Headless Hook</DocsLinkItem>
+              </ul>
+            </Flex>
+          </li>
+          <li>
+            <Text color="gray" highContrast weight="bold">API</Text>
+            <Flex direction="column" gap="1" asChild>
+              <ul className="ml-2">
+                <DocsLinkItem href="/docs/toast-container">toastContainer</DocsLinkItem>
+                <DocsLinkItem href="/docs/toast">toast</DocsLinkItem>
+                <DocsLinkItem href="/docs/use-toasts">useToasts</DocsLinkItem>
+              </ul>
+            </Flex>
+          </li>
+        </ul>
+      </Flex>
+    </Box>
   );
 }
 
 export default function DocsLayout({ children }: PropsWithChildren) {
   return (
     <>
-      <header className="w-full h-14 fixed bg-primary-white z-10 sm:pr-5">
-        <div className="py-3 pr-5 flex justify-between ">
-          <div className="flex">
-            <Link href="/">
-              <b className="font-bold text-xl">
-                React <span className="text-straw-berry">Strawberry</span> Toast
-              </b>
+      <Box
+        asChild
+        position="fixed"
+        width="100%"
+        height="56px"
+        style={{ backgroundColor: 'var(--primary-white)', zIndex: 10 }}
+      >
+        <header>
+          <Flex justify="between" py="4" px="4">
+            <Link asChild>
+              <NextLink href="/">
+                <Text weight="bold" color="gray" highContrast>React <Text color="ruby">Strawberry</Text> Toast</Text>
+              </NextLink>
             </Link>
-          </div>
-          <Link href="https://github.com/dkpark10/react-strawberry-toast">
-            <Github />
-          </Link>
-        </div>
-        <div className="-mx-5 h-[2px] bg-[#ececec]" />
-      </header>
-      
 
-      <div className="pt-16 sm:hidden">
+            <Link href="https://github.com/dkpark10/react-strawberry-toast">
+              <Github />
+            </Link>
+          </Flex>
+
+          <Separator orientation="horizontal" size="4" />
+        </header>
+      </Box>
+
+      {/* mobile */}
+      <Box id="nav-mo" pt="72px" display={{ sm: 'none' }}>
         <Menus />
-      </div>
+      </Box>
 
-      <div className="pt-16">
-        <aside id="layout-container" className="flex max-sm:hidden fixed">
-         <Menus />
-        </aside>
+      {/* pc */}
+      <Box id="nav-pc" pt="72px">
+        <Box asChild position="fixed" display={{ initial: 'none', sm: 'block' }}>
+          <aside id="layout-container">
+            <Menus />
+          </aside>
+        </Box>
 
-        <main id="docs-main" className="sm:w-7/12 sm:ml-56">
-          {children}
-        </main>
-      </div>
+        <Box
+          asChild
+          pl={{ initial: '16px', sm: '224px', md: '224px' }}
+          pr="16px"
+          width={{ initial: '100%', sm: '100%', md: '960px' }}
+          mb="4"
+        >
+          <main id="docs-main">{children}</main>
+        </Box>
+      </Box>
     </>
   );
 }

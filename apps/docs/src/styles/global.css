@@ -2,10 +2,106 @@
 @tailwind components;
 @tailwind utilities;
 
-:root, ::before, ::after {
+:root,
+::before,
+::after {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  background-color: #fffcfd;
-  color: #020715;
 }
+
+:root {
+  --strawberry-h: 348;
+  --strawberry-s: 75%;
+
+  --strawberry-1: hsl(var(--strawberry-h), 60%, 98%);
+  --strawberry-2: hsl(var(--strawberry-h), 65%, 95%);
+  --strawberry-3: hsl(var(--strawberry-h), 70%, 90%);
+  --strawberry-4: hsl(var(--strawberry-h), 75%, 85%);
+  --strawberry-5: hsl(var(--strawberry-h), 75%, 78%);
+  --strawberry-6: hsl(var(--strawberry-h), 75%, 70%);
+  --strawberry-7: hsl(var(--strawberry-h), 75%, 62%);
+  --strawberry-8: hsl(var(--strawberry-h), 75%, 55%);
+  --strawberry-9: hsl(var(--strawberry-h), 75%, 48%);
+  --strawberry-10: hsl(var(--strawberry-h), 75%, 42%);
+  --strawberry-11: hsl(var(--strawberry-h), 75%, 30%);
+  --strawberry-12: hsl(var(--strawberry-h), 75%, 18%);
+}
+
+@supports (color: color(display-p3 1 1 1)) {
+  :root {
+    --strawberry-1: color(display-p3 1 0.988 0.992);
+    --strawberry-2: color(display-p3 1 0.969 0.973);
+    --strawberry-3: color(display-p3 1 0.898 0.918);
+    --strawberry-4: color(display-p3 1 0.804 0.839);
+    --strawberry-5: color(display-p3 1 0.702 0.753);
+    --strawberry-6: color(display-p3 1 0.580 0.651);
+    --strawberry-7: color(display-p3 0.957 0.447 0.541);
+    --strawberry-8: color(display-p3 0.910 0.325 0.447);
+    --strawberry-9: color(display-p3 0.890 0.267 0.380);
+    --strawberry-10: color(display-p3 0.839 0.235 0.345);
+    --strawberry-11: color(display-p3 0.757 0.200 0.314);
+    --strawberry-12: color(display-p3 0.302 0.051 0.114);
+  }
+}
+
+/* 
+  1–2	background
+  3–5	subtle bg
+  6–8	borders / soft
+  9	main brand
+  10–11	hover / active
+  12	text contrast 
+*/
+.radix-themes {
+  --cursor-button: pointer;
+  --color-background: var(--strawberry-1);
+}
+
+[data-accent-color='ruby'] {
+  --ruby-1: var(--strawberry-1);
+  --ruby-2: var(--strawberry-2);
+  --ruby-3: var(--strawberry-3);
+  --ruby-4: var(--strawberry-4);
+  --ruby-5: var(--strawberry-5);
+  --ruby-6: var(--strawberry-6);
+  --ruby-7: var(--strawberry-7);
+  --ruby-8: var(--strawberry-8);
+  --ruby-9: var(--strawberry-9);
+  --ruby-10: var(--strawberry-10);
+  --ruby-11: var(--strawberry-11);
+  --ruby-12: var(--strawberry-12);
+  --ruby-a1: var(--strawberry-1);
+  --ruby-a2: var(--strawberry-2);
+  --ruby-a3: var(--strawberry-3);
+  --ruby-a4: var(--strawberry-4);
+  --ruby-a5: var(--strawberry-5);
+  --ruby-a6: var(--strawberry-6);
+  --ruby-a7: var(--strawberry-7);
+  --ruby-a8: var(--strawberry-8);
+  --ruby-a9: var(--strawberry-9);
+  --ruby-a10: var(--strawberry-10);
+  --ruby-a11: var(--strawberry-11);
+  --ruby-a12: var(--strawberry-12);
+  --ruby-contrast: #fff;
+  --ruby-surface: rgba(255, 247, 248, 0.8);
+  --ruby-indicator: var(--strawberry-9);
+  --ruby-track: var(--strawberry-9);
+}
+
+/* Tabs 언더바 제거 및 선택된 탭 텍스트 색상 변경 */
+.rt-TabsList::before {
+  display: none;
+}
+
+.rt-TabsTrigger::before {
+  display: none;
+}
+
+/* .rt-TabsTrigger[data-state="active"] {
+  color: var(--strawberry-9);
+}
+
+.rt-TabsTrigger[data-state="inactive"] {
+  color: var(--gray-11);
+} */

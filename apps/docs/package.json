@@ -7,7 +7,7 @@
     "dev": "next dev",
     "build": "next build",
     "build:local": "NEXT_BUILD=LOCAL next build",
-    "start": "npx serve@latest out -p 8080",
+    "start": "pnpm dlx serve out -p 8080",
     "predeploy": "next build",
     "deploy": "pnpm run predeploy && touch ./out/.nojekyll && gh-pages -d out"
   },
@@ -16,13 +16,13 @@
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.0",
     "@next/font": "13.1.6",
+    "@radix-ui/themes": "^3.3.0",
     "clsx": "^2.1.1",
     "dompurify": "^3.2.3",
     "loadjs": "^4.3.0",
     "next": "^14",
     "react": "^18",
     "react-dom": "18",
-    "react-strawberry-toast": "workspace:*",
     "react-syntax-highlighter": "^15.6.1",
     "react-tabs": "^6.1.0"
   },

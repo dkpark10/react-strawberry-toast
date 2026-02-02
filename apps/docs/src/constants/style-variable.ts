@@ -1,4 +1,3 @@
-export const primaryBlack = '#020715';
-export const primaryWhite = '#fffcfd';
-export const primaryGray = '#c3c6c1';
+export const primaryBlack = '#202020';
+export const primaryWhite = '#FCFCFC';
 export const strawBerry = '#e34461';

@@ -2,13 +2,13 @@
 
 import React, { useRef } from 'react';
 import { ToastContainer, toast } from '@react-strawberry-toast/src';
+import { Button, Flex, Box } from "@radix-ui/themes";
 
 export default function TargetPlayGround() {
   const elementRef = useRef<HTMLButtonElement>(null);
 
-  const click = () => {
+  const onClick = () => {
     toast.success('This toast is positioned 30px away from the target in both directions.', {
-      timeOut: Infinity,
       containerId: 'target',
       target: {
         element: elementRef.current!,
@@ -20,16 +20,23 @@ export default function TargetPlayGround() {
   return (
     <React.Fragment>
       <ToastContainer containerId='target' />
-      <div className="w-full h-40 flex items-center justify-center">
-        <button
-          onClick={click}
-          ref={elementRef}
-          type="button"
-          className="bg-straw-berry w-40 h-10 text-white flex items-center justify-center rounded-md"
-        >
-          target
-        </button>
-      </div>
+      <Box p="4" style={{ border: '1px solid var(--gray-6)' }}>
+        <Flex align="center" justify="center" gap="4" height="160px">
+          <Button
+            ref={elementRef}
+            onClick={onClick}
+            radius="large"
+            variant="soft"
+            color="ruby"
+            style={{
+              backgroundColor: 'white',
+              boxShadow: 'var(--shadow-3)',
+            }}
+          >
+            target
+          </Button>
+        </Flex>
+      </Box>
     </React.Fragment>
   );
 }

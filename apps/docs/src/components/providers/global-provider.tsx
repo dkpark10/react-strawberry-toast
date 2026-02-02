@@ -2,11 +2,17 @@
 'use client';
 
 import { type PropsWithChildren } from 'react';
-import { PrismLight } from 'react-syntax-highlighter';
-import jsx from 'react-syntax-highlighter/dist/cjs/languages/prism/jsx';
-
-PrismLight.registerLanguage('jsx', jsx);
+import { Theme } from '@radix-ui/themes';
 
 export default function GlobalProvider({ children }: PropsWithChildren) {
-  return <div className="sm:px-5 max-sm:px-2">{children}</div>;
+  return (
+    <Theme 
+      accentColor='ruby' 
+      grayColor="gray"
+      appearance='light' 
+      scaling='100%'
+    >
+      {children}
+    </Theme>
+  );
 }
