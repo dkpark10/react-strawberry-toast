@@ -1,6 +1,6 @@
 @import "base";
 
-.#{$react-strawberry-toast-namespace}__toast-content {
+.#{$toast-namespace}__toast-content {
   pointer-events: auto;
   box-sizing: border-box;
   background-color: white;
@@ -29,35 +29,35 @@
 }
 
 
-.#{$react-strawberry-toast-namespace}__toast-success {
+.#{$toast-namespace}__toast-success {
   &::before {
     @include left-bar;
-    background-color: $react-strawberry-toast-success;
+    background-color: var(--toast-color-success);
   }
 }
 
-.#{$react-strawberry-toast-namespace}__toast-error {
+.#{$toast-namespace}__toast-error {
   &::before {
     @include left-bar;
-    background-color: $react-strawberry-toast-error;
+    background-color: var(--toast-color-error);
   }
 }
 
-.#{$react-strawberry-toast-namespace}__toast-warn {
+.#{$toast-namespace}__toast-warn {
   &::before {
     @include left-bar;
-    background-color: $react-strawberry-toast-warn;
+    background-color: var(--toast-color-warn);
   }
 }
 
-.#{$react-strawberry-toast-namespace}__toast-info {
+.#{$toast-namespace}__toast-info {
   &::before {
     @include left-bar;
-    background-color: $react-strawberry-toast-info;
+    background-color: var(--toast-color-info);
   }
 }
 
-.#{$react-strawberry-toast-namespace}__close-button {
+.#{$toast-namespace}__close-button {
   @include close-button;
   position: absolute;
   right: 0;

@@ -1,19 +1,9 @@
 'use client';
 
-import React from 'react';
-import { Toast, type OtherProps } from './toast';
+import { Toast } from './toast';
 import { useToasts } from '../hooks/use-toasts';
-import type { Position, NonHeadlessToastState as ToastState } from '../types';
+import type { ToasterProps, Position, ToastContainerProps, NonHeadlessToastState as ToastState } from '../types';
 import { STYLE_NAMESPACE } from '../constants';
-interface ToastContainerProps {
-  className?: string;
-  style?: React.CSSProperties;
-  position?: Position;
-  containerId?: string;
-  reverse?: boolean;
-  gap?: number;
-  pauseOnActivate?: boolean;
-}
 
 export function ToastContainer({
   className,
@@ -23,6 +13,7 @@ export function ToastContainer({
   gap = 9,
   reverse = false,
   pauseOnActivate = true,
+  stack = false,
 }: ToastContainerProps) {
   const toastList = useToasts();
 
@@ -46,8 +37,8 @@ export function ToastContainer({
         .filter(absoluteToastsFilter)
         .filter(containerIdFilter)
         .map((toast, order, self) => {
-          const mergedProps: OtherProps & ToastState =
-            Object.assign(toast, { gap, order, samePositionLists: self, pauseOnActivate });
+          const mergedProps: ToasterProps['toastProps'] =
+            Object.assign(toast, { gap, order, toastsBySamePosition: self, pauseOnActivate, stack });
 
           return (
             <Toast
@@ -58,20 +49,19 @@ export function ToastContainer({
         })}
       {Object.entries(toastsByPosition).map(([position, toastByPosition]) => {
         const filteredToasts = toastByPosition.filter(containerIdFilter);
-
-        const toasts = reverse ? filteredToasts.reverse() : filteredToasts;
+        const toasts = reverse && !stack ? filteredToasts.reverse() : filteredToasts;
+        const cn = `${STYLE_NAMESPACE}__z9999 ${className ?? `${STYLE_NAMESPACE}__toast-container ${STYLE_NAMESPACE}__${position}`}`;
 
         return (
           <div
             key={position}
             data-testid={position}
-            className={`${STYLE_NAMESPACE}__z9999 ${className ?? `${STYLE_NAMESPACE}__toast-container ${STYLE_NAMESPACE}__${position}`
-              }`}
+            className={cn}
             style={style}
           >
             {toasts.map((toast, order, self) => {
-              const mergedProps: OtherProps & ToastState =
-                Object.assign(toast, { gap, order, samePositionLists: self, pauseOnActivate });
+              const mergedProps: ToasterProps['toastProps'] =
+                Object.assign(toast, { gap, order, toastsBySamePosition: self, pauseOnActivate, stack });
 
               return (
                 <Toast

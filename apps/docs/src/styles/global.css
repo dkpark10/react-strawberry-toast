@@ -11,21 +11,21 @@
 }
 
 :root {
-  --strawberry-h: 348;
-  --strawberry-s: 75%;
+  --strawberry-hue: 348;
+  --strawberry-saturation: 75%;
 
-  --strawberry-1: hsl(var(--strawberry-h), 60%, 98%);
-  --strawberry-2: hsl(var(--strawberry-h), 65%, 95%);
-  --strawberry-3: hsl(var(--strawberry-h), 70%, 90%);
-  --strawberry-4: hsl(var(--strawberry-h), 75%, 85%);
-  --strawberry-5: hsl(var(--strawberry-h), 75%, 78%);
-  --strawberry-6: hsl(var(--strawberry-h), 75%, 70%);
-  --strawberry-7: hsl(var(--strawberry-h), 75%, 62%);
-  --strawberry-8: hsl(var(--strawberry-h), 75%, 55%);
-  --strawberry-9: hsl(var(--strawberry-h), 75%, 48%);
-  --strawberry-10: hsl(var(--strawberry-h), 75%, 42%);
-  --strawberry-11: hsl(var(--strawberry-h), 75%, 30%);
-  --strawberry-12: hsl(var(--strawberry-h), 75%, 18%);
+  --strawberry-1: hsl(var(--strawberry-hue), 60%, 98%);
+  --strawberry-2: hsl(var(--strawberry-hue), 65%, 95%);
+  --strawberry-3: hsl(var(--strawberry-hue), 70%, 90%);
+  --strawberry-4: hsl(var(--strawberry-hue), 75%, 85%);
+  --strawberry-5: hsl(var(--strawberry-hue), 75%, 78%);
+  --strawberry-6: hsl(var(--strawberry-hue), 75%, 70%);
+  --strawberry-7: hsl(var(--strawberry-hue), 75%, 62%);
+  --strawberry-8: hsl(var(--strawberry-hue), 75%, 55%);
+  --strawberry-9: hsl(var(--strawberry-hue), 75%, 48%);
+  --strawberry-10: hsl(var(--strawberry-hue), 75%, 42%);
+  --strawberry-11: hsl(var(--strawberry-hue), 75%, 30%);
+  --strawberry-12: hsl(var(--strawberry-hue), 75%, 18%);
 }
 
 @supports (color: color(display-p3 1 1 1)) {

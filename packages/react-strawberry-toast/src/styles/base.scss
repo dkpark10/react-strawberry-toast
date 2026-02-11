@@ -1,9 +1,14 @@
-$react-strawberry-toast-namespace: 'react-strawberry-toast';
-$offset: 16px;
-$react-strawberry-toast-success: #1dca82;
-$react-strawberry-toast-error: #eb2639;
-$react-strawberry-toast-warn: #fcba03;
-$react-strawberry-toast-info: #5365e7;
+// SCSS 변수 (클래스명, 연산용)
+$toast-namespace: 'react-strawberry-toast';
+$toast-offset: 16px;
+
+// CSS 커스텀 프로퍼티
+:root {
+  --toast-color-success: #1dca82;
+  --toast-color-error: #eb2639;
+  --toast-color-warn: #fcba03;
+  --toast-color-info: #5365e7;
+}
 
 @keyframes l3 {
   to {
@@ -59,11 +64,11 @@ $react-strawberry-toast-info: #5365e7;
   }
 }
 
-.#{$react-strawberry-toast-namespace}__z9999 {
+.#{$toast-namespace}__z9999 {
   z-index: 9999;
 }
 
-.#{$react-strawberry-toast-namespace}__toast-container {
+.#{$toast-namespace}__toast-container {
   width: 100%;
   position: fixed;
   z-index: 9999;
@@ -72,44 +77,44 @@ $react-strawberry-toast-info: #5365e7;
   flex-direction: column;
 }
 
-.#{$react-strawberry-toast-namespace}__top-left {
-  top: $offset;
-  left: calc(-50% + $offset);
+.#{$toast-namespace}__top-left {
+  top: $toast-offset;
+  left: calc(-50% + $toast-offset);
 }
 
-.#{$react-strawberry-toast-namespace}__top-center {
-  top: $offset;
+.#{$toast-namespace}__top-center {
+  top: $toast-offset;
   left: 50%;
   transform: translateX(-50%);
 }
 
-.#{$react-strawberry-toast-namespace}__top-right {
-  top: $offset;
-  right: calc(-50% + $offset);
+.#{$toast-namespace}__top-right {
+  top: $toast-offset;
+  right: calc(-50% + $toast-offset);
 }
 
-.#{$react-strawberry-toast-namespace}__bottom-left {
-  bottom: $offset - 8;
-  left: calc(-50% + $offset);
+.#{$toast-namespace}__bottom-left {
+  bottom: $toast-offset - 8;
+  left: calc(-50% + $toast-offset);
 }
 
-.#{$react-strawberry-toast-namespace}__bottom-center {
-  bottom: $offset - 8;
+.#{$toast-namespace}__bottom-center {
+  bottom: $toast-offset - 8;
   left: 50%;
   transform: translateX(-50%);
 }
 
-.#{$react-strawberry-toast-namespace}__bottom-right {
-  bottom: $offset - 8;
-  right: calc(-50% + $offset);
+.#{$toast-namespace}__bottom-right {
+  bottom: $toast-offset - 8;
+  right: calc(-50% + $toast-offset);
 }
 
-.#{$react-strawberry-toast-namespace}__toast-content-container {
+.#{$toast-namespace}__toast-content-container {
   position: absolute;
   pointer-events: none;
 }
 
-.#{$react-strawberry-toast-namespace}__toast-icon {
+.#{$toast-namespace}__toast-icon {
   width: 22px;
   height: 22px;
   display: flex;
@@ -117,23 +122,23 @@ $react-strawberry-toast-info: #5365e7;
   justify-content: center;
 }
 
-.#{$react-strawberry-toast-namespace}__fade-in {
+.#{$toast-namespace}__fade-in {
   animation: react-strawberry-toast_fade-in 0.3s cubic-bezier(0.43, 0.14, 0.2, 1.05);
 }
 
-.#{$react-strawberry-toast-namespace}__fade-out {
+.#{$toast-namespace}__fade-out {
   animation: react-strawberry-toast_fade-out 0.3s cubic-bezier(0.43, 0.14, 0.2, 1.05);
 }
 
-.#{$react-strawberry-toast-namespace}__fade-in-reverse {
+.#{$toast-namespace}__fade-in-reverse {
   animation: react-strawberry-toast_fade-in-reverse 0.3s cubic-bezier(0.43, 0.14, 0.2, 1.05);
 }
 
-.#{$react-strawberry-toast-namespace}__fade-out-reverse {
+.#{$toast-namespace}__fade-out-reverse {
   animation: react-strawberry-toast_fade-out-reverse 0.3s cubic-bezier(0.43, 0.14, 0.2, 1.05);
 }
 
-.#{$react-strawberry-toast-namespace}__loading {
+.#{$toast-namespace}__loading {
   width: 18px;
   padding: 3.5px;
   aspect-ratio: 1;

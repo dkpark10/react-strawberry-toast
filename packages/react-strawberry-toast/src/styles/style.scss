@@ -1,6 +1,6 @@
 @import "base";
 
-.#{$react-strawberry-toast-namespace}__toast-content {
+.#{$toast-namespace}__toast-content {
   pointer-events: auto;
   box-sizing: border-box;
   background-color: white;
@@ -14,6 +14,6 @@
   max-width: 368px;
 }
 
-.#{$react-strawberry-toast-namespace}__close-button {
+.#{$toast-namespace}__close-button {
   @include close-button;
 }

@@ -54,3 +54,23 @@ export type NonHeadlessToastState = Required<Options & { toastType: ToastType }>
   Omit<ToastState, 'data'> & {
     data: ToastDataWithCallback | ReactNode;
   };
+
+export interface ToastContainerProps {
+  className?: string;
+  style?: React.CSSProperties;
+  position?: Position;
+  containerId?: string;
+  reverse?: boolean;
+  gap?: number;
+  pauseOnActivate?: boolean;
+  stack?: boolean;
+}
+
+export type AddionalProps = {
+  order: number;
+  toastsBySamePosition: Array<NonHeadlessToastState>;
+} & Required<Pick<ToastContainerProps, 'gap' | 'pauseOnActivate' | 'stack'>>
+
+export interface ToasterProps {
+  toastProps: NonHeadlessToastState & AddionalProps;
+}

@@ -5,20 +5,9 @@ import { toast } from '../core/toast';
 import { STYLE_NAMESPACE } from '../constants';
 import { useEventListener } from '../hooks/use-event-listener';
 import { ToastTypeIcons, CloseSvg } from './toast-icons';
-import type { NonHeadlessToastState as ToastState } from '../types';
+import type { ToasterProps, NonHeadlessToastState as ToastState } from '../types';
 
-export interface OtherProps {
-  gap: number;
-  order: number;
-  samePositionLists: Array<ToastState>;
-  pauseOnActivate: boolean;
-}
-
-interface ToasterProps {
-  toastProps: ToastState & OtherProps;
-}
-
-const heights = new Map<ToastState['toastId'], number>;
+const heights = new Map<ToastState['toastId'], number>();
 
 export function Toast({ toastProps }: ToasterProps) {
   const elementRef = useRef<HTMLOutputElement>(null);
@@ -38,10 +27,11 @@ export function Toast({ toastProps }: ToasterProps) {
     data,
     pauseOnHover,
     closeButton,
-    samePositionLists,
+    toastsBySamePosition,
     gap,
     order,
     target,
+    stack,
   } = toastProps;
 
   const animationClassName = getAnimation({
@@ -107,32 +97,78 @@ export function Toast({ toastProps }: ToasterProps) {
     resizeHandler();
   }, [toastId]);
 
-  /** @description calculate the position when the order of toasts changes */
   useEffect(() => {
-    if (elementRef.current && !target) {
-      const height = heights.get(toastId) || elementRef.current.getBoundingClientRect().height;
-      heights.set(toastId, height);
-
-      const x = /left/.test(position!) ? 50 : /center/.test(position!) ? 0 : -50;
-
-      const limitIdx = /bottom/.test(position!) ? 0 : 1;
-
-      const top = samePositionLists
-        .filter((_, idx) => idx <= order - limitIdx)
-        .reduce((acc, t) => {
-          return /bottom/.test(position!)
-            ? (acc -= gap + (heights.get(t.toastId) || 0))
-            : (acc += gap + (heights.get(t.toastId) || 0));
-        }, 0);
-
-      elementRef.current.style.transition = 'transform 0.2s cubic-bezier(0.43, 0.14, 0.2, 1.05)';
-      elementRef.current.style.transform = `translate(${x}%, ${top}px)`;
+    if (!elementRef.current || target) {
+      return;
     }
+
+    const el = elementRef.current;
+    const height = heights.get(toastId) || el.getBoundingClientRect().height;
+    heights.set(toastId, height);
+
+    const x = /left/.test(position!) ? 50 : /center/.test(position!) ? 0 : -50;
+    const isBottom = /bottom/.test(position!);
+
+    const getExpandedY = () => {
+      const baseOffset = isBottom ? -(gap + height) : 0;
+      const previousOffset = toastsBySamePosition
+        .slice(0, order)
+        .reduce((acc, t) => acc + gap + (heights.get(t.toastId) || 0), 0);
+      return baseOffset + (isBottom ? -previousOffset : previousOffset);
+    };
+
+    if (stack) {
+      const len = toastsBySamePosition.length;
+      const reverseOrder = (len - 1) - order;
+      const latestToast = toastsBySamePosition[len - 1];
+      const latestToastHeight = heights.get(latestToast.toastId) || height;
+
+      const scale = 1 - (reverseOrder * 0.05);
+      const offset = reverseOrder * 12;
+
+      /**
+       * @description Old toast piled up on top after rising to the latest toast height
+       */
+      const baseOffset = isBottom ? -(latestToastHeight + gap) : 0;
+      const stackOffset = isBottom ? -offset : offset;
+
+      const applyStackStyle = () => {
+        el.style.transition = 'transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease';
+        el.style.transform = `translate(${x}%, ${baseOffset + stackOffset}px) scale(${scale})`;
+        el.style.zIndex = String(order + 1);
+        /**
+         * @description Only 3 are exposed
+         */
+        if (len - 3 > order) {
+          el.style.opacity = '0';
+        }
+      };
+
+      const applyExpandStyle = () => {
+        el.style.transition = 'transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease';
+        el.style.transform = `translate(${x}%, ${getExpandedY()}px) scale(1)`;
+        el.style.opacity = '1';
+      };
+
+      applyStackStyle();
+
+      const container = el.parentElement;
+      container?.addEventListener('mouseenter', applyExpandStyle);
+      container?.addEventListener('mouseleave', applyStackStyle);
+
+      return () => {
+        container?.removeEventListener('mouseenter', applyExpandStyle);
+        container?.removeEventListener('mouseleave', applyStackStyle);
+      };
+    }
+
+    el.style.transition = 'transform 0.2s cubic-bezier(0.43, 0.14, 0.2, 1.05)';
+    el.style.transform = `translate(${x}%, ${getExpandedY()}px)`;
 
     return () => {
       heights.delete(toastId);
-    }
-  }, [order]);
+    };
+  }, [order, stack, toastsBySamePosition.length]);
 
   /** @description promise toast */
   useEffect(() => {
