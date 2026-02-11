@@ -4,7 +4,7 @@ import { getAnimation } from '../utils/get-animation';
 import { toast } from '../core/toast';
 import { STYLE_NAMESPACE } from '../constants';
 import { useEventListener } from '../hooks/use-event-listener';
-import { ToastTypeIcons, CloseButton } from './toast-icons';
+import { ToastTypeIcons, CloseSvg } from './toast-icons';
 import type { NonHeadlessToastState as ToastState } from '../types';
 
 export interface OtherProps {
@@ -153,6 +153,8 @@ export function Toast({ toastProps }: ToasterProps) {
       ref={elementRef}
       className={`${STYLE_NAMESPACE}__toast-content-container`}
       data-testid={`container-${containerId || 'default'}`}
+      aria-live={toastType === 'error' ? 'assertive' : 'polite'}
+      tabIndex={0}
       onMouseEnter={() => {
         if (pauseOnHover) {
           toast.pause(toastId);
@@ -178,6 +180,7 @@ export function Toast({ toastProps }: ToasterProps) {
             {content}
             {closeButton && (
               <button
+                aria-label='Close Toast Button'
                 data-testid={`${toastId}__close-button`}
                 className={`${STYLE_NAMESPACE}__close-button`}
                 onClick={() => {
@@ -185,7 +188,7 @@ export function Toast({ toastProps }: ToasterProps) {
                 }}
                 type="button"
               >
-                <CloseButton />
+                <CloseSvg />
               </button>
             )}
           </div>

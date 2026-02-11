@@ -64,7 +64,7 @@ function WarnSvg() {
   );
 }
 
-export function CloseButton() {
+export function CloseSvg() {
   return (
     <svg
       fill="#8b8b8b"
