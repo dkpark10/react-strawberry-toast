@@ -25,7 +25,14 @@ import { ToastContainer } from '@react-strawberry-toast/src';
 </Box>
 
 <main>
-  <Flex id="btn-area" pt="7" pb="2" justify="center" align="center" gap="3">
+  <Flex
+    id="btn-area"
+    pt="7"
+    pb="2"
+    justify="center"
+    align="center"
+    gap="3" 
+  >
     <HomeToastBtn />
 
     <Button
@@ -61,7 +68,7 @@ import { ToastContainer } from '@react-strawberry-toast/src';
   </Flex> 
 
   <Flex id="code-area" justify="center" py="7">
-    <Container style={{ fontSize: 'var(--font-size-2)' }}>
+    <Box width={{ initial: '100%', md: '960px' }} style={{ fontSize: 'var(--font-size-2)' }}>
       ## usage
       ```javascript
       import { ToastContainer, toast } from 'react-strawberry-toast';
@@ -80,11 +87,11 @@ import { ToastContainer } from '@react-strawberry-toast/src';
         );
       }
       ```
-    </Container>
+    </Box>
   </Flex>
 
   <Flex justify="center" py="7">
-    <Container style={{ fontSize: 'var(--font-size-2)' }}>
+    <Box width={{ initial: '100%', md: '960px' }} style={{ fontSize: 'var(--font-size-2)' }}>
       ## Toast Type
 
       <ToastTabs defaultValue="Success">
@@ -175,11 +182,11 @@ import { ToastContainer } from '@react-strawberry-toast/src';
           </Tabs.Content>
         </Box>
       </ToastTabs>
-    </Container>
+    </Box>
   </Flex>
 
   <Flex justify="center" py="7">
-    <Container style={{ fontSize: 'var(--font-size-2)' }}>
+    <Box width={{ initial: '100%', md: '960px' }} style={{ fontSize: 'var(--font-size-2)' }}>
       ## Toast Position
 
       <ToastPositionTabs defaultValue="top-center">
@@ -234,11 +241,11 @@ import { ToastContainer } from '@react-strawberry-toast/src';
           </Tabs.Content>
         </Box>
       </ToastPositionTabs>
-    </Container>
+    </Box>
   </Flex>
 
   <Flex justify="center" py="7">
-    <Container style={{ fontSize: 'var(--font-size-2)' }}>
+    <Box width={{ initial: '100%', md: '960px' }} style={{ fontSize: 'var(--font-size-2)' }}>
       ## Toast Direction
 
       <ToastDirectionTabs defaultValue="forward">
@@ -257,11 +264,11 @@ import { ToastContainer } from '@react-strawberry-toast/src';
           </Tabs.Content>
         </Box>
       </ToastDirectionTabs>
-    </Container>
+    </Box>
   </Flex>
 
   <Flex justify="center" py="7">
-    <Container style={{ fontSize: 'var(--font-size-2)' }}>
+    <Box width={{ initial: '100%', md: '960px' }} style={{ fontSize: 'var(--font-size-2)' }}>
       ## Toast Gap
 
       <ToastGapTabs defaultValue="9">
@@ -323,7 +330,7 @@ import { ToastContainer } from '@react-strawberry-toast/src';
 
         </Box>
       </ToastGapTabs>
-    </Container>
+    </Box>
   </Flex>
 
 </main>

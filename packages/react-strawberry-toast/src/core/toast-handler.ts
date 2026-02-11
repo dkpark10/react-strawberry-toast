@@ -76,7 +76,7 @@ export const toastHandlers = <T = ToastState>(
   };
 
   const disappear = (toastId: ToastState['toastId'], timeOut: number): void => {
-    const timer = setTimeout(
+    const timer = window.setTimeout(
       () => {
         toastStore.state = toastStore.state.map((toast) => {
           if (toast.toastId === toastId) {
@@ -96,7 +96,6 @@ export const toastHandlers = <T = ToastState>(
       timeOut > MAX_TIMEOUT ? MAX_TIMEOUT : timeOut
     );
 
-    // @ts-ignore
     toastStore.toastTimers.set(toastId, timer);
   };
 

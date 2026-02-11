@@ -62,7 +62,7 @@ export default function DocsLayout({ children }: PropsWithChildren) {
         position="fixed"
         width="100%"
         height="56px"
-        style={{ backgroundColor: 'var(--primary-white)', zIndex: 10 }}
+        style={{ backgroundColor: 'var(--gray-1)', zIndex: 10 }}
       >
         <header>
           <Flex justify="between" py="4" px="4">

@@ -5,8 +5,19 @@ import { Heading, Badge, Table, Strong } from '@radix-ui/themes';
 import NextLink from 'next/link';
 
 type AnchorProps = ComponentProps<'a'>;
+type ImageProps = ComponentProps<'img'>;
 
 const components = {
+  img: ({ src, alt }: ImageProps) => {
+    const normalizedSrc = src?.startsWith('/') ? src.slice(1) : src;
+    return (
+      <img
+        src={process.env.NODE_ENV === "production" ? `/react-strawberry-toast/${normalizedSrc}` : src}
+        alt={alt}
+      />
+    )
+  },
+
   h1: ({ children }: PropsWithChildren) => (
     <Heading as="h1" size="8" mb="4">{children}</Heading>
   ),
