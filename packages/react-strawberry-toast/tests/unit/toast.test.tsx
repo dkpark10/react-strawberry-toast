@@ -2,6 +2,7 @@ import React, { useRef } from 'react';
 import { afterEach, beforeEach, vi, describe, expect, test } from 'vitest';
 import { act, render, fireEvent } from '@testing-library/react';
 import { ToastContainer } from '../../src/components/toast-container';
+import { heights } from '../../src/components/toast';
 import { toast, toastStore } from '../../src/core/toast';
 import { DISAPPEAR_TIMEOUT, REMOVE_TIMEOUT } from '../../src/constants';
 import '@testing-library/jest-dom';
@@ -160,7 +161,7 @@ describe('toast', () => {
     expect(queryByTestId('top-right')).toBeInTheDocument();
   });
 
-  test('should display the toast after 3200ms even if removeTimeout is greater than or equal to 1000ms', async (context) => {
+  test('should display the toast after 3200ms even if removeTimeout is greater than or equal to 1000ms.', async (context) => {
     function App() {
       const click = () => {
         toast(context.task.id, { removeTimeOut: 1_000 });
@@ -185,7 +186,7 @@ describe('toast', () => {
     expect(queryByText(new RegExp(context.task.id, 'i'))).toBeInTheDocument();
   });
 
-  test('should not display duplicated toast id', async (context) => {
+  test('should not display duplicated toast id.', async (context) => {
     function App() {
       const click = () => {
         toast(context.task.id, {
@@ -214,7 +215,7 @@ describe('toast', () => {
     ).toThrowError('A duplicate custom ID is not available.');
   });
 
-  test('Should update the toast message when isVisible state change', async () => {
+  test('Should update the toast message when isVisible state change.', async () => {
     function App() {
       const click = () => {
         toast(({ isVisible }) => <div>{isVisible ? 'visible' : 'invisible'}</div>);
@@ -239,5 +240,104 @@ describe('toast', () => {
     });
 
     expect(queryByText('invisible')).toBeInTheDocument();
+  });
+
+  test('Should have the same number of height map as there are toasts.', async (context) => {
+    const repeat = 4;
+    function App() {
+      const click = () => {
+        toast(<div>{context.task.id}</div>);
+      };
+
+      const click2 = () => {
+        for (let i = 0; i < repeat; i += 1) {
+          toast(<div>{context.task.id}</div>);
+        }
+      };
+
+      return (
+        <React.Fragment>
+          <ToastContainer />
+          <button onClick={click}>click</button>
+          <button onClick={click2}>click2</button>
+        </React.Fragment>
+      );
+    }
+
+    const { getByRole, queryByText, queryAllByText } = render(<App />);
+
+    fireEvent.click(getByRole('button', { name: 'click' }));
+
+    const regex = new RegExp(context.task.id, 'i');
+
+    expect(queryByText(regex)).toBeInTheDocument();
+    expect(heights).toHaveLength(1);
+
+    act(() => {
+      vi.advanceTimersByTime(DISAPPEAR_TIMEOUT + REMOVE_TIMEOUT);
+    });
+
+    expect(queryByText(regex)).not.toBeInTheDocument();
+    expect(heights).toHaveLength(0);
+
+    fireEvent.click(getByRole('button', { name: 'click2' }));
+
+    expect(queryAllByText(new RegExp(context.task.id, 'i'))).toHaveLength(repeat);
+    expect(heights).toHaveLength(repeat);
+
+    act(() => {
+      vi.advanceTimersByTime(DISAPPEAR_TIMEOUT + REMOVE_TIMEOUT);
+    });
+
+    expect(queryAllByText(new RegExp(context.task.id, 'i'))).toHaveLength(0);
+    expect(heights).toHaveLength(0);
+  });
+
+  test('Should match the heights data length to the number of toasts when multiple containers exist.', async (context) => {
+    function App() {
+      const click = () => {
+        toast(<div>{context.task.id}</div>, {
+          containerId: 'foo'
+        });
+      };
+
+      const click2 = () => {
+        toast(<div>{context.task.id}</div>, {
+          containerId: 'bar'
+        });
+      };
+
+      const click3 = () => {
+        toast(<div>{context.task.id}</div>);
+      };
+
+      return (
+        <React.Fragment>
+          <ToastContainer containerId='foo' />
+          <ToastContainer containerId='bar' />
+          <button onClick={click}>click</button>
+          <button onClick={click2}>click2</button>
+          <button onClick={click3}>click3</button>
+        </React.Fragment>
+      );
+    }
+
+    const { queryAllByText, getAllByRole } = render(<App />);
+
+    getAllByRole('button', { name: /click/g }).forEach((el) => {
+      fireEvent.click(el);
+    });
+
+    const regex = new RegExp(context.task.id, 'i');
+
+    expect(queryAllByText(regex)).toHaveLength(2);
+    expect(heights).toHaveLength(2);
+
+    act(() => {
+      vi.advanceTimersByTime(DISAPPEAR_TIMEOUT + REMOVE_TIMEOUT);
+    });
+
+    expect(queryAllByText(new RegExp(context.task.id, 'i'))).toHaveLength(0);
+    expect(heights).toHaveLength(0);
   });
 });

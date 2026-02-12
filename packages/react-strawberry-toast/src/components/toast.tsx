@@ -7,7 +7,7 @@ import { useEventListener } from '../hooks/use-event-listener';
 import { ToastTypeIcons, CloseSvg } from './toast-icons';
 import type { ToasterProps, NonHeadlessToastState as ToastState } from '../types';
 
-const heights = new Map<ToastState['toastId'], number>();
+export const heights = new Map<ToastState['toastId'], number>();
 
 export function Toast({ toastProps }: ToasterProps) {
   const elementRef = useRef<HTMLOutputElement>(null);
