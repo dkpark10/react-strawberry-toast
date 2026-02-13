@@ -1,6 +1,6 @@
 @import "base";
 
-.#{$toast-namespace}__toast-content {
+.react-strawberry-toast__toast-content {
   pointer-events: auto;
   box-sizing: border-box;
   padding: 10px;
@@ -10,33 +10,32 @@
   width: 314px;
   border-radius: 8px;
   box-shadow: 2px 2px 6px 2px rgba(0, 0, 0, 0.1);
-  min-height: 54px;
-  max-width: 368px;
+  max-width: var(--toast-max-width, 368px);
   position: relative;
-  background-color: white;
+  background-color: var(--bg-white);
 }
 
-.#{$toast-namespace}__toast-success {
+.react-strawberry-toast__toast-success {
   color: white;
   background-color: var(--toast-color-success);
 }
 
-.#{$toast-namespace}__toast-error {
+.react-strawberry-toast__toast-error {
   color: white;
   background-color: var(--toast-color-error);
 }
 
-.#{$toast-namespace}__toast-warn {
+.react-strawberry-toast__toast-warn {
   color: white;
   background-color: var(--toast-color-warn);
 }
 
-.#{$toast-namespace}__toast-info {
+.react-strawberry-toast__toast-info {
   color: white;
   background-color: var(--toast-color-info);
 }
 
-.#{$toast-namespace}__close-button {
+.react-strawberry-toast__close-button {
   @include close-button;
   position: absolute;
   right: 0;
@@ -44,5 +43,5 @@
 }
 
 svg .react-strawberry-toast-path {
-  fill: white;
+  fill: var(--bg-white);
 }

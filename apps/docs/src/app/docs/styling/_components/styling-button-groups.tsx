@@ -5,8 +5,8 @@ import { Button, Flex, Box } from "@radix-ui/themes";
 
 export default function StylingButtonGroups() {
   const onClick = (styleNumber: 2 | 3) => {
-    const cssPath = process.env.NODE_ENV === 
-      'development' ? `/style${styleNumber}.css` : `/react-strawberry-toast/style${styleNumber}.css`;
+    const basePath = process.env.NODE_ENV === 'production' ? '/react-strawberry-toast' : '';
+    const cssPath = `${basePath}/styles/style${styleNumber}.css`;
 
     document.querySelectorAll('link[href*="style"]').forEach(link => {
       const href = link.getAttribute('href');

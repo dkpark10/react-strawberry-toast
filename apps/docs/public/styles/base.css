@@ -1,7 +1,6 @@
 :root {
-  --toast-namespace: 'react-strawberry-toast';
+  --toast-namespace: "react-strawberry-toast";
   --toast-offset: 16px;
-
   --bg-white: #fff;
   --toast-color-success: #1dca82;
   --toast-color-error: #eb2639;
@@ -14,55 +13,46 @@
     transform: rotate(1turn);
   }
 }
-
 @keyframes react-strawberry-toast_fade-in {
   from {
     transform: translateY(-100%) scale(0.2);
     opacity: 0.2;
   }
-
   to {
     transform: translateY(0) scale(1);
     opacity: 1;
   }
 }
-
 @keyframes react-strawberry-toast_fade-out {
   from {
     transform: translateY(0);
     opacity: 1;
   }
-
   to {
     transform: translateY(-100%);
     opacity: 0.2;
   }
 }
-
 @keyframes react-strawberry-toast_fade-in-reverse {
   from {
     transform: translateY(100%) scale(0.2);
     opacity: 0.2;
   }
-
   to {
     transform: translateY(0) scale(1);
     opacity: 1;
   }
 }
-
 @keyframes react-strawberry-toast_fade-out-reverse {
   from {
     transform: translateY(0);
     opacity: 1;
   }
-
   to {
     transform: translateY(100%);
     opacity: 0.2;
   }
 }
-
 .react-strawberry-toast__z9999 {
   z-index: 9999;
 }
@@ -150,13 +140,4 @@
   -webkit-mask-composite: source-out;
   mask-composite: subtract;
   animation: l3 1s infinite linear;
-}
-
-@mixin close-button {
-  background: transparent;
-  border: none;
-  outline: none;
-  width: 15px;
-  height: 15px;
-  cursor: pointer;
 }

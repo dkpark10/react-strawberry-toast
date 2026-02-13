@@ -4,7 +4,9 @@
   "private": true,
   "author": "dkpark10",
   "scripts": {
-    "dev": "next dev",
+    "dev": "concurrently \"pnpm dev:next\" \"pnpm dev:sass\"",
+    "dev:next": "next dev",
+    "dev:sass": "sass --watch ../../packages/react-strawberry-toast/src/styles:public/styles --no-source-map",
     "build": "next build",
     "build:local": "NEXT_BUILD=LOCAL next build",
     "start": "pnpm dlx serve out -p 8080",
@@ -27,6 +29,8 @@
     "react-tabs": "^6.1.0"
   },
   "devDependencies": {
+    "concurrently": "^8.2.2",
+    "sass": "^1.77.0",
     "@mdx-js/loader": "^3.1.0",
     "@mdx-js/react": "^3.1.0",
     "@next/mdx": "^15.2.2",
