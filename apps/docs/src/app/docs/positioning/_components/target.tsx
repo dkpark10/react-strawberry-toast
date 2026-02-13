@@ -29,7 +29,6 @@ export default function TargetPlayGround() {
             variant="soft"
             color="ruby"
             style={{
-              backgroundColor: 'white',
               boxShadow: 'var(--shadow-3)',
             }}
           >

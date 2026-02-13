@@ -1,6 +1,11 @@
 :root {
   --toast-namespace: "react-strawberry-toast";
   --toast-offset: 16px;
+  --max-width: 368px;
+  --border-radius: 8px;
+  --toast-gap: 5px;
+  --toast-padding: 10px;
+  --box-shadow: 2px 2px 6px 2px rgba(0, 0, 0, 0.1);
   --bg-white: #fff;
   --toast-color-success: #1dca82;
   --toast-color-error: #eb2639;
@@ -146,14 +151,13 @@
   pointer-events: auto;
   box-sizing: border-box;
   background-color: var(--bg-white);
-  padding: 10px 10px 10px 15px;
+  padding: 8px 8px 8px 12px;
   display: flex;
   align-items: center;
-  gap: 5px;
-  width: 314px;
-  border-radius: 8px;
-  box-shadow: 2px 2px 6px 2px rgba(0, 0, 0, 0.1);
-  max-width: var(--toast-max-width, 368px);
+  gap: var(--toast-gap);
+  border-radius: var(--border-radius);
+  box-shadow: var(--box-shadow);
+  max-width: var(--max-width);
   position: relative;
 }
 
@@ -162,7 +166,7 @@
   display: inline-block;
   top: 0;
   left: 0;
-  width: 7px;
+  width: 6px;
   height: 100%;
   position: absolute;
   border-top-left-radius: 8px;
@@ -175,7 +179,7 @@
   display: inline-block;
   top: 0;
   left: 0;
-  width: 7px;
+  width: 6px;
   height: 100%;
   position: absolute;
   border-top-left-radius: 8px;
@@ -188,7 +192,7 @@
   display: inline-block;
   top: 0;
   left: 0;
-  width: 7px;
+  width: 6px;
   height: 100%;
   position: absolute;
   border-top-left-radius: 8px;
@@ -201,7 +205,7 @@
   display: inline-block;
   top: 0;
   left: 0;
-  width: 7px;
+  width: 6px;
   height: 100%;
   position: absolute;
   border-top-left-radius: 8px;

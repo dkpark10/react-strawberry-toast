@@ -161,3 +161,32 @@ export function ToastGapTabs({ children, onValueChange, ...props }: TabsRootProp
     </>
   );
 }
+
+type Stack = 'default' | 'stack';
+
+export function ToastStackTabs({ children, onValueChange, ...props }: TabsRootProps) {
+  const [activeTab, setActiveTab] = useState<Stack>('default');
+
+  const onClick = (value: Stack) => {
+    toast(`gap: ${value}`, { 
+      containerId: 'stack',
+    });
+  };
+
+  return (
+    <>
+      <ToastContainer stack={activeTab === 'stack'} containerId='stack' />
+      <Tabs.Root {...props} onValueChange={(value) => {
+        setActiveTab(value as Stack);
+      }}>
+        <Tabs.List>
+          {['default', 'stack']
+            .map((t) => (
+              <Tabs.Trigger key={t} onClick={() => onClick(activeTab)} value={String(t)}>{t}</Tabs.Trigger>
+            ))}
+        </Tabs.List>
+        {children}
+      </Tabs.Root>
+    </>
+  );
+}
