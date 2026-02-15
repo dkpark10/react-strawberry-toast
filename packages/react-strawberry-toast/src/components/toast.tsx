@@ -206,15 +206,13 @@ export function Toast({ toastProps }: ToasterProps) {
         <If>
           <div
             className={
-              className ??
-              `${STYLE_NAMESPACE}__toast-content ${STYLE_NAMESPACE}__toast-${toastType} ${!toast.isActive(toastId) ? animationClassName : ''
-              }`
+              `${STYLE_NAMESPACE}__toast-content ${STYLE_NAMESPACE}__toast-${toastType} ${className} ${!toast.isActive(toastId) ? animationClassName : ''}`
             }
             style={toastStyle}
           >
-            {renderIcon && <span className={`${STYLE_NAMESPACE}__toast-icon`}>{renderIcon}</span>}
+            {renderIcon && <>{renderIcon}</>}
             {content}
-            {closeButton && (
+            <Condition condition={closeButton}>
               <button
                 aria-label='Close Toast Button'
                 data-testid={`${toastId}__close-button`}
@@ -226,7 +224,7 @@ export function Toast({ toastProps }: ToasterProps) {
               >
                 <CloseSvg />
               </button>
-            )}
+            </Condition>
           </div>
         </If>
         <Else>

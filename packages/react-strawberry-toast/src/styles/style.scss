@@ -10,7 +10,7 @@
   gap: var(--toast-gap);
   border-radius: var(--border-radius);
   box-shadow: var(--box-shadow);
-  max-width: var(--max-width);
+  width: var(--toast-width);
 }
 
 .react-strawberry-toast__close-button {

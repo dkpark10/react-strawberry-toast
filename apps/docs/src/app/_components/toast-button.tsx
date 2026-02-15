@@ -5,7 +5,7 @@ import { toast } from "@react-strawberry-toast/src";
 
 export function HomeToastBtn() {
   const onClick = () => {
-    toast.success('react-strawberry-toast');
+    toast.success('React Strawberry Toast');
   }
 
   return (

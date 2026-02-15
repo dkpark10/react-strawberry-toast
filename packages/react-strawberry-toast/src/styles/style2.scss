@@ -1,16 +1,21 @@
 @import "base";
 
+:root {
+  --bar-width: 6px;
+}
+
 .react-strawberry-toast__toast-content {
   pointer-events: auto;
   box-sizing: border-box;
   background-color: var(--bg-white);
-  padding: 8px 8px 8px 12px;
+  padding: var(--toast-padding);
+  padding-left: calc(var(--bar-width) / 2 + var(--toast-padding));
   display: flex;
   align-items: center;
   gap: var(--toast-gap);
   border-radius: var(--border-radius);
   box-shadow: var(--box-shadow);
-  max-width: var(--max-width);
+  width: var(--toast-width);
   position: relative;
 }
 
@@ -19,13 +24,12 @@
   display: inline-block;
   top: 0;
   left: 0;
-  width: 6px;
+  width: var(--bar-width);
   height: 100%;
   position: absolute;
   border-top-left-radius: 8px;
   border-bottom-left-radius: 8px;
 }
-
 
 .react-strawberry-toast__toast-success {
   &::before {

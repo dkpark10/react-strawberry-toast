@@ -8,11 +8,11 @@ function SuccessSvg() {
       stroke="none"
       fill="none"
       strokeWidth="2"
-      viewBox="0 0 24 24"
+      viewBox="2 2 20 20"
       strokeLinecap="round"
       strokeLinejoin="round"
-      height="22"
-      width="22"
+      height="16"
+      width="16"
       xmlns="http://www.w3.org/2000/svg"
     >
       <path stroke="none" d="M0 0h24v24H0z"></path>
@@ -32,14 +32,14 @@ function InfoSvg({ fill }: { fill: string }) {
       stroke="none"
       fill={fill}
       strokeWidth="2"
-      viewBox="0 0 24 24"
-      height="22"
-      width="22"
+      viewBox="2 2 20 20"
+      height="16"
+      width="16"
       xmlns="http://www.w3.org/2000/svg"
     >
       <path
         className="react-strawberry-toast-path"
-        d="M11.953 2C6.465 2 2 6.486 2 12s4.486 10 10 10 10-4.486 10-10S17.493 2 11.953 2zM13 17h-2v-2h2v2zm0-4h-2V7h2v6z"
+        d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"
       ></path>
     </svg>
   );
@@ -52,8 +52,8 @@ function WarnSvg() {
       fill="#fcba03"
       strokeWidth="0"
       viewBox="0 0 1024 1024"
-      height="22"
-      width="22"
+      height="20"
+      width="20"
       xmlns="http://www.w3.org/2000/svg"
     >
       <path
@@ -70,8 +70,8 @@ export function CloseSvg() {
       fill="#8b8b8b"
       strokeWidth="0"
       viewBox="0 0 512 512"
-      height="15px"
-      width="15px"
+      height="14"
+      width="14"
       xmlns="http://www.w3.org/2000/svg"
     >
       <path

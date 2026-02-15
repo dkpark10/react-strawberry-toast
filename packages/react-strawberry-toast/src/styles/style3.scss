@@ -9,7 +9,7 @@
   gap: var(--toast-gap);
   border-radius: var(--border-radius);
   box-shadow: var(--box-shadow);
-  max-width: var(--max-width);
+  width: var(--toast-width);
   position: relative;
   background-color: var(--bg-white);
 }

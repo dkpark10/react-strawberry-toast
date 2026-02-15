@@ -19,7 +19,11 @@ export default function StylingButtonGroups() {
     link.rel = 'stylesheet';
     link.href = cssPath;
     document.head.appendChild(link);
-    toast.success(`theme${styleNumber} toast`);
+    toast.success(`Theme${styleNumber || ''} Toast`, {
+      style: {
+        width: '296px',
+      },
+    });
   }
 
   return (

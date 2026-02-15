@@ -25,7 +25,7 @@ const toastActions: Record<ToastType, () => void> = {
       const func = Math.floor(Math.random() * 100) & 2 ? resolve : reject;
       func(noop);
     }, 3_000)),
-    { loading: 'loading', success: 'success', error: 'error' }
+    { loading: 'Loading', success: 'Success', error: 'Error' }
   ),
   DarkTheme: () => toast('Dark Theme', {
     style: { color: 'white', backgroundColor: 'black', border: '1px solid white' },
