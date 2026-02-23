@@ -9,9 +9,9 @@ import type { ToasterProps, NonHeadlessToastState as ToastState } from '../types
 
 export const heights = new Map<ToastState['toastId'], number>();
 
-export function Toast({ toastProps }: ToasterProps) {
-  const elementRef = useRef<HTMLOutputElement>(null);
+const SWIPE_THRESHOLD = 100;
 
+export function Toast({ toastProps }: ToasterProps) {
   const {
     toastId,
     isVisible,
@@ -34,6 +34,10 @@ export function Toast({ toastProps }: ToasterProps) {
     stack,
   } = toastProps;
 
+  const elementRef = useRef<HTMLOutputElement>(null);
+
+  const swipeRef = useRef({ startX: 0, startY: 0, currentX: 0, currentY: 0, isSwiping: false });
+  
   const animationClassName = getAnimation({
     isVisible: isVisible,
     position,
@@ -78,9 +82,83 @@ export function Toast({ toastProps }: ToasterProps) {
           elementRef.current!.style.top = `${rect.y + y + window.scrollY}px`;
           elementRef.current!.style.left = `${rect.x + x + window.scrollX}px`;
         }
-
       });
     }
+  };
+
+  const isVerticalSwipe = /center/.test(position!);
+
+  const getSwipeDelta = (e: React.PointerEvent) => {
+    const deltaX = e.clientX - swipeRef.current.startX;
+    const deltaY = e.clientY - swipeRef.current.startY;
+    return isVerticalSwipe ? deltaY : deltaX;
+  };
+
+  const isValidSwipeDirection = (delta: number) => {
+    if (/left/.test(position!)) return delta < 0;
+    if (/right/.test(position!)) return delta > 0;
+    if (/top/.test(position!)) return delta < 0;
+    if (/bottom/.test(position!)) return delta > 0;
+    return false;
+  };
+
+  const onPointerDown = (e: React.PointerEvent<HTMLOutputElement>) => {
+    swipeRef.current.startX = e.clientX;
+    swipeRef.current.startY = e.clientY;
+    swipeRef.current.isSwiping = true;
+    /**
+     * @description Capture pointer to keep receiving events even when pointer moves outside the element
+     */
+    e.currentTarget.setPointerCapture(e.pointerId);
+  };
+
+  const onPointerMove = (e: React.PointerEvent<HTMLOutputElement>) => {
+    if (!swipeRef.current.isSwiping || !elementRef.current) return;
+
+    const delta = getSwipeDelta(e);
+    if (isVerticalSwipe) {
+      swipeRef.current.currentY = delta;
+    } else {
+      swipeRef.current.currentX = delta;
+    }
+
+    const innerEl = elementRef.current.firstElementChild as HTMLElement;
+    if (innerEl) {
+      innerEl.style.transition = 'none';
+      innerEl.style.transform = isVerticalSwipe
+        ? `translateY(${delta}px)`
+        : `translateX(${delta}px)`;
+    }
+  };
+
+  const onPointerUp = (e: React.PointerEvent<HTMLOutputElement>) => {
+    if (!swipeRef.current.isSwiping || !elementRef.current) return;
+
+    const delta = isVerticalSwipe ? swipeRef.current.currentY : swipeRef.current.currentX;
+    const innerEl = elementRef.current.firstElementChild as HTMLElement;
+    const shouldDismiss = Math.abs(delta) > SWIPE_THRESHOLD && isValidSwipeDirection(delta);
+
+    if (shouldDismiss) {
+      if (innerEl) {
+        const dismissOffset = delta > 0 ? 200 : -200;
+        innerEl.style.transition = 'transform 0.2s ease-out, opacity 0.2s ease-out';
+        innerEl.style.transform = isVerticalSwipe
+          ? `translateY(${dismissOffset}px)`
+          : `translateX(${dismissOffset}px)`;
+        innerEl.style.opacity = '0';
+      }
+      toast.remove(toastId, 0);
+      heights.delete(toastId);
+    } else {
+      if (innerEl) {
+        innerEl.style.transition = 'transform 0.2s ease-out, opacity 0.2s ease-out';
+        innerEl.style.transform = isVerticalSwipe ? 'translateY(0)' : 'translateX(0)';
+        innerEl.style.opacity = '1';
+      }
+    }
+
+    swipeRef.current = { startX: 0, startY: 0, currentX: 0, currentY: 0, isSwiping: false };
+    e.currentTarget.releasePointerCapture(e.pointerId);
   };
 
   useEventListener('focus', focusHandler);
@@ -191,6 +269,9 @@ export function Toast({ toastProps }: ToasterProps) {
       data-testid={`container-${containerId || 'default'}`}
       aria-live={toastType === 'error' ? 'assertive' : 'polite'}
       tabIndex={0}
+      onPointerDown={onPointerDown}
+      onPointerMove={onPointerMove}
+      onPointerUp={onPointerUp}
       onMouseEnter={() => {
         if (pauseOnHover) {
           toast.pause(toastId);
