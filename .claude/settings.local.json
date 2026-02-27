@@ -2,7 +2,7 @@
   "permissions": {
     "allow": [
       "Bash(grep:*)",
-      "WebFetch(domain:www.radix-ui.com)"
+      "Bash(pnpm run build:*)"
     ]
   }
 }

@@ -1,7 +1,16 @@
 const { defineConfig } = require('tsup');
 const { sassPlugin } = require('esbuild-sass-plugin');
-const path = require('path');
 const fs = require('fs');
+
+const removeDataTestId = async (files) => {
+  const removeDataTestIdImpl = (code) =>
+    code.replace(/"data-testid":\s*(`[^`]*`|"[^"]*"|[^,}]+),?/g, '');
+
+  for (const file of files) {
+    const content = await fs.promises.readFile(file, 'utf8');
+    await fs.promises.writeFile(file, removeDataTestIdImpl(content));
+  }
+}
 
 export default defineConfig([
   {
@@ -15,6 +24,9 @@ export default defineConfig([
     platform: 'browser',
     banner: {
       js: '"use client";',
+    },
+    async onSuccess() {
+      await removeDataTestId(['dist/index.js', 'dist/index.mjs']);
     },
   },
   {
@@ -35,5 +47,8 @@ export default defineConfig([
     platform: 'browser',
     outDir: 'dist',
     external: ['react', 'react-dom'],
+    async onSuccess() {
+      await removeDataTestId(['dist/headless.js', 'dist/headless.mjs']);
+    },
   },
 ]);

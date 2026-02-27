@@ -10,8 +10,7 @@
     "url": "https://github.com/dkpark10/react-strawberry-toast/issues"
   },
   "scripts": {
-    "dev": "pnpm run --filter=react-strawberry-toast-playground dev",
-    "dev:docs": "pnpm run --filter=react-strawberry-toast-docs dev",
+    "dev": "pnpm run --filter=react-strawberry-toast-docs dev",
     "deploy:docs": "pnpm run --filter=react-strawberry-toast-docs deploy",
     "prepare": "husky install"
   },

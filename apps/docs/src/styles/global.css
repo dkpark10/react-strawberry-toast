@@ -10,22 +10,27 @@
   box-sizing: border-box;
 }
 
-:root {
-  --strawberry-hue: 348;
-  --strawberry-saturation: 75%;
+body {
+  font-family: var(--font-inter), -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
 
-  --strawberry-1: hsl(var(--strawberry-hue), 60%, 98%);
-  --strawberry-2: hsl(var(--strawberry-hue), 65%, 95%);
-  --strawberry-3: hsl(var(--strawberry-hue), 70%, 90%);
-  --strawberry-4: hsl(var(--strawberry-hue), 75%, 85%);
-  --strawberry-5: hsl(var(--strawberry-hue), 75%, 78%);
-  --strawberry-6: hsl(var(--strawberry-hue), 75%, 70%);
-  --strawberry-7: hsl(var(--strawberry-hue), 75%, 62%);
-  --strawberry-8: hsl(var(--strawberry-hue), 75%, 55%);
-  --strawberry-9: hsl(var(--strawberry-hue), 75%, 48%);
-  --strawberry-10: hsl(var(--strawberry-hue), 75%, 42%);
-  --strawberry-11: hsl(var(--strawberry-hue), 75%, 30%);
-  --strawberry-12: hsl(var(--strawberry-hue), 75%, 18%);
+code, pre, kbd, samp {
+  font-family: var(--font-mono), 'SF Mono', Menlo, Monaco, 'Courier New', monospace;
+}
+
+:root {
+  --strawberry-1: hsl(348, 60%, 98%);
+  --strawberry-2: hsl(348, 65%, 95%);
+  --strawberry-3: hsl(348, 70%, 90%);
+  --strawberry-4: hsl(348, 75%, 85%);
+  --strawberry-5: hsl(348, 75%, 78%);
+  --strawberry-6: hsl(348, 75%, 70%);
+  --strawberry-7: hsl(348, 75%, 62%);
+  --strawberry-8: hsl(348, 75%, 55%);
+  --strawberry-9: hsl(348, 75%, 48%);
+  --strawberry-10: hsl(348, 75%, 42%);
+  --strawberry-11: hsl(348, 75%, 30%);
+  --strawberry-12: hsl(348, 75%, 18%);
 }
 
 @supports (color: color(display-p3 1 1 1)) {

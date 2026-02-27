@@ -7,15 +7,14 @@ function SuccessSvg() {
     <svg
       stroke="none"
       fill="none"
-      strokeWidth="2"
-      viewBox="0 0 24 24"
+      strokeWidth="0"
+      viewBox="2 2 20 20"
       strokeLinecap="round"
       strokeLinejoin="round"
-      height="22"
-      width="22"
+      height="18"
+      width="18"
       xmlns="http://www.w3.org/2000/svg"
     >
-      <path stroke="none" d="M0 0h24v24H0z"></path>
       <path
         className="react-strawberry-toast-path"
         d="M17 3.34a10 10 0 1 1 -14.995 8.984l-.005 -.324l.005 -.324a10 10 0 0 1 14.995 -8.336zm-1.293 5.953a1 1 0 0 0 -1.32 -.083l-.094 .083l-3.293 3.292l-1.293 -1.292l-.094 -.083a1 1 0 0 0 -1.403 1.403l.083 .094l2 2l.094 .083a1 1 0 0 0 1.226 0l.094 -.083l4 -4l.083 -.094a1 1 0 0 0 -.083 -1.32z"
@@ -32,9 +31,9 @@ function InfoSvg({ fill }: { fill: string }) {
       stroke="none"
       fill={fill}
       strokeWidth="2"
-      viewBox="0 0 24 24"
-      height="22"
-      width="22"
+      viewBox="2 2 20 20"
+      height="18"
+      width="18"
       xmlns="http://www.w3.org/2000/svg"
     >
       <path
@@ -51,9 +50,9 @@ function WarnSvg() {
       stroke="none"
       fill="#fcba03"
       strokeWidth="0"
-      viewBox="0 0 1024 1024"
-      height="22"
-      width="22"
+      viewBox="56 120 912 800"
+      height="18"
+      width="18"
       xmlns="http://www.w3.org/2000/svg"
     >
       <path
@@ -67,11 +66,11 @@ function WarnSvg() {
 export function CloseSvg() {
   return (
     <svg
-      fill="#8b8b8b"
+      fill="var(--toast-close-button)"
       strokeWidth="0"
-      viewBox="0 0 512 512"
-      height="15px"
-      width="15px"
+      viewBox="112 112 288 288"
+      height="8"
+      width="8"
       xmlns="http://www.w3.org/2000/svg"
     >
       <path

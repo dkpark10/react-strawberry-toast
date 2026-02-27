@@ -43,7 +43,7 @@ export interface ToastDataCallback {
   close: () => void;
   immediatelyClose: () => void;
   isVisible: boolean;
-  icons: Record<Exclude<ToastType, 'default' | 'custom'>, ReactNode>;
+  icons: Record<Exclude<ToastType, 'default' | 'custom'> | 'close', ReactNode>;
 }
 
 export type ToastState = ToastBaseState & BaseOptions;

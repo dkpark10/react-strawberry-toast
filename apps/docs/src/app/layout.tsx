@@ -7,6 +7,19 @@ import type { Metadata } from 'next'
 import { Flex, Container, Text } from '@radix-ui/themes';
 import '@radix-ui/themes/styles.css';
 import '@/styles/global.css';
+import { Inter, JetBrains_Mono } from 'next/font/google';
+
+const inter = Inter({
+  subsets: ['latin'],
+  variable: '--font-inter',
+  display: 'swap',
+});
+
+const jetbrainsMono = JetBrains_Mono({
+  subsets: ['latin'],
+  variable: '--font-mono',
+  display: 'swap',
+});
 
 PrismLight.registerLanguage('jsx', jsx);
 
@@ -16,7 +29,7 @@ export const metadata: Metadata = {
 
 export default async function RootLayout({ children }: PropsWithChildren) {
   return (
-    <html lang="en">
+    <html lang="en" className={`${inter.variable} ${jetbrainsMono.variable}`}>
       <body>
         <GlobalProvider>
           {children}

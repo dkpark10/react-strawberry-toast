@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, cloneElement, isValidElement } from 'react';
 import { Condition, If, Else } from './condition';
 import { getAnimation } from '../utils/get-animation';
 import { toast } from '../core/toast';
@@ -54,6 +54,7 @@ export function Toast({ toastProps }: ToasterProps) {
           warn: ToastTypeIcons.warn,
           loading: ToastTypeIcons.loading,
           info: ToastTypeIcons.info,
+          close: <CloseSvg />,
         },
         isVisible,
       })
@@ -206,13 +207,11 @@ export function Toast({ toastProps }: ToasterProps) {
         <If>
           <div
             className={
-              className ??
-              `${STYLE_NAMESPACE}__toast-content ${STYLE_NAMESPACE}__toast-${toastType} ${!toast.isActive(toastId) ? animationClassName : ''
-              }`
+              `${STYLE_NAMESPACE}__toast-content ${STYLE_NAMESPACE}__toast-${toastType} ${!toast.isActive(toastId) ? animationClassName : ''} ${className}`
             }
             style={toastStyle}
           >
-            {renderIcon && <span className={`${STYLE_NAMESPACE}__toast-icon`}>{renderIcon}</span>}
+            {renderIcon && <>{renderIcon}</>}
             {content}
             {closeButton && (
               <button
@@ -230,9 +229,12 @@ export function Toast({ toastProps }: ToasterProps) {
           </div>
         </If>
         <Else>
-          <div className={className ?? `${!toast.isActive(toastId) ? animationClassName : ''}`}>
-            {content}
-          </div>
+          {isValidElement(content)
+            ? cloneElement(content, {
+              style: { ...content.props.style, ...toastStyle },
+              className: `${content.props.className || ''} ${!toast.isActive(toastId) ? animationClassName : ''} ${className}`.trim(),
+            })
+            : content}
         </Else>
       </Condition>
     </output>

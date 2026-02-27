@@ -1,18 +1,3 @@
-:root {
-  --toast-namespace: "react-strawberry-toast";
-  --toast-offset: 16px;
-  --max-width: 368px;
-  --border-radius: 8px;
-  --toast-gap: 5px;
-  --toast-padding: 10px;
-  --box-shadow: 2px 2px 6px 2px rgba(0, 0, 0, 0.1);
-  --bg-white: #fff;
-  --toast-color-success: #1dca82;
-  --toast-color-error: #eb2639;
-  --toast-color-warn: #fcba03;
-  --toast-color-info: #5365e7;
-}
-
 @keyframes l3 {
   to {
     transform: rotate(1turn);
@@ -58,62 +43,56 @@
     opacity: 0.2;
   }
 }
-.react-strawberry-toast__z9999 {
-  z-index: 9999;
-}
-
 .react-strawberry-toast__toast-container {
+  --toast-color-success: #1dca82;
+  --toast-color-error: #eb2639;
+  --toast-color-warn: #fcba03;
+  --toast-color-info: #5365e7;
+  --toast-close-button: #8b8b8b;
   width: 100%;
   position: fixed;
   z-index: 9999;
   display: flex;
   align-items: center;
   flex-direction: column;
+  pointer-events: none;
 }
 
 .react-strawberry-toast__top-left {
-  top: var(--toast-offset);
-  left: calc(-50% + var(--toast-offset));
+  top: var(--toast-offset, 16px);
+  left: calc(-50% + var(--toast-offset, 16px));
 }
 
 .react-strawberry-toast__top-center {
-  top: var(--toast-offset);
+  top: var(--toast-offset, 16px);
   left: 50%;
   transform: translateX(-50%);
 }
 
 .react-strawberry-toast__top-right {
-  top: var(--toast-offset);
-  right: calc(-50% + var(--toast-offset));
+  top: var(--toast-offset, 16px);
+  right: calc(-50% + var(--toast-offset, 16px));
 }
 
 .react-strawberry-toast__bottom-left {
-  bottom: calc(var(--toast-offset) - 8px);
-  left: calc(-50% + var(--toast-offset));
+  bottom: calc(var(--toast-offset, 16px) - 8px);
+  left: calc(-50% + var(--toast-offset, 16px));
 }
 
 .react-strawberry-toast__bottom-center {
-  bottom: calc(var(--toast-offset) - 8px);
+  bottom: calc(var(--toast-offset, 16px) - 8px);
   left: 50%;
   transform: translateX(-50%);
 }
 
 .react-strawberry-toast__bottom-right {
-  bottom: calc(var(--toast-offset) - 8px);
-  right: calc(-50% + var(--toast-offset));
+  bottom: calc(var(--toast-offset, 16px) - 8px);
+  right: calc(-50% + var(--toast-offset, 16px));
 }
 
 .react-strawberry-toast__toast-content-container {
   position: absolute;
-  pointer-events: none;
-}
-
-.react-strawberry-toast__toast-icon {
-  width: 22px;
-  height: 22px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  pointer-events: auto;
 }
 
 .react-strawberry-toast__fade-in {
@@ -148,17 +127,16 @@
 }
 
 .react-strawberry-toast__toast-content {
-  pointer-events: auto;
+  position: relative;
   box-sizing: border-box;
-  background-color: var(--bg-white);
-  padding: 8px 8px 8px 12px;
   display: flex;
   align-items: center;
-  gap: var(--toast-gap);
-  border-radius: var(--border-radius);
-  box-shadow: var(--box-shadow);
-  max-width: var(--max-width);
-  position: relative;
+  gap: var(--toast-gap, 6px);
+  border-radius: var(--toast-border-radius, 8px);
+  box-shadow: var(--toast-box-shadow, 2px 2px 6px 2px rgba(0, 0, 0, 0.1));
+  max-width: var(--toast-max-width, 368px);
+  background-color: var(--toast-bg, #fff);
+  padding: var(--toast-padding, 12px);
 }
 
 .react-strawberry-toast__toast-success::before {
@@ -217,8 +195,8 @@
   background: transparent;
   border: none;
   outline: none;
-  width: 15px;
-  height: 15px;
+  width: 8px;
+  height: 8px;
   cursor: pointer;
   position: absolute;
   right: 0;

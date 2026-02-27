@@ -50,7 +50,7 @@ export function ToastContainer({
       {Object.entries(toastsByPosition).map(([position, toastByPosition]) => {
         const filteredToasts = toastByPosition.filter(containerIdFilter);
         const toasts = reverse && !stack ? filteredToasts.reverse() : filteredToasts;
-        const cn = `${STYLE_NAMESPACE}__z9999 ${className ?? `${STYLE_NAMESPACE}__toast-container ${STYLE_NAMESPACE}__${position}`}`;
+        const cn = `${STYLE_NAMESPACE}__toast-container ${STYLE_NAMESPACE}__${position} ${className}`;
 
         return (
           <div

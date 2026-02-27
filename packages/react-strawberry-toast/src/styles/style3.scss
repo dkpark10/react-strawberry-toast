@@ -1,17 +1,16 @@
 @import "base";
 
 .react-strawberry-toast__toast-content {
-  pointer-events: auto;
+  position: relative;
   box-sizing: border-box;
-  padding: var(--toast-padding);
   display: flex;
   align-items: center;
-  gap: var(--toast-gap);
-  border-radius: var(--border-radius);
-  box-shadow: var(--box-shadow);
-  max-width: var(--max-width);
-  position: relative;
-  background-color: var(--bg-white);
+  padding: var(--toast-padding, 12px);
+  gap: var(--toast-gap, 6px);
+  border-radius: var(--toast-border-radius, 8px);
+  box-shadow: var(--toast-box-shadow, 2px 2px 6px 2px rgba(0, 0, 0, 0.1));
+  max-width: var(--toast-max-width, 368px);
+  background-color: var(--toast-bg, #fff);
 }
 
 .react-strawberry-toast__toast-success {
@@ -42,5 +41,5 @@
 }
 
 svg .react-strawberry-toast-path {
-  fill: var(--bg-white);
+  fill: var(--toast-bg, #fff);
 }
