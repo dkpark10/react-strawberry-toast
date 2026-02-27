@@ -12,7 +12,10 @@
   "scripts": {
     "dev": "pnpm run --filter=react-strawberry-toast-docs dev",
     "deploy:docs": "pnpm run --filter=react-strawberry-toast-docs deploy",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "test:e2e": "pnpm --filter=react-strawberry-toast test:e2e",
+    "test:e2e:ui": "pnpm --filter=react-strawberry-toast test:e2e:ui",
+    "test:e2e:update": "pnpm --filter=react-strawberry-toast test:e2e:update"
   },
   "devDependencies": {
     "@commitlint/cli": "^19.6.1",

@@ -4,7 +4,7 @@
   display: flex;
   align-items: center;box-sizing: border-box;
   background-color: var(--toast-bg, #fff);
-  padding: var(--toast-padding, 12px);
+  padding: var(--toast-padding-x, 8px) var(--toast-padding-y, 12px);
   gap: var(--toast-gap, 6px);
   border-radius: var(--toast-border-radius, 8px);
   box-shadow: var(--toast-box-shadow, 2px 2px 6px 2px rgba(0, 0, 0, 0.1));

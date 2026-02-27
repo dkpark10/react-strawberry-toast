@@ -8,7 +8,7 @@ import { toast, ToastContainer, type Position } from '@react-strawberry-toast/sr
 
 type TabsRootProps = ComponentProps<typeof Tabs.Root>;
 
-const toastType = ['Success', 'Warn', 'Error', 'Info', 'Promise', 'TailwindCSS', 'Emotion', 'DarkTheme'] as const;
+const toastType = ['Success', 'Warn', 'Error', 'Info', 'Promise', 'TailwindCSS', 'Emotion', 'InlineStyle'] as const;
 
 const toastPosition = ['top-left', 'top-center', 'top-right', 'bottom-left', 'bottom-center', 'bottom-right'] as Position[];
 
@@ -27,10 +27,10 @@ const toastActions: Record<ToastType, () => void> = {
     }, 3_000)),
     { loading: 'loading', success: 'success', error: 'error' }
   ),
-  DarkTheme: () => toast('Dark Theme', {
+  InlineStyle: () => toast('Inline Style', {
     style: { color: 'white', backgroundColor: 'black', border: '1px solid white' },
   }),
-  TailwindCSS: () => toast.custom(({ icons, close }) =>
+  TailwindCSS: () => toast.custom(({ Icons, close }) =>
     <div className="font-mono rounded-xl bg-white/80 backdrop-blur-sm border border-gray-200
       text-gray-800 flex p-3 px-4 items-center gap-3 shadow-xl"
     >
@@ -41,11 +41,11 @@ const toastActions: Record<ToastType, () => void> = {
         onClick={close}
         className="ml-auto bg-gray-200/50 hover:bg-gray-200 rounded-md p-1 transition-colors"
       >
-        {icons.close}
+        <Icons.Close />
       </button>
     </div>
   ),
-  Emotion: () => toast.custom(({ icons, close }) =>
+  Emotion: () => toast.custom(({ Icons, close }) =>
     <div css={{
       background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
       color: 'white',
@@ -75,7 +75,7 @@ const toastActions: Record<ToastType, () => void> = {
           },
         }}
       >
-        {icons.close}
+        <Icons.Close />
       </button>
     </div>
   ),

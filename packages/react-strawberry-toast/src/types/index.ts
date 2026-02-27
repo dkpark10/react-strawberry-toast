@@ -10,6 +10,8 @@ export type Position =
 
 export type ToastType = 'default' | 'custom' | 'success' | 'error' | 'loading' | 'warn' | 'info';
 
+export type CapitalizedToastType = Capitalize<ToastType>;
+
 export interface BaseOptions {
   toastId?: string;
   timeOut?: number;
@@ -43,7 +45,7 @@ export interface ToastDataCallback {
   close: () => void;
   immediatelyClose: () => void;
   isVisible: boolean;
-  icons: Record<Exclude<ToastType, 'default' | 'custom'> | 'close', ReactNode>;
+  Icons: Record<Exclude<CapitalizedToastType, 'Default' | 'Custom'> | 'Close', () => ReactNode>;
 }
 
 export type ToastState = ToastBaseState & BaseOptions;

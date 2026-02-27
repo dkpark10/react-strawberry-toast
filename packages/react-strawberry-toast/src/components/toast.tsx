@@ -48,13 +48,13 @@ export function Toast({ toastProps }: ToasterProps) {
           toast.disappear(toastId, 0);
           toast.remove(toastId, 0);
         },
-        icons: {
-          success: ToastTypeIcons.success,
-          error: ToastTypeIcons.error,
-          warn: ToastTypeIcons.warn,
-          loading: ToastTypeIcons.loading,
-          info: ToastTypeIcons.info,
-          close: <CloseSvg />,
+        Icons: {
+          Success: () => ToastTypeIcons.success,
+          Error: () => ToastTypeIcons.error,
+          Warn: () => ToastTypeIcons.warn,
+          Loading: () => ToastTypeIcons.loading,
+          Info: () => ToastTypeIcons.info,
+          Close: CloseSvg,
         },
         isVisible,
       })
@@ -125,7 +125,7 @@ export function Toast({ toastProps }: ToasterProps) {
       const latestToastHeight = heights.get(latestToast.toastId) || height;
 
       const scale = 1 - (reverseOrder * 0.05);
-      const offset = reverseOrder * 12;
+      const offset = reverseOrder * 10;
 
       /**
        * @description Old toast piled up on top after rising to the latest toast height

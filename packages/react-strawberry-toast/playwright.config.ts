@@ -1,3 +1,4 @@
+/// <reference types="node" />
 import { defineConfig, devices } from '@playwright/test';
 
 /**
@@ -35,7 +36,7 @@ export default defineConfig({
   timeout: 5_000,
 
   webServer: {
-    command: 'pnpm --filter=react-strawberry-toast-playground run dev',
+    command: 'pnpm --filter=react-strawberry-toast-docs run dev',
     url: 'http://127.0.0.1:3000',
     reuseExistingServer: !process.env.CI,
     stdout: 'ignore',

@@ -1,7 +1,7 @@
 import { generateId } from '../utils/generate-id';
 import { ToastStore } from '../core/store';
 import { REMOVE_TIMEOUT, MAX_TIMEOUT, DISAPPEAR_TIMEOUT } from '../constants';
-import { ToastTypeIcons } from '../components/toast-icons';
+import { CloseSvg, ToastTypeIcons } from '../components/toast-icons';
 import { toastHandlers } from './toast-handler';
 import type { ReactNode } from 'react';
 import type {
@@ -111,12 +111,13 @@ toast.promise = <T>(
       toast.disappear(toastId, 0);
       toast.remove(toastId, 0);
     },
-    icons: {
-      success: ToastTypeIcons.success,
-      error: ToastTypeIcons.error,
-      warn: ToastTypeIcons.warn,
-      loading: ToastTypeIcons.loading,
-      info: ToastTypeIcons.info,
+    Icons: {
+      Success: () => ToastTypeIcons.success,
+      Error: () => ToastTypeIcons.error,
+      Warn: () => ToastTypeIcons.warn,
+      Loading: () => ToastTypeIcons.loading,
+      Info: () =>ToastTypeIcons.info,
+      Close: CloseSvg,
     },
     isVisible: true,
   };

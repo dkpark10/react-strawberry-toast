@@ -4,7 +4,7 @@ import { toast } from "@react-strawberry-toast/src";
 import { Button, Flex, Box } from "@radix-ui/themes";
 
 export default function StylingButtonGroups() {
-  const onClick = (styleNumber?: 2 | 3) => {
+  const onClick = (styleNumber: 1 | 2 | 3 = 1) => {
     const basePath = process.env.NODE_ENV === 'production' ? '/react-strawberry-toast' : '';
     const cssPath = `${basePath}/styles/style${styleNumber}.css`;
 

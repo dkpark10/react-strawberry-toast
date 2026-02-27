@@ -131,9 +131,9 @@ import { ToastContainer } from '@react-strawberry-toast/src';
             ```
           </Tabs.Content>
 
-          <Tabs.Content value="DarkTheme">
+          <Tabs.Content value="InlineStyle">
             ```javascript
-            toast('Dark Theme', {
+            toast('Inline Style', {
               style: {
                 color: 'white',
                 backgroundColor: 'black',    
@@ -145,7 +145,7 @@ import { ToastContainer } from '@react-strawberry-toast/src';
 
           <Tabs.Content value="TailwindCSS">
             ```javascript
-            toast.custom(({ icons, close }) =>
+            toast.custom(({ Icons, close }) =>
               <div className="font-mono rounded-xl bg-white/80 backdrop-blur-sm border border-gray-200
                 text-gray-800 flex p-3 px-4 items-center gap-3 shadow-xl"
               >
@@ -156,7 +156,7 @@ import { ToastContainer } from '@react-strawberry-toast/src';
                   onClick={close}
                   className="ml-auto bg-gray-200/50 hover:bg-gray-200 rounded-md p-1 transition-colors"
                 >
-                  {icons.close}
+                  <Icons.Close />
                 </button>
               </div>
             )
@@ -165,7 +165,7 @@ import { ToastContainer } from '@react-strawberry-toast/src';
 
           <Tabs.Content value="Emotion">
             ```javascript
-            toast.custom(({ icons, close }) => 
+            toast.custom(({ Icons, close }) => 
               <div css={{
                 background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
                 color: 'white',
@@ -195,7 +195,7 @@ import { ToastContainer } from '@react-strawberry-toast/src';
                     },
                   }}
                 >
-                  {icons.close}
+                  <Icons.Close />
                 </button>
               </div>
             )
