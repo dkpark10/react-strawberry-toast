@@ -5,6 +5,7 @@
 import { type ComponentProps, useState } from 'react';
 import { Tabs } from '@radix-ui/themes';
 import { toast, ToastContainer, type Position } from '@react-strawberry-toast/src';
+import AssetImage from '@/components/asset-image';
 
 type TabsRootProps = ComponentProps<typeof Tabs.Root>;
 
@@ -34,7 +35,7 @@ const toastActions: Record<ToastType, () => void> = {
     <div className="font-mono rounded-xl bg-white/80 backdrop-blur-sm border border-gray-200
       text-gray-800 flex p-3 px-4 items-center gap-3 shadow-xl"
     >
-      <img src="/tailwindcss.png" className="w-5" />
+      <AssetImage src="/tailwindcss.png" width="20" height="11" className="w-5" alt="tailwind icon" />
       <span className="font-medium">Tailwind CSS Toast</span>
       <button
         type="button"

@@ -1,4 +1,4 @@
-import { useEffect, useRef, cloneElement, isValidElement } from 'react';
+import { useEffect, useRef, cloneElement, isValidElement, type ReactElement } from 'react';
 import { Condition, If, Else } from './condition';
 import { getAnimation } from '../utils/get-animation';
 import { toast } from '../core/toast';
@@ -230,7 +230,7 @@ export function Toast({ toastProps }: ToasterProps) {
         </If>
         <Else>
           {isValidElement(content)
-            ? cloneElement(content, {
+            ? cloneElement(content as ReactElement<{ style?: React.CSSProperties; className?: string }>, {
               style: { ...content.props.style, ...toastStyle },
               className: `${content.props.className || ''} ${!toast.isActive(toastId) ? animationClassName : ''} ${className}`.trim(),
             })

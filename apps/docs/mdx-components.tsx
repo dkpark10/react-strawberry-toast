@@ -45,7 +45,7 @@ const components = {
     const code = String(children).replace(/\n$/, "");
 
     return (
-      <PrismLight language="jsx" style={CodeTheme} customStyle={{ fontSize: 'var(--font-size-2)' }}>
+      <PrismLight language="jsx" style={CodeTheme} customStyle={{ fontSize: 'var(--font-size-2)', maxWidth: 653 }}>
         {code}
       </PrismLight>
     );
