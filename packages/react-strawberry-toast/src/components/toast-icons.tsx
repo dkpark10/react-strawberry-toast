@@ -48,7 +48,7 @@ function WarnSvg() {
   return (
     <svg
       stroke="none"
-      fill="#fcba03"
+      fill="var(--toast-color-warn)"
       strokeWidth="0"
       viewBox="56 120 912 800"
       height="18"
