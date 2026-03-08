@@ -79,7 +79,6 @@ export function Toast({ toastProps }: ToasterProps) {
           elementRef.current!.style.top = `${rect.y + y + window.scrollY}px`;
           elementRef.current!.style.left = `${rect.x + x + window.scrollX}px`;
         }
-
       });
     }
   };
