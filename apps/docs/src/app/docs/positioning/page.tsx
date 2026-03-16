@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { SITE_URL, OG_IMAGE } from '@/constants/site';
 
 export const metadata: Metadata = {
   title: 'Positioning | react-strawberry-toast',
@@ -6,9 +7,9 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Positioning | react-strawberry-toast',
     description: 'Positioning of react-strawberry-toast',
-    images: 'https://react-strawberry-toast.com/strawberry.png',
+    images: OG_IMAGE,
     type: 'website',
-    url: 'https://react-strawberry-toast.com/docs/positioning',
+    url: `${SITE_URL}/docs/positioning`,
   },
 };
 

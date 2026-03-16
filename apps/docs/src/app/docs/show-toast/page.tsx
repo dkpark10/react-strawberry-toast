@@ -1,15 +1,16 @@
 import React from 'react';
-import type { Metadata } from 'next'
- 
+import type { Metadata } from 'next';
+import { SITE_URL, OG_IMAGE } from '@/constants/site';
+
 export const metadata: Metadata = {
   title: 'Show Toast | react-strawberry-toast',
   description: 'Various functions for displaying a toast',
   openGraph: {
     title: 'Show Toast | react-strawberry-toast',
     description: 'Various functions for displaying a toast',
-    images: 'https://react-strawberry-toast.com/strawberry.png',
+    images: OG_IMAGE,
     type: 'website',
-    url: 'https://react-strawberry-toast.com/docs/show-toast'
+    url: `${SITE_URL}/docs/show-toast`,
   },
 };
 

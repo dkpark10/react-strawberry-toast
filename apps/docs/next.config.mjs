@@ -26,11 +26,6 @@ const nextConfig = {
 
   trailingSlash: true,
 
-  basePath:
-    process.env.NODE_ENV === 'production' && process.env.NEXT_BUILD !== 'LOCAL'
-      ? '/react-strawberry-toast'
-      : '',
-
   images: {
     unoptimized: true,
   },

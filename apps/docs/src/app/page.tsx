@@ -1,6 +1,7 @@
 import React from 'react';
 import { Flex, Box } from '@radix-ui/themes';
 import type { Metadata } from 'next';
+import { SITE_URL, OG_IMAGE } from '@/constants/site';
 
 export const metadata: Metadata = {
   title: 'React strawberry toast',
@@ -8,9 +9,9 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'React strawberry toast',
     description: 'React strawberry toast documentation',
-    images: 'https://react-strawberry-toast.com/strawberry.png',
+    images: OG_IMAGE,
     type: 'website',
-    url: 'https://react-strawberry-toast.com'
+    url: SITE_URL,
   },
 };
 

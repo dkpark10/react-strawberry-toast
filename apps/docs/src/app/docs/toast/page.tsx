@@ -1,5 +1,6 @@
 import React from 'react';
 import type { Metadata } from 'next';
+import { SITE_URL, OG_IMAGE } from '@/constants/site';
 
 export const metadata: Metadata = {
   title: 'Toast API | react-strawberry-toast',
@@ -7,9 +8,9 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Toast API | react-strawberry-toast',
     description: 'Description of the toast function options',
-    images: 'https://react-strawberry-toast.com/strawberry.png',
+    images: OG_IMAGE,
     type: 'website',
-    url: 'https://react-strawberry-toast.com/docs/toast',
+    url: `${SITE_URL}/docs/toast`,
   },
 };
 
