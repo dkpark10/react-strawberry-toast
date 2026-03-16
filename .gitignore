@@ -4,3 +4,5 @@ dt.txt
 .next
 
 /playground/src/pages/ignore/**/*
+/packages/react-strawberry-toast/README.md
+/mov/**/*

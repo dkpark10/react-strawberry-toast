@@ -91,7 +91,7 @@ describe('toast promise', () => {
     });
 
     await act(() => {
-      vi.advanceTimersByTime(fulfilledTimeout );
+      vi.advanceTimersByTime(fulfilledTimeout);
     });
 
     expect(queryByText(/loading/i)).not.toBeInTheDocument();

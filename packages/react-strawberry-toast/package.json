@@ -20,7 +20,7 @@
   "bugs": {
     "url": "https://github.com/dkpark10/react-strawberry-toast/issues"
   },
-  "homepage": "https://dkpark10.github.io/react-strawberry-toast/",
+  "homepage": "https://react-strawberry-toast.com/",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "exports": {

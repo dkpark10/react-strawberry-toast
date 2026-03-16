@@ -7,9 +7,9 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Customize | react-strawberry-toast',
     description: 'Customize usage of react-strawberry-toast',
-    images: 'https://dkpark10.github.io/react-strawberry-toast/strawberry.png',
+    images: 'https://react-strawberry-toast.com/strawberry.png',
     type: 'website',
-    url: 'https://dkpark10.github.io/react-strawberry-toast/docs/customize',
+    url: 'https://react-strawberry-toast.com/docs/customize',
   },
 };
 

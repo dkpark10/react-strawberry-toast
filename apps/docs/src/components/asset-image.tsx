@@ -5,7 +5,7 @@ export default function AssetImage(props: ImageProps) {
 
   return (
     <Image
-      src={`${process.env.NODE_ENV === 'production' ? '/react-strawberry-toast' : ''}${src}`}
+      src={src}
       {...rest}
     />
   );

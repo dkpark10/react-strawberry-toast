@@ -7,9 +7,9 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Toast Container API | react-strawberry-toast',
     description: 'Description of the Toast Container component options',
-    images: 'https://dkpark10.github.io/react-strawberry-toast/strawberry.png',
+    images: 'https://react-strawberry-toast.com/strawberry.png',
     type: 'website',
-    url: 'https://dkpark10.github.io/react-strawberry-toast/docs/toast-container',
+    url: 'https://react-strawberry-toast.com/docs/toast-container',
   },
 };
 

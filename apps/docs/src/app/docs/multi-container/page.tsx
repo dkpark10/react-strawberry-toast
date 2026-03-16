@@ -7,9 +7,9 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Multi Container | react-strawberry-toast',
     description: 'Multi container usage of react-strawberry-toast',
-    images: 'https://dkpark10.github.io/react-strawberry-toast/strawberry.png',
+    images: 'https://react-strawberry-toast.com/strawberry.png',
     type: 'website',
-    url: 'https://dkpark10.github.io/react-strawberry-toast/docs/multi-container',
+    url: 'https://react-strawberry-toast.com/docs/multi-container',
   },
 }
 

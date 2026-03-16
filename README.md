@@ -2,9 +2,24 @@
 
 A simple and customizable React toast library
 
+<video src="./promotion1.mp4" autoplay loop muted playsinline width="500"></video>
+<video src="./promotion2.mp4" autoplay loop muted playsinline width="300"></video>
+<video src="./promotion3.mp4" autoplay loop muted playsinline width="300"></video>
+
+## Features
+
+- **Lightweight** - Less than 11kb bundle size
+- **3 Built-in Themes** - Ready-to-use style presets (more coming soon)
+- **Promise Support** - Handle async operations with loading, success, and error states
+- **Headless Mode** - Full control over rendering with `useToasts` hook
+- **Easy Customization** - Style with CSS, Tailwind, Emotion, or inline styles
+- **Stack Mode** - Overlay toasts in a compact stacked view
+- **Flexible Positioning** - Place toasts anywhere, even relative to target elements like tooltips
+- **More Options Coming Soon** - Actively maintained and evolving
+
 ## Documentation
 
-For more detailed information, please refer to the official [Documentation](https://dkpark10.github.io/react-strawberry-toast/)
+For more detailed information, please refer to the official [Documentation](https://react-strawberry-toast.com/)
 
 ## Installation
 
@@ -53,6 +68,7 @@ function App() {
 | style      | Style of ToastContainer  |  Object | |
 | gap      | Gap Between toasts  |  Number | 9 |
 | pauseOnActivate      | Pause Toast timer when blur events occurs  |  Boolean | true |
+| stack      | Allow toast overlap  |  Boolean | false |
 
 
 ### toast
