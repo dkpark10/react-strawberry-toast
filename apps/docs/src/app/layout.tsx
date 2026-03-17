@@ -24,7 +24,7 @@ const jetbrainsMono = JetBrains_Mono({
 PrismLight.registerLanguage('jsx', jsx);
 
 export const metadata: Metadata = {
-  icons: '/react-strawberry-toast/favicon.ico',
+  icons: '/favicon.ico',
 };
 
 export default async function RootLayout({ children }: PropsWithChildren) {
