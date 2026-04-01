@@ -4,7 +4,7 @@ A simple and customizable React toast library
 
 ## Demo
 
-![demo](https://github-production-user-asset-6210df.s3.amazonaws.com/43857226/564307114-79d3e51f-ceb8-47af-be28-a4f775ebaa3a.gif?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAVCODYLSA53PQK4ZA%2F20260316%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20260316T175357Z&X-Amz-Expires=300&X-Amz-Signature=ae604186b25ea25717c1e376155dd59b149f972f7d4c166b432c974932979467&X-Amz-SignedHeaders=host)
+![demo](https://raw.githubusercontent.com/dkpark10/react-strawberry-toast/master/demo.gif)
 
 ## Features
 
