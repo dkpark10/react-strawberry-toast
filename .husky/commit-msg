@@ -13,4 +13,9 @@ if [ "$COMMIT_TYPE" = "test" ] || \
   pnpm --filter=react-strawberry-toast run test --run
 fi
 
+if echo "$COMMIT_MSG" | grep -qE '^v[0-9]+\.[0-9]+\.[0-9]+'; then
+  pnpm --filter=react-strawberry-toast run test --run && \
+  pnpm --filter=react-strawberry-toast run test:e2e
+fi
+
 npx --no-install commitlint --edit "$1"
